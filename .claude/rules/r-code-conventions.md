@@ -1,6 +1,7 @@
 ---
 paths:
   - "**/*.R"
+  - "Analysis/**/*.R"
   - "Figures/**/*.R"
   - "scripts/**/*.R"
 ---
@@ -27,54 +28,84 @@ paths:
 
 ## 3. Domain Correctness
 
-<!-- Customize for your field's known pitfalls -->
-- Verify estimator implementations match slide formulas
+- Verify estimator implementations match paper equations
+- IV construction must match exclusion restriction argument
+- Check instrument strength (first-stage F-statistics)
+- Ensure clustering level matches data structure (auction-level, zone-level)
 - Check known package bugs (document below in Common Pitfalls)
 
 ## 4. Visual Identity
 
 ```r
-# --- Your institutional palette ---
-primary_blue  <- "#012169"
-primary_gold  <- "#f2a900"
-accent_gray   <- "#525252"
-positive_green <- "#15803d"
-negative_red  <- "#b91c1c"
+# --- Clean academic palette ---
+primary_dark  <- "#2c3e50"
+primary_blue  <- "#2980b9"
+accent_gray   <- "#7f8c8d"
+positive_green <- "#27ae60"
+negative_red  <- "#c0392b"
+highlight_orange <- "#e67e22"
 ```
 
 ### Custom Theme
 ```r
-theme_custom <- function(base_size = 14) {
+theme_paper <- function(base_size = 11) {
   theme_minimal(base_size = base_size) +
     theme(
-      plot.title = element_text(face = "bold", color = primary_blue),
-      legend.position = "bottom"
+      plot.title = element_text(face = "bold", size = base_size + 2),
+      axis.title = element_text(size = base_size),
+      legend.position = "bottom",
+      panel.grid.minor = element_blank()
     )
 }
 ```
 
-### Figure Dimensions for Beamer
+### Figure Dimensions for Paper
 ```r
-ggsave(filepath, width = 12, height = 5, bg = "transparent")
+# Single-column figure
+ggsave(filepath, width = 6.5, height = 4.5, dpi = 300)
+
+# Full-width figure
+ggsave(filepath, width = 6.5, height = 3.5, dpi = 300)
+
+# For Beamer slides (future)
+# ggsave(filepath, width = 12, height = 5, bg = "transparent")
 ```
 
-## 5. RDS Data Pattern
+## 5. Table Generation
 
-**Heavy computations saved as RDS; slide rendering loads pre-computed data.**
+```r
+# Preferred: modelsummary for regression tables
+library(modelsummary)
+modelsummary(models, output = "Paper/tables/table_name.tex",
+             stars = c('*' = 0.10, '**' = 0.05, '***' = 0.01))
+
+# Alternative: stargazer
+library(stargazer)
+stargazer(model, out = "Paper/tables/table_name.tex", type = "latex")
+```
+
+## 6. RDS Data Pattern
+
+**Heavy computations saved as RDS; paper tables and figures load pre-computed data.**
 
 ```r
 saveRDS(result, file.path(out_dir, "descriptive_name.rds"))
 ```
 
-## 6. Common Pitfalls
+## 7. Common Pitfalls
 
-<!-- Add your field-specific pitfalls here -->
 | Pitfall | Impact | Prevention |
 |---------|--------|------------|
-| Missing `bg = "transparent"` | White boxes on slides | Always include in ggsave() |
-| Hardcoded paths | Breaks on other machines | Use relative paths |
+| OLS demand estimation without instruments | Biased elasticities (simultaneous equations) | Always use IV/2SLS for price coefficients |
+| Weak instruments in demand estimation | Unreliable IV estimates, worse than OLS | Report first-stage F; use Cragg-Donald/Kleibergen-Paap |
+| Wrong clustering level | Invalid inference | Cluster at market/auction level; consider two-way clustering |
+| Panel data — ignoring auction periodicity | Temporal aggregation bias | Align with PJM BRA schedule (annual delivery years) |
+| Price unit confusion | Orders of magnitude errors | Document $/MW-day vs $/MW-year conversions explicitly |
+| `fixest::feols` vs `AER::ivreg` SE defaults | Different SEs for same model | Explicitly specify `vcov` argument |
+| Hardcoded paths | Breaks on other machines | Use relative paths from repo root |
+| Missing `bg = "transparent"` in slide figures | White boxes on slides | Include in ggsave() for Beamer output |
 
-## 7. Line Length & Mathematical Exceptions
+## 8. Line Length & Mathematical Exceptions
 
 **Standard:** Keep lines <= 100 characters.
 
@@ -83,8 +114,8 @@ saveRDS(result, file.path(out_dir, "descriptive_name.rds"))
 1. Breaking the line would harm readability of the math (influence functions, matrix ops, finite-difference approximations, formula implementations matching paper equations)
 2. An inline comment explains the mathematical operation:
    ```r
-   # Sieve projection: inner product of residuals onto basis functions P_k
-   alpha_k <- sum(r_i * basis[, k]) / sum(basis[, k]^2)
+   # Residual demand: total demand minus rivals' aggregate supply at price p
+   resid_demand_i <- total_demand(p) - sum(rival_supply[-i](p))
    ```
 3. The line is in a numerically intensive section (simulation loops, estimation routines, inference calculations)
 
@@ -92,14 +123,16 @@ saveRDS(result, file.path(out_dir, "descriptive_name.rds"))
 - Long lines in non-mathematical code: minor penalty (-1 to -2 per line)
 - Long lines in documented mathematical sections: no penalty
 
-## 8. Code Quality Checklist
+## 9. Code Quality Checklist
 
 ```
 [ ] Packages at top via library()
 [ ] set.seed() once at top
 [ ] All paths relative
 [ ] Functions documented (Roxygen)
-[ ] Figures: transparent bg, explicit dimensions
+[ ] Figures: explicit dimensions, 300 dpi
+[ ] Tables: output to Paper/tables/ as .tex
 [ ] RDS: every computed object saved
+[ ] IV diagnostics: first-stage F reported
 [ ] Comments explain WHY not WHAT
 ```

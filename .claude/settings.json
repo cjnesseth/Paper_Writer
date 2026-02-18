@@ -42,7 +42,8 @@
       "Bash(for *)",
       "Bash(gs *)",
       "Bash(pdftk *)",
-      "Bash(mkdir *)"
+      "Bash(mkdir *)",
+      "Bash(pdflatex *)"
     ]
   },
   "hooks": {
