@@ -83,12 +83,12 @@
 
 ---
 
-## Next Session
+## Next Session (completed 2026-03-24)
 
-1. Identify remaining 4 ambiguous PDFs (check title pages)
-2. Acquire Joskow (2008) *Utilities Policy* (last missing Tier 1)
+1. ~~Identify remaining 4 ambiguous PDFs~~ — DONE
+2. ~~Acquire Joskow (2008) *Utilities Policy*~~ — DONE (on hand)
 3. Begin deep-reading Baker & Bresnahan (1988)
-4. Create `Paper/main.tex` scaffold when paper writing begins
+4. Create `Paper/main.tex` scaffold — NEXT PRIORITY
 
 ---
 

@@ -1,44 +1,67 @@
 % ==============================================================================
-% Bibliography -- IO Paper 2: Residual Demand in PJM Capacity Auctions
+% Bibliography -- IO Paper 2: Calibrated SFE Simulation of Market Power in PJM RPM
 % ==============================================================================
 %
 % Naming convention: AuthorYear_keyword
-% Example: Baker1988_residual_demand
+% Topic pivot: 2026-03-24 (from residual demand estimation to SFE simulation)
 %
 % ==============================================================================
 
-% --- Residual Demand Estimation ---
+% --- Foundational SFE Theory ---
 
-@article{Baker1988_residual_demand,
-  author  = {Baker, Jonathan B. and Bresnahan, Timothy F.},
-  title   = {Estimating the Residual Demand Curve Facing a Single Firm},
-  journal = {International Journal of Industrial Organization},
-  volume  = {6},
-  number  = {3},
-  pages   = {283--300},
-  year    = {1988}
-}
-
-@article{Schmalensee1989_inter_industry,
-  author  = {Schmalensee, Richard},
-  title   = {Inter-Industry Studies of Structure and Performance},
-  journal = {Handbook of Industrial Organization},
-  volume  = {2},
-  pages   = {951--1009},
+@article{Klemperer1989_sfe,
+  author  = {Klemperer, Paul D. and Meyer, Margaret A.},
+  title   = {Supply Function Equilibria in Oligopoly under Uncertainty},
+  journal = {Econometrica},
+  volume  = {57},
+  number  = {6},
+  pages   = {1243--1277},
   year    = {1989}
 }
 
-% --- Electricity Market Power ---
-
-@article{Borenstein2002_market_power,
-  author  = {Borenstein, Severin and Bushnell, James B. and Wolak, Frank A.},
-  title   = {Measuring Market Inefficiencies in {California}'s Restructured Wholesale Electricity Market},
-  journal = {American Economic Review},
-  volume  = {92},
+@article{Green1992_british,
+  author  = {Green, Richard J. and Newbery, David M.},
+  title   = {Competition in the {British} Electricity Spot Market},
+  journal = {Journal of Political Economy},
+  volume  = {100},
   number  = {5},
-  pages   = {1376--1405},
-  year    = {2002}
+  pages   = {929--953},
+  year    = {1992}
 }
+
+@article{Holmberg2008_unique_sfe,
+  author  = {Holmberg, P{\"a}r},
+  title   = {Unique Supply Function Equilibrium with Capacity Constraints},
+  journal = {Energy Economics},
+  volume  = {30},
+  number  = {1},
+  pages   = {148--172},
+  year    = {2008}
+}
+
+% --- Numerical Methods for SFE ---
+
+@article{Anderson2008_sfe_asymmetric,
+  author  = {Anderson, Edward J. and Hu, Xinmin},
+  title   = {Finding Supply Function Equilibria with Asymmetric Firms},
+  journal = {Operations Research},
+  volume  = {56},
+  number  = {3},
+  pages   = {697--711},
+  year    = {2008}
+}
+
+@article{Baldick2004_linear_sfe,
+  author  = {Baldick, Ross and Grant, Ryan and Kahn, Edward},
+  title   = {Theory and Application of Linear Supply Function Equilibrium in Electricity Markets},
+  journal = {Journal of Regulatory Economics},
+  volume  = {25},
+  number  = {2},
+  pages   = {143--167},
+  year    = {2004}
+}
+
+% --- Market Power in Electricity (Empirical Motivation) ---
 
 @article{Wolak2003_measuring,
   author  = {Wolak, Frank A.},
@@ -50,14 +73,14 @@
   year    = {2003}
 }
 
-@article{Wolak2007_quantifying,
-  author  = {Wolak, Frank A.},
-  title   = {Quantifying the Supply-Side Benefits from Forward Contracting in Wholesale Electricity Markets},
-  journal = {Journal of Applied Econometrics},
-  volume  = {22},
-  number  = {7},
-  pages   = {1179--1209},
-  year    = {2007}
+@article{Bushnell2008_vertical,
+  author  = {Bushnell, James B. and Mansur, Erin T. and Saravia, Celeste},
+  title   = {Vertical Arrangements, Market Structure, and Competition: An Analysis of Restructured {US} Electricity Markets},
+  journal = {American Economic Review},
+  volume  = {98},
+  number  = {1},
+  pages   = {237--266},
+  year    = {2008}
 }
 
 @article{Sweeting2007_market_power,
@@ -70,9 +93,51 @@
   year    = {2007}
 }
 
+@article{Sioshansi2007_sfe_ercot,
+  author  = {Sioshansi, Ramteen and Oren, Shmuel},
+  title   = {How Good Are Supply Function Equilibrium Models: An Empirical Analysis of the {ERCOT} Balancing Market},
+  journal = {Journal of Regulatory Economics},
+  volume  = {31},
+  number  = {1},
+  pages   = {1--35},
+  year    = {2007}
+}
+
+% --- Residual Demand and Market Power Measurement ---
+
+@article{Baker1988_residual_demand,
+  author  = {Baker, Jonathan B. and Bresnahan, Timothy F.},
+  title   = {Estimating the Residual Demand Curve Facing a Single Firm},
+  journal = {International Journal of Industrial Organization},
+  volume  = {6},
+  number  = {3},
+  pages   = {283--300},
+  year    = {1988}
+}
+
+@article{Wolfram1999_duopoly,
+  author  = {Wolfram, Catherine D.},
+  title   = {Measuring Duopoly Power in the {British} Electricity Spot Market},
+  journal = {American Economic Review},
+  volume  = {89},
+  number  = {4},
+  pages   = {805--826},
+  year    = {1999}
+}
+
+@article{Borenstein2002_market_power,
+  author  = {Borenstein, Severin and Bushnell, James B. and Wolak, Frank A.},
+  title   = {Measuring Market Inefficiencies in {California}'s Restructured Wholesale Electricity Market},
+  journal = {American Economic Review},
+  volume  = {92},
+  number  = {5},
+  pages   = {1376--1405},
+  year    = {2002}
+}
+
 % --- Capacity Market Design ---
 
-@article{Cramton2004_capacity,
+@article{Cramton2005_capacity,
   author  = {Cramton, Peter and Stoft, Steven},
   title   = {A Capacity Market that Makes Sense},
   journal = {Electricity Journal},
@@ -82,14 +147,24 @@
   year    = {2005}
 }
 
-@article{Cramton2017_capacity,
-  author  = {Cramton, Peter},
-  title   = {Electricity Market Design},
-  journal = {Oxford Review of Economic Policy},
-  volume  = {33},
-  number  = {4},
-  pages   = {589--612},
-  year    = {2017}
+@article{Cramton2007_uniform,
+  author  = {Cramton, Peter and Stoft, Steven},
+  title   = {Why We Need to Stick with Uniform-Price Auctions in Electricity Markets},
+  journal = {Electricity Journal},
+  volume  = {20},
+  number  = {1},
+  pages   = {26--37},
+  year    = {2007}
+}
+
+@article{CramtonOckenfels2012_capacity,
+  author  = {Cramton, Peter and Ockenfels, Axel},
+  title   = {Economics and Design of Capacity Markets for the Power Sector},
+  journal = {Zeitschrift f{\"u}r Energiewirtschaft},
+  volume  = {36},
+  number  = {2},
+  pages   = {113--134},
+  year    = {2012}
 }
 
 @article{Joskow2007_capacity,
@@ -102,87 +177,57 @@
   year    = {2007}
 }
 
-% --- Foundational IO / Demand Estimation ---
-
-@article{Berry1995_auto,
-  author  = {Berry, Steven and Levinsohn, James and Pakes, Ariel},
-  title   = {Automobile Prices in Market Equilibrium},
-  journal = {Econometrica},
-  volume  = {63},
-  number  = {4},
-  pages   = {841--890},
-  year    = {1995}
-}
-
-@book{Tirole1988_io,
-  author    = {Tirole, Jean},
-  title     = {The Theory of Industrial Organization},
-  publisher = {MIT Press},
-  year      = {1988},
-  address   = {Cambridge, MA}
-}
-
-@article{Nevo2001_practitioners,
-  author  = {Nevo, Aviv},
-  title   = {A Practitioner's Guide to Estimation of Random-Coefficients Logit Models of Demand},
-  journal = {Journal of Economics \& Management Strategy},
-  volume  = {9},
-  number  = {4},
-  pages   = {513--548},
-  year    = {2000}
-}
-
-% --- Auction Theory ---
-
-@article{Milgrom1982_auctions,
-  author  = {Milgrom, Paul R. and Weber, Robert J.},
-  title   = {A Theory of Auctions and Competitive Bidding},
-  journal = {Econometrica},
-  volume  = {50},
-  number  = {5},
-  pages   = {1089--1122},
-  year    = {1982}
-}
-
-@book{Krishna2010_auction,
-  author    = {Krishna, Vijay},
-  title     = {Auction Theory},
-  edition   = {2nd},
-  publisher = {Academic Press},
-  year      = {2010}
-}
-
-% --- Data Center / Energy Demand ---
-
-@article{Shehabi2016_data_centers,
-  author  = {Shehabi, Arman and Smith, Sarah and Sartor, Dale and Brown, Richard and Herrlin, Magnus and Koomey, Jonathan and Masanet, Eric and Horner, Nathaniel and Azevedo, In{\^e}s and Lintner, William},
-  title   = {United States Data Center Energy Usage Report},
-  journal = {Lawrence Berkeley National Laboratory},
-  year    = {2016},
-  note    = {LBNL-1005775}
-}
-
-% ==============================================================================
-% --- Supply Function Equilibria ---
-% ==============================================================================
-
-@article{Baldick2004_linear_sfe,
-  author  = {Baldick, Ross and Grant, Ryan and Kahn, Edward},
-  title   = {Theory and Application of Linear Supply Function Equilibrium in Electricity Markets},
-  journal = {Journal of Regulatory Economics},
-  volume  = {25},
-  number  = {2},
-  pages   = {143--167},
-  year    = {2004}
-}
-
-@article{Anderson2005_sfe_contracts,
-  author  = {Anderson, Edward J. and Xu, Huifu},
-  title   = {Supply Function Equilibria with Capacity Constraints and Hidden Information},
-  journal = {Economic Theory},
-  volume  = {25},
+@article{Joskow2008_capacity_payments,
+  author  = {Joskow, Paul L.},
+  title   = {Capacity Payments in Imperfect Electricity Markets: Need and Design},
+  journal = {Utilities Policy},
+  volume  = {16},
   number  = {3},
-  pages   = {595--614},
+  pages   = {159--170},
+  year    = {2008}
+}
+
+% --- PJM-Specific Institutional ---
+
+@article{Hobbs2007_rpm,
+  author  = {Hobbs, Benjamin F. and Hu, Ming-Che and I{\~{n}}{\'{o}}n, Javier G. and Stoft, Steven E. and Bhavaraju, Murty P.},
+  title   = {A Dynamic Analysis of a Demand Curve-Based Capacity Market Proposal: The {PJM} Reliability Pricing Model},
+  journal = {IEEE Transactions on Power Systems},
+  volume  = {22},
+  number  = {1},
+  pages   = {3--14},
+  year    = {2007}
+}
+
+@article{Bowring2013_pjm,
+  author  = {Bowring, Joseph},
+  title   = {Capacity Markets in {PJM}},
+  journal = {Economics of Energy \& Environmental Policy},
+  volume  = {2},
+  number  = {2},
+  pages   = {47--64},
+  year    = {2013}
+}
+
+% --- Additional SFE Literature ---
+
+@article{Holmberg2009_paybid,
+  author  = {Holmberg, P{\"a}r},
+  title   = {Supply Function Equilibria of Pay-as-Bid Auctions},
+  journal = {Journal of Regulatory Economics},
+  volume  = {36},
+  number  = {2},
+  pages   = {154--177},
+  year    = {2009}
+}
+
+@article{Anderson2005_sfe_pricecaps,
+  author  = {Anderson, Edward J. and Xu, Huifu},
+  title   = {Supply Function Equilibrium in Electricity Spot Markets with Contracts and Price Caps},
+  journal = {Journal of Optimization Theory and Applications},
+  volume  = {124},
+  number  = {2},
+  pages   = {257--283},
   year    = {2005}
 }
 
@@ -196,122 +241,6 @@
   year    = {2005}
 }
 
-@article{Holmberg2009_paybid,
-  author  = {Holmberg, P{\"a}r},
-  title   = {Supply Function Equilibria of Pay-as-Bid Auctions},
-  journal = {Journal of Regulatory Economics},
-  volume  = {36},
-  number  = {2},
-  pages   = {154--177},
-  year    = {2009}
-}
-
-@article{Salarkheili2012_market_power,
-  author  = {Salarkheili, Saeed and Haghifam, Mahmoud-Reza and Safdarian, Amir},
-  title   = {Market Power Assessment in Electricity Markets Using Supply Function Equilibrium},
-  journal = {International Transactions on Electrical Energy Systems},
-  volume  = {22},
-  number  = {7},
-  pages   = {870--882},
-  year    = {2012}
-}
-
-@article{Kebriaei2018_sfe_learning,
-  author  = {Kebriaei, Hamed and Glielmo, Luigi},
-  title   = {Estimation, Learning, and Stability Analysis of Supply Function Equilibrium Game for Generation Companies},
-  journal = {IEEE Transactions on Systems, Man, and Cybernetics: Systems},
-  volume  = {48},
-  number  = {5},
-  pages   = {700--711},
-  year    = {2018}
-}
-
-@article{Azadi2017_sfe_bidding,
-  author  = {Azadi Hematabadi, Ali and Akbari Foroud, Asghar},
-  title   = {Supply Function Equilibrium Bidding Strategy in Electricity Markets: An Analytical Approach},
-  journal = {Scientia Iranica},
-  volume  = {24},
-  number  = {3},
-  pages   = {1332--1345},
-  year    = {2017}
-}
-
-% ==============================================================================
-% --- Capacity Market Design ---
-% ==============================================================================
-
-@article{Cramton2007_uniform,
-  author  = {Cramton, Peter and Stoft, Steven},
-  title   = {Why We Need to Stick with Uniform-Price Auctions in Electricity Markets},
-  journal = {Electricity Journal},
-  volume  = {20},
-  number  = {1},
-  pages   = {26--37},
-  year    = {2007}
-}
-
-@article{Li2024_capacity,
-  author  = {Li, Xiaofei and others},
-  title   = {Capacity Market Design and Investment Incentives},
-  journal = {Energy Policy},
-  year    = {2024},
-  note    = {Full citation to be confirmed}
-}
-
-% ==============================================================================
-% --- Multi-Unit Auction Theory ---
-% ==============================================================================
-
-@article{Rao2011_multi_unit,
-  author  = {Rao, Zhichao and Zheng, Mingchao},
-  title   = {Multi-Unit Auction Theory Review},
-  journal = {Applied Mechanics and Materials},
-  year    = {2011},
-  note    = {Full citation to be confirmed from out(1).pdf}
-}
-
-% ==============================================================================
-% --- Background / Low Relevance ---
-% ==============================================================================
-
-@techreport{Wolak2018b_solar,
-  author      = {Wolak, Frank A.},
-  title       = {Leveling the Playing Field for Natural Gas in Electricity Markets},
-  institution = {National Bureau of Economic Research},
-  year        = {2018},
-  number      = {25087},
-  type        = {Working Paper},
-  note        = {w25087.pdf --- LOW direct relevance to capacity auction paper}
-}
-
-% ==============================================================================
-% --- Priority Acquisitions (Placeholder Entries) ---
-% ==============================================================================
-% These papers are cited heavily in the on-hand literature and must be acquired.
-% Entries are stubs: year/journal confirmed from secondary sources.
-
-@article{Klemperer1989_sfe,
-  author  = {Klemperer, Paul D. and Meyer, Margaret A.},
-  title   = {Supply Function Equilibria in Oligopoly under Uncertainty},
-  journal = {Econometrica},
-  volume  = {57},
-  number  = {6},
-  pages   = {1243--1277},
-  year    = {1989},
-  note    = {ACQUIRE: foundational SFE theory; cited by all SFE papers on hand}
-}
-
-@article{Green1992_british,
-  author  = {Green, Richard J. and Newbery, David M.},
-  title   = {Competition in the {British} Electricity Spot Market},
-  journal = {Journal of Political Economy},
-  volume  = {100},
-  number  = {5},
-  pages   = {929--953},
-  year    = {1992},
-  note    = {ACQUIRE: first empirical SFE application}
-}
-
 @article{Allaz1993_forward,
   author  = {Allaz, Blaise and Vila, Jean-Luc},
   title   = {Cournot Competition, Forward Markets and Efficiency},
@@ -319,28 +248,43 @@
   volume  = {59},
   number  = {1},
   pages   = {1--16},
-  year    = {1993},
-  note    = {ACQUIRE: forward contracting and strategic behavior}
+  year    = {1993}
 }
 
-@article{Joskow2008_capacity_payments,
-  author  = {Joskow, Paul L.},
-  title   = {Capacity Payments in Imperfect Electricity Markets: Need and Design},
-  journal = {Utilities Policy},
-  volume  = {16},
-  number  = {3},
-  pages   = {159--170},
-  year    = {2008},
-  note    = {ACQUIRE: bridges reliability need and capacity market design}
+@article{Rudkevich2004_sfe_applications,
+  author  = {Rudkevich, Aleksandr},
+  title   = {On the Supply Function Equilibrium and Its Applications in Electricity Markets},
+  journal = {Decision Support Systems},
+  year    = {2004},
+  doi     = {10.1016/j.dss.2004.05.004}
 }
 
-@article{Bresnahan1981_duopoly,
-  author  = {Bresnahan, Timothy F.},
-  title   = {Duopoly Models with Consistent Conjectures},
-  journal = {American Economic Review},
-  volume  = {71},
-  number  = {5},
-  pages   = {934--945},
-  year    = {1981},
-  note    = {ACQUIRE: foundational for residual demand + conjectural variation}
+@article{Wolak2007_quantifying,
+  author  = {Wolak, Frank A.},
+  title   = {Quantifying the Supply-Side Benefits from Forward Contracting in Wholesale Electricity Markets},
+  journal = {Journal of Applied Econometrics},
+  volume  = {22},
+  number  = {7},
+  pages   = {1179--1209},
+  year    = {2007}
+}
+
+@article{Vasin2016_sfe_uniform,
+  author  = {Vasin, Alexander and Dolmatova, Marina and Weber, Gerhard-Wilhelm},
+  title   = {Supply Function Equilibria for Uniform Price Auction in Oligopolistic Markets},
+  journal = {Central European Journal of Operations Research},
+  volume  = {24},
+  number  = {4},
+  pages   = {819--831},
+  year    = {2016}
+}
+
+@article{Vossler2009_price_caps,
+  author  = {Vossler, Christian A. and Mount, Timothy D. and Thomas, Robert J. and Zimmerman, Ray D.},
+  title   = {An Experimental Investigation of Soft Price Caps in Uniform Price Auction Markets for Wholesale Electricity},
+  journal = {Journal of Regulatory Economics},
+  volume  = {36},
+  number  = {1},
+  pages   = {44--59},
+  year    = {2009}
 }

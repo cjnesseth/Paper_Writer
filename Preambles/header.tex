@@ -1,0 +1,60 @@
+% ==============================================================================
+% header.tex -- Preamble for IO Paper 2
+% Loaded via TEXINPUTS=../Preambles:$TEXINPUTS from the Paper/ directory
+% ==============================================================================
+
+% --- Page layout ---
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\doublespacing
+
+% --- Fonts and encoding ---
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% --- Math ---
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{assumption}{Assumption}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+
+% --- Figures and tables ---
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage[font=small,labelfont=bf]{caption}
+
+% --- Bibliography ---
+\usepackage[authoryear,round]{natbib}
+\bibliographystyle{aer}
+
+% --- Hyperlinks (load last among most packages) ---
+\usepackage[
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=blue,
+  urlcolor=blue,
+  pdftitle={Residual Demand Analysis in PJM Capacity Auctions},
+  pdfauthor={}
+]{hyperref}
+
+% --- Misc utilities ---
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{appendix}
+
+% --- Draft helpers (comment out for submission) ---
+\usepackage{todonotes}
+\newcommand{\TODO}[1]{\todo[inline,color=yellow!40]{#1}}
+\newcommand{\CITE}[1]{\textcolor{red}{[CITE: #1]}}
+\newcommand{\NOTE}[1]{\textcolor{blue}{\textit{#1}}}

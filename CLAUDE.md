@@ -1,6 +1,6 @@
 # CLAUDE.MD -- Academic Project Development with Claude Code
 
-**Project:** IO Paper 2: Residual Demand Analysis in PJM Capacity Auctions
+**Project:** IO Paper 2: Calibrated SFE Simulation of Market Power in PJM Capacity Auctions
 **Branch:** main
 
 ---
@@ -95,11 +95,11 @@ python scripts/quality_score.py Paper/main.tex
 
 | Section | File | Status | Description |
 |---------|------|--------|-------------|
-| Introduction | `sections/introduction.tex` | Not started | Motivation, contribution, roadmap |
-| Literature | `sections/literature.tex` | Not started | IO demand estimation, capacity markets |
-| Institutional | `sections/institutional.tex` | Not started | PJM capacity auction mechanics |
-| Model | `sections/model.tex` | Not started | Residual demand framework |
-| Data | `sections/data.tex` | Not started | PJM auction data, data center entry |
-| Estimation | `sections/estimation.tex` | Not started | IV strategy, identification |
-| Results | `sections/results.tex` | Not started | Estimates, counterfactuals |
-| Conclusion | `sections/conclusion.tex` | Not started | Policy implications |
+| Introduction | `sections/introduction.tex` | Stub | Market power in capacity markets; SFE simulation approach |
+| Literature | `sections/literature.tex` | Skeleton | Citations only, no prose; 5 subsections |
+| Institutional | `sections/institutional.tex` | Stub | PJM RPM, VRR curve, BRA process, mitigation rules |
+| Model | `sections/model.tex` | Stub | SFE setup, FOCs, ODE system, equilibrium selection |
+| Calibration | `sections/calibration.tex` | Stub | PJM data sources, parameter choices, baseline structure |
+| Results | `sections/results.tex` | Stub | Baseline markups + 4 comparative statics |
+| Discussion | `sections/discussion.tex` | Stub | Compare to IMM metrics; VRR and transmission policy |
+| Conclusion | `sections/conclusion.tex` | Stub | Policy implications |

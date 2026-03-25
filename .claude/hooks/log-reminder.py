@@ -13,6 +13,7 @@ Usage (in .claude/settings.json):
 """
 
 import json
+import os
 import sys
 import hashlib
 from pathlib import Path
@@ -23,7 +24,11 @@ STATE_DIR = Path("/tmp/claude-log-reminder")
 
 
 def get_project_dir():
-    """Get project directory from stdin JSON or environment."""
+    """Get project directory from environment or stdin JSON.
+
+    Prefers CLAUDE_PROJECT_DIR (always the project root) over cwd (which
+    changes when Claude runs commands in subdirectories).
+    """
     try:
         hook_input = json.load(sys.stdin)
     except (json.JSONDecodeError, EOFError):
@@ -34,7 +39,9 @@ def get_project_dir():
     if hook_input.get("stop_hook_active", False):
         sys.exit(0)
 
-    return hook_input.get("cwd", ""), hook_input
+    # CLAUDE_PROJECT_DIR is always the project root regardless of cwd
+    project_dir = os.environ.get("CLAUDE_PROJECT_DIR", "") or hook_input.get("cwd", "")
+    return project_dir, hook_input
 
 
 def get_state_path(project_dir: str) -> Path:

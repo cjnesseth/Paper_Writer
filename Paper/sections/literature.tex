@@ -1,170 +1,118 @@
 % ==============================================================================
 % Section: Literature Review
-% Paper: IO Paper 2 -- Residual Demand Analysis in PJM Capacity Auctions
+% Paper: IO Paper 2 -- Calibrated SFE Simulation of Market Power in PJM RPM
 % Status: SKELETON -- headings and \cite{} only, no prose
-% Last updated: 2026-02-17
+% Last updated: 2026-03-24
 % ==============================================================================
 
 \section{Literature Review}
 \label{sec:literature}
 
 % ------------------------------------------------------------------------------
-\subsection{Residual Demand Estimation}
-\label{subsec:lit_residual_demand}
+\subsection{Supply Function Equilibria: Theory}
+\label{subsec:lit_sfe_theory}
 % ------------------------------------------------------------------------------
 
-% Core methodology: Baker & Bresnahan (1988)
-\cite{Baker1988_residual_demand}
+% Foundational SFE theory: multiplicity, existence, demand uncertainty
+\cite{Klemperer1989_sfe}
 
-% Conjectural variation foundation
-\cite{Bresnahan1981_duopoly}
+% First electricity application: E&W duopoly calibration -- closest methodological template
+\cite{Green1992_british}
 
-% Oligopoly review: Bresnahan (1989) -- ACQUIRE
-% \cite{Bresnahan1989_handbook}
+% Capacity constraints resolve multiplicity; backward-integration solution method
+\cite{Holmberg2008_unique_sfe}
 
-% Landes & Posner antitrust lineage -- ACQUIRE (Tier 3)
-% \cite{Landes1981_market_power}
+% Pay-as-bid SFE: unique symmetric equilibrium
+\cite{Holmberg2009_paybid}
+
+% Uniform-price oligopoly SFE
+\cite{Vasin2016_sfe_uniform}
+
+% SFE with forward contracts and price caps
+\cite{Anderson2005_sfe_pricecaps}
+
+% Forward contracting reduces strategic withholding
+\cite{Allaz1993_forward}
+
+% ------------------------------------------------------------------------------
+\subsection{Numerical Methods for SFE}
+\label{subsec:lit_sfe_methods}
+% ------------------------------------------------------------------------------
+
+% Iterative best-response algorithm for asymmetric firms -- primary methods reference
+\cite{Anderson2008_sfe_asymmetric}
+
+% Linear SFE approximation: tractable fallback
+\cite{Baldick2004_linear_sfe}
+
+% SFE bidding strategy: fixed forward contracts
+\cite{Niu2005_sfe_forward}
+
+% Rudkevich: relaxed continuity; computational algorithms for SFE
+\cite{Rudkevich2004_sfe_applications}
+
+% SFE empirical validation: ERCOT
+\cite{Sioshansi2007_sfe_ercot}
 
 % ------------------------------------------------------------------------------
 \subsection{Market Power in Electricity Markets}
-\label{subsec:lit_electricity_io}
+\label{subsec:lit_electricity_mp}
 % ------------------------------------------------------------------------------
 
-% Structural market power measurement: California
+% California market power: structural measurement
 \cite{Borenstein2002_market_power}
 
-% Unilateral market power: Wolak California
+% Unilateral market power: California
 \cite{Wolak2003_measuring}
 
 % Forward contracting reduces market power
 \cite{Wolak2007_quantifying}
 
-% England and Wales: Sweeting
+% Cournot simulation calibrated to US electricity markets -- methodologically related
+\cite{Bushnell2008_vertical}
+
+% Structural estimation of strategic behavior: E&W SFE test
 \cite{Sweeting2007_market_power}
 
+% Empirical test of SFE predictions: E&W duopoly
+\cite{Wolfram1999_duopoly}
+
 % Market power via SFE index
-\cite{Salarkheili2012_market_power}
-
-% Hortacsu & Puller structural bidding -- ACQUIRE (Tier 2)
-% \cite{Hortacsu2008_bidding}
-
-% Kastl discrete bids -- ACQUIRE (Tier 3)
-% \cite{Kastl2011_discrete}
-
-% Bushnell Cournot vs. SFE -- ACQUIRE (Tier 3)
-% \cite{Bushnell2005_oligopoly}
+% \cite{Salarkheili2012_market_power}
 
 % ------------------------------------------------------------------------------
-\subsection{Supply Function Equilibria}
-\label{subsec:lit_sfe}
+\subsection{Residual Demand and the Baker--Bresnahan Framework}
+\label{subsec:lit_residual_demand}
 % ------------------------------------------------------------------------------
 
-% Foundational SFE theory -- ACQUIRE (Tier 1)
-\cite{Klemperer1989_sfe}
-
-% First empirical SFE calibration -- ACQUIRE (Tier 1)
-\cite{Green1992_british}
-
-% Green (1996) calibration with policy counterfactual -- ACQUIRE (Tier 2)
-% \cite{Green1996_competition}
-
-% Linear SFE theory
-\cite{Baldick2004_linear_sfe}
-
-% Parametrized SFE -- ACQUIRE (Tier 2)
-% \cite{Baldick2002_parametrization}
-
-% SFE with forward contracts and price caps
-\cite{Anderson2005_sfe_contracts}
-
-% SFE with fixed forward contracts
-\cite{Niu2005_sfe_forward}
-
-% Pay-as-bid SFE
-\cite{Holmberg2009_paybid}
-
-% Forward contracting and efficiency -- ACQUIRE (Tier 1)
-\cite{Allaz1993_forward}
-
-% SFE learning and stability
-\cite{Kebriaei2018_sfe_learning}
-
-% SFE bidding strategy: analytical approach
-\cite{Azadi2017_sfe_bidding}
+% Foundational residual demand methodology -- framing the Lerner index
+\cite{Baker1988_residual_demand}
 
 % ------------------------------------------------------------------------------
 \subsection{Capacity Market Design}
 \label{subsec:lit_capacity_markets}
 % ------------------------------------------------------------------------------
 
-% Reliability and competitive electricity markets
-\cite{Joskow2007_capacity}
-
-% Capacity payments in imperfect markets -- ACQUIRE (Tier 1)
-\cite{Joskow2008_capacity_payments}
-
-% Capacity market that makes sense
-\cite{Cramton2004_capacity}
+% Why capacity markets exist; VRR demand curve design
+\cite{Cramton2005_capacity}
 
 % Uniform-price auction defense
 \cite{Cramton2007_uniform}
 
-% Electricity market design: Cramton
-\cite{Cramton2017_capacity}
+% Broader capacity market design: market power concerns
+\cite{CramtonOckenfels2012_capacity}
 
-% Capacity market design and investment incentives
-\cite{Li2024_capacity}
+% Reliability and competitive electricity markets
+\cite{Joskow2007_capacity}
 
-% Power system economics textbook -- ACQUIRE (Tier 2)
-% \cite{Stoft2002_power}
+% Capacity payments: need and design in imperfect markets
+\cite{Joskow2008_capacity_payments}
 
-% Chao & Wilson reliability pricing foundations -- ACQUIRE (Tier 3)
-% \cite{Chao1987_priority}
+% Dynamic analysis of PJM RPM / VRR curve
+\cite{Hobbs2007_rpm}
 
-% ------------------------------------------------------------------------------
-\subsection{Auction Theory}
-\label{subsec:lit_auctions}
-% ------------------------------------------------------------------------------
+% Overview of RPM design and market power mitigation by PJM IMM
+\cite{Bowring2013_pjm}
 
-% Auctions and competitive bidding
-\cite{Milgrom1982_auctions}
-
-% Auction theory textbook
-\cite{Krishna2010_auction}
-
-% Multi-unit auction theory
-\cite{Rao2011_multi_unit}
-
-% Maskin & Riley optimal multi-unit auctions -- ACQUIRE (Tier 3)
-% \cite{Maskin1989_multiunit}
-
-% ------------------------------------------------------------------------------
-\subsection{Industrial Organization Methods}
-\label{subsec:lit_io_methods}
-% ------------------------------------------------------------------------------
-
-% Automobile prices: BLP
-\cite{Berry1995_auto}
-
-% Practitioner's guide to BLP
-\cite{Nevo2001_practitioners}
-
-% Theory of industrial organization
-\cite{Tirole1988_io}
-
-% Schmalensee inter-industry studies
-\cite{Schmalensee1989_inter_industry}
-
-% Imperfect IVs -- ACQUIRE (Tier 2)
-% \cite{Nevo2012_imperfect_iv}
-
-% ------------------------------------------------------------------------------
-\subsection{Data Centers and Electricity Demand}
-\label{subsec:lit_data_centers}
-% ------------------------------------------------------------------------------
-
-% US data center energy usage
-\cite{Shehabi2016_data_centers}
-
-% Wolak (2018) distributed solar -- background only
-% \cite{Wolak2018b_solar}
+% Experimental evidence on soft price caps in uniform-price auctions
+\cite{Vossler2009_price_caps}

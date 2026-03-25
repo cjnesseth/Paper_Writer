@@ -1,6 +1,6 @@
-# Literature Matrix — IO Paper 2: Residual Demand in PJM Capacity Auctions
-**Updated:** 2026-02-17
-**Total on hand:** 18 PDFs + 15 .bib entries (some overlap)
+# Literature Matrix — IO Paper 2: Calibrated SFE Simulation of Market Power in PJM RPM
+**Updated:** 2026-03-24 (topic pivot from residual demand estimation)
+**Total on hand:** 34 PDFs | **Required by pivot sketch:** 14 academic papers (all on hand)
 
 ---
 
@@ -8,78 +8,84 @@
 
 - **Section:** Which paper section this informs
 - **Core claim:** The one sentence most relevant to this project
-- **Bib status:** `keyed` = entry in Bibliography_base.bib | `add` = needs entry | `placeholder` = stub added
+- **Priority:** `core` = cited in pivot sketch | `supporting` = useful context | `background` = low relevance
 - **Read status:** `unread` | `skimmed` | `read` | `deep-read`
 
 ---
 
-## Papers On Hand (18 PDFs)
+## Core Literature (Required by Pivot Sketch)
 
-| # | Key | Authors | Year | Venue | Section | Core Claim for This Project | Bib Status | Read Status |
-|---|-----|---------|------|-------|---------|----------------------------|------------|-------------|
-| 1 | Baker1988_residual_demand | Baker & Bresnahan | 1988 | IJIO | Lit/Model | Residual demand elasticity identifies a firm's market power without observing rivals' costs | keyed | unread |
-| 2 | Joskow2007_capacity | Joskow & Tirole | 2007 | RAND | Lit/Institutional | Competitive capacity markets require reliability obligation + sloped demand curve to internalize externalities | keyed | unread |
-| 3 | Cramton2007_uniform | Cramton & Stoft | 2007 | Utilities Policy | Lit/Institutional | Uniform-price auctions are revenue-equivalent to pay-as-bid and informationally superior | add | unread |
-| 4 | RPM_design | Whitman, Hirst et al. | ~2006 | Working Paper | Institutional | PJM RPM uses a variable resource requirement (VRR) curve as downward-sloping demand | add | unread |
-| 5 | Li2024_capacity | Li et al. | 2024 | J. Energy Policy | Lit/Model | Capacity market design affects long-run investment incentives through price signal shape | add | unread |
-| 6 | Baldick2004_linear_sfe | Baldick, Grant & Kahn | 2004 | IEEE Trans. | Lit/Model | Linear supply function equilibria exist and are tractable for electricity markets | add | unread |
-| 7 | Anderson2005_sfe_contracts | Anderson & Xu | 2005 | Econ. Theory | Lit/Model | Forward contracts and price caps narrow the SFE multiplicity and select more competitive equilibria | add | unread |
-| 8 | Niu2005_sfe_forward | Niu, Baldick & Zhu | 2005 | IEEE Trans. | Lit/Model | Forward contracting reduces strategic withholding in SFE; effect depends on contract quantity | add | unread |
-| 9 | Holmberg2009_paybid | Holmberg | 2009 | Energy J. | Lit/Model | Pay-as-bid SFE has unique symmetric equilibrium; tends toward higher prices than uniform-price | add | unread |
-| 10 | SFE_uniform_oligopoly | Unknown | 2015 | Unknown | Lit/Model | Uniform-price oligopoly SFE: multiplicity shrinks when demand uncertainty is large | add | unread |
-| 11 | SFE_electricity_apps | Unknown | 2004 | Unknown | Lit | SFE framework applied to real electricity markets yields measurable market power predictions | add | unread |
-| 12 | SFE_reg_economics | Unknown | 2009 | Reg. Econ. | Lit | Regulatory instruments (price caps, contracts) reshape SFE equilibrium selection | add | unread |
-| 13 | Salarkheili2012_market_power | Salarkheili et al. | 2012 | Int. Trans. EES | Lit | SFE-based market power index provides a tractable empirical measure for electricity auctions | add | unread |
-| 14 | Kebriaei2018_sfe_learning | Kebriaei & Glielmo | 2018 | IEEE Trans. | Lit | SFE is learnable and stable under best-response dynamics; convergence conditions derived | add | unread |
-| 15 | MarketPower_estimation | Unknown | ~1990s | Unknown | Lit | Critiques structural identification of market power; motivates residual demand approach | add | unread |
-| 16 | Wolak2018b_solar | Wolak | 2018 | NBER WP | (Background) | Distributed solar affects distribution network pricing — LOW direct relevance | placeholder | skimmed |
-| 17 | Azadi2017_sfe_bidding | Azadi Hematabadi & Akbari Foroud | 2017 | Scientia Iranica | Lit | Analytical SFE bidding strategy with closed-form solution — MEDIUM relevance | add | unread |
-| 18 | Rao2011_multi_unit | Rao & Zheng | 2011 | Applied Mech. & Mat. | Lit | Multi-unit auction theory review — LOW-MEDIUM direct relevance | add | unread |
+| # | Key | Authors | Year | Venue | Section | Core Claim for This Project | Priority | Read Status |
+|---|-----|---------|------|-------|---------|----------------------------|----------|-------------|
+| 1 | Klemperer1989_sfe | Klemperer & Meyer | 1989 | Econometrica | Lit/Model | SFE exists under demand uncertainty; generically multiple equilibria — discuss uniqueness with deterministic VRR | core | unread |
+| 2 | Green1992_british | Green & Newbery | 1992 | JPE | Lit/Model | First SFE calibration to electricity market — closest methodological template | core | unread |
+| 3 | Holmberg2008_unique_sfe | Holmberg | 2008 | Energy Economics | Lit/Model | Capacity constraints yield unique SFE; backward-integration solution method | core | unread |
+| 4 | Anderson2008_sfe_asymmetric | Anderson & Hu | 2008 | Operations Research | Lit/Model | Iterative best-response algorithm for asymmetric SFE — primary methods reference | core | unread |
+| 5 | Baldick2004_linear_sfe | Baldick, Grant & Kahn | 2004 | JRE | Lit/Model | Linear SFE approximation — tractable fallback if nonlinear ODE too costly | core | unread |
+| 6 | Wolak2003_measuring | Wolak | 2003 | AER P&P | Lit | Structural measurement of unilateral market power — motivates simulation when bids unobserved | core | unread |
+| 7 | Bushnell2008_vertical | Bushnell, Mansur & Saravia | 2008 | AER | Lit | Cournot simulation calibrated to US electricity markets — methodologically related | core | unread |
+| 8 | Sweeting2007_market_power | Sweeting | 2007 | EJ | Lit | Structural estimation of SFE in E&W auctions — tests SFE predictions against data | core | unread |
+| 9 | Baker1988_residual_demand | Baker & Bresnahan | 1988 | IJIO | Lit | Residual demand elasticity as Lerner index — framing for simulation output | core | unread |
+| 10 | Wolfram1999_duopoly | Wolfram | 1999 | AER | Lit | Empirically tests SFE predictions in E&W spot market — bridges SFE theory and B&B measurement | core | unread |
+| 11 | Cramton2005_capacity | Cramton & Stoft | 2005 | Electricity Journal | Lit/Institutional | Why capacity markets need a demand curve; VRR design principles | core | unread |
+| 12 | CramtonOckenfels2012_capacity | Cramton & Ockenfels | 2012 | ZfE | Lit | Broader capacity market design with market power concerns | core | unread |
+| 13 | Bowring2013_pjm | Bowring | 2013 | EEEP | Lit/Institutional | RPM design and market power mitigation rules — PJM IMM perspective | core | unread |
+| 14 | Monitoring Analytics (annual) | PJM IMM | 2025 | Report | Data/Institutional | HHI by LDA, TPS test results, offer curves — primary calibration data source | core | skimmed |
 
 ---
 
-## Existing .bib Entries Not Matched to On-Hand PDFs
+## Supporting Literature (On Hand, Contextually Useful)
 
-These 15 entries are already in `Bibliography_base.bib` but the physical PDFs may not be in `supporting_papers/`.
-
-| Key | Authors | Year | Section | PDF on hand? |
-|-----|---------|------|---------|--------------|
-| Baker1988_residual_demand | Baker & Bresnahan | 1988 | Lit/Model | YES (#1) |
-| Schmalensee1989_inter_industry | Schmalensee | 1989 | Lit | No — obtain |
-| Borenstein2002_market_power | Borenstein, Bushnell & Wolak | 2002 | Lit | No — obtain |
-| Wolak2003_measuring | Wolak | 2003 | Lit | No — obtain |
-| Wolak2007_quantifying | Wolak | 2007 | Lit | No — obtain |
-| Sweeting2007_market_power | Sweeting | 2007 | Lit | No — obtain |
-| Cramton2004_capacity | Cramton & Stoft | 2005 | Lit/Institutional | Partial (#3) |
-| Cramton2017_capacity | Cramton | 2017 | Lit/Institutional | No — obtain |
-| Joskow2007_capacity | Joskow & Tirole | 2007 | Lit/Institutional | YES (#2) |
-| Berry1995_auto | Berry, Levinsohn & Pakes | 1995 | Lit | No — obtain |
-| Tirole1988_io | Tirole | 1988 | Lit | No — obtain |
-| Nevo2001_practitioners | Nevo | 2000 | Lit/Estimation | No — obtain |
-| Milgrom1982_auctions | Milgrom & Weber | 1982 | Lit | No — obtain |
-| Krishna2010_auction | Krishna | 2010 | Lit | No — obtain |
-| Shehabi2016_data_centers | Shehabi et al. | 2016 | Data/Lit | No — obtain |
+| # | Key | Authors | Year | Venue | Section | Relevance | Priority | Read Status |
+|---|-----|---------|------|-------|---------|-----------|----------|-------------|
+| 15 | Hobbs2007_rpm | Hobbs et al. | 2007 | IEEE Trans. Power Sys. | Institutional | Dynamic analysis of VRR/RPM equilibrium and investment | supporting | unread |
+| 16 | Joskow2007_capacity | Joskow & Tirole | 2007 | RAND | Lit/Institutional | Reliability externalities and competitive capacity markets | supporting | unread |
+| 17 | Joskow2008_capacity_payments | Joskow | 2008 | Utilities Policy | Lit/Institutional | Capacity payments in imperfect markets: need and design | supporting | unread |
+| 18 | Cramton2007_uniform | Cramton & Stoft | 2007 | Electricity Journal | Lit | Uniform-price auctions: revenue equivalence and informational superiority | supporting | unread |
+| 19 | Borenstein2002_market_power | Borenstein, Bushnell & Wolak | 2002 | AER | Lit | Structural market power measurement in California — empirical motivation | supporting | unread |
+| 20 | Sioshansi2007_sfe_ercot | Sioshansi & Oren | 2007 | JRE | Lit | Empirical SFE validation in ERCOT — confirms model relevance | supporting | unread |
+| 21 | Wolak2007_quantifying | Wolak | 2007 | JAE | Lit | Forward contracts reduce market power — connects to PJM bilateral contracts | supporting | unread |
+| 22 | Anderson2005_sfe_pricecaps | Anderson & Xu | 2005 | JOTA | Lit/Model | Price caps and forward contracts narrow SFE multiplicity | supporting | unread |
+| 23 | Holmberg2009_paybid | Holmberg | 2009 | JRE | Lit | Pay-as-bid SFE: unique equilibrium, higher prices — contrast with uniform-price | supporting | unread |
+| 24 | Niu2005_sfe_forward | Niu, Baldick & Zhu | 2005 | IEEE Trans. | Lit | Fixed forward contracts in SFE reduce withholding | supporting | unread |
+| 25 | Allaz1993_forward | Allaz & Vila | 1993 | JET | Lit | Forward contracting and efficiency under Cournot | supporting | unread |
+| 26 | Rudkevich2004_sfe_applications | Rudkevich | 2004 | DSS | Lit | SFE with relaxed continuity; computational algorithms | supporting | unread |
+| 27 | Vasin2016_sfe_uniform | Vasin, Dolmatova & Weber | 2016 | CEJOR | Lit | Uniform-price oligopoly SFE multiplicity | supporting | unread |
+| 28 | Vossler2009_price_caps | Vossler et al. | 2009 | JRE | Lit | Experimental: soft price caps reduce market power in uniform-price auctions | supporting | unread |
+| 29 | PJM Manual 18 | PJM | — | Manual | Institutional | RPM rules, offer requirements, capacity performance | supporting | unread |
 
 ---
 
-## Section Assignment Summary
+## Background / Low Relevance (Kept for Completeness)
 
-| Paper Section | Papers Assigned |
-|---------------|-----------------|
-| **Lit — IO Demand Estimation** | Baker1988, Schmalensee1989, Berry1995, Nevo2001, MarketPower_estimation |
-| **Lit — Electricity IO / Market Power** | Borenstein2002, Wolak2003, Wolak2007, Sweeting2007, Salarkheili2012 |
-| **Lit — Supply Function Equilibria** | Baldick2004, Anderson2005, Niu2005, Holmberg2009, SFE_uniform_oligopoly, SFE_electricity_apps, SFE_reg_economics, Kebriaei2018, Azadi2017 |
-| **Lit — Capacity Market Design** | Joskow2007, Cramton2004, Cramton2007, Cramton2017, RPM_design, Li2024 |
-| **Lit — Auction Theory** | Milgrom1982, Krishna2010, Rao2011 |
-| **Institutional — PJM** | RPM_design, Joskow2007 (partial) |
-| **Model** | Baker1988, Baldick2004, Anderson2005, Li2024 |
-| **Data / Background** | Shehabi2016, Wolak2018b |
-| **Estimation** | Nevo2001, Baker1988 |
+| Key | Authors | Year | Note |
+|-----|---------|------|------|
+| Wolak2018b_solar | Wolak | 2018 | Distributed solar/distribution — LOW relevance to capacity auction paper |
+| Boyer1996_market_power | Boyer | 1996 | Critiques structural market power identification — OLD TOPIC framing |
+| Bresnahan1981_duopoly | Bresnahan | 1981 | Conjectural variation — OLD TOPIC framing |
+| Azadi2017_sfe_bidding | Azadi & Akbari Foroud | 2017 | Analytical SFE bidding — MEDIUM-LOW relevance |
+| Salarkheili2012_market_power | Salarkheili et al. | 2012 | SFE market power index — MEDIUM-LOW relevance |
+| Kebriaei2018_sfe_learning | Kebriaei & Glielmo | 2018 | SFE learning/stability — MEDIUM-LOW relevance |
+| Rao2011_multi_unit | Rao & Zheng | 2011 | Multi-unit auction review — LOW relevance |
+
+---
+
+## Reading Priority Order
+
+1. Green & Newbery (1992) — methodological template, read first
+2. Holmberg (2008) — solution method for the ODE
+3. Anderson & Hu (2008) — iterative algorithm, needed to code the model
+4. Klemperer & Meyer (1989) — foundational theory
+5. Bowring (2013) — institutional grounding for PJM
+6. Bushnell, Mansur & Saravia (2008) — calibration approach reference
+7. Cramton & Stoft (2005) — VRR design motivation
+8. Wolfram (1999) / Sweeting (2007) — empirical SFE tests for framing
 
 ---
 
 ## Notes
 
-- Papers #10, #11, #12, #15 still have unknown full citations — need PDF metadata extraction or DOI lookup
-- Papers #16, #17, #18 (Wolak2018b, Azadi2017, Rao2011) identified from filenames `w25087.pdf`, `out.pdf`, `out(1).pdf`
-- Cramton2004 entry in .bib has year 2005 (published) but key says 2004 (working paper year) — reconcile when finalizing
+- All 14 core papers are on hand as of 2026-03-24
+- `Anderson2005_sfe_pricecaps` (JOTA) is distinct from `Anderson2008_sfe_asymmetric` (OR) — different papers by overlapping authors
+- PJM Planning Parameters and BRA Results are web/data sources, not PDFs to acquire
+- Li et al. (2023) IJEPES — year discrepancy (2023 vs. 2024 plan), not relevant to new topic
