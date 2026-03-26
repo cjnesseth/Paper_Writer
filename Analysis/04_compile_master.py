@@ -28,6 +28,14 @@ vrr = pd.read_csv(CLEANED_DIR / "vrr_params.csv")
 bra = pd.read_csv(CLEANED_DIR / "bra_clearing.csv")
 mkt = pd.read_csv(CLEANED_DIR / "market_structure.csv")
 
+# Normalize IMM LDA names to match planning-params / BRA-results conventions
+_lda_map = {
+    "ComEd":     "COMED",
+    "DPL South": "DPL SOUTH",
+    "Dominion":  "DOM",
+}
+mkt["lda"] = mkt["lda"].replace(_lda_map)
+
 # ---------------------------------------------------------------------------
 # BRA lead-time metadata
 # (from data_inventory.md; 2021/22 date from Excel file metadata)
@@ -76,7 +84,7 @@ master = (
         how="left",
     )
     .merge(
-        mkt[["delivery_year", "lda", "rsi_1", "rsi_1_05", "n_participants", "n_pivotal"]],
+        mkt[["delivery_year", "lda", "rsi_1", "rsi_3", "n_participants", "n_pivotal"]],
         on=["delivery_year", "lda"],
         how="left",
     )
@@ -127,7 +135,7 @@ col_order = [
     "clearing_price", "mw_cleared",
     "price_net_cone_ratio", "capacity_margin", "at_cap",
     # Market structure (RSI/TPS from IMM Section 5)
-    "rsi_1", "rsi_1_05", "n_participants", "n_pivotal",
+    "rsi_1", "rsi_3", "n_participants", "n_pivotal",
 ]
 # Keep only columns that exist (some may be missing if upstream scripts failed)
 col_order = [c for c in col_order if c in master.columns]
@@ -150,7 +158,7 @@ rto = master[master["lda"] == "RTO"][[
 print(rto.to_string(index=False))
 
 n_miss_price = master["clearing_price"].isna().sum()
-n_miss_rsi   = master["rsi_1"].isna().sum() if "rsi_1" in master.columns else len(master)
+n_miss_rsi   = master["rsi_3"].isna().sum() if "rsi_3" in master.columns else len(master)
 if n_miss_price:
     print(f"\nWARNING: {n_miss_price} rows missing clearing_price", file=sys.stderr)
 if n_miss_rsi:

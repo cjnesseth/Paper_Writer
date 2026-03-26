@@ -1,31 +1,33 @@
 """
-03_parse_imm_hhi.py
-Extract RSI (Residual Supply Index) and pivotal-supplier counts from the
-PJM IMM State of the Market reports (Vol 2, Section 5 Capacity Market).
+03_parse_imm_hhi.py  (v2 — pdfplumber, page-targeted)
+Extract RSI (Residual Supply Index) results from PJM IMM State of the Market
+reports (Vol 2, Section 5 Capacity Market).
 
-The IMM capacity section reports the Three Pivotal Supplier (TPS) / RSI test
-results by LDA — not HHI.  This script extracts those tables.
+The IMM reports the Three Pivotal Supplier (TPS) / RSI test by LDA, not HHI.
 
-Input:  Data/raw/imm_reports/*.pdf   (pdfplumber)
+Input:  Data/raw/imm_reports/*.pdf
 Output: Data/cleaned/market_structure.csv
         Data/cleaned/imm_parse_diagnostics.txt
 
-Columns extracted per BRA per LDA:
-  rsi_1          RSI at 3-supplier threshold (1.0)
-  rsi_1_05       RSI at 3-supplier threshold (1.05)
-  n_participants Total market participants
-  n_pivotal      Failed-RSI participants (= pivotal suppliers)
+Columns per BRA per LDA:
+  rsi_1          Residual Supply Index for 1 supplier (threshold 1.05)
+  rsi_3          Residual Supply Index for 3 suppliers
+  n_participants Total market participants in the relevant market
+  n_pivotal      Participants who failed the RSI_3 test (= pivotal)
 
-Report-to-BRA mapping:
-  2020 SotM Vol 2 → 2021/22 BRA
-  2021 SotM Vol 2 → 2022/23 BRA
-  2022 SotM Vol 2 → 2023/24 BRA (and retrospective 2022/23)
-  2023 SotM Vol 2 → no BRA held (gap year); RSI for active delivery years
-  2024 SotM Vol 2 → 2024/25 BRA + 2025/26 BRA
-  2025 SotM Vol 2 → 2026/27 BRA + 2027/28 BRA
+Strategy:
+  Scan each PDF for the page containing both "RSI results" and a BRA heading
+  with actual numeric data rows.  Grab that page + the next one (in case the
+  table spans), then parse line by line.  The two-column PDF layout means some
+  rows have trailing text from the adjacent column — the regex captures the
+  first 5 tokens and ignores the rest.
 
-NOTE: PDF parsing is inherently fragile.  Always compare output against
-the printed report before using numbers in the paper.
+Report-to-BRA mapping used here (non-overlapping):
+  2022 SotM Vol 2 → 2022/23 BRA  (Table 5-9, page 336)
+  2025 SotM Vol 2 → 2023/24 through 2027/28 BRAs  (Table 5-11, page 346)
+  All others: skipped (no target BRAs assigned)
+
+NOTE: Compare output against IMM reports before using numbers in the paper.
 """
 
 import re
@@ -40,8 +42,17 @@ CLEANED_DIR = Path("Data/cleaned")
 CLEANED_DIR.mkdir(parents=True, exist_ok=True)
 
 # ---------------------------------------------------------------------------
-# File manifest
+# Which BRA delivery years to pull from each report year (non-overlapping)
 # ---------------------------------------------------------------------------
+
+TARGET_BRAS = {
+    2020: [],
+    2021: [],
+    2022: ["2022/23"],
+    2023: [],
+    2024: [],
+    2025: ["2023/24", "2024/25", "2025/26", "2026/27", "2027/28"],
+}
 
 FILE_MAP = [
     (2020, "2020-som-pjm-vol2.pdf"),
@@ -52,100 +63,108 @@ FILE_MAP = [
     (2025, "2025-som-pjm-vol2.pdf"),
 ]
 
-# BRA years that we want to pull out of each report
-TARGET_BRAS = {
-    2020: ["2021/22"],
-    2021: ["2022/23"],
-    2022: ["2022/23", "2023/24"],
-    2023: ["2023/24", "2024/25"],   # gap year — BRAs from prior/next
-    2024: ["2024/25", "2025/26"],
-    2025: ["2026/27", "2027/28"],
-}
+# ---------------------------------------------------------------------------
+# Patterns
+# ---------------------------------------------------------------------------
 
-# Regex to match BRA headings in the RSI table
-# e.g. "2022/2023 Base Residual Auction" or "2022/2023 RPM Base Residual Auction"
 BRA_HEADING_RE = re.compile(
     r"(\d{4})/(\d{4})\s+(?:RPM\s+)?Base\s+Residual\s+Auction",
     re.IGNORECASE,
 )
 
-# Normalize "2022/2023" → "2022/23"
-def norm_year(y1, y2):
-    return f"{y1}/{y2[-2:]}"
-
-# Regex for an RSI data row:
-# LDA_NAME  rsi_1  rsi_1.05  total_participants  failed_participants
-# e.g.  "RTO 0.81 0.73 130 130"
-LDA_TOKEN = (
-    r"(?:RTO|MAAC|SWMAAC|EMAAC|PSEG(?:\s+North)?|PS(?:\s+North)?|"
-    r"DPL(?:\s+South)?|ATSI(?:-CLEVELAND|-Cleveland)?|DEOK|AEP|DAY(?:TON)?|"
-    r"APS|EKPC|DOM|BGE|ComEd|COMED|JCPL|PL)"
-)
-RSI_ROW_RE = re.compile(
-    rf"^({LDA_TOKEN})\s+"           # LDA name
-    r"(-?\d+\.\d+)\s+"             # RSI_1
-    r"(-?\d+\.\d+)\s+"             # RSI_1.05
-    r"(\d+)\s+"                     # total participants
-    r"(\d+)\s*$",                   # failed (pivotal) participants
+IA_HEADING_RE = re.compile(
+    r"(?:First|Second|Third|Incremental)\s+(?:Incremental\s+)?Auction",
     re.IGNORECASE,
 )
 
+# LDA names as they appear in the RSI table (covers all years in the panel)
+LDA_TOKEN = (
+    r"(?:RTO|MAAC|SWMAAC|EMAAC|PSEG(?:\s+North)?|PS(?:\s+North)?|"
+    r"DPL(?:\s+South)?|ATSI(?:-CLEVELAND|-Cleveland)?|DEOK|AEP|DAY(?:TON)?|"
+    r"APS|EKPC|DOM(?:inion)?|BGE|ComEd|COMED|JCPL|PL)"
+)
+
+# Capture the 5 data tokens; do NOT anchor to end-of-line because the 2022 SOM
+# two-column layout leaves trailing text from the adjacent column on some rows.
+RSI_ROW_RE = re.compile(
+    rf"^({LDA_TOKEN})\s+"   # LDA name
+    r"(-?\d+\.\d+)\s+"      # rsi_1
+    r"(-?\d+\.\d+)\s+"      # rsi_3
+    r"(\d+)\s+"              # total participants
+    r"(\d+)",                # failed (pivotal) participants
+    re.IGNORECASE,
+)
+
+
+def norm_year(y1, y2):
+    """'2022', '2023' → '2022/23'"""
+    return f"{y1}/{y2[-2:]}"
+
+
 # ---------------------------------------------------------------------------
-# Find Section 5 (Capacity Market) pages
+# Page finder
 # ---------------------------------------------------------------------------
 
-def find_section5_pages(pdf):
-    """Return list of page indices whose header says 'Section 5 Capacity'."""
-    pages = []
+def find_rsi_table_page(pdf):
+    """
+    Scan all pages for the one containing the BRA RSI results table.
+    Returns (page_index, combined_text) where combined_text is that page
+    plus the following page (in case the table spans a page break).
+    Returns (None, '') if not found.
+    """
     for i, page in enumerate(pdf.pages):
         text = page.extract_text() or ""
-        first_line = text.strip().split("\n")[0] if text.strip() else ""
-        if re.search(r"(?i)section\s+5\s+capacity", first_line):
-            pages.append(i)
-    return pages
+        # Must contain the table title AND at least one numeric data row
+        if (re.search(r"RSI results", text, re.IGNORECASE)
+                and re.search(r"Base Residual Auction", text, re.IGNORECASE)
+                and re.search(r"\d+\.\d+\s+\d+\.\d+\s+\d+\s+\d+", text)):
+            next_text = ""
+            if i + 1 < len(pdf.pages):
+                next_text = pdf.pages[i + 1].extract_text() or ""
+            return i, text + "\n" + next_text
+    return None, ""
 
 
 # ---------------------------------------------------------------------------
-# Parse RSI table from text
+# RSI table parser
 # ---------------------------------------------------------------------------
 
 def parse_rsi_table(text_lines):
     """
-    Parse the RSI results table from a list of text lines.
-    Returns list of dicts: {delivery_year, lda, rsi_1, rsi_1_05,
-                            n_participants, n_pivotal}
-    Only collects Base Residual Auction rows (not Incremental Auctions).
+    Walk the RSI table line by line.
+    Collects rows only within Base Residual Auction blocks;
+    stops collecting when an Incremental Auction heading is encountered.
+    Returns list of dicts.
     """
-    records = []
-    current_bra  = None
-    in_bra_block = False
+    records     = []
+    current_bra = None
+    in_bra      = False
 
     for line in text_lines:
         line = line.strip()
         if not line:
             continue
 
-        # Check for BRA heading
-        m_bra = BRA_HEADING_RE.search(line)
-        if m_bra:
-            current_bra  = norm_year(m_bra.group(1), m_bra.group(2))
-            in_bra_block = True
+        # BRA heading → start collecting
+        m = BRA_HEADING_RE.search(line)
+        if m:
+            current_bra = norm_year(m.group(1), m.group(2))
+            in_bra      = True
             continue
 
-        # Check for Incremental Auction heading — stop collecting for this BRA
-        if re.search(r"(?i)Incremental\s+Auction", line) and current_bra:
-            in_bra_block = False
+        # Incremental Auction heading → stop collecting for current BRA
+        if IA_HEADING_RE.search(line) and current_bra:
+            in_bra = False
             continue
 
-        # Collect RSI data rows while in a BRA block
-        if in_bra_block and current_bra:
+        if in_bra and current_bra:
             m = RSI_ROW_RE.match(line)
             if m:
                 records.append({
                     "delivery_year":  current_bra,
                     "lda":            m.group(1).strip(),
                     "rsi_1":          float(m.group(2)),
-                    "rsi_1_05":       float(m.group(3)),
+                    "rsi_3":          float(m.group(3)),
                     "n_participants": int(m.group(4)),
                     "n_pivotal":      int(m.group(5)),
                 })
@@ -158,60 +177,53 @@ def parse_rsi_table(text_lines):
 # ---------------------------------------------------------------------------
 
 def parse_report(cal_year, filename):
+    targets = TARGET_BRAS.get(cal_year, [])
+    diag    = [f"=== {filename} (calendar year {cal_year}) ==="]
+
+    if not targets:
+        diag.append("SKIPPED — no target BRAs assigned")
+        return [], "\n".join(diag)
+
     path = RAW_DIR / filename
     if not path.exists():
-        print(f"  MISSING: {path}", file=sys.stderr)
-        return [], f"=== {filename} ===\nFILE NOT FOUND"
-
-    diag = [f"=== {filename} (calendar year {cal_year}) ==="]
+        diag.append("FILE NOT FOUND")
+        return [], "\n".join(diag)
 
     try:
-        pdf = pdfplumber.open(path)
+        with pdfplumber.open(path) as pdf:
+            diag.append(f"Total pages: {len(pdf.pages)}")
+
+            pg_idx, combined = find_rsi_table_page(pdf)
+
+            if pg_idx is None:
+                diag.append("WARNING: RSI table page not found — verify manually")
+                return [], "\n".join(diag)
+
+            diag.append(f"RSI table found on page {pg_idx + 1}")
+
+            records = parse_rsi_table(combined.split("\n"))
+            diag.append(f"RSI rows parsed (all BRAs): {len(records)}")
+
+            records = [r for r in records if r["delivery_year"] in targets]
+            diag.append(f"Rows after filtering to {targets}: {len(records)}")
+
+            for r in records:
+                r["calendar_year"] = cal_year
+
+            if records:
+                diag.append("Extracted rows:")
+                for r in records:
+                    diag.append(
+                        f"  {r['delivery_year']:8s}  {r['lda']:15s}"
+                        f"  rsi_1={r['rsi_1']:.2f}  rsi_3={r['rsi_3']:.2f}"
+                        f"  n={r['n_participants']}  pivotal={r['n_pivotal']}"
+                    )
+
     except Exception as e:
-        msg = f"ERROR opening PDF: {e}"
-        print(f"  {msg}", file=sys.stderr)
-        return [], "\n".join(diag + [msg])
-
-    diag.append(f"Total pages: {len(pdf.pages)}")
-
-    sec5_pages = find_section5_pages(pdf)
-    diag.append(f"Section 5 page indices: {sec5_pages[:5]}{'...' if len(sec5_pages) > 5 else ''}")
-
-    if not sec5_pages:
-        msg = "WARNING: No Section 5 pages found"
-        print(f"  {msg}", file=sys.stderr)
-        pdf.close()
-        return [], "\n".join(diag + [msg])
-
-    # Extract text from all Section 5 pages
-    all_lines = []
-    for pg_idx in sec5_pages:
-        text = pdf.pages[pg_idx].extract_text() or ""
-        all_lines.extend(text.split("\n"))
-
-    pdf.close()
-
-    diag.append(f"Section 5 total lines: {len(all_lines)}")
-    # Show first 10 non-empty lines
-    diag.append("--- First 10 non-empty Section 5 lines ---")
-    shown = 0
-    for line in all_lines:
-        if line.strip():
-            diag.append(f"  {line.strip()}")
-            shown += 1
-            if shown >= 10:
-                break
-
-    records = parse_rsi_table(all_lines)
-    diag.append(f"RSI rows extracted: {len(records)}")
-
-    # Filter to target BRAs for this report year
-    targets = TARGET_BRAS.get(cal_year, [])
-    records = [r for r in records if r["delivery_year"] in targets]
-    diag.append(f"Rows after filtering to target BRAs {targets}: {len(records)}")
-
-    for r in records:
-        r["calendar_year"] = cal_year
+        diag.append(f"ERROR: {e}")
+        import traceback
+        diag.append(traceback.format_exc())
+        return [], "\n".join(diag)
 
     return records, "\n".join(diag)
 
@@ -232,16 +244,17 @@ for cal_year, filename in FILE_MAP:
 
 df = pd.DataFrame(all_records) if all_records else pd.DataFrame(
     columns=["delivery_year", "calendar_year", "lda",
-             "rsi_1", "rsi_1_05", "n_participants", "n_pivotal"]
+             "rsi_1", "rsi_3", "n_participants", "n_pivotal"]
 )
 
 if df.empty:
-    print("\nWARNING: market_structure.csv is empty — PDF parsing needs manual review",
+    print("\nWARNING: market_structure.csv is empty — check diagnostics",
           file=sys.stderr)
 else:
+    df = df.sort_values(["delivery_year", "lda"]).reset_index(drop=True)
     print(f"\nExtracted {len(df)} rows across "
           f"{df['delivery_year'].nunique()} delivery years")
-    print(df[["delivery_year", "lda", "rsi_1", "n_pivotal"]].to_string(index=False))
+    print(df[["delivery_year", "lda", "rsi_1", "rsi_3", "n_pivotal"]].to_string(index=False))
 
 out = CLEANED_DIR / "market_structure.csv"
 df.to_csv(out, index=False)
@@ -249,5 +262,5 @@ print(f"\nWrote {len(df)} rows to {out}")
 
 diag_out = CLEANED_DIR / "imm_parse_diagnostics.txt"
 diag_out.write_text("\n\n".join(all_diag))
-print(f"Diagnostics written to {diag_out}")
-print("\nIMPORTANT: Compare output against IMM reports before using in paper.")
+print(f"Diagnostics: {diag_out}")
+print("\nIMPORTANT: Spot-check output against the printed IMM reports before use.")
