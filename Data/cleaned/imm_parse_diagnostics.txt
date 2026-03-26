@@ -1,0 +1,165 @@
+=== 2020-som-pjm-vol2.pdf ===
+Total pages: 686
+Capacity chapter pages found: 10
+--- First 500 chars of chapter ---
+Table of Contents
+TABLE OF CONTENTS
+PREFACE I
+SECTION 1 INTRODUCTION 1
+2020 in Review 1
+PJM Market Summary Statistics 4
+PJM Market Background 4
+Conclusions 6
+Energy Market Conclusion 6
+Capacity Market Conclusion 8
+Tier 2 Synchronized Reserve Market Conclusion 9
+Day-Ahead Scheduling Reserve Market Conclusion 9
+Regulation Market Conclusion 10
+FTR Auction Market Conclusion 10
+Role of MMU 11
+Reporting 11
+Monitoring 11
+Market Design 12
+New Recommendations 13
+New Recommendations from Section 3, Energy
+HHI rows found: 0
+TPS rows found: 0
+WARNING: No data extracted — manual review required
+
+=== 2021-som-pjm-vol2.pdf ===
+Total pages: 732
+Capacity chapter pages found: 10
+--- First 500 chars of chapter ---
+Table of Contents
+TABLE OF CONTENTS
+PREFACE I
+SECTION 1 INTRODUCTION 1
+2021 in Review 1
+PJM Market Summary Statistics 5
+PJM Market Background 6
+Conclusions 7
+Energy Market Conclusion 8
+Capacity Market Conclusion 9
+Tier 2 Synchronized Reserve Market Conclusion 11
+Day-Ahead Scheduling Reserve Market Conclusion 11
+Regulation Market Conclusion 11
+FTR Auction Market Conclusion 12
+Role of MMU 12
+Reporting 13
+Monitoring 13
+Market Design 14
+New Recommendations 14
+New Recommendations from Section 3, Ener
+HHI rows found: 0
+TPS rows found: 0
+WARNING: No data extracted — manual review required
+
+=== 2022-som-pjm-vol2.pdf ===
+Total pages: 798
+Capacity chapter pages found: 10
+--- First 500 chars of chapter ---
+Table of Contents
+Table of Contents
+Preface 1
+SECTION 1 Introduction 1
+2022 in Review 1
+PJM Market Summary Statistics 6
+PJM Market Background 6
+Conclusions 8
+Energy Market Conclusion 8
+Capacity Market Conclusion 10
+Tier 2 Synchronized Reserve Market Conclusion (Prior to October 1, 2022) 11
+Synchronized Reserve Market Conclusion (Since October 1, 2022) 11
+Day-Ahead Scheduling Reserve Market Conclusion (Prior to October 1, 2022) 12
+Secondary Reserve Market Conclusion (Since October 1, 2022) 12
+Reg
+HHI rows found: 0
+TPS rows found: 0
+WARNING: No data extracted — manual review required
+
+=== 2023-som-pjm-vol2.pdf ===
+Total pages: 816
+Capacity chapter pages found: 10
+--- First 500 chars of chapter ---
+Table of Contents
+Table of Contents
+Preface i
+SECTION 1 Introduction 1
+2023 in Review 1
+PJM Market Summary Statistics 5
+PJM Market Background 6
+Conclusions 7
+Energy Market Conclusion 8
+Capacity Market Conclusion 9
+Synchronized Reserve Market Conclusion 10
+Nonsynchronized Reserve Market Conclusion 11
+Secondary Reserve Market Conclusion 11
+Regulation Market Conclusion 11
+FTR Auction Market Conclusion 12
+Role of MMU 13
+Reporting 13
+Monitoring 13
+Market Design 14
+New Recommendations 14
+New Recommend
+HHI rows found: 0
+TPS rows found: 0
+WARNING: No data extracted — manual review required
+
+=== 2024-som-pjm-vol2.pdf ===
+Total pages: 818
+Capacity chapter pages found: 10
+--- First 500 chars of chapter ---
+Table of Contents
+Table of Contents
+Preface iii
+SECTION 1 Introduction 1
+2024 in Review 1
+PJM Market Summary Statistics 6
+PJM Market Background 7
+Conclusions 8
+Energy Market Conclusion 9
+Capacity Market Conclusion 11
+Synchronized Reserve Market Conclusion 12
+Nonsynchronized Reserve Market Conclusion 12
+Secondary Reserve Market Conclusion 12
+Regulation Market Conclusion 13
+FTR Auction Market Conclusion 13
+Role of MMU 14
+Reporting 14
+Monitoring 14
+Market Design 16
+New Recommendations 16
+New Recomm
+HHI rows found: 0
+TPS rows found: 0
+WARNING: No data extracted — manual review required
+
+=== 2025-som-pjm-vol2.pdf ===
+Total pages: 892
+Capacity chapter pages found: 10
+--- First 500 chars of chapter ---
+Table of Contents
+Table of Contents
+Preface i
+SECTION 1 Introduction 1
+2025 in Review 1
+PJM Market Summary Statistics 5
+PJM Market Background 5
+Conclusions 7
+Energy Market Conclusion 7
+Capacity Market Conclusion 9
+Synchronized Reserve Market Conclusion 10
+Nonsynchronized Reserve Market Conclusion 11
+Secondary Reserve Market Conclusion 11
+Regulation Market Conclusion 12
+FTR Auction Market Conclusion 12
+Role of MMU 13
+Reporting 13
+Monitoring 13
+Market Design 15
+New Recommendations 15
+New Recommend
+HHI rows found: 0
+TPS rows found: 0
+WARNING: No data extracted — manual review required
