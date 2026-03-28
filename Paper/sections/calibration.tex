@@ -1,27 +1,151 @@
 % ==============================================================================
 % Section: Calibration
-% Status: NOT STARTED
+% Status: PARTIAL (2026-03-27) -- data sources + VRR parameters complete;
+%         market structure, cost parameters, delivery years TBD (Session 2+)
 % ==============================================================================
 
 \section{Calibration}
 \label{sec:calibration}
 
-\TODO{Describe data sources, parameter choices, and baseline market structure for
-each delivery year. Cover: VRR curve coordinates (Net CONE, reliability requirement,
-reserve margin); capacity shares of top firms by LDA (from IMM HHI tables); aggregate
-capacity offered vs. cleared; avoidable cost rates; import limits by LDA; fringe size.
-Justify choice of 2--3 delivery years.}
+% ------------------------------------------------------------------------------
+\subsection{Data Sources}
+\label{subsec:cal_data}
+% ------------------------------------------------------------------------------
 
-% Subsections:
-%   \subsection{Data Sources}
-%   \subsection{VRR Curve Parameters}
-%   \subsection{Market Structure}
-%   \subsection{Cost Parameters}
-%   \subsection{Delivery Years}
+The calibration draws on four publicly available datasets produced by PJM
+and the PJM Independent Market Monitor (IMM).
 
-% Key data sources (public, no access issues):
-%   PJM Planning Parameters (Net CONE, VRR anchor points, CETL by LDA)
-%   PJM IMM State of the Market (HHI by LDA, TPS test results, offer curves)
-%   PJM BRA Results (clearing prices and quantities by LDA)
-%   EIA-860 (generator attributes, ownership) -- optional for richer calibration
-%   PJM CONE Study -- for fringe supply calibration
+\paragraph{PJM Planning Parameters.}
+PJM publishes the planning parameters for each BRA in advance of the
+auction, including the VRR curve anchor points, Net CONE, CETL, and
+reliability requirement for every LDA. These files are available in Excel
+format and provide the complete VRR demand schedule that sellers observe
+when submitting capacity offers. We processed the planning parameter files
+for delivery years 2021/22 through 2028/29 using a custom parser that
+extracts LDA-level parameters for each VRR design vintage and handles the
+three-point (old) and four-point (new) curve specifications separately.
+Spot-checks against published PJM summary tables confirm accuracy (e.g.,
+2023/24 RTO Net CONE = \$274.96 per MW-day).
+
+\paragraph{PJM BRA Results.}
+Following each auction, PJM releases clearing prices and quantities by LDA.
+We processed seven completed auctions (2021/22 through 2027/28); the
+2028/29 BRA had not yet been conducted at the time of data collection.
+Clearing results are verified against PJM press releases (e.g., 2025/26
+RTO clearing = \$269.92 per MW-day; 2026/27 RTO clearing = \$329.17).
+
+\paragraph{PJM IMM State of the Market Reports.}
+The PJM IMM publishes an annual State of the Market (SotM) report containing
+auction-by-auction summaries of market concentration, TPS test outcomes, and
+offer-curve characteristics. We extracted Residual Supply Index values and
+participant counts from the relevant report volumes using a PDF-parsing
+pipeline. Volume 2022 covers delivery years through 2022/23, and Volume 2025
+covers delivery years 2023/24 through 2027/28. Due to layout variation
+across report vintages, RSI data is available for a subset of LDAs and
+delivery years, as documented in Table~\ref{tab:tps_results}. The 2021/22
+delivery year predates our RSI extraction window and is excluded from the
+market structure analysis.
+
+\paragraph{Auction Lead Times.}
+BRA settlement dates and delivery-year start dates were coded manually from
+PJM auction notices and verified against the data in
+Table~\ref{tab:bra_timeline}. Lead time is defined as the number of calendar
+months between the BRA settlement date and the first day of the delivery
+year. The highly irregular lead-time pattern documented in
+Section~\ref{subsec:inst_leadtime} is incorporated as a covariate in the
+calibration of the investment-signal environment.
+
+The four datasets are joined at the LDA--delivery-year level to produce a
+master panel with 110 observations spanning 17 LDAs and seven delivery years
+(2021/22 through 2027/28).
+
+% ------------------------------------------------------------------------------
+\subsection{VRR Curve Parameters}
+\label{subsec:cal_vrr}
+% ------------------------------------------------------------------------------
+
+Table~\ref{tab:vrr_params} reports the VRR curve parameters for the RTO
+under both the old and new designs for the six delivery years with complete
+BRA data. Under the old design, Point~(a) equals $1.5 \times \text{Net CONE}$
+and Point~(b) equals $0.75 \times \text{Net CONE}$ by construction, so the
+ratio $p_{a} / p_{b} = 2$ is exact for all old-design years except 2025/26,
+where a transitional administrative cap produced a Point~(a) price above the
+standard $1.5 \times \text{Net CONE}$ multiple.\footnote{The 2025/26 Net CONE
+of \$228.81 per MW-day implies a standard cap of \$343.22, but the published
+Point~(a) was \$451.61. This discrepancy reflects the fact that VRR anchor
+points are fixed at planning-parameter publication and may diverge from the
+final Net CONE if energy and ancillary service revenues are revised
+substantially between publication and auction. We use the published anchor
+points as the realized VRR parameters in all calibrations.}
+Under the new design, Points~(b) and~(c) equal the explicit floor price of
+approximately \$177--\$179 per MW-day, and Point~(a) is set at approximately
+$1.5 \times \text{Net CONE}$.
+
+\begin{table}[H]
+  \centering
+  \caption{RTO VRR Curve Parameters, 2022/23--2027/28}
+  \label{tab:vrr_params}
+  \begin{tabular}{lcccccc}
+    \toprule
+    Delivery & Net CONE    & Pt.~(a) & Pt.~(a) & Pt.~(b) & Pt.~(b) & VRR  \\
+    Year     & (\$/MW-day) & Price   & MW      & Price   & MW      & Design \\
+    \midrule
+    2022/23 & \$260.50 & \$390.75 & 136{,}076 & \$195.38 & 139{,}656 & Old \\
+    2023/24 & \$274.96 & \$412.44 & 135{,}914 & \$206.22 & 139{,}473 & Old \\
+    2024/25 & \$293.19 & \$439.79 & 138{,}341 & \$219.89 & 141{,}910 & Old \\
+    2025/26 & \$228.81 & \$451.61 & 133{,}554 & \$171.61 & 137{,}160 & Old \\
+    2026/27 & \$212.14 & \$329.17 & 134{,}887 & \$177.24 & 136{,}361 & New \\
+    2027/28 & \$242.52 & \$333.44 & 141{,}681 & \$179.55 & 143{,}218 & New \\
+    \bottomrule
+  \end{tabular}
+  \vspace{3pt}
+
+  \begin{minipage}{0.92\textwidth}
+    \footnotesize \textit{Note:} Prices in nominal dollars per MW-day;
+    quantities in MW. Under the old design, Point~(c) is the zero-price
+    floor at a quantity above Point~(b); under the new design, Points~(b)
+    and~(c) share the floor price and a flat segment extends to Point~(d).
+    The 2025/26 Point~(a) price exceeds $1.5 \times \text{Net CONE}$ due to
+    a transitional administrative cap; see footnote. Data source: PJM
+    Planning Parameters.
+  \end{minipage}
+\end{table}
+
+The panel encompasses 110 LDA--delivery-year cells with observed clearing
+prices across 17 LDAs. The three benchmark calibration years used throughout
+Sections~\ref{sec:model} and~\ref{sec:results} are selected to represent
+three distinct capacity market regimes: \textit{2023/24}, a low-price year
+under the old VRR design with no evidence of strategic withholding
+(\$34.13 per MW-day, $\mathrm{RSI}_3 = 0.68$); \textit{2025/26}, a
+high-price year under the old VRR design that preceded the redesign
+(\$269.92 per MW-day, $\mathrm{RSI}_3 = 0.62$); and \textit{2026/27},
+the first auction under the new VRR design, which cleared at exactly the
+Point~(a) cap (\$329.17 per MW-day, $\mathrm{RSI}_3 = 0.64$). Together,
+these three years span the full range of price outcomes in the sample and
+allow the comparative static analysis to isolate the effect of VRR design
+changes from variation in market structure and cost parameters.
+
+% ------------------------------------------------------------------------------
+\subsection{Market Structure}
+\label{subsec:cal_market_structure}
+% ------------------------------------------------------------------------------
+
+\TODO{Describe capacity shares of top firms by LDA (from IMM SotM HHI tables);
+fringe size; justify symmetric-firm approximation (K = 3 strategic firms).}
+
+% ------------------------------------------------------------------------------
+\subsection{Cost Parameters}
+\label{subsec:cal_cost}
+% ------------------------------------------------------------------------------
+
+\TODO{Describe avoidable cost rate (ACR) calibration; fringe supply function
+(step function at ACR); CETL import limits by LDA.}
+
+% ------------------------------------------------------------------------------
+\subsection{Benchmark Delivery Years}
+\label{subsec:cal_years}
+% ------------------------------------------------------------------------------
+
+\TODO{Justify selection of 2023/24, 2025/26, and 2026/27 as benchmark years.
+Cross-reference market structure and VRR data. Note 2024/25 exclusion (spot
+auction; no forward investment signal).}

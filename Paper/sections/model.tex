@@ -1,27 +1,283 @@
 % ==============================================================================
 % Section: Model
-% Status: NOT STARTED
+% Status: COMPLETE (2026-03-27)
 % ==============================================================================
 
 \section{Model}
 \label{sec:model}
 
-\TODO{Develop the SFE model. Cover: (1) players and capacity portfolios; (2) VRR
-demand curve parameterization; (3) cost structure (ACR / Net CONE); (4) firm FOCs
-and the ODE system; (5) boundary conditions; (6) symmetric special case; (7)
-equilibrium selection (highest equilibrium / Holmberg uniqueness under capacity
-constraints).}
+% ------------------------------------------------------------------------------
+\subsection{Setup}
+\label{subsec:model_setup}
+% ------------------------------------------------------------------------------
 
-% Subsections:
-%   \subsection{Setup}
-%   \subsection{The VRR Demand Curve}
-%   \subsection{Firm Optimization and the FOC}
-%   \subsection{The ODE System}
-%   \subsection{Equilibrium Selection}
+The BRA is modeled as a static, complete-information game in which sellers
+simultaneously submit supply functions before the auction clears. This
+formulation follows \citet{Klemperer1989_sfe} and, for the electricity market
+application, \citet{Green1992_british}. The timing is: (1) PJM publishes the
+VRR curve parameters for the upcoming delivery year; (2) sellers submit
+supply functions; (3) PJM clears the auction at the uniform price where
+aggregate supply meets the VRR curve; (4) sellers deliver committed capacity
+during the delivery year.
 
-% Key sources:
-% \cite{Klemperer1989_sfe}          -- SFE existence and multiplicity
-% \cite{Green1992_british}          -- Closest methodological template
-% \cite{Holmberg2008_unique_sfe}    -- Uniqueness under capacity constraints; backward integration
-% \cite{Anderson2008_sfe_asymmetric} -- Iterative best-response for asymmetric firms
-% \cite{Baldick2004_linear_sfe}     -- Linear SFE fallback
+\begin{assumption}
+  \label{assm:players}
+  There are $K \geq 2$ strategic sellers, indexed $i = 1, \ldots, K$, and a
+  competitive fringe. Each strategic seller $i$ holds a fixed capacity
+  portfolio $\bar{q}_i > 0$ measured in megawatts. A supply function
+  $S_i : [0, \bar{p}] \to [0, \bar{q}_i]$ is a nondecreasing, twice
+  continuously differentiable mapping from price to quantity. Each seller
+  simultaneously commits to a supply function before the auction clears.
+\end{assumption}
+
+\begin{assumption}
+  \label{assm:fringe}
+  The competitive fringe bids at its avoidable cost rate $c_f > 0$. Fringe
+  supply is $S_f(p) = 0$ for $p < c_f$ and $S_f(p) = \bar{Q}_f$ for
+  $p \geq c_f$, where $\bar{Q}_f > 0$ is total fringe capacity. The fringe
+  is price-taking and its behavior is common knowledge.
+\end{assumption}
+
+\begin{assumption}
+  \label{assm:cost}
+  Each strategic seller has a constant marginal cost $c > 0$ for output
+  $q \leq \bar{q}_i$ and infinite marginal cost above capacity. For the
+  symmetric calibration we set $c$ equal to the sector-average avoidable
+  cost rate published by the PJM IMM.
+\end{assumption}
+
+The market clears at the price $p^*$ satisfying
+\begin{equation}
+  \sum_{i=1}^{K} S_i(p^*) + S_f(p^*) = D(p^*),
+  \label{eq:clearing}
+\end{equation}
+where $D(\cdot)$ is the VRR demand schedule described below. Every seller
+receives the same clearing price $p^*$ for its committed capacity. The
+\emph{residual demand} facing seller $i$ at price $p$ is
+\begin{equation}
+  R_i(p) \;=\; D(p) - \sum_{j \neq i} S_j(p) - S_f(p).
+  \label{eq:resid}
+\end{equation}
+In equilibrium, $S_i(p^*) = R_i(p^*)$. Because $D(\cdot)$ and all rivals'
+strategies are publicly known before the auction, there is no demand
+uncertainty: the residual demand curve each seller faces is deterministic.
+This determinism strengthens the role of the boundary condition in selecting
+among equilibria, as discussed in Section~\ref{subsec:model_selection}.
+
+% ------------------------------------------------------------------------------
+\subsection{The VRR Demand Schedule}
+\label{subsec:model_vrr}
+% ------------------------------------------------------------------------------
+
+PJM's Variable Resource Requirement curve is a piecewise-linear,
+publicly-announced downward-sloping demand schedule. Under the old design
+(delivery years 2021/22--2025/26) it is parameterized by three anchor points
+$(p_a, q_a)$, $(p_b, q_b)$, and $(0, q_c)$:
+\begin{equation}
+  D(p) =
+  \begin{cases}
+    q_a                                              & p \geq p_a \\[4pt]
+    q_a + \dfrac{q_b - q_a}{p_b - p_a}(p - p_a)   & p_b \leq p < p_a \\[6pt]
+    q_b + \dfrac{q_c - q_b}{0 - p_b}(p - p_b)     & 0 \leq p < p_b,
+  \end{cases}
+  \label{eq:vrr_old}
+\end{equation}
+where $p_a = 1.5 \times \text{Net CONE}$ is the price cap and
+$p_b = 0.75 \times \text{Net CONE}$ is the reliability-requirement price.
+The quantities $q_a < q_b < q_c$ are the corresponding capacity levels, with
+$q_b$ equal to the reliability requirement. Because $D(p) = q_a$ for all
+$p \geq p_a$, the VRR curve is effectively inelastic above the cap.
+
+Under the new design (delivery years 2026/27 onward), FERC Order ER25-1357
+introduces a fourth anchor point $(p_f, q_f)$ and $(p_f, q_d)$ with
+$q_f > q_b$, creating a flat floor segment at price $p_f \approx \$177$--
+$\$179$/MW-day. The new schedule is:
+\begin{equation}
+  D(p) =
+  \begin{cases}
+    q_a                                              & p \geq p_a \\[4pt]
+    q_a + \dfrac{q_b - q_a}{p_f - p_a}(p - p_a)   & p_f \leq p < p_a \\[6pt]
+    q_d                                              & 0 \leq p < p_f.
+  \end{cases}
+  \label{eq:vrr_new}
+\end{equation}
+The flat floor segment at $p_f$ means that clearing prices cannot fall below
+$p_f$ along the VRR, changing the elasticity profile that sellers face and
+thus the equilibrium markup. The comparative static in
+Section~\ref{subsec:res_vrr} isolates this design change.
+
+The slope $D'(p)$ is piecewise constant and satisfies:
+
+\begin{assumption}
+  \label{assm:demand}
+  $D'(p) < 0$ on the sloped segments; $D'(p) = 0$ on the flat segments
+  (at and above $p_a$, and below $p_f$ under the new design). The function
+  $D(\cdot)$ is known to all players before the auction.
+\end{assumption}
+
+% ------------------------------------------------------------------------------
+\subsection{Firm Optimization and the SFE Condition}
+\label{subsec:model_foc}
+% ------------------------------------------------------------------------------
+
+Seller $i$ chooses $S_i(\cdot)$ to maximize profit. Taking rivals'
+supply functions as fixed, the profit at any market-clearing price $p$ is
+$\pi_i = p \cdot S_i(p) - c \cdot S_i(p) = (p - c) \cdot S_i(p)$, since
+marginal cost is constant at $c$. The seller's problem is equivalent to
+maximizing profit along its residual demand curve $R_i(\cdot)$. At
+price $p$, if seller $i$ considers increasing its offered quantity by
+$\mathrm{d}q$, the market-clearing price must fall by $\mathrm{d}p$ to
+preserve equation~\eqref{eq:clearing}:
+\begin{equation}
+  \mathrm{d}p
+  \;=\; \frac{\mathrm{d}q}{D'(p) - \sum_{j \neq i} S_j'(p) - S_f'(p)}.
+  \label{eq:dprice}
+\end{equation}
+Since $D'(p) < 0$ and $S_j'(p) \geq 0$, the denominator is strictly
+negative: an increase in supply lowers the clearing price. The seller's
+marginal revenue from increasing quantity at price $p$ is:
+\begin{equation}
+  \text{MR}_i(p)
+  \;=\; p + \frac{S_i(p)}{D'(p) - \sum_{j \neq i} S_j'(p) - S_f'(p)}.
+  \label{eq:mr}
+\end{equation}
+Setting marginal revenue equal to marginal cost $c$ yields the
+\emph{supply function equilibrium condition}:
+
+\begin{proposition}
+  \label{prop:sfe_foc}
+  In a supply function equilibrium, each seller $i$'s strategy
+  $S_i(\cdot)$ satisfies
+  \begin{equation}
+    S_i(p) \;=\; -\bigl(p - c\bigr)
+    \Bigl[D'(p) - \textstyle\sum_{j \neq i} S_j'(p) - S_f'(p)\Bigr]
+    \label{eq:sfe_foc}
+  \end{equation}
+  at every price $p$ at which the market can clear. This is a system of
+  $K$ coupled first-order ordinary differential equations in the supply
+  functions $\{S_1, \ldots, S_K\}$.
+\end{proposition}
+
+Equation~\eqref{eq:sfe_foc} is the $K$-seller generalization of the
+first-order condition derived by \citet{Green1992_british} for the symmetric
+duopoly (their equation~3) and of the general condition in
+\citet{Anderson2008_sfe_asymmetric} (their equation~1). Its economic content
+is straightforward: seller $i$ equates its residual-demand markup $(p - c)$
+to the inverse of the residual demand elasticity at that price. When more
+sellers compete ($K$ large) or the VRR slope is steep (large $|D'|$), the
+system requires a smaller markup at each price, pushing the equilibrium
+supply function toward the competitive schedule.
+
+% ------------------------------------------------------------------------------
+\subsection{Equilibrium Selection and the Boundary Condition}
+\label{subsec:model_selection}
+% ------------------------------------------------------------------------------
+
+The ODE system~\eqref{eq:sfe_foc} generally admits a continuum of solutions.
+\citet{Klemperer1989_sfe} show that under demand uncertainty, the set of
+symmetric supply function equilibria is an interval bounded above by the
+Cournot schedule (where each firm behaves as if rivals are at capacity) and
+below by the competitive schedule (where $p = c$). Any trajectory between
+these two stationary solutions is a Nash equilibrium. This multiplicity
+complicates both prediction and comparative statics.
+
+The multiplicity is resolved by the following result, which applies
+directly to the capacity-auction setting:
+
+\begin{proposition}[\citealt{Holmberg2008_unique_sfe}]
+  \label{prop:holmberg}
+  Suppose sellers are symmetric, demand is inelastic above the price cap
+  $\bar{p}$, and the probability that aggregate demand reaches the capacity
+  ceiling is strictly positive. Then there exists a unique symmetric supply
+  function equilibrium. In this equilibrium each seller's supply function
+  satisfies the boundary condition
+  \begin{equation}
+    S_i(\bar{p}) \;=\; \bar{q}_i \quad \text{for all } i.
+    \label{eq:bc}
+  \end{equation}
+\end{proposition}
+
+The intuition is direct. When rivals' capacity constraints simultaneously
+bind, seller $i$ faces perfectly inelastic residual demand. Its monopoly
+optimum at that moment is to set price equal to the cap $\bar{p}$; any lower
+price sacrifices revenue without reducing quantity (since residual demand is
+inelastic), and any higher price is infeasible. This forces the supply
+function to pass through the point $(\bar{p},\, \bar{q}_i)$, tying the
+arbitrary constant in the ODE and selecting a unique trajectory.
+
+In the PJM BRA, the price cap $\bar{p}$ equals the VRR Point~(a) price, and
+Assumption~\ref{assm:demand} ensures $D'(\bar{p}) = 0$ (the VRR is flat at
+the cap). The Holmberg conditions are met: PJM's reliability target requires
+essentially all installed capacity, so there is positive probability that
+aggregate supply reaches the ceiling at $\bar{p}$. The at-cap clearing
+outcomes in 2026/27 and 2027/28 (Table~\ref{tab:bra_timeline}) confirm that
+the boundary condition is active in those years. We therefore integrate the
+ODE~\eqref{eq:sfe_foc} \emph{backward} from the boundary condition
+$S_i(\bar{p}) = \bar{q}_i$, following the solution method of
+\citet{Green1992_british}.
+
+% ------------------------------------------------------------------------------
+\subsection{The Symmetric Special Case}
+\label{subsec:model_symmetric}
+% ------------------------------------------------------------------------------
+
+For calibration and comparative statics we begin with the symmetric case in
+which all $K$ strategic sellers are identical: $\bar{q}_i = \bar{q}$ and
+$c_i = c$ for all $i$. In a symmetric Nash equilibrium,
+$S_i(p) = s(p)$ for all $i$. Substituting into
+equation~\eqref{eq:sfe_foc}:
+\begin{equation}
+  s(p) \;=\; -\bigl(p - c\bigr)
+    \Bigl[D'(p) - (K-1)\,s'(p) - S_f'(p)\Bigr].
+  \label{eq:sfe_sym_raw}
+\end{equation}
+Under Assumption~\ref{assm:fringe}, $S_f'(p) = 0$ almost everywhere.
+Rearranging~\eqref{eq:sfe_sym_raw} for $s'(p)$ yields the \emph{symmetric
+SFE ordinary differential equation}:
+\begin{equation}
+  \boxed{
+    s'(p) \;=\; \frac{1}{K-1}
+    \left[ D'(p) + \frac{s(p)}{p - c} \right],
+    \quad p \in [c,\, \bar{p}),
+  }
+  \label{eq:sfe_ode}
+\end{equation}
+with boundary condition $s(\bar{p}) = \bar{q}$. This is a first-order,
+nonautonomous ODE in the single unknown function $s(\cdot)$. It is
+the $K$-firm generalization of \citeauthor{Green1992_british}'s
+equation~(3), to which it reduces when $K = 2$ and $S_f \equiv 0$.
+
+Equation~\eqref{eq:sfe_ode} has a direct economic interpretation.
+The term $D'(p)$ captures the direct effect of price on quantity demanded:
+a steeper VRR slope (larger $|D'|$) increases $s'(p)$ in absolute value,
+meaning the equilibrium supply function is less steep and sellers offer more
+capacity at any given price below the cap. The term $s(p)/(p-c)$ is the
+markup-demand feedback: as the markup grows, firms optimally increase the
+rate at which they withdraw supply as price falls. More competitors (larger
+$K$) divide the denominator, flattening each firm's supply function toward
+the competitive benchmark.
+
+The equilibrium clearing price $p^*$ is found by solving
+\begin{equation}
+  K \cdot s(p^*) + S_f(p^*) = D(p^*)
+  \label{eq:clearing_sym}
+\end{equation}
+for $p^*$ after integrating~\eqref{eq:sfe_ode} backward from $\bar{p}$.
+The implied Lerner index is
+\begin{equation}
+  L \;=\; \frac{p^* - c}{p^*},
+  \label{eq:lerner}
+\end{equation}
+which serves as the primary measure of market power in the results of
+Section~\ref{sec:results}. The competitive benchmark corresponds to $c = p^*$
+($L = 0$), attained as $K \to \infty$ or as $|D'(p)| \to \infty$ (perfectly
+elastic demand). The Cournot upper bound on the markup is
+$L^{\text{Cournot}} = 1 / (K \cdot |D'(p^*) \cdot p^* / D(p^*)|)$, the
+standard inverse-elasticity rule evaluated at residual demand.
+
+Equation~\eqref{eq:sfe_ode} is solved numerically using the \texttt{lsoda}
+solver in R's \texttt{deSolve} package \citep{Anderson2008_sfe_asymmetric},
+which handles the mild stiffness introduced by the $1/(p-c)$ term as
+$p \downarrow c$. The piecewise nature of $D'(p)$ is accommodated by
+restarting the integration at each VRR kink point. Full details of the
+numerical implementation are provided in Section~\ref{sec:calibration}.

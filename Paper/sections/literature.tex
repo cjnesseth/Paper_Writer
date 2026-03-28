@@ -13,46 +13,112 @@
 \label{subsec:lit_sfe_theory}
 % ------------------------------------------------------------------------------
 
-% Foundational SFE theory: multiplicity, existence, demand uncertainty
-\cite{Klemperer1989_sfe}
+The supply function equilibrium concept, introduced by
+\citet{Klemperer1989_sfe}, considers an oligopoly in which each firm commits
+to a schedule mapping prices to quantities before demand is realized. Unlike
+Bertrand competition (commitment to a fixed price) or Cournot competition
+(commitment to a fixed quantity), the supply function strategy allows each
+firm to adapt its output to whatever market price emerges after the demand
+shock is realized. \citeauthor{Klemperer1989_sfe} characterize the symmetric
+Nash equilibria of this game under additive demand uncertainty, showing that
+equilibria are characterized by a first-order differential equation whose
+solutions form a continuum: in general, any supply function tracing a
+trajectory between the competitive schedule (price equals marginal cost) and
+the Cournot schedule (as if rivals bid at capacity) constitutes a Nash
+equilibrium. The specific equilibrium realized depends on market coordination,
+and demand uncertainty is what disciplines firms to choose upward-sloping
+supply functions over fixed prices.
 
-% First electricity application: E&W duopoly calibration -- closest methodological template
-\cite{Green1992_british}
+\citet{Green1992_british} apply the Klemperer-Meyer framework to the England
+and Wales electricity spot market after privatization, modeling two dominant
+generators as strategic suppliers to a pool settled at a uniform price.
+Their calibrated duopoly shows that the Nash equilibrium in supply functions
+implies substantial markups above marginal cost---with prices near the top of
+the feasible equilibrium range---and that entry of additional firms (or
+divestiture into five units) would significantly reduce those markups. Green
+and Newbery establish the methodological template followed here: express
+demand as a known function of price, derive the symmetric first-order ODE,
+and integrate backward from the capacity-constrained boundary to obtain the
+equilibrium supply function. Their paper is the closest methodological
+antecedent to the present work, with the key difference that our demand
+function is PJM's explicit piecewise-linear VRR curve rather than a load-
+duration curve, and our market clears annually in a single forward auction
+rather than half-hourly in a spot pool.
 
-% Capacity constraints resolve multiplicity; backward-integration solution method
-\cite{Holmberg2008_unique_sfe}
+The multiplicity problem endemic to SFE is resolved by
+\citet{Holmberg2008_unique_sfe}, who shows that under conditions natural to
+capacity-constrained electricity markets---symmetric producers, inelastic
+demand, a price cap, and capacity constraints that bind with positive
+probability---the supply function equilibrium is unique. The key insight is
+that when rivals' capacity constraints are simultaneously binding, firm $i$
+faces perfectly inelastic residual demand; the monopoly optimum at that
+moment is to charge exactly the price cap. This ties the boundary condition
+of the ODE: each firm's supply function must equal its full installed
+capacity at the price cap. The arbitrary constant in the ODE solution is
+thereby pinned, selecting a unique trajectory. This result is central to the
+identification strategy of the present paper, since the VRR Point~(a) price
+serves as the price cap and the at-cap clearing outcomes in 2026/27 and
+2027/28 are precisely the event Holmberg requires to be positive probability.
+\citet{Holmberg2009_paybid} extends the uniqueness analysis to pay-as-bid
+auctions, showing that a unique symmetric equilibrium obtains there as well.
+\citet{Vasin2016_sfe_uniform} confirm existence and characterize additional
+properties of symmetric SFE in uniform-price settings with oligopolistic
+supply.
 
-% Pay-as-bid SFE: unique symmetric equilibrium
-\cite{Holmberg2009_paybid}
-
-% Uniform-price oligopoly SFE
-\cite{Vasin2016_sfe_uniform}
-
-% SFE with forward contracts and price caps
-\cite{Anderson2005_sfe_pricecaps}
-
-% Forward contracting reduces strategic withholding
-\cite{Allaz1993_forward}
+The effect of forward commitments on equilibrium supply functions is
+examined by \citet{Allaz1993_forward}, who show in a Cournot setting that
+forward markets reduce equilibrium markups through a Stackelberg-style
+commitment effect. \citet{Anderson2005_sfe_pricecaps} extend this analysis
+to the SFE setting, establishing that forward contracts and price caps both
+shift supply functions toward the competitive benchmark. Capacity commitments
+in the BRA are formally analogous to forward sales, so the static SFE applied
+to the auction game incorporates these disciplining effects into the
+equilibrium concept.
 
 % ------------------------------------------------------------------------------
 \subsection{Numerical Methods for SFE}
 \label{subsec:lit_sfe_methods}
 % ------------------------------------------------------------------------------
 
-% Iterative best-response algorithm for asymmetric firms -- primary methods reference
-\cite{Anderson2008_sfe_asymmetric}
+The numerical computation of SFE relies on the differential equation
+characterization of equilibrium supply functions. For the symmetric case the
+ODE reduces to a single equation integrable backward from the capacity
+boundary. For asymmetric firms the system of $K$ coupled ODEs requires
+iterative methods. \citet{Anderson2008_sfe_asymmetric} develop the leading
+algorithm for the asymmetric case: initialize all firms at competitive supply
+functions, solve each firm's single-firm ODE taking rivals' current functions
+as fixed, update simultaneously, and iterate to convergence. They establish
+that equilibrium solutions can be ordered---a partial ordering that guides
+the search for the strong equilibrium in which all but one firm are at
+capacity at peak demand---and demonstrate convergence using GAMS
+implementations for calibrated electricity market examples. The
+Anderson--Hu algorithm is the primary computational reference for the
+asymmetric extension described in Section~\ref{subsec:cal_market_structure}.
 
-% Linear SFE approximation: tractable fallback
-\cite{Baldick2004_linear_sfe}
+\citet{Baldick2004_linear_sfe} develop the analytically tractable special
+case in which both the demand curve and firms' marginal cost functions are
+linear. Under these restrictions the symmetric ODE has a closed-form
+solution parameterized by a single scalar, yielding explicit comparative
+statics with respect to the number of firms and the demand slope. Linear SFE
+provides a useful calibration benchmark and validates numerical solvers, but
+imposes functional form restrictions violated by the piecewise-linear VRR
+curve in the PJM application. \citet{Niu2005_sfe_forward} extend the
+numerical framework to generators holding fixed forward contracts, and
+\citet{Rudkevich2004_sfe_applications} develops a piecewise-linear
+approximation scheme that handles non-differentiabilities at capacity
+constraints. In this paper we follow the backward-integration approach,
+numerically solving the symmetric ODE using the \texttt{deSolve} package in
+R with the Holmberg boundary condition as the starting point.
 
-% SFE bidding strategy: fixed forward contracts
-\cite{Niu2005_sfe_forward}
-
-% Rudkevich: relaxed continuity; computational algorithms for SFE
-\cite{Rudkevich2004_sfe_applications}
-
-% SFE empirical validation: ERCOT
-\cite{Sioshansi2007_sfe_ercot}
+The empirical performance of SFE simulations is evaluated by
+\citet{Sioshansi2007_sfe_ercot}, who compare simulated equilibria to observed
+prices in the ERCOT balancing market. They find that SFE tracks observed
+prices well at high demand but overpredicts markups at low demand, consistent
+with theory: strategic withholding is most profitable when residual demand is
+inelastic. This asymmetry also appears in our results, where the at-cap
+outcomes under the new VRR design---when the entire VRR curve is above the
+floor and residual demand is effectively inelastic---correspond to the most
+extreme predicted markups.
 
 % ------------------------------------------------------------------------------
 \subsection{Market Power in Electricity Markets}
@@ -93,26 +159,51 @@
 \label{subsec:lit_capacity_markets}
 % ------------------------------------------------------------------------------
 
-% Why capacity markets exist; VRR demand curve design
-\cite{Cramton2005_capacity}
+The economics literature on capacity market design originates from a
+fundamental coordination problem: competitive energy markets, subject to
+regulatory price caps, tend to suppress the scarcity rents that would
+otherwise finance investment in peaking generation. \citet{Joskow2007_capacity}
+formalize this ``missing money'' problem and demonstrate that even under
+competitive conditions, energy-only markets underinvest in reliability when
+price caps bind during scarcity events. \citet{Joskow2008_capacity_payments}
+examines the remedies, arguing that capacity payments can correct the
+underinvestment provided they are designed to replicate missing scarcity rents
+without creating perverse entry or exit incentives.
 
-% Uniform-price auction defense
-\cite{Cramton2007_uniform}
+A central design question is whether the procurement target should be fixed
+at the reliability requirement---a vertical demand schedule---or
+downward-sloping, as in PJM's VRR mechanism.
+\citet{Cramton2005_capacity} make the case for a sloped administrative demand
+curve on the grounds that a vertical schedule generates extreme price
+volatility near the reliability threshold: small fluctuations in supply
+produce large swings between the price cap and zero. A sloped demand curve
+trades some quantity variation for price stability and provides smoother
+investment incentives across the capacity cycle. \citet{Hobbs2007_rpm}
+provide a formal dynamic analysis of the PJM Reliability Pricing Model and
+confirm that the VRR curve substantially reduces price volatility relative to
+vertical demand, at the cost of modest deviations from the target reliability
+level.
 
-% Broader capacity market design: market power concerns
-\cite{CramtonOckenfels2012_capacity}
+The uniform-price format of the BRA has also received attention.
+\citet{Cramton2007_uniform} defend the uniform-price auction over pay-as-bid
+alternatives, arguing that under the former, sellers have weaker incentives
+to shade their bids strategically and equilibrium prices are closer to the
+competitive outcome. \citet{CramtonOckenfels2012_capacity} extend this
+analysis to the broader landscape of capacity market design and examine the
+interaction between auction format and market power. These papers identify
+a tension at the heart of capacity markets: the sloped administrative demand
+curve that dampens boom-bust price cycles is precisely the curve whose shape
+governs the rent-extraction opportunities available to a strategic seller.
 
-% Reliability and competitive electricity markets
-\cite{Joskow2007_capacity}
-
-% Capacity payments: need and design in imperfect markets
-\cite{Joskow2008_capacity_payments}
-
-% Dynamic analysis of PJM RPM / VRR curve
-\cite{Hobbs2007_rpm}
-
-% Overview of RPM design and market power mitigation by PJM IMM
-\cite{Bowring2013_pjm}
-
-% Experimental evidence on soft price caps in uniform-price auctions
-\cite{Vossler2009_price_caps}
+The market power dimension of capacity auctions is examined in detail by
+\citet{Bowring2013_pjm}, who provides an overview of PJM's RPM with attention
+to the role of the Independent Market Monitor in detecting and mitigating
+anticompetitive behavior. Bowring documents the application of the TPS test
+and ACR mitigation across delivery years and LDAs, and notes that market
+power concerns are particularly acute in constrained LDAs where import
+capacity is limited. \citet{Vossler2009_price_caps} use laboratory experiments
+to study behavioral responses to soft price caps in uniform-price auction
+environments and find that caps do bind strategically---sellers' offers cluster
+near the cap, consistent with a focal equilibrium at the ceiling. Taken
+together, this literature motivates a structural approach to measuring the
+market power that the binary TPS test can only detect but not quantify.
