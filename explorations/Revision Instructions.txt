@@ -1,0 +1,497 @@
+# Paper Revision Instructions: PJM Capacity Market Analysis
+
+## Context
+
+You are helping revise an academic economics paper analyzing market power in PJM capacity auctions. The original paper uses a calibrated Supply Function Equilibrium (SFE) model to estimate Lerner indices and claims to "structurally identify" market power.
+
+The revision reframes the paper around a specific policy intervention: Pennsylvania Governor Josh Shapiro negotiated a $325/MW-day price cap for PJM's 2026/27 and 2027/28 capacity auctions, claiming $21 billion in consumer savings. The SFE model provides the counterfactual equilibrium price that this cap suppresses.
+
+## Core Thesis (Revised)
+
+The Shapiro cap recreates the "missing money" problem inside the capacity market. Capacity markets exist because energy market price caps suppress scarcity rents and create underinvestment. Capping the capacity market below its clearing price suppresses scarcity rents in both markets, leaving no venue for fixed cost recovery. The paper uses SFE to quantify the gap between equilibrium and capped prices, and argues that structural remedies (transmission expansion, entry promotion) dominate administrative price controls.
+
+## Foundational Price Theory Principles
+
+The following principles must be reflected throughout the paper:
+
+### Prices Always Send Signals
+
+Even when physical supply cannot respond within a delivery period, high prices:
+
+1. **Affect expectations about future prices.** Investors observe current scarcity and update beliefs about future returns. A high 2025/26 price accelerates investment decisions for 2028/29 and beyond, even if 2025/26 supply is fixed.
+
+2. **Shift the entry/exit margin.** Marginal plants reconsidering retirement observe high prices and defer exit. New entrants accelerate development timelines. These responses operate on shorter horizons than greenfield construction.
+
+3. **Attract mobile resources.** Demand response aggregators, battery storage developers, and import suppliers respond to price signals within months, not years.
+
+4. **Alter contracting and hedging behavior.** Load-serving entities observing high spot capacity prices contract forward, providing revenue certainty that finances new investment.
+
+5. **Reveal information about scarcity.** Prices aggregate dispersed private information about supply costs, demand growth, and retirement risk. Suppressing prices suppresses this information.
+
+There is no lead time short enough that prices become "pure transfers." The distinction between "short run" and "long run" is about which margins adjust, not about whether prices have allocative content. In the short run, prices allocate existing capacity and affect expectations; in the long run, they also govern entry and exit. Both are allocative.
+
+### Price Caps Distort All These Margins
+
+A binding price cap:
+
+1. **Distorts expectations.** Investors observe that scarcity rents are subject to political appropriation. This is a regime change, not a one-time transfer. The expected return to capacity investment falls for all future periods, not just the capped periods.
+
+2. **Accelerates exit, deters entry.** Marginal plants that would have remained online at $400/MW-day may retire at $325. Prospective entrants require compensation for regulatory risk.
+
+3. **Discourages mobile resources.** Demand response aggregators and storage developers face lower returns. Import suppliers commit capacity to uncapped neighboring markets.
+
+4. **Undermines forward contracting.** If spot prices are capped, forward premiums compress. The financing mechanism for new investment weakens.
+
+5. **Destroys information.** The price no longer reveals the true marginal value of capacity. Planners, investors, and policymakers lose the signal.
+
+### The Lead-Time Argument Is a Non-Sequitur
+
+Governor Shapiro's argument—that compressed auction lead times prevent supply response, so high prices do not benefit consumers—misunderstands price functions.
+
+The argument implicitly assumes:
+- Prices only matter if physical supply responds within the delivery period
+- The only relevant supply margin is greenfield construction
+- Expectations, retirement decisions, and mobile resources are unaffected by prices
+- Information revelation has no value
+
+All four assumptions are false. Even if the 2025/26 auction were held one day before delivery, the price would still:
+- Signal expected future scarcity (affecting investment for 2027/28+)
+- Affect retirement decisions (a plant cannot be un-retired, but one considering retirement in 2026 observes 2025/26 prices)
+- Attract demand response and imports (which can mobilize in weeks)
+- Reveal information about market tightness
+
+The correct response to compressed lead times is to restore proper auction timing—which PJM is pursuing—not to suppress the price signal. Capping prices because lead times are short is like breaking the thermometer because the house is too hot.
+
+### Scarcity Rents Are Not Market Power Rents
+
+The paper must carefully distinguish:
+
+**Scarcity rents:** Returns to capacity that is genuinely scarce. These are efficient signals that induce entry. Suppressing them causes underinvestment.
+
+**Market power rents:** Returns from strategic withholding or markup above competitive levels. These transfer surplus from consumers to producers without inducing efficient entry.
+
+The original paper conflates these by computing Lerner indices and calling them "market power." But a high Lerner index in a tight market may reflect scarcity, not conduct. The static SFE model cannot separate the two.
+
+Under the revised framing, this distinction matters less because we are not claiming the equilibrium price is "too high." We are claiming that suppressing it below market-clearing has costs—regardless of whether the equilibrium price reflects scarcity or market power.
+
+However, the paper should note: if high prices reflect genuine scarcity (data center load growth, coal retirements, renewable intermittency), then suppressing them is especially costly. Scarcity prices are exactly the signal that should induce entry. Capping them guarantees the scarcity persists.
+
+## Key Facts About the Shapiro Intervention
+
+- $325/MW-day cap and $175/MW-day floor for 2026/27 and 2027/28 delivery years
+- Negotiated after 2025/26 auction cleared at $269.92/MW-day (up from $28.92 prior year)
+- Constrained LDAs (BGE, Dominion) cleared at $444-466/MW-day
+- Shapiro's justification: "not enough time for generators to respond to high prices"
+- Supported by governors of Delaware, Illinois, Maryland, New Jersey
+- Opposed by Constellation Energy, Electric Power Supply Association, PJM Power Providers
+- Subject to FERC approval via Federal Power Act Section 205 filing
+
+## Revised Structure
+
+### Section 1: Introduction
+
+Open with the Shapiro intervention as motivation. Frame the research question as:
+
+"What price would PJM capacity markets clear at absent political intervention, and what are the consequences of suppressing that price?"
+
+Key points:
+- 2025/26 auction cleared at ~10x prior year prices, triggering political response
+- Shapiro claims $21 billion savings; this paper evaluates that claim
+- The SFE model provides counterfactual equilibrium prices
+- Distinguish between critiquing market power (normatively fraught) and analyzing price controls (tractable)
+
+Foreshadow the price theory argument: price caps do not merely transfer surplus—they distort entry, exit, expectations, and information revelation. The "savings" calculation assumes these distortions are zero, which is inconsistent with having a market.
+
+Do NOT claim to identify "excessive" market power or welfare losses. The model estimates where markets would clear, not where they should clear.
+
+### Section 2: Institutional Background
+
+Retain existing Section 3 material but reframe around two distinct price ceilings:
+
+1. **VRR Point (a) cap**: Administrative ceiling at 1.5 × Net CONE, calibrated to investment incentives, part of market design since 2007
+
+2. **Shapiro cap**: Political intervention at $325/MW-day, below Point (a) in constrained conditions, motivated by consumer cost concerns
+
+Note the irony: the VRR cap was already binding in 2026/27 (market cleared at exactly $329.17). The Shapiro cap shaves $4/MW-day off the RTO price but has larger effects in constrained LDAs where local caps exceeded $400.
+
+Include timeline of events:
+- July 2024: 2025/26 BRA clears at record prices
+- December 2024: Shapiro files FERC complaint
+- January 2025: Shapiro-PJM agreement on $325 cap
+- Subject to FERC approval
+
+Add context on what drove the price spike:
+- Data center load growth across PJM footprint
+- Accelerated coal and gas retirements
+- Compressed auction timeline reducing forward visibility
+- These are scarcity fundamentals, not conduct changes
+
+### Section 3: The Supply Function Equilibrium Framework
+
+Retain existing Section 4 but revise framing throughout.
+
+The model computes p*, the market-clearing price under strategic bidding with the Holmberg boundary condition.
+
+Key reframing:
+- The model does NOT claim p* is welfare-optimal
+- The model does NOT claim deviations from p* represent inefficiency
+- The model DOES claim p* is where markets would clear absent external intervention
+- This counterfactual is what we need to evaluate the Shapiro cap
+
+Remove or substantially soften all "market power" language. Replace with neutral descriptions:
+- "Lerner index" → "price-cost margin" or "markup over avoidable cost"
+- "market power" → "equilibrium markup" or "strategic pricing"
+- "structurally identifies" → "is consistent with"
+
+The boundary condition discussion (Section 4.4) becomes important: it explains why equilibrium prices hit the VRR cap under tight capacity conditions, which is what Shapiro is responding to.
+
+### Section 4: Calibration
+
+Retain existing Section 5 with minor modifications.
+
+Emphasize that calibration parameters (K=3, c=$150/MW-day) produce equilibrium prices, not welfare benchmarks. Uncertainty in these parameters affects the magnitude of p* but not the qualitative finding that p* > $325 in constrained markets.
+
+Add robustness discussion: even if c = $100 or c = $200, even if K = 2 or K = 4, the equilibrium price exceeds $325 in constrained LDAs under tight capacity conditions. The qualitative conclusion (Shapiro cap is binding) is robust.
+
+### Section 5: Results - Equilibrium Prices vs. Shapiro Cap
+
+This replaces existing Section 6. Restructure around the gap between p* and the Shapiro cap.
+
+**5.1 RTO-Level Results**
+
+Present equilibrium prices alongside the Shapiro cap:
+
+| Delivery Year | p* (SFE) | Shapiro Cap | VRR Point (a) | Gap (p* - cap) |
+|---------------|----------|-------------|---------------|----------------|
+| 2026/27       | $329     | $325        | $329          | $4             |
+| 2027/28       | $333     | $325        | $333          | $8             |
+
+The Shapiro cap is binding at the RTO level: equilibrium prices exceed $325.
+
+**5.2 LDA-Level Results**
+
+The effects are larger in constrained LDAs. Present equilibrium prices for BGE, Dominion, EMAAC, COMED, etc. These LDAs had actual clearing prices of $444-466/MW-day in 2025/26. The Shapiro cap binds more severely here.
+
+**5.3 Regime Classification**
+
+Reframe the K comparative static (existing Table 5, Figure 2) as regime analysis:
+- At K ≤ 3, markets clear at or near the VRR cap → Shapiro cap is binding
+- At K ≥ 7, markets clear near competitive levels → Shapiro cap may be slack
+
+The observed 2026/27 at-cap outcome is consistent with K ≤ 3. This tells us the market is in the "cap-binding regime" where the Shapiro intervention has bite.
+
+**5.4 Transmission Counterfactual**
+
+Retain the CETL analysis (existing Section 6.4, 6.5) but reframe:
+
+Expanding import capacity shifts LDAs from cap-binding to interior-clearing regimes. This reduces equilibrium prices organically without suppressing scarcity signals. Key finding: each 10 percentage point increase in import penetration reduces equilibrium prices by approximately 5 percentage points.
+
+This establishes transmission expansion as a structural alternative to price caps.
+
+### Section 6: The Allocative Cost of Price Caps
+
+This is new material grounded in price theory. It replaces and expands the "Consequences" section.
+
+**6.1 The Missing Money Problem, Recreated**
+
+Develop the parallel explicitly:
+- Energy market problem: Price caps suppress scarcity rents → underinvestment in peakers → capacity markets created
+- Capacity market problem: Shapiro cap suppresses scarcity rents → underinvestment in reliability → ???
+
+The logical endpoint is either (a) reliability degradation, (b) out-of-market procurement at higher cost, or (c) yet another administrative mechanism to restore investment incentives. Each outcome is costly; the "savings" calculation accounts for none of them.
+
+**6.2 Distorted Entry and Exit Incentives**
+
+Price caps affect investment through multiple channels:
+
+*Expected returns fall.* A prospective entrant considering a 20-year investment observes that Year 1 returns are capped at $325/MW-day. Even if the cap is temporary, it establishes a precedent: high prices trigger political intervention. The expected return to the investment falls by more than the direct cap effect.
+
+*Risk-adjusted hurdle rates rise.* Regulatory risk is now priced into capacity investment. Developers require higher expected prices to compensate for the probability of future caps. This shifts the entry threshold upward—exactly the opposite of what the cap intends.
+
+*Retirement decisions accelerate.* A marginal plant earning $400/MW-day covers its going-forward costs with a cushion; the same plant earning $325/MW-day may not. Plants that would have operated another 3-5 years under market pricing may retire immediately under the cap.
+
+Compare Shapiro cap to Net CONE:
+- 2026/27 Net CONE: $212/MW-day → cap exceeds Net CONE by $113
+- 2027/28 Net CONE: $243/MW-day → cap exceeds Net CONE by $82
+
+New entry remains theoretically viable at $325. But the margin above Net CONE is thin, and the regulatory risk premium may eliminate it entirely.
+
+**6.3 Suppressed Information**
+
+Prices aggregate dispersed private information:
+- Generator owners know their retirement timelines
+- Load-serving entities know their demand growth expectations
+- Developers know their construction pipelines and costs
+
+The market-clearing price reflects all this information. A $450/MW-day clearing price in BGE reveals that local supply is tight, retirements are imminent, or demand growth is accelerating. This signal coordinates decentralized investment decisions.
+
+A capped price of $325 reveals nothing. The cap binds whether scarcity is mild or severe. Investors, planners, and policymakers lose the signal that would direct resources to where they are most needed.
+
+**6.4 Asymmetric LDA Effects**
+
+A uniform $325 cap has heterogeneous effects:
+- Well-connected LDAs with p* < $325: cap is slack, no direct effect
+- Constrained LDAs with p* > $400: cap is severely binding
+
+This concentrates the distortion in regions where scarcity is most severe. The policy suppresses the signal precisely where the signal is most informative.
+
+Present a map or table showing which LDAs are most affected.
+
+**6.5 Dynamic Inconsistency**
+
+The Shapiro cap creates a time-consistency problem. Suppose PJM restores the three-year-forward auction timeline and a 2029/30 auction clears at $400/MW-day. Does the cap apply? If so, the cap is permanent and investment is permanently deterred. If not, what principle distinguishes 2026/27 from 2029/30?
+
+Investors facing this uncertainty will price it in. The cap's effect on investment extends beyond the capped years to all future years where similar intervention is possible.
+
+### Section 7: Evaluating the Lead-Time Argument
+
+Address Governor Shapiro's justification directly and thoroughly.
+
+**7.1 The Argument**
+
+Shapiro's FERC complaint argues: "there isn't enough time for generators to respond to high capacity prices, so consumers wouldn't benefit from the high prices."
+
+This argument has surface plausibility. Table 1 documents the disrupted auction schedule:
+- 2024/25 BRA: 0.8 months lead time
+- 2022/23-2023/24: 11-12 months lead time
+- Design intent: 36 months lead time
+
+At 0.8 months, no new generation can be constructed. The argument concludes that high prices cannot induce entry, so they merely transfer surplus.
+
+**7.2 The Argument Misunderstands Price Functions**
+
+The lead-time argument rests on the premise that prices only matter if physical supply responds within the delivery period. This premise is false.
+
+Even at zero lead time, prices:
+
+*Affect expectations for future periods.* Investors observe 2025/26 prices when deciding whether to build for 2028/29. High prices today signal persistent scarcity and accelerate future entry. Capping 2025/26 prices mutes this signal.
+
+*Shift the retirement margin.* A plant considering retirement in 2026 observes 2025/26 prices. High prices defer exit; capped prices accelerate it. This margin operates immediately—no construction required.
+
+*Attract mobile resources.* Demand response, battery storage, and import commitments can be mobilized in months. High prices attract these resources; caps repel them.
+
+*Alter contracting and hedging.* Load-serving entities observing high spot prices sign forward contracts, providing revenue certainty that finances investment. Capping spot prices compresses forward premiums and weakens this mechanism.
+
+*Reveal information.* A high price reveals that the market is tight. This information is valuable to all participants regardless of lead time. Capping prices destroys the information.
+
+The lead-time argument implicitly assumes all these margins are zero. If that were true, there would be no point in having a capacity market at all—prices would be arbitrary numbers with no behavioral content. The existence of the market presumes prices affect behavior.
+
+**7.3 The Correct Response to Compressed Lead Times**
+
+If compressed lead times are the problem, the solution is to restore proper auction timing. PJM is pursuing this: the 2026/27 and 2027/28 auctions have lead times of 10+ months, and future auctions are scheduled to return toward the three-year-forward design.
+
+Capping prices because lead times are short is incoherent. It treats the symptom (high prices) by suppressing the signal, rather than treating the cause (compressed schedules) by fixing the timeline. And it does so permanently: the Shapiro cap applies to 2026/27 and 2027/28 regardless of lead time.
+
+**7.4 Empirical Check: Did Supply Respond to 2025/26 Prices?**
+
+If the lead-time argument were correct, we would observe no supply response to the 2025/26 price spike. If prices have allocative content even at short lead times, we should observe:
+- Deferred retirements announced after the auction
+- New demand response registrations
+- Accelerated battery storage deployment
+- Increased import commitments from neighboring regions
+
+Document whatever evidence exists on these margins. Any observed supply response refutes the premise of the lead-time argument.
+
+### Section 8: Evaluating the $21 Billion Claim
+
+**8.1 The Calculation**
+
+Shapiro claims $21 billion in savings over two years. This figure equals:
+
+(Counterfactual price − Capped price) × Quantity × Delivery years
+
+The counterfactual price is asserted to be "over $500/MW-day." The capped price is $325. The quantity is PJM's reliability requirement (~140,000 MW). Two delivery years.
+
+**8.2 Problems with the Counterfactual Price**
+
+Where does "$500/MW-day" come from? The VRR Point (a) cap for 2026/27 is $329.17. For the RTO to clear above $329, aggregate supply would have to fall short of the reliability requirement at $329—a reliability emergency, not a market outcome.
+
+The $500+ figure appears to reference constrained LDA prices (BGE at $466, Dominion at $444). But these are local prices for sub-regions, not the RTO price. Multiplying LDA prices by RTO quantity overstates the counterfactual dramatically.
+
+Recalculate using the SFE-implied p* for each LDA, weighted by LDA reliability requirements. The result will be substantially below $21 billion.
+
+**8.3 Problems with the Quantity Assumption**
+
+The $21 billion calculation holds quantity fixed at the reliability requirement. This assumes capacity supply is perfectly inelastic—that no supplier exits, defers retirement, or fails to enter in response to lower prices.
+
+This assumption is internally inconsistent. If supply were perfectly inelastic, there would be no reason to have a capacity market. The purpose of the market is to set prices that induce efficient entry and exit. Assuming zero supply response assumes away the market's entire function.
+
+A correct calculation would account for:
+- Reduced entry under lower prices
+- Accelerated retirements under lower prices
+- Reduced imports and demand response under lower prices
+
+These responses reduce quantity, which reduces "savings" and increases reliability costs.
+
+**8.4 Problems with Ignoring Reliability Costs**
+
+The $21 billion figure accounts for zero reliability costs from suppressed investment. But if quantity supplied falls (per 8.3), reserve margins decline, and the probability of load-shedding events rises.
+
+The expected cost of reliability degradation depends on:
+- Value of lost load (typically $10,000-50,000/MWh in regulatory proceedings)
+- Probability of shortfall events
+- Duration and magnitude of shortfalls
+
+Even small increases in shortfall probability can generate large expected costs. A single severe event (cf. Texas, February 2021) can exceed the claimed "savings" by an order of magnitude.
+
+**8.5 Correct Interpretation**
+
+The $21 billion figure is an upper bound on consumer savings that obtains if and only if:
+- Supply is perfectly inelastic
+- The counterfactual price is $500/MW-day
+- There are no reliability costs
+
+All three conditions are implausible. Actual savings will be lower—possibly negative if reliability costs materialize.
+
+### Section 9: Policy Alternatives
+
+If the concern is high consumer costs, what alternatives to price caps exist?
+
+**9.1 Transmission Expansion**
+
+Section 5.4 results show CETL expansion reduces equilibrium prices by shifting LDAs from cap-binding to interior regimes. This addresses the structural cause (import constraints) rather than the symptom (high prices).
+
+Quantify: a 30% CETL expansion reduces price-cost margins by 12-18 percentage points in interior-clearing years.
+
+Transmission expansion:
+- Reduces prices organically by increasing competition
+- Preserves scarcity signals (prices still rise when supply is tight)
+- Improves reliability by diversifying supply sources
+- Does not create regulatory risk that deters investment
+
+**9.2 Entry Promotion**
+
+The K comparative static shows K ≥ 7 produces near-competitive outcomes. Policies that increase effective competition:
+- Streamlined permitting for new generation
+- Interconnection queue reform (PJM's queue has multi-year backlogs)
+- Storage deployment incentives
+- Demand response market design improvements
+
+These policies increase supply, which reduces prices, which benefits consumers—without suppressing price signals.
+
+**9.3 Auction Schedule Reform**
+
+Restore the three-year-forward timeline. This:
+- Provides lead time for physical supply response
+- Makes high prices informative investment signals
+- Addresses the stated justification for the Shapiro cap
+
+PJM is already working toward this. The Shapiro cap is duplicative.
+
+**9.4 Improved Market Monitoring**
+
+If the concern is strategic withholding rather than scarcity, strengthen TPS mitigation. Options:
+- Lower the RSI threshold that triggers mitigation
+- Apply mitigation to more resource types
+- Increase IMM monitoring resources
+
+But note: TPS mitigation was already applied in 2025/26. Prices rose because of market tightness—fewer resources offered into the auction—not because mitigated sellers exercised market power. This suggests scarcity rather than conduct.
+
+**9.5 Ranking the Alternatives**
+
+Structural solutions (transmission, entry promotion, scheduling) dominate price controls because:
+- They address causes rather than suppress symptoms
+- They reduce equilibrium prices organically, preserving scarcity signals
+- They do not create regulatory risk that chills future investment
+- They do not recreate the missing money problem
+- They improve reliability rather than degrading it
+
+Price caps are appropriate only if capacity supply is perfectly inelastic and reliability costs are zero. Neither condition holds.
+
+### Section 10: Conclusion
+
+Summarize:
+
+1. **The Shapiro cap is binding.** SFE equilibrium prices exceed $325 in constrained conditions. The cap suppresses market-clearing prices.
+
+2. **Price caps have allocative costs.** Suppressed prices distort entry, exit, expectations, and information revelation. These costs are absent from the $21 billion savings calculation.
+
+3. **The lead-time argument misunderstands price functions.** Prices affect expectations, retirement decisions, mobile resources, and contracting even when physical construction cannot occur within the delivery period. The correct response to compressed lead times is to fix the schedule, not suppress the signal.
+
+4. **The $21 billion claim is an upper bound under implausible assumptions.** It requires perfectly inelastic supply, an inflated counterfactual price, and zero reliability costs. Actual savings will be lower.
+
+5. **Structural alternatives dominate price caps.** Transmission expansion, entry promotion, and schedule reform reduce equilibrium prices organically without suppressing scarcity signals or creating regulatory risk.
+
+The case for the Shapiro cap rests on the assumption that capacity prices have no allocative function—that supply is perfectly inelastic and information revelation has no value. If that were true, there would be no point in having a capacity market. The market's existence presumes that prices matter. Capping them has costs.
+
+Close with an observation about political economy: the Shapiro cap is a visible, immediate transfer from producers to consumers. The costs—deferred investment, accelerated retirements, reliability degradation—are diffuse and delayed. This asymmetry makes price caps politically attractive and economically harmful. The paper quantifies what the political process ignores.
+
+## Revised Title
+
+"Capping the Capacity Market: A Supply Function Equilibrium Analysis of Price Controls in PJM"
+
+## Revised Abstract
+
+In response to record-high capacity auction prices, Pennsylvania Governor Josh Shapiro negotiated a $325/MW-day price cap for PJM's 2026/27 and 2027/28 delivery years, claiming $21 billion in consumer savings. We analyze this intervention using a calibrated supply function equilibrium model. Under the observed market structure—three pivotal suppliers with residual supply index below unity—equilibrium prices reach or exceed the Shapiro cap in constrained regions. Governor Shapiro's lead-time argument—that compressed auction schedules prevent supply response to high prices—misunderstands price functions: even at short lead times, prices affect expectations, retirement decisions, mobile resources, and information revelation. Suppressing prices below market-clearing recreates the "missing money" problem that capacity markets were designed to solve and distorts entry, exit, and contracting decisions. The claimed $21 billion in savings assumes perfectly inelastic capacity supply and zero reliability costs—assumptions inconsistent with the premise of capacity markets. Transmission expansion, which our model shows reduces equilibrium prices by shifting constrained regions from cap-binding to interior-clearing regimes, dominates administrative price controls because it addresses causes rather than symptoms and preserves the scarcity signals that coordinate decentralized investment.
+
+## Prose and Style Guidelines
+
+1. **Prices always allocate.** Never say high prices are "pure transfers" or have "no allocative function." Even at zero lead time, prices affect expectations, retirement, mobile resources, and information.
+
+2. **Distinguish scarcity from conduct.** High prices may reflect scarcity (efficient signal to enter) or strategic behavior (inefficient withholding). The static model cannot separate these. Acknowledge this but note: price caps are costly regardless of the source of high prices.
+
+3. **Avoid normative market power language.** Do not say prices are "too high" or market power is "excessive." The model estimates equilibrium prices, not welfare optima.
+
+4. **Replace "identifies" with "is consistent with."** The model calibrates, it does not identify in the econometric sense.
+
+5. **Take the lead-time argument seriously, then refute it.** Present Shapiro's argument in its strongest form before critiquing. Do not strawman.
+
+6. **Be concrete about alternatives.** Quantify how much CETL expansion would reduce prices. Specify what entry promotion policies would help.
+
+7. **Acknowledge limitations honestly.** The static model cannot compute optimal prices or fully separate strategic markup from scarcity rents. Its value is in computing counterfactual equilibrium prices for policy evaluation.
+
+8. **Emphasize robustness.** The qualitative finding (cap is binding) holds across wide parameter ranges.
+
+9. **Ground arguments in price theory.** Every claim about price cap effects should trace back to first principles about how prices function in markets.
+
+## What to Cut from Original
+
+1. Remove Section 7.1 (Comparison to IMM Metrics) or substantially shorten.
+
+2. Remove or de-emphasize LDA-level Lerner index tables. Replace with tables showing gap between p* and Shapiro cap by LDA.
+
+3. Remove claims about "structurally identifying" K. Say the at-cap outcome is consistent with K ≤ 3.
+
+4. Remove the implication that Lerner indices measure welfare loss. They measure price-cost margins, which is descriptive not normative.
+
+5. Shorten the literature review. Retain Klemperer-Meyer, Green-Newbery, Holmberg, and Joskow-Tirole. Cut or shorten everything else.
+
+6. Remove any language suggesting high prices are "pure transfers" at short lead times. This is inconsistent with price theory.
+
+## Files to Create/Modify
+
+1. Main paper text (complete rewrite following structure above)
+2. Abstract (as provided above)
+3. Tables:
+   - Table showing p* vs Shapiro cap by delivery year and LDA
+   - Table showing sensitivity of "cap is binding" finding to K and c
+   - Table showing transmission counterfactual (CETL expansion → price reduction)
+   - Table deconstructing the $21 billion claim
+4. Figures:
+   - Figure showing equilibrium price by LDA with Shapiro cap as horizontal line
+   - Figure showing regime classification (cap-binding vs interior) by K
+   - Map showing which LDAs are most affected by the cap
+
+## Key Citations to Add
+
+- Shapiro FERC complaint filing (December 2024)
+- PJM-Shapiro agreement announcement (January 2025)
+- News coverage of the $21 billion claim
+- Any FERC filings in response
+- Hayek (1945) on prices as information aggregators
+- Standard references on price caps and shortage (e.g., Weitzman, Glaeser and Luttmer)
+
+## Validation Checks
+
+After revision, verify:
+
+1. Paper never says high prices are "pure transfers" or lack allocative content
+2. Paper never claims to identify K or c; only calibrates them
+3. Paper never claims equilibrium prices are welfare benchmarks
+4. Paper explicitly states the Shapiro lead-time argument before critiquing it
+5. Paper grounds the critique in price theory (expectations, entry/exit, information)
+6. Paper quantifies what transmission expansion would accomplish
+7. Paper acknowledges that static model cannot fully separate markup from scarcity
+8. All Lerner index discussion is framed as descriptive, not normative
+9. Paper addresses the $21 billion claim with specific objections
+10. Paper discusses regulatory risk and dynamic inconsistency of the cap

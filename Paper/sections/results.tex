@@ -16,7 +16,7 @@ three benchmark delivery years, calibrated with $K = 3$ strategic sellers and
 $c = \$150$/MW-day (the sector-average ACR for combined-cycle generators from
 the 2025 IMM State of the Market). For each year, the table reports the
 model-predicted equilibrium price $p^*$, the observed BRA clearing price, and
-the implied Lerner index $L = (p^* - c)/p^*$.
+the implied price-cost margin (Lerner index) $L = (p^* - c)/p^*$.
 
 \begin{table}[ht]
   \centering
@@ -36,7 +36,7 @@ the implied Lerner index $L = (p^* - c)/p^*$.
   \noindent\footnotesize
   \textit{Notes:} $\bar{p}$ is the VRR Point~(a) price cap. $p^*$ is the
   model-predicted SFE clearing price. $p_{\text{actual}}$ is the observed BRA
-  clearing price. $L$ is the Lerner index $(p^* - c)/p^*$. Prices in
+  clearing price. $L$ is the price-cost margin (Lerner index) $(p^* - c)/p^*$. Prices in
   \$/MW-day. ``Interior'' means equilibrium falls strictly inside $(c,\bar{p})$;
   ``At cap'' means $S_i(\bar{p}) = \bar{q}_i$ for all $i$ and the Holmberg
   boundary condition is active.
@@ -54,8 +54,8 @@ the planning parameters. The substantively informative content is the
 \emph{binary} at-cap versus interior outcome: for $K \geq 4$, the model
 predicts interior clearing strictly below the cap (see
 Section~\ref{subsec:res_concentration}), so the observed at-cap outcome
-is a structural test that identifies $K \leq 3$ as the maximal effective
-seller count in 2026/27. The model does not confirm the price; it confirms
+is consistent with $K \leq 3$ as the maximal effective seller count
+in 2026/27. The model does not confirm the price; it confirms
 the structural regime.
 
 For 2023/24, the model predicts $p^* = \$330$ against an observed $p_{\text{actual}} = \$34$.
@@ -94,23 +94,23 @@ $3 \cdot s(p^*)$ plus fringe supply meets the VRR demand.
 % ------------------------------------------------------------------------------
 
 Figure~\ref{fig:K_lerner} and Table~\ref{tab:K_sensitivity} report the
-equilibrium Lerner index as a function of the number of strategic sellers $K$,
+equilibrium price-cost margin $L$ as a function of the number of strategic sellers $K$,
 holding calibration-year parameters fixed. The results reveal three qualitative
 zones.
 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.85\textwidth]{../Figures/fig02b_K_lerner.pdf}
-  \caption{Lerner Index vs.\ Number of Strategic Sellers}
+  \caption{Price-Cost Margin vs.\ Number of Strategic Sellers}
   \label{fig:K_lerner}
-  {\small\noindent\textit{Notes:} Each line traces the Lerner index $(p^* - c)/p^*$
+  {\small\noindent\textit{Notes:} Each line traces the price-cost margin $L = (p^* - c)/p^*$
     as $K$ varies from 2 to 10, holding all other calibration parameters fixed
     at their benchmark-year values. Shaded region indicates at-cap outcomes.}
 \end{figure}
 
 \begin{table}[ht]
   \centering
-  \caption{Equilibrium Price and Lerner Index by $K$ (Baseline Calibration)}
+  \caption{Equilibrium Price and Price-Cost Margin by $K$ (Baseline Calibration)}
   \label{tab:K_sensitivity}
   \begin{tabular}{lccc|ccc|ccc}
     \hline\hline
@@ -134,17 +134,17 @@ zones.
   \checkmark\ indicates the market clears at the VRR price cap $\bar{p}$.
 \end{table}
 
-\noindent\textbf{Zone 1 ($K \leq 3$): High market power, price cap binding.}
+\noindent\textbf{Zone 1 ($K \leq 3$): High strategic markup, price cap binding.}
 For $K = 2$, the market clears at $\bar{p}$ in all three benchmark years,
 yielding Lerner indices of 0.64--0.67. The at-cap outcome is also produced by
 $K = 3$ in 2026/27 (where the VRR cap $\bar{p} = \$329$ is lower, meeting the
 equilibrium supply function sooner). The transition from $K = 2$ to $K = 3$
-has a modest effect on the Lerner index in 2023/24 (0.64 to 0.55) but almost
+has a modest effect on the price-cost margin in 2023/24 (0.64 to 0.55) but almost
 none in 2025/26 (0.67 to 0.65), because in 2025/26 the supply function
 remains close to the cap throughout.
 
-\noindent\textbf{Zone 2 ($K = 4$): Moderate market power.} Adding a fourth
-seller reduces the Lerner index by 33--45 percentage points relative to
+\noindent\textbf{Zone 2 ($K = 4$): Moderate strategic markup.} Adding a fourth
+seller reduces the price-cost margin by 33--45 percentage points relative to
 $K = 3$, shifting the 2023/24 equilibrium from \$330 to \$215 and the 2026/27
 equilibrium from the cap to \$228. The ODE~\eqref{eq:sfe_ode} makes this
 intuitive: increasing $K$ divides the denominator, forcing $s'(p)$ to be
@@ -154,14 +154,14 @@ function shifts outward.
 
 \noindent\textbf{Zone 3 ($K \geq 7$): Near-competitive.} With seven or more
 strategic sellers, equilibrium prices fall to within 0.5\% of marginal cost
-($c = \$150$/MW-day) in all three years. The Lerner index is effectively zero
+($c = \$150$/MW-day) in all three years. The price-cost margin is effectively zero
 ($L < 0.02$), consistent with the competitive limiting result
 $p^* \to c$ as $K \to \infty$, implied by equation~\eqref{eq:sfe_ode}.
 
-The identification implication is direct: the observed 2026/27 at-cap outcome
+The structural implication is direct: the observed 2026/27 at-cap outcome
 ($p^* = \$329$) is consistent with $K \leq 3$ but inconsistent with $K \geq 4$
 (which would predict interior clearing at \$228 or below). This makes 2026/27
-a useful natural experiment for identifying the effective number of strategic
+a useful natural experiment for establishing the effective number of strategic
 sellers.
 
 % ------------------------------------------------------------------------------
@@ -169,7 +169,7 @@ sellers.
 \label{subsec:res_vrr}
 % ------------------------------------------------------------------------------
 
-Figure~\ref{fig:vrr_slope} shows the Lerner index as a function of the VRR
+Figure~\ref{fig:vrr_slope} shows the price-cost margin $L$ as a function of the VRR
 slope scaling factor. A factor of $f = 1$ corresponds to the baseline slope
 for each year; $f < 1$ means a flatter VRR (less elastic demand) and $f > 1$
 a steeper VRR (more elastic demand on the sloped segment).
@@ -177,7 +177,7 @@ a steeper VRR (more elastic demand on the sloped segment).
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.85\textwidth]{../Figures/fig03_vrr_slope.pdf}
-  \caption{Lerner Index vs.\ VRR Slope Scaling Factor ($K = 3$)}
+  \caption{Price-Cost Margin vs.\ VRR Slope Scaling Factor ($K = 3$)}
   \label{fig:vrr_slope}
   {\small\noindent\textit{Notes:} The slope scaling factor multiplies the quantity
     increment $(q_b - q_a)$ on the sloped segment, leaving the anchor prices
@@ -208,7 +208,7 @@ the new design, the minimum clearing price is \$177 (the floor), compared to
 \label{subsec:res_transmission}
 % ------------------------------------------------------------------------------
 
-Figure~\ref{fig:fringe} traces the Lerner index as the fringe supply
+Figure~\ref{fig:fringe} traces the price-cost margin $L$ as the fringe supply
 $\bar{Q}_f$ varies from 70\% to 150\% of its calibrated baseline, holding
 all other parameters fixed. The fringe captures competitive imports and
 non-strategic capacity, so this comparative static approximates the effect of
@@ -218,7 +218,7 @@ transmission congestion.
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.85\textwidth]{../Figures/fig04_fringe.pdf}
-  \caption{Lerner Index vs.\ Fringe Supply Scaling Factor ($K = 3$)}
+  \caption{Price-Cost Margin vs.\ Fringe Supply Scaling Factor ($K = 3$)}
   \label{fig:fringe}
   {\small\noindent\textit{Notes:} Fringe supply scaling factor of 1.0 equals the
     calibrated $\bar{Q}_f$ for each benchmark year. Fringe bids at $c = c_f$
@@ -226,18 +226,18 @@ transmission congestion.
     clearing quantity without affecting the ODE itself.}
 \end{figure}
 
-Increasing fringe supply by 30\% (factor $= 1.3$) reduces the Lerner index by
+Increasing fringe supply by 30\% (factor $= 1.3$) reduces the price-cost margin by
 12--18 percentage points in the interior-clearing years, corresponding to
 equilibrium price reductions of \$30--\$75/MW-day. The mechanism is
 straightforward: more fringe capacity shifts the market-clearing condition
 \eqref{eq:clearing_sym} rightward, requiring the strategic sellers to clear at
 a lower point on their supply functions where the markup is smaller.
 
-Notably, for 2026/27, expanding the fringe at $K = 3$ reduces the Lerner
-index from 0.54 to roughly 0.30 at factor $= 1.3$, which corresponds to a
+Notably, for 2026/27, expanding the fringe at $K = 3$ reduces the price-cost
+margin from 0.54 to roughly 0.30 at factor $= 1.3$, which corresponds to a
 price reduction from the cap (\$329) to approximately \$215/MW-day. This
 suggests that expanding import capacity to the RTO would have a substantial
-effect on market power even without structural remedies to seller
+effect on equilibrium pricing even without structural remedies to seller
 concentration. The implied cost-effectiveness of transmission investment versus
 divestiture depends on the marginal cost per MW of CETL capacity --- a
 comparison we leave for future work.
@@ -260,9 +260,9 @@ with valid CETL data across the three benchmark years. Two patterns dominate.
 
 \input{../Paper/tables/tab_lda_lerner}
 
-\noindent\textbf{Uniformly high market power.} Lerner indices range from
+\noindent\textbf{Uniformly high price-cost margins.} Lerner indices range from
 0.48 (DEOK in 2025/26) to 0.70 (PS and PS NORTH in 2025/26), with most
-LDAs above 0.60 in every year. The concentration of market power is
+LDAs above 0.60 in every year. The elevated price-cost margins are
 consistent with low import penetration ratios: across the sample,
 $\text{CETL}/\text{rel.~req.}$ averages 0.40, meaning strategic sellers
 must cover 60\% of the reliability requirement on average. In 2026/27,
@@ -270,14 +270,14 @@ every LDA clears at or within \$0.50 of the \$329.17 price cap ---
 perfectly consistent with the RTO result and confirming that the at-cap
 outcome is not an artefact of RTO aggregation.
 
-\noindent\textbf{Transmission constraints amplify market power.}
+\noindent\textbf{Transmission constraints amplify price-cost margins.}
 Figure~\ref{fig:cetl_scatter} illustrates the relationship between import
-penetration and the Lerner index. The dashed trend lines (estimated
+penetration and the price-cost margin. The dashed trend lines (estimated
 separately per year) are uniformly downward-sloping: LDAs with higher
 CETL relative to their reliability requirement systematically exhibit lower
 equilibrium markups. A 10-percentage-point increase in the import
-penetration ratio is associated with a 4--6-point reduction in the Lerner
-index depending on the benchmark year. DEOK, which has the highest import
+penetration ratio is associated with a 4--6-point reduction in the
+price-cost margin depending on the benchmark year. DEOK, which has the highest import
 penetration ratio in the sample at 96\% (2025/26), is the only LDA to
 produce an interior equilibrium price below the RTO price (\$290 vs.\
 \$270).
@@ -285,33 +285,33 @@ produce an interior equilibrium price below the RTO price (\$290 vs.\
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.85\textwidth]{../Figures/fig05_lda_lerner.pdf}
-  \caption{SFE Lerner Index by LDA and Benchmark Year ($K = 3$)}
+  \caption{SFE Price-Cost Margin by LDA and Benchmark Year ($K = 3$)}
   \label{fig:lda_lerner}
-  {\small\noindent\textit{Notes:} Bars show the SFE Lerner index $(p^* - c)/p^*$
+  {\small\noindent\textit{Notes:} Bars show the SFE price-cost margin $L = (p^* - c)/p^*$
     for each LDA and benchmark year. $K = 3$, $c = \$150$/MW-day. LDAs
-    ordered by 2026/27 Lerner index. $\dagger$ indicates the market cleared at
+    ordered by 2026/27 price-cost margin. $\dagger$ indicates the market cleared at
     or within \$0.50 of the VRR price cap.}
 \end{figure}
 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.85\textwidth]{../Figures/fig06_cetl_scatter.pdf}
-  \caption{Import Penetration and Market Power by LDA}
+  \caption{Import Penetration and Price-Cost Margin by LDA}
   \label{fig:cetl_scatter}
   {\small\noindent\textit{Notes:} Horizontal axis is
     $\text{CETL}/\text{reliability requirement}$, the share of local demand
-    that can be served by competitive imports. Vertical axis is the SFE Lerner
-    index. Each point is one LDA-year observation. Dashed lines are OLS trends
+    that can be served by competitive imports. Vertical axis is the SFE
+    price-cost margin $L$. Each point is one LDA-year observation. Dashed lines are OLS trends
     estimated separately per year. Shapes distinguish VRR design variants.}
 \end{figure}
 
 These results have a direct policy implication. The CETL is the primary
-instrument available to PJM for reducing local market power without
+instrument available to PJM for reducing local strategic pricing without
 structural divestiture. The cross-LDA variation confirms the comparative
 static from Section~\ref{subsec:res_transmission}: expanding the CETL is
 quantitatively as important as reducing strategic concentration for LDAs
 in the middle of the import-penetration distribution. For LDAs at the left
 tail --- PS, PS NORTH, COMED, and EMAAC --- even large CETL expansions
-would leave Lerner indices above 0.50 given the current number of
+would leave price-cost margins above 0.50 given the current number of
 strategic sellers, indicating that structural remedies are necessary to
 achieve competitive outcomes.

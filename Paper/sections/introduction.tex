@@ -19,20 +19,21 @@ anticipated is a question central to the design and regulation of capacity
 markets \citep{Joskow2007_capacity}. This paper answers that question
 structurally, using a calibrated supply function equilibrium model.
 
-The existing tool for detecting market power in PJM's capacity auctions is
-the Three Pivotal Supplier (TPS) test administered by the Independent Market
-Monitor \citep{Bowring2013_pjm}. A seller passes the test if the residual
-supply index --- the ratio of available supply excluding that seller to the
-reliability requirement --- exceeds unity; failing sellers face offer price
-mitigation. In our data, the RTO-level RSI for the top three sellers ranges
-from 0.62 to 0.73 across all seven delivery years in the sample, meaning
-that every participant fails the TPS test in every year. Yet over this same
-period, the clearing price varies by a factor of eleven, from \$28.92/MW-day
-in 2024/25 to \$333.44/MW-day in 2027/28. The binary pass/fail structure of
-the TPS test is blind to this variation: it can detect the presence of market
-power, but it cannot quantify its magnitude, characterize how markups change
-with market structure, or evaluate how VRR redesign affects equilibrium
-prices. A richer structural measure is needed.
+The existing tool for measuring strategic pricing conditions in PJM's capacity
+auctions is the Three Pivotal Supplier (TPS) test administered by the
+Independent Market Monitor \citep{Bowring2013_pjm}. A seller passes the test
+if the residual supply index --- the ratio of available supply excluding that
+seller to the reliability requirement --- exceeds unity; failing sellers face
+offer price mitigation. In our data, the RTO-level RSI for the top three
+sellers ranges from 0.62 to 0.73 across all seven delivery years in the
+sample, meaning that every participant fails the TPS test in every year. Yet
+over this same period, the clearing price varies by a factor of eleven, from
+\$28.92/MW-day in 2024/25 to \$333.44/MW-day in 2027/28. The binary
+pass/fail structure of the TPS test is blind to this variation: it can detect
+whether mitigation conditions are met, but it cannot quantify markup
+magnitude, characterize how price-cost margins change with market structure,
+or evaluate how VRR redesign affects equilibrium prices. A richer structural
+measure is needed.
 
 We develop a calibrated supply function equilibrium model of the PJM Base
 Residual Auction. In the model, $K$ symmetric strategic sellers simultaneously
@@ -51,26 +52,26 @@ trajectory. We calibrate the model to three benchmark delivery years ---
 (at-cap, new VRR) --- using published PJM planning parameters, BRA clearing
 results, and IMM State of the Market cost data.
 
-Four findings emerge. First, the baseline Lerner indices under $K = 3$
-symmetric strategic sellers are 0.54--0.65 across the three benchmark years.
+Four findings emerge. First, the baseline price-cost margins (Lerner indices)
+under $K = 3$ symmetric strategic sellers are 0.54--0.65 across the three
+benchmark years.
 The 2026/27 equilibrium clears at the VRR price cap (\$329.17/MW-day).
 This is a mechanical consequence of the Holmberg boundary condition: when
 $K = 3$ and the 2026/27 capacity margin is negative ($-0.2\%$), the ODE
 solution is forced to the cap. The result is informative not because the
 model guesses a dollar amount, but because $K \geq 4$ would predict interior
-clearing below the cap --- so the observed at-cap outcome structurally
-identifies $K \leq 3$ as the effective seller count. Second, concentration
-matters sharply: at $K = 4$, Lerner indices fall by 33--45 percentage points
-relative to $K = 3$; at $K = 7$, the equilibrium is nearly competitive.
-The observed 2026/27 at-cap outcome is consistent with $K \leq 3$ and
-inconsistent with $K \geq 4$, providing identification of the effective number
-of strategic sellers. Third, the VRR redesign (FERC ER25-1357) steepens
+clearing below the cap --- so the observed at-cap outcome is consistent with $K \leq 3$ as the
+effective seller count. Second, concentration matters sharply: at $K = 4$,
+price-cost margins fall by 33--45 percentage points relative to $K = 3$;
+at $K = 7$, the equilibrium is nearly competitive. The observed 2026/27
+at-cap outcome is consistent with $K \leq 3$ and inconsistent with $K \geq 4$,
+providing structural evidence on the effective number of strategic sellers. Third, the VRR redesign (FERC ER25-1357) steepens
 the sloped segment between the floor and cap, which reduces markups in the
 interior, but the new price floor at $p_f \approx \$177$/MW-day prevents
 prices from falling below that level even in competitive scenarios. Fourth,
 import capacity expansions --- modeled as increases in the competitive fringe
 available to the RTO --- reduce equilibrium prices substantially: a 30\%
-fringe expansion cuts the Lerner index by 12--18 percentage points in
+fringe expansion cuts the price-cost margin by 12--18 percentage points in
 interior-clearing years, with larger effects in the at-cap 2026/27 year.
 
 The remainder of the paper is organized as follows.
@@ -81,5 +82,5 @@ PJM capacity market, including the VRR mechanism and the 2022--2024 auction
 irregularities. Section~\ref{sec:model} develops the theoretical model.
 Section~\ref{sec:calibration} describes the data and calibration procedure.
 Section~\ref{sec:results} presents the baseline results and four comparative
-statics. Section~\ref{sec:discussion} compares structural markups to IMM
-metrics and draws policy implications. Section~\ref{sec:conclusion} concludes.
+statics. % TODO Session 3: update road map to new 11-section structure
+Section~\ref{sec:conclusion} concludes.

@@ -8,33 +8,29 @@
 % ==============================================================================
 
 % --- Title page ---
-\title{Calibrated Supply Function Equilibrium Simulation of Market Power in PJM Capacity Auctions}
+\title{Capping the Capacity Market: A Supply Function Equilibrium Analysis of Price Controls in PJM}
 \author{}
 \date{\today}
 \maketitle
 
 \begin{abstract}
-Capacity markets are designed to ensure long-run resource adequacy, but when
-only a few sellers hold pivotal capacity, the same auction mechanism that
-compensates investment generates strategic market power. We quantify this
-trade-off in PJM's Reliability Pricing Model using a calibrated Supply
-Function Equilibrium (SFE) model. The equilibrium is selected by Holmberg's
-boundary condition, which yields a unique SFE when capacity constraints bind,
-and is calibrated to PJM's Variable Resource Requirement demand curve,
-three-pivotal-supplier market structure, and an avoidable cost rate of
-\$150/MW-day from the 2025 IMM State of the Market. Using seven years of BRA
-data (delivery years 2021/22--2027/28) and planning parameters for all
-constrained LDAs, we find Lerner indices of 0.54--0.65 at the baseline
-$K = 3$ structure, implying equilibrium prices 2.2--2.9 times the competitive
-level. The 2026/27 market clears at the VRR cap (\$329.17/MW-day) --- a mechanical
-consequence of the Holmberg boundary condition under $K=3$ and binding
-capacity constraints --- ruling out effective competition among four or more
-symmetric sellers. Competitive outcomes require $K \geq 7$. At the LDA level,
-import penetration (CETL relative to the reliability requirement) is the
-dominant predictor of market power across 41 LDA-year cells. These findings
-imply that existing binary mitigation rules understate markup severity, and
-that transmission investment expanding import capacity is as much a
-capacity-market policy as an offer-cap rule.
+% TODO: Rewrite abstract (Session 6). Draft from revision instructions:
+% In response to record-high capacity auction prices, Pennsylvania Governor
+% Josh Shapiro negotiated a \$325/MW-day price cap and \$175/MW-day floor for
+% PJM's 2026/27 and 2027/28 delivery years, claiming \$21 billion in consumer
+% savings. We analyze this intervention using a calibrated supply function
+% equilibrium (SFE) model. Under the observed market structure---three pivotal
+% suppliers with residual supply index below unity---equilibrium prices reach
+% or exceed the Shapiro cap in constrained regions. The Shapiro settlement's
+% lead-time argument misunderstands price functions: even at short lead times,
+% prices affect expectations, retirement decisions, mobile resources, and
+% information revelation. Suppressing prices below market-clearing recreates
+% the ``missing money'' problem that capacity markets were designed to solve.
+% The claimed \$21 billion in savings uses the VRR Point~(a) price as the
+% counterfactual; our SFE model provides a structural estimate that is lower
+% but still exceeds the settlement cap in constrained LDAs. Transmission
+% expansion shifts constrained regions from cap-binding to interior-clearing
+% regimes and dominates administrative price controls as a durable remedy.
 \end{abstract}
 
 \newpage
@@ -57,7 +53,13 @@ capacity-market policy as an offer-cap rule.
 
 \input{sections/results}
 
-\input{sections/discussion}
+\input{sections/sec6_allocative_cost}
+
+\input{sections/sec7_leadtime}
+
+\input{sections/sec8_21billion}
+
+\input{sections/sec9_policy_alternatives}
 
 \input{sections/conclusion}
 
