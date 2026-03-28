@@ -1,9 +1,203 @@
 % ==============================================================================
 % Section: Policy Alternatives
-% Status: STUB (Session 1) -- full draft in Session 5
+% Status: COMPLETE (2026-03-28 Session R5)
 % ==============================================================================
 
 \section{Policy Alternatives}
 \label{sec:policy_alternatives}
 
-% TODO: ~900 words. See plan: quality_reports/plans/2026-03-28_revision_shapiro_reframe.md Phase 4D
+The analysis in Sections~\ref{sec:allocative_cost}--\ref{sec:21billion}
+establishes that the Shapiro settlement reduces the equilibrium capacity price
+by \$4--\$8/MW-day at the RTO level, suppresses the scarcity signal that
+informs entry decisions, and generates aggregate consumer savings that are an
+order of magnitude smaller than the VRR-counterfactual estimate of
+\$21~billion. This section considers four structural alternatives that address
+the source of elevated capacity prices --- a concentrated seller side with
+limited competitive fringe --- rather than suppressing the price symptom.
+The alternatives are not mutually exclusive; the most durable solution likely
+combines elements of all four.
+
+% ------------------------------------------------------------------------------
+\subsection{Option 1: The Shapiro Settlement (Current Policy)}
+\label{subsec:pol_settlement}
+% ------------------------------------------------------------------------------
+
+The settlement reshapes the VRR demand curve for 2026/27 and 2027/28, imposing
+a cap at $\bar{p}_S = \$325$/MW-day UCAP and a floor at $\bar{p}_f = \$175$/MW-day
+UCAP. It is designed as a temporary emergency measure during the period of
+acute auction-schedule disruption documented in Section~\ref{subsec:inst_leadtime},
+and PJM's slides describe it as applicable to two specific delivery years
+only \citep{PJM2025_settlement_slides}.
+
+The settlement's key advantages are speed and certainty: the VRR curve
+modification is directly within FERC's regulatory authority under FPA~\S205,
+it does not require structural changes to the seller side, and it provides
+immediate price relief for the 2026/27 and 2027/28 auctions. Its key
+disadvantages are equally clear. It does not reduce the number of strategic
+sellers, expand the competitive fringe, or steepen the VRR demand curve;
+it therefore does nothing to address the structural source of the $K \leq 3$
+regime. Section~\ref{sec:allocative_cost} shows that the price-cost margins
+in 2026/27 would remain at $L = 0.54$ under the settlement --- unchanged
+from the SFE equilibrium. The settlement compresses the \emph{price}, but
+not the underlying \emph{markup structure}.
+
+Furthermore, as Section~\ref{sec:leadtime} argues, suppressing the price
+signal imposes an informational cost that persists beyond the settlement
+window: investors planning for 2028/29 and later years observe capped prices
+rather than the unconstrained equilibrium, reducing the clarity of the
+capacity market's investment signal.
+
+% ------------------------------------------------------------------------------
+\subsection{Option 2: Transmission Expansion (CETL)}
+\label{subsec:pol_cetl}
+% ------------------------------------------------------------------------------
+
+The comparative statics in Section~\ref{subsec:res_transmission} show that
+increasing the competitive fringe supply $\bar{Q}_f$ reduces equilibrium
+prices organically, without requiring any modification to the demand curve.
+Fringe supply in the SFE model represents capacity that bids at (or near)
+marginal cost, which in PJM's context corresponds to imports limited by
+the Capacity Emergency Transfer Limit. A 30\% increase in the competitive
+fringe at $K = 3$ reduces the price-cost margin from 0.54 to approximately
+0.30 in 2026/27 --- a reduction of 24~percentage points, far larger than
+the settlement's zero-point-zero reduction in price-cost margins.
+
+The LDA cross-sectional results (Section~\ref{subsec:res_lda}) confirm this
+mechanism: a 10-percentage-point increase in the import penetration ratio
+$\text{CETL}/\text{reliability requirement}$ is associated with a 4--6-point
+reduction in the LDA price-cost margin. For the median LDA in the sample
+(import penetration 0.40), increasing the CETL to achieve a 0.50 import
+penetration ratio would reduce the price-cost margin by roughly 6--12 points,
+equivalent to a price reduction of \$20--\$40/MW-day at the 2026/27 VRR cap.
+
+CETL expansion through transmission investment preserves the price signal:
+equilibrium prices fall because competition increases, not because the demand
+curve is truncated. The scarcity signal remains informative; it is simply
+responding to a market structure with more competitive imports. This makes
+transmission expansion the most structurally efficient of the four options
+considered here. The relevant policy instrument is PJM's Regional Transmission
+Expansion Plan (RTEP), which can be directed to prioritize projects that
+increase import capacity to capacity-constrained LDAs.
+
+% ------------------------------------------------------------------------------
+\subsection{Option 3: VRR Curve Redesign}
+\label{subsec:pol_vrr}
+% ------------------------------------------------------------------------------
+
+Section~\ref{subsec:res_vrr} shows that steepening the VRR demand curve ---
+increasing $|D'(p)|$ on the sloped segment --- reduces equilibrium markups
+through the ODE mechanism. The intuition is straightforward: a steeper demand
+curve means each unit of capacity withheld has less effect on price (the
+curve is harder to move), which reduces the marginal incentive to withhold.
+A doubling of the VRR slope reduces the price-cost margin by 20--30
+percentage points in interior-clearing years; for 2026/27, the at-cap outcome
+transitions to interior clearing at a slope scaling factor of approximately
+1.4.
+
+FERC Order ER25-1357 redesigned the VRR curve for the 2026/27 BRA, steepening
+the sloped segment between $p_f$ and $\bar{p}$ by narrowing its quantity width.
+This is a step in the right direction from an SFE perspective. However, the
+redesign also introduced the flat floor at $p_f \approx \$177$/MW-day, which
+as Section~\ref{subsec:alloc_floor} discusses, creates an investment-adequacy
+guarantee whose interaction with the cap introduces its own distortions.
+
+A reformed VRR curve that steepens the slope further while maintaining a
+smooth lower tail (without a hard floor) would more directly address the
+strategic markup problem. The quantitative target from the SFE results is
+a slope factor of approximately 1.4 or greater: at that steepness, the
+2026/27 equilibrium transitions from cap-binding to interior-clearing even
+with $K = 3$ sellers, allowing the price signal to operate freely below the
+Point~(a) cap.
+
+% ------------------------------------------------------------------------------
+\subsection{Option 4: Entry Promotion and Deconcentration}
+\label{subsec:pol_entry}
+% ------------------------------------------------------------------------------
+
+The $K$ comparative static in Section~\ref{subsec:res_concentration} is the
+most direct guide to durable structural reform. The transition from
+cap-binding to interior-clearing equilibria occurs between $K = 3$ and
+$K = 4$: adding a fourth symmetric strategic seller reduces the price-cost
+margin by 20--33 percentage points and moves the 2026/27 equilibrium from
+\$329 to \$228 (a reduction of \$101/MW-day). With $K \geq 7$, equilibrium
+prices fall to within 0.5\% of marginal cost in all three benchmark years.
+
+Reducing effective seller concentration in PJM's capacity market requires
+lowering the barriers that prevent entry and expansion. Three levers are
+available:
+
+\begin{enumerate}
+
+\item \textbf{Interconnection queue reform.} PJM's interconnection queue has
+historically taken 4--7 years to process new generator applications, far
+exceeding the lead times at which high capacity prices can stimulate entry.
+FERC Order 2023 on transmission planning and Order 2023-A on interconnection
+reform are designed to accelerate this process. Timely interconnection is
+a necessary condition for the $K \geq 4$ outcome that would organically
+resolve the cap-binding equilibrium.
+
+\item \textbf{Demand response and storage deployment.} Demand response
+resources and utility-scale battery storage can participate in PJM's
+capacity market on timescales much shorter than new thermal generation.
+Expanding the effective capacity of these resources increases $K$ in the
+SFE framework by adding sellers who do not share the symmetric cost
+structure of the thermal strategic sellers. This is an asymmetric effect:
+demand response that bids at zero marginal cost is analogous to increasing
+the competitive fringe rather than increasing $K$, providing the fringe-expansion
+benefits described in Option~2.
+
+\item \textbf{Targeted divestiture or mitigation.} For the LDAs at the left
+tail of the import-penetration distribution --- PS, PS~NORTH, COMED, and
+EMAAC --- even large CETL expansions leave price-cost margins above 0.50
+given the current seller count (Section~\ref{subsec:res_lda}). In these
+areas, structural remedies including divestiture or enhanced offer price
+mitigation may be necessary to achieve interior clearing. PJM's existing
+Capacity Market Seller Offer Cap mitigation rules provide a framework for
+this, though they have historically been calibrated to the Avoidable Cost
+Rate rather than the SFE-based markup threshold.
+
+\end{enumerate}
+
+% ------------------------------------------------------------------------------
+\subsection{Comparative Assessment}
+\label{subsec:pol_ranking}
+% ------------------------------------------------------------------------------
+
+Table~\ref{tab:policy_comparison} summarizes the four options along the
+dimensions that matter for capacity market design: the source of price
+reduction, the duration of the effect, whether the price signal is
+preserved, and the required regulatory authority.
+
+\begin{table}[ht]
+  \centering
+  \caption{Comparative Assessment of Policy Alternatives}
+  \label{tab:policy_comparison}
+  \begin{tabular}{p{3.2cm}p{2.8cm}lp{2cm}p{3cm}}
+    \hline\hline
+    Option & Price reduction mechanism & Duration & Signal preserved & Regulatory lever \\
+    \hline
+    1. Settlement (current) & Cap/floor reshape VRR & 2 years & No (cap binding) & FERC \S205 tariff \\
+    2. CETL expansion       & Competitive fringe $\uparrow$ & Permanent & Yes & RTEP, FERC Tx planning \\
+    3. VRR redesign         & Demand elasticity $\uparrow$ & Permanent & Yes & FERC VRR recalibration \\
+    4. Entry/deconcentration & $K \uparrow$ / fringe $\uparrow$ & Permanent & Yes & FERC Ords. 2023/2023-A; mitigation \\
+    \hline\hline
+  \end{tabular}
+  \smallskip
+
+  \noindent\footnotesize
+  \textit{Notes:} Signal preservation indicates whether the capacity clearing
+  price reflects unconstrained strategic equilibrium (Options~2--4) or is
+  truncated by an administrative cap (Option~1). Duration refers to whether
+  the price reduction persists beyond a fixed delivery window.
+\end{table}
+
+Options~2--4 are strictly preferable to Option~1 along every structural
+dimension: they produce permanent price reductions by addressing the source
+of high prices (concentrated supply, limited competitive fringe, inelastic
+demand) rather than the symptom (high clearing prices). The settlement is
+justified as an emergency measure during a period of acute schedule
+disruption and lead-time compression, but it should not substitute for the
+structural reforms that would render a similar intervention unnecessary in
+future auctions. PJM's own settlement framing calls for ``reform the
+capacity market'' alongside the cap \citep{PJM2025_settlement_slides},
+consistent with this ranking.

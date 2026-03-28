@@ -1,9 +1,149 @@
 % ==============================================================================
 % Section: Evaluating the $21 Billion Claim
-% Status: STUB (Session 1) -- full draft in Session 5
+% Status: COMPLETE (2026-03-28 Session R5)
 % ==============================================================================
 
-\section{Evaluating the \$21 Billion Claim}
+\section{Evaluating the \$21~Billion Claim}
 \label{sec:21billion}
 
-% TODO: ~800 words. See plan: quality_reports/plans/2026-03-28_revision_shapiro_reframe.md Phase 4C
+% ------------------------------------------------------------------------------
+\subsection{The Counterfactual Behind the Claim}
+\label{subsec:21b_counterfactual}
+% ------------------------------------------------------------------------------
+
+Pennsylvania's January 28, 2025 announcement stated that the settlement
+would save consumers ``over \$21~billion over the next two delivery years''
+\citep{Shapiro2025_press_release}. The arithmetic behind this figure is
+straightforward: (counterfactual price $-$ \$325) $\times$ cleared quantity
+$\times$ 2 delivery years. Shapiro's stated counterfactual is ``over
+\$500/MW-Day'' --- the unconstrained VRR Point~(a) price under the dual-fuel
+combustion turbine reference technology that determines PJM's Net CONE
+\citep{PJM2025_settlement_slides}.
+
+This counterfactual deserves scrutiny. The VRR Point~(a) price is not a
+strategic equilibrium price. It is the maximum of the administrative demand
+schedule: the price at which the VRR curve becomes perfectly inelastic (the
+``flat top'' in the old design). In equilibrium, the capacity market clears
+where supply meets the VRR schedule --- which, as Section~\ref{sec:results}
+shows, may occur anywhere in the range $[c, \bar{p}]$ depending on market
+structure. For $K = 3$, the model predicts interior equilibria in 2023/24 and
+2025/26 that fall substantially below Point~(a). The VRR counterfactual
+therefore conflates two separate components of a high clearing price: the
+scarcity rent that is \emph{part of the market design} (the gap between the
+competitive price $c$ and the Point~(a) cap $\bar{p}$) and the strategic
+markup above competitive levels (captured by the SFE price-cost margin $L$).
+
+Our SFE model provides a structural alternative counterfactual: $p^*$, the
+equilibrium price under strategic bidding against the \emph{unmodified} VRR
+curve. This is what the market would have cleared at absent the settlement,
+given the observed market structure. In 2026/27, $p^* = \$329.17$/MW-day;
+in 2027/28, $p^* = \$333.44$/MW-day \citep[from BRA clearing data]{PJM2025_settlement_slides}.
+Both equilibria fall at the respective VRR Point~(a) caps because the
+Holmberg boundary condition is active for $K \leq 3$, but they are
+substantially below the \$500 figure in Shapiro's claim.
+
+% ------------------------------------------------------------------------------
+\subsection{Three-Scenario Revenue-Transfer Analysis}
+\label{subsec:21b_scenarios}
+% ------------------------------------------------------------------------------
+
+Table~\ref{tab:21billion} compares the implied revenue transfer under three
+counterfactual scenarios for the 2026/27 and 2027/28 delivery years,
+using RTO-level cleared quantities from the published BRA results.
+
+\begin{table}[ht]
+  \centering
+  \caption{Revenue Transfer Under Three Counterfactual Scenarios (RTO Level)}
+  \label{tab:21billion}
+  \begin{tabular}{lcccccc}
+    \hline\hline
+    & \multicolumn{2}{c}{Counterfactual price} &
+      \multicolumn{2}{c}{Annual revenue transfer} &
+      \multicolumn{1}{c}{Two-year} \\
+    \cmidrule(lr){2-3}\cmidrule(lr){4-5}
+    Scenario & 2026/27 & 2027/28 & 2026/27 & 2027/28 & total \\
+    \hline
+    VRR Point~(a) [Shapiro] & \$500 & \$500 & \$8.57B & \$8.59B & \$17.16B \\
+    SFE equilibrium [this paper] & \$329 & \$333 & \$0.20B & \$0.41B & \$0.61B \\
+    Competitive equilibrium & \$150 & \$150 & \multicolumn{3}{c}{(cap exceeds competitive; transfer reversed)} \\
+    \hline
+    Settlement cap & \$325 & \$325 & --- & --- & --- \\
+    \hline\hline
+  \end{tabular}
+  \smallskip
+
+  \noindent\footnotesize
+  \textit{Notes:} All prices in \$/MW-day UCAP. Annual revenue transfer $=
+  (p_{\text{counterfactual}} - \$325) \times Q \times 365$, where
+  $Q = 134{,}205$~MW (2026/27) and $Q = 134{,}478$~MW (2027/28) from BRA
+  clearing data. VRR Point~(a) counterfactual uses \$500/MW-day as a
+  conservative approximation of Shapiro's ``over \$500'' figure; the
+  two-year RTO total of \$17.16B falls short of the \$21B claim, with the
+  remainder attributable to constrained LDA effects (see text).
+  SFE counterfactual uses model-predicted $p^* = \bar{p}$ for $K \leq 3$.
+  Competitive equilibrium ($c = \$150$/MW-day) implies the settlement cap
+  transfers revenue \emph{to} sellers relative to the competitive outcome.
+\end{table}
+
+Several observations follow from Table~\ref{tab:21billion}.
+
+\textbf{The VRR counterfactual overstates the settlement's direct benefit.}
+Using \$500/MW-day as the counterfactual and RTO-level quantities, the
+two-year revenue transfer is \$17.16~billion --- approximately 18\% below
+the stated \$21~billion. The gap arises primarily from constrained LDAs,
+where the settlement cap applies to the separately-clearing LDA demand
+curves. In 2025/26, PJM's constrained LDA prices reached
+\$444--\$466/MW-day; without the settlement, 2026/27 and 2027/28 LDA
+equilibria in the tightest zones (PS, PS~NORTH, EMAAC) would likely have
+cleared near their respective VRR caps as well, contributing additional
+revenue transfer not captured in the RTO-only calculation.
+
+\textbf{The SFE counterfactual yields a far smaller transfer.}
+The structural estimate based on $p^*$ implies a two-year revenue transfer
+of approximately \$612~million --- 35~times smaller than the \$21~billion
+VRR-based claim. This does not mean the settlement is inconsequential: the
+SFE and VRR counterfactuals differ not because one is wrong, but because
+they answer different questions. The VRR counterfactual measures the gap
+between the design-level cap and the settlement cap --- a policy decision
+about where to set the demand curve ceiling. The SFE counterfactual
+measures the gap between the strategic equilibrium and the settlement cap
+--- the reduction in strategic markup attributable to the price band. The
+first gap (\$175/MW-day) is much larger than the second (\$4--\$8/MW-day)
+because the strategic equilibrium in 2026/27 happens to fall near the
+VRR Point~(a) price.
+
+\textbf{The competitive benchmark inverts the direction of transfer.}
+If capacity markets achieved the competitive equilibrium ($c \approx
+\$150$/MW-day), the settlement cap at \$325 would represent a transfer
+\emph{to} sellers, not buyers --- \$175/MW-day above marginal cost.
+This is unsurprising: capacity markets are \emph{designed} to clear above
+marginal cost to provide investment signals \citep{Cramton2005_capacity,
+Joskow2008_capacity_payments}. The relevant benchmark for evaluating
+Shapiro's savings claim is not competitive pricing but rather the strategic
+equilibrium, which is the price that would prevail in the market as
+structured.
+
+% ------------------------------------------------------------------------------
+\subsection{Quantity Assumption and Supply Response}
+\label{subsec:21b_quantity}
+% ------------------------------------------------------------------------------
+
+All three scenarios in Table~\ref{tab:21billion} hold quantity fixed at the
+observed BRA clearing. This assumption is internally consistent for short-run
+analysis --- the capacity that cleared in 2026/27 and 2027/28 was the supply
+available given the lead times involved --- but it suppresses supply response.
+PJM's settlement framing acknowledges this implicitly: the \$175 floor is
+described as ``supporting near-term investment,'' recognizing that capping the
+price without a floor could accelerate retirements and reduce future clearing
+quantities.
+
+A complete savings calculation should account for the effect of the price cap
+on (i) retirement decisions for marginal capacity that would have been
+retained under higher prices, and (ii) new entry decisions for the 2028/29
+auction and beyond, which are informed by the observed 2026/27 and 2027/28
+clearing prices. Both effects reduce future cleared quantities, reducing the
+denominator of the cost-per-MW calculation. The \$21~billion figure holds
+quantity fixed, so it is an upper bound on consumer savings even under the
+VRR counterfactual. The SFE estimate of \$612~million is both a lower
+counterfactual and a smaller quantity-adjusted figure, making it an
+approximate lower bound on the settlement's direct price effect.

@@ -129,9 +129,24 @@ Complete literature §2.3–2.4, add HHI secondary axis to fig02b, run proofread
 
 **Verification:** 3-pass LaTeX + BibTeX clean, 59 pages, zero undefined references.
 
+### Session R5 — COMPLETED
+
+**sec8_21billion.tex (~800 words):** "Evaluating the \$21~Billion Claim"
+- §8.1: Shapiro's VRR counterfactual ($500) explained vs. SFE structural alternative
+- §8.2: tab_21billion — 3-scenario comparison (VRR $17.16B, SFE $0.61B, competitive reversed); gap explained by LDA effects
+- §8.3: Quantity assumption — fixed quantity is upper bound; supply response further reduces true savings
+
+**sec9_policy_alternatives.tex (~900 words):** "Policy Alternatives"
+- §9.1: Settlement as current policy — temporary, preserves no price signal, zero markup reduction
+- §9.2: CETL expansion — 30% fringe → -24pp margin; 10pp CETL → 4-6pp margin; organic, signal-preserving
+- §9.3: VRR redesign — slope factor ≥1.4 shifts 2026/27 to interior clearing even at K=3
+- §9.4: Entry/deconcentration — K=4 → $228 in 2026/27; 3 levers: interconnection reform, DR/storage, targeted mitigation
+- §9.5: tab_policy_comparison — 4 options ranked on mechanism, duration, signal, regulatory lever
+
+**Verification:** 3-pass LaTeX + BibTeX clean, 68 pages, zero errors.
+
 ### Remaining sessions
-- Session R5: New §§9-10 ($21B claim, Policy Alternatives) — sec8_21billion.tex, sec9_policy_alternatives.tex
-- Session R6: Conclusion + abstract rewrite; literature prose
+- Session R6: Conclusion + abstract rewrite; literature prose (§2.5 price-cap lit)
 - Session R7: QA + full compile + quality score ≥ 90
 
 ---
