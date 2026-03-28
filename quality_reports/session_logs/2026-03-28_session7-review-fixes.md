@@ -145,8 +145,27 @@ Complete literature §2.3–2.4, add HHI secondary axis to fig02b, run proofread
 
 **Verification:** 3-pass LaTeX + BibTeX clean, 68 pages, zero errors.
 
+### Session R6 — COMPLETED
+
+**conclusion.tex (full rewrite, ~600 words):** Five-finding structure aligned to settlement evaluation
+1. Settlement binding: p*=$329 > $325; price-cost margin unchanged at 0.54
+2. Demand curve modification: $175 floor below Net CONE ($212); price band neither competitive nor strategic equilibrium
+3. $21B uses wrong counterfactual: VRR ~$17.2B vs SFE ~$612M (35× gap); LDA effects explain remainder
+4. Lead-time argument partial: 5 channels active at 10.2-month horizon; schedule restoration is correct remedy
+5. Structural alternatives dominate: CETL, VRR redesign, entry promotion preserve price signal permanently
+
+**main.tex abstract (~170 words):** Replaced TODO placeholder with polished abstract covering settlement terms, structural model, binding gap, $612M SFE estimate, lead-time partial defense, CETL organic remedy
+
+**literature.tex §2.5 (~400 words):** "Price Controls in Oligopolistic Markets"
+- Weitzman (1974): prices vs. quantities in inelastic-supply setting
+- Glaeser-Luttmer (2003): dynamic misallocation from binding caps
+- Anderson2005_sfe_pricecaps: caps modify ODE boundary condition throughout, not just at ceiling
+- Vossler (2009): floor as potential focal point for future auctions
+- Cramton-Stoft (2005): cap recreates missing money problem the market was designed to solve
+
+**Verification:** 3-pass LaTeX + BibTeX clean, 71 pages, zero errors.
+
 ### Remaining sessions
-- Session R6: Conclusion + abstract rewrite; literature prose (§2.5 price-cap lit)
 - Session R7: QA + full compile + quality score ≥ 90
 
 ---

@@ -255,4 +255,68 @@ to study behavioral responses to soft price caps in uniform-price auction
 environments and find that caps do bind strategically---sellers' offers cluster
 near the cap, consistent with a focal equilibrium at the ceiling. Taken
 together, this literature motivates a structural approach to measuring the
-market power that the binary TPS test can only detect but not quantify.
+strategic markup that the binary TPS test can only detect but not quantify.
+
+% ------------------------------------------------------------------------------
+\subsection{Price Controls in Oligopolistic Markets}
+\label{subsec:lit_price_controls}
+% ------------------------------------------------------------------------------
+
+The economics of price controls in oligopolistic markets provides the
+theoretical foundation for the allocative analysis in
+Section~\ref{sec:allocative_cost}. The foundational reference is
+\citet{Weitzman1974_prices}, who shows that the choice between price
+instruments and quantity instruments for regulatory intervention depends
+on the relative slopes of the marginal benefit and marginal cost schedules.
+When the marginal cost schedule is steep (supply is inelastic in the short
+run) and the marginal benefit schedule is relatively flat (demand is elastic),
+price instruments dominate quantity instruments because they avoid the
+deadweight loss from misallocating constrained supply. Capacity markets
+present precisely this structure: short-run supply is inelastic (capacity
+is fixed within the delivery year) and the administrative demand curve has
+a downward-sloping segment whose elasticity the regulator can calibrate.
+Weitzman's analysis implies that modifying the VRR price ceiling is an
+efficient regulatory instrument if and only if the unconstrained equilibrium
+price is genuinely above the socially optimal level --- a question our SFE
+model addresses directly by providing a structural estimate of $p^*$.
+
+\citet{GlaeserLuttmer2003_rent} demonstrate that binding price controls in
+markets with imperfect competition generate misallocation that is
+qualitatively different from the standard deadweight loss triangle. When
+quantity must be rationed below the unconstrained equilibrium, goods are
+allocated to those with the strongest relationships to sellers rather than
+to those with the highest willingness to pay, creating efficiency losses
+that are a multiple of the simple triangle. In capacity markets the
+analogue is resource allocation across time: a binding cap suppresses the
+scarcity signal that should direct investment toward future delivery years
+with highest expected returns, creating an efficiency loss that accumulates
+dynamically rather than appearing as a static deadweight triangle.
+
+In the SFE literature, \citet{Anderson2005_sfe_pricecaps} extend the
+Klemperer-Meyer framework to incorporate both price caps and forward
+contracts, establishing conditions under which equilibria with caps exist
+and characterizing how caps modify the ODE boundary condition. Their
+analysis shows that a price cap does not simply truncate the equilibrium
+supply function: it changes the strategic problem by altering the payoff at
+the capacity boundary. When the cap is below the unconstrained Holmberg
+boundary price, firms face a modified optimization at the cap level, and the
+equilibrium supply function differs from the uncapped case throughout the
+price range, not just at the ceiling. This result is directly relevant to
+the PJM application: the settlement does not merely cap revenues at
+\$325/MW-day, it modifies the entire strategic incentive structure facing
+the $K = 3$ sellers.
+
+\citet{Vossler2009_price_caps} provide experimental evidence that price caps
+induce focal behavior in uniform-price auction environments: offers cluster
+near the cap even when the unconstrained equilibrium would clear below it.
+Applied to PJM, this suggests that the settlement floor at \$175/MW-day
+may itself become a focal point in future auctions with ample supply, as
+sellers coordinate on offering just above the floor rather than competing
+down to marginal cost. Finally, \citet{Cramton2005_capacity} emphasize that
+the missing money problem --- the chronic revenue shortfall that motivates
+capacity markets in the first place --- is recreated if capacity market
+prices are suppressed below the investment threshold. The settlement floor
+at \$175/MW-day represents a partial recognition of this risk: PJM
+characterizes the floor as ``supporting near-term investment,'' an implicit
+acknowledgment that the cap side of the settlement poses the very problem
+that the capacity market was designed to solve.

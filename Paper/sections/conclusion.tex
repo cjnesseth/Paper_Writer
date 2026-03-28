@@ -1,73 +1,112 @@
 % ==============================================================================
 % Section: Conclusion
-% Status: COMPLETE (2026-03-28)
+% Status: COMPLETE (2026-03-28 Session R6 rewrite)
 % ==============================================================================
 
 \section{Conclusion}
 \label{sec:conclusion}
 
-Capacity markets are designed to solve an investment problem: generators will
-not commit capital to build new capacity if energy-market revenues alone are
-insufficient to cover fixed costs. But if the market is thin --- a small
-number of sellers hold pivotal capacity --- the same mechanism that
-compensates investment can generate substantial strategic markup. This paper
-asks how large those markups are in PJM's Reliability Pricing Model and what
-market-design choices govern their magnitude.
+On December 30, 2024, Pennsylvania filed a FERC complaint arguing that PJM's
+capacity auction demand curve was miscalibrated given near-term entry
+expectations. One month later, Governor Shapiro announced a settlement: the
+VRR curve for the 2026/27 and 2027/28 auctions would be reshaped, with a cap
+at \$325/MW-day UCAP and a floor at \$175/MW-day UCAP, at a projected savings
+of over \$21~billion for 65~million consumers. This paper uses a calibrated
+Supply Function Equilibrium model to evaluate the settlement's terms, its
+stated counterfactual, and its consequences for entry incentives and
+information.
 
-We answer the question using a calibrated Supply Function Equilibrium model.
-Sellers simultaneously choose quantity-contingent supply functions; the
-equilibrium is selected by Holmberg's boundary condition, which pins down
-a unique SFE when capacity constraints are binding. We calibrate the model to
-PJM's VRR demand curve, three-pivotal-supplier market structure, and
-combined-cycle ACR of \$150/MW-day using publicly available planning parameters
-and IMM State of the Market data for delivery years 2021/22 through 2027/28.
+Five findings emerge.
 
-The baseline results are striking. With $K = 3$ strategic sellers --- the
-number identified by RSI$_3 < 1$ in every benchmark year --- the model
-predicts Lerner indices of 0.54--0.65, implying equilibrium prices 2.2--2.9
-times the competitive level. The 2026/27 result is structurally informative: the Holmberg boundary
-condition mechanically produces at-cap clearing when $K = 3$ and the
-capacity margin is negative. Critically, $K \geq 4$ would predict interior
-clearing below the cap. The observed at-cap outcome is therefore consistent with
-$K \leq 3$ as the effective seller count, and confirms that the transition
-to the new four-point VRR design did not eliminate strategic pricing
-incentives.
+\textbf{First, the settlement is binding under the observed market structure.}
+With $K = 3$ pivotal suppliers --- confirmed by RSI$_3 < 1$ in every
+benchmark year --- the SFE equilibrium for 2026/27 falls at the VRR
+Point~(a) cap of \$329.17/MW-day, exceeding the settlement cap
+$\bar{p}_S = \$325$ by \$4.17/MW-day at the RTO level. The at-cap outcome
+is consistent with $K \leq 3$: four or more symmetric strategic sellers would
+predict interior clearing at \$228 or below (Section~\ref{subsec:res_concentration}).
+In constrained LDAs, where the 2025/26 BRA produced prices of
+\$444--\$466/MW-day, the structural gap between the SFE equilibrium and the
+settlement cap is considerably larger. The settlement reduces the price
+paid in the 2026/27 and 2027/28 auctions; it does not reduce the price-cost
+margin $L$, which remains 0.54 under the strategic equilibrium.
 
-The comparative statics identify two structural levers for reducing market
-power. First, concentration: each additional strategic seller beyond three
-substantially reduces markups, and $K \geq 7$ is near-competitive
-($L < 0.02$). Entry promotion policies that credibly reduce the pivotal
-supplier count have the largest marginal impact. Second, the VRR demand slope:
-steepening the curve by a factor of two reduces interior-year Lerner values
-by 20--30 percentage points. The new VRR design moves in this direction
-but simultaneously raises the price floor, limiting the markup reduction for
-at-cap outcomes. At the LDA level, import penetration --- measured by
-CETL relative to the reliability requirement --- is the dominant
-cross-sectional predictor of strategic pricing: each ten-percentage-point
-increase in import penetration reduces the price-cost margin by approximately
-five percentage points.
+\textbf{Second, the settlement modifies the demand curve, not merely the
+price outcome.} The settlement does not impose an external overlay; it
+replaces the VRR curve shape with a flat top at \$325, the existing sloped
+segment between \$325 and \$175, and a flat bottom at \$175 that procures
+all sub-threshold supply at the floor price. The \$175 floor is an
+investment-adequacy mechanism --- below the RTO Net CONE of \$212/MW-day in
+2026/27 --- designed to prevent the price from collapsing in over-supplied
+future auctions. Applying a floor while capping the price creates an
+administered price band that is neither the competitive equilibrium
+(\$150/MW-day) nor the strategic equilibrium (\$329--\$333/MW-day). The
+incentive implications of the band depend on where the unconstrained
+equilibrium falls relative to the Net CONE threshold, which varies across
+LDAs (Section~\ref{subsec:alloc_floor}).
 
-The central policy implication is that transmission investment is competition
-policy. Expanding CETL in constrained LDAs reduces effective concentration
-without requiring any change to auction rules or mitigation thresholds: each
-ten-percentage-point increase in import penetration reduces the price-cost margin
-by approximately five percentage points, and the highest-markup LDAs (PS,
-EMAAC, COMED) are precisely those where import limits are most binding. This
-is a more actionable lever than VRR redesign, which faces a binding price-floor
-constraint under the new four-point curve. ACR-level offer-price mitigation
-remains necessary but insufficient: it addresses price withholding but not
-quantity withholding, and the binary TPS test cannot quantify the magnitude
-of the markup it detects.
+\textbf{Third, the \$21~billion savings figure uses the wrong counterfactual.}
+Shapiro's claim is computed as the gap between the unconstrained VRR
+Point~(a) price (``over \$500/MW-day'') and the settlement cap, multiplied
+by cleared quantity over two delivery years. Our SFE model provides a
+structural alternative: the strategic equilibrium $p^*$ against the
+unmodified VRR curve. Using RTO-level quantities, the VRR counterfactual
+implies a two-year transfer of approximately \$17.2~billion (to which
+LDA effects add the remaining \$4~billion to reach \$21~billion); the SFE
+counterfactual implies a two-year transfer of approximately \$612~million
+(Section~\ref{sec:21billion}). The two estimates answer different questions.
+The VRR-based figure measures the gap between the design ceiling and the
+settlement cap --- a policy decision about how to calibrate the demand curve.
+The SFE-based figure measures the reduction in strategic markup attributable
+to the price band. The first is 35~times larger than the second because the
+2026/27 strategic equilibrium happens to fall near the design ceiling, not
+because the settlement eliminates large strategic rents.
 
-Several directions for future work are suggested by the model's limitations.
-An asymmetric-firm SFE with heterogeneous capacities and costs would
-characterize how markup dispersion interacts with the TPS screen. A dynamic
-version with endogenous entry and exit would connect short-run strategic
-pricing to long-run capacity adequacy. Most ambitiously, an empirical
-structural model that recovers firm-level cost parameters from observed
-offer data would allow direct welfare calculation and policy counterfactuals.
-The calibrated SFE results in this paper provide a benchmark for assessing
-whether any of these extensions materially change the central conclusion:
-strategic pricing in PJM's capacity auctions produces large, quantifiable
-price-cost margins that are sensitive to market-design choices that
-policymakers directly control.
+\textbf{Fourth, the lead-time argument for the settlement is partial.}
+The complaint's investment-adequacy theory --- that the VRR cap is too high
+given near-term entry expectations --- is strongest for greenfield generation
+(36--48~month deployment) and weakest for demand response, storage, and
+existing-plant upgrades (6--18~months). For the 2026/27 BRA held 10.2~months
+ahead, at least some capacity categories could have responded to price
+signals. More fundamentally, prices inform investment even when direct
+construction is infeasible within the lead time: through retirement deterrence,
+mobile resource deployment, portfolio contracting, regulatory signaling, and
+the formation of expectations for future delivery years
+(Section~\ref{subsec:lt_channels}). The correct structural remedy for
+lead-time compression is schedule restoration, which PJM is pursuing, not
+price suppression.
+
+\textbf{Fifth, structural alternatives dominate price controls.}
+Three interventions reduce SFE equilibrium prices without suppressing the
+scarcity signal: CETL expansion (30\% fringe increase $\to$ $-$24~pp
+price-cost margin reduction; 10~pp CETL/reliability-requirement increase $\to$
+4--6~pp reduction); VRR slope steepening beyond the ER25-1357 baseline
+(slope factor $\geq 1.4$ moves 2026/27 from cap-binding to interior clearing
+even at $K = 3$); and entry promotion to reach $K \geq 4$ (which alone
+would reduce 2026/27 prices by \$101/MW-day without any demand-curve
+modification). Each of these options is permanent and preserves the price
+signal; the settlement is temporary and suppresses it
+(Section~\ref{sec:policy_alternatives}).
+
+The central finding is that PJM's 2026/27 and 2027/28 capacity prices are
+high because the market is structurally thin --- three sellers hold pivotal
+capacity in every benchmark year --- and because transmission constraints
+limit competitive imports in the most constrained LDAs. The settlement
+addresses the symptom (high prices) rather than the cause (concentrated
+supply with limited competitive fringe). It is defensible as emergency relief
+during a period of acute auction-schedule disruption; it is not a substitute
+for the transmission investment, VRR redesign, and entry promotion that would
+make a similar intervention unnecessary in future auctions.
+
+Several directions for future work follow naturally from the model's
+limitations. An asymmetric-firm SFE would characterize how cost and capacity
+heterogeneity interact with the TPS screen and the settlement's LDA application.
+A dynamic model with endogenous entry and exit would connect the short-run
+price-cost margin findings to long-run capacity adequacy under the price band.
+An empirical structural model recovering firm-level cost parameters from
+observed offer data would allow direct welfare calculation and would permit
+testing whether the $K = 3$ symmetric calibration understates or overstates
+actual strategic markups. The calibrated SFE results in this paper provide a
+structural benchmark for each of these extensions and a quantitative foundation
+for evaluating the settlement's long-run consequences as the 2028/29 auction
+cycle approaches.
