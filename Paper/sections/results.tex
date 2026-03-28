@@ -237,3 +237,77 @@ effect on market power even without structural remedies to seller
 concentration. The implied cost-effectiveness of transmission investment versus
 divestiture depends on the marginal cost per MW of CETL capacity --- a
 comparison we leave for future work.
+
+% ------------------------------------------------------------------------------
+\subsection{LDA-Level Market Power}
+\label{subsec:res_lda}
+% ------------------------------------------------------------------------------
+
+The RTO-level analysis treats PJM as a single market, but capacity is traded
+separately in constrained Locational Deliverability Areas. For each LDA, the
+CETL imposes a hard upper bound on competitive imports, and local strategic
+sellers cover the residual reliability requirement. This section applies the
+same SFE model to each LDA individually, calibrating the competitive fringe at
+$\bar{Q}_f = \text{CETL}$ and setting each strategic seller's capacity at
+$\bar{q} = (\text{rel.~req.} - \text{CETL}) / K$.
+
+Table~\ref{tab:lda_lerner} reports the implied Lerner indices for all LDAs
+with valid CETL data across the three benchmark years. Two patterns dominate.
+
+\input{../Paper/tables/tab_lda_lerner}
+
+\noindent\textbf{Uniformly high market power.} Lerner indices range from
+0.48 (DEOK in 2025/26) to 0.70 (PS and PS NORTH in 2025/26), with most
+LDAs above 0.60 in every year. The concentration of market power is
+consistent with low import penetration ratios: across the sample,
+$\text{CETL}/\text{rel.~req.}$ averages 0.40, meaning strategic sellers
+must cover 60\% of the reliability requirement on average. In 2026/27,
+every LDA clears at or within \$0.50 of the \$329.17 price cap ---
+perfectly consistent with the RTO result and confirming that the at-cap
+outcome is not an artefact of RTO aggregation.
+
+\noindent\textbf{Transmission constraints amplify market power.}
+Figure~\ref{fig:cetl_scatter} illustrates the relationship between import
+penetration and the Lerner index. The dashed trend lines (estimated
+separately per year) are uniformly downward-sloping: LDAs with higher
+CETL relative to their reliability requirement systematically exhibit lower
+equilibrium markups. A 10-percentage-point increase in the import
+penetration ratio is associated with a 4--6-point reduction in the Lerner
+index depending on the benchmark year. DEOK, which has the highest import
+penetration ratio in the sample at 96\% (2025/26), is the only LDA to
+produce an interior equilibrium price below the RTO RTO price (\$290 vs.\
+\$270).
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.85\textwidth]{../Figures/fig05_lda_lerner.pdf}
+  \caption{SFE Lerner Index by LDA and Benchmark Year ($K = 3$)}
+  \label{fig:lda_lerner}
+  {\small\noindent\textit{Notes:}Bars show the SFE Lerner index $(p^* - c)/p^*$
+    for each LDA and benchmark year. $K = 3$, $c = \$150$/MW-day. LDAs
+    ordered by 2026/27 Lerner index. $\dagger$ indicates the market cleared at
+    or within \$0.50 of the VRR price cap.}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.85\textwidth]{../Figures/fig06_cetl_scatter.pdf}
+  \caption{Import Penetration and Market Power by LDA}
+  \label{fig:cetl_scatter}
+  {\small\noindent\textit{Notes:}Horizontal axis is
+    $\text{CETL}/\text{reliability requirement}$, the share of local demand
+    that can be served by competitive imports. Vertical axis is the SFE Lerner
+    index. Each point is one LDA-year observation. Dashed lines are OLS trends
+    estimated separately per year. Shapes distinguish VRR design variants.}
+\end{figure}
+
+These results have a direct policy implication. The CETL is the primary
+instrument available to PJM for reducing local market power without
+structural divestiture. The cross-LDA variation confirms the comparative
+static from Section~\ref{subsec:res_transmission}: expanding the CETL is
+quantitatively as important as reducing strategic concentration for LDAs
+in the middle of the import-penetration distribution. For LDAs at the left
+tail --- PS, PS NORTH, COMED, and EMAAC --- even large CETL expansions
+would leave Lerner indices above 0.50 given the current number of
+strategic sellers, indicating that structural remedies are necessary to
+achieve competitive outcomes.

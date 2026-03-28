@@ -1,110 +1,153 @@
 # =============================================================================
 # 01_vrr_demand.R
-# VRR demand curve: D(p) and D'(p) for old (3-point) and new (4-point) designs
+# VRR demand curve: D(p) and D'(p) for three designs:
+#
+#   "old"     -- 3-point piecewise linear (floor at p=0)
+#                Used for delivery years 2021/22-2025/26
+#   "new"     -- 2-point slope + flat floor (pt_b = pt_c = p_f)
+#                Used for RTO/BGE/ATSI/DPL/SWMAAC in 2026/27
+#   "new_4pt" -- 3-point slope + flat floor (pt_b > pt_c = p_f, pt_d = floor demand)
+#                Used for EMAAC/MAAC/COMED/PS/PEPCO/PL/JCPL in 2026/27
 # =============================================================================
 # Units: prices in $/MW-day, quantities in MW
 
 # -----------------------------------------------------------------------------
-# make_vrr_params()
-# Build a named list of VRR parameters from a single-row data.frame
-# (one row from calibration_master.csv).
+# make_vrr_params(row)
+# Build a named list of VRR parameters from a single-row data.frame.
+# Detects new_4pt automatically when vrr_pt_d_price is non-empty.
 # -----------------------------------------------------------------------------
 make_vrr_params <- function(row) {
   design <- as.character(row$vrr_design)
+
   if (design == "old") {
     list(
       design = "old",
-      pa = row$vrr_pt_a_price,   # price cap (1.5 × Net CONE)
-      pb = row$vrr_pt_b_price,   # reliability-requirement price (0.75 × Net CONE)
-      pc = 0,                    # floor price = 0 for old design
-      qa = row$vrr_pt_a_mw,      # MW at price cap
-      qb = row$vrr_pt_b_mw,      # MW at reliability-requirement price
-      qc = row$vrr_pt_c_mw       # MW at p = 0
+      pa = as.numeric(row$vrr_pt_a_price),  # price cap (1.5 × Net CONE)
+      pb = as.numeric(row$vrr_pt_b_price),  # reliability-requirement price
+      pc = 0,                               # floor price = 0 for old design
+      qa = as.numeric(row$vrr_pt_a_mw),
+      qb = as.numeric(row$vrr_pt_b_mw),
+      qc = as.numeric(row$vrr_pt_c_mw)
     )
   } else {
-    # new design: pt_b and pt_c columns both equal the floor price p_f
-    list(
-      design = "new",
-      pa = row$vrr_pt_a_price,   # price cap
-      pf = row$vrr_pt_b_price,   # floor price (~$177/MW-day)
-      qa = row$vrr_pt_a_mw,      # MW at price cap
-      qb = row$vrr_pt_b_mw,      # MW at top of sloped segment (= MW at floor start)
-      qd = row$vrr_pt_c_mw       # MW at floor (flat segment demand)
-    )
+    # New design: detect whether there is a 4th anchor point.
+    # 4-point LDAs have pt_d_price = floor price (~177.24) and pt_d_mw = floor demand.
+    pd_price <- suppressWarnings(as.numeric(row$vrr_pt_d_price))
+    pd_mw    <- suppressWarnings(as.numeric(row$vrr_pt_d_mw))
+    has_4pt  <- !is.na(pd_price) && !is.na(pd_mw)
+
+    if (has_4pt) {
+      # new_4pt: pa > pb > pf=pc=pd, two sloped segments + flat floor
+      list(
+        design = "new_4pt",
+        pa = as.numeric(row$vrr_pt_a_price),  # price cap
+        pb = as.numeric(row$vrr_pt_b_price),  # intermediate kink
+        pf = as.numeric(row$vrr_pt_c_price),  # floor price (= pt_d_price)
+        qa = as.numeric(row$vrr_pt_a_mw),
+        qb = as.numeric(row$vrr_pt_b_mw),     # MW at pb (top of lower slope)
+        qc = as.numeric(row$vrr_pt_c_mw),     # MW at pf (top of flat floor)
+        qd = pd_mw                             # MW at flat floor (demand below pf)
+      )
+    } else {
+      # new (simple): pa > pf=pb, single sloped segment + flat floor
+      list(
+        design = "new",
+        pa = as.numeric(row$vrr_pt_a_price),  # price cap
+        pf = as.numeric(row$vrr_pt_b_price),  # floor price (= pt_b = pt_c)
+        qa = as.numeric(row$vrr_pt_a_mw),
+        qb = as.numeric(row$vrr_pt_b_mw),     # MW at top of flat floor (sloped side)
+        qd = as.numeric(row$vrr_pt_c_mw)      # flat floor demand (below pf)
+      )
+    }
   }
 }
 
 # -----------------------------------------------------------------------------
-# vrr_demand(p, vp)
-# D(p): quantity demanded at price p.
-# vp: list returned by make_vrr_params()
-# Vectorised over p.
+# vrr_demand_scalar(p, vp)
+# D(p): quantity demanded at price p. Scalar. Used in equilibrium finder.
 # -----------------------------------------------------------------------------
-vrr_demand <- function(p, vp) {
-  if (vp$design == "old") {
-    slope_upper <- (vp$qb - vp$qa) / (vp$pb - vp$pa)   # < 0
-    slope_lower <- (vp$qc - vp$qb) / (0    - vp$pb)    # < 0
-    dplyr::case_when(
-      p >= vp$pa ~ vp$qa,
-      p >= vp$pb ~ vp$qa + slope_upper * (p - vp$pa),
-      p >= 0     ~ vp$qb + slope_lower * (p - vp$pb),
-      TRUE       ~ vp$qc   # p < 0 not feasible but guard
-    )
-  } else {
-    slope_upper <- (vp$qb - vp$qa) / (vp$pf - vp$pa)   # < 0
-    dplyr::case_when(
-      p >= vp$pa ~ vp$qa,
-      p >= vp$pf ~ vp$qa + slope_upper * (p - vp$pa),
-      TRUE       ~ vp$qd   # flat floor segment
-    )
-  }
-}
-
-# Vectorised-safe wrapper that avoids loading dplyr if not needed
 vrr_demand_scalar <- function(p, vp) {
   if (vp$design == "old") {
-    slope_upper <- (vp$qb - vp$qa) / (vp$pb - vp$pa)
-    slope_lower <- (vp$qc - vp$qb) / (0 - vp$pb)
+    s1 <- (vp$qb - vp$qa) / (vp$pb - vp$pa)
+    s2 <- (vp$qc - vp$qb) / (0 - vp$pb)
     if (p >= vp$pa) return(vp$qa)
-    if (p >= vp$pb) return(vp$qa + slope_upper * (p - vp$pa))
-    return(vp$qb + slope_lower * (p - vp$pb))
-  } else {
-    slope_upper <- (vp$qb - vp$qa) / (vp$pf - vp$pa)
+    if (p >= vp$pb) return(vp$qa + s1 * (p - vp$pa))
+    return(vp$qb + s2 * (p - vp$pb))
+
+  } else if (vp$design == "new") {
+    s1 <- (vp$qb - vp$qa) / (vp$pf - vp$pa)
     if (p >= vp$pa) return(vp$qa)
-    if (p >= vp$pf) return(vp$qa + slope_upper * (p - vp$pa))
+    if (p >= vp$pf) return(vp$qa + s1 * (p - vp$pa))
+    return(vp$qd)
+
+  } else {   # new_4pt
+    s1 <- (vp$qb - vp$qa) / (vp$pb - vp$pa)
+    s2 <- (vp$qc - vp$qb) / (vp$pf - vp$pb)
+    if (p >= vp$pa) return(vp$qa)
+    if (p >= vp$pb) return(vp$qa + s1 * (p - vp$pa))
+    if (p >= vp$pf) return(vp$qb + s2 * (p - vp$pb))
     return(vp$qd)
   }
 }
 
+# Vectorised wrapper (uses dplyr if available, else loops)
+vrr_demand <- function(p, vp) {
+  sapply(p, vrr_demand_scalar, vp = vp)
+}
+
 # -----------------------------------------------------------------------------
 # vrr_deriv_at(p, vp)
-# D'(p) = dQ/dP at price p. Piecewise constant; returns 0 on flat segments.
+# D'(p) = dQ/dP at price p. Piecewise constant; right-continuous at kinks.
 # Scalar only (used inside the ODE).
 # -----------------------------------------------------------------------------
 vrr_deriv_at <- function(p, vp) {
-  # Use strict upper inequalities at each boundary so that evaluation AT a kink
-  # point uses the lower-segment (right-continuous) derivative, matching the
-  # direction of integration (backward from p_bar: p decreases into each segment).
+  # Strict upper inequalities: kink points belong to the lower segment,
+  # giving D'(p) right-continuous as p decreases into each segment.
   if (vp$design == "old") {
-    if (p > vp$pa) return(0)                      # flat cap (above pa)
-    if (p > vp$pb) return((vp$qb - vp$qa) / (vp$pb - vp$pa))  # upper sloped segment
-    return((vp$qc - vp$qb) / (0 - vp$pb))         # lower sloped segment (includes pb)
-  } else {
-    if (p > vp$pa) return(0)                      # flat cap (above pa)
-    if (p > vp$pf) return((vp$qb - vp$qa) / (vp$pf - vp$pa))  # sloped segment
-    return(0)                                      # flat floor segment (includes pf)
+    if (p > vp$pa) return(0)
+    if (p > vp$pb) return((vp$qb - vp$qa) / (vp$pb - vp$pa))
+    return((vp$qc - vp$qb) / (0 - vp$pb))
+
+  } else if (vp$design == "new") {
+    if (p > vp$pa) return(0)
+    if (p > vp$pf) return((vp$qb - vp$qa) / (vp$pf - vp$pa))
+    return(0)
+
+  } else {   # new_4pt
+    if (p > vp$pa) return(0)
+    if (p > vp$pb) return((vp$qb - vp$qa) / (vp$pb - vp$pa))
+    if (p > vp$pf) return((vp$qc - vp$qb) / (vp$pf - vp$pb))
+    return(0)
   }
 }
 
 # -----------------------------------------------------------------------------
 # vrr_kinks(vp)
-# Returns the interior kink prices (points where D'(p) is discontinuous).
-# Used to restart the ODE integrator at each kink for accuracy.
+# Interior kink prices (D'(p) discontinuous). Used to restart ODE integrator.
+# Returns numeric vector, ascending in price.
 # -----------------------------------------------------------------------------
 vrr_kinks <- function(vp) {
-  if (vp$design == "old") {
-    c(vp$pb)   # one kink: at the reliability-requirement price
-  } else {
-    c(vp$pf)   # one kink: at the floor price
-  }
+  if (vp$design == "old")     return(c(vp$pb))
+  if (vp$design == "new")     return(c(vp$pf))
+  if (vp$design == "new_4pt") return(c(vp$pb, vp$pf))  # two kinks
+}
+
+# -----------------------------------------------------------------------------
+# vrr_floor_price(vp)
+# Returns the floor price below which D(p) = qd (flat). NA for old design.
+# -----------------------------------------------------------------------------
+vrr_floor_price <- function(vp) {
+  if (vp$design == "old")     return(NA_real_)
+  if (vp$design == "new")     return(vp$pf)
+  if (vp$design == "new_4pt") return(vp$pf)
+}
+
+# -----------------------------------------------------------------------------
+# vrr_floor_demand(vp)
+# Returns the [qb, qd] range at the floor price (for clearing-check).
+# -----------------------------------------------------------------------------
+vrr_floor_demand <- function(vp) {
+  if (vp$design == "old")     return(NULL)
+  if (vp$design == "new")     return(c(qb = vp$qb, qd = vp$qd))
+  if (vp$design == "new_4pt") return(c(qb = vp$qc, qd = vp$qd))  # qc is demand at pf from sloped side
 }

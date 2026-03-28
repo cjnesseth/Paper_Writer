@@ -114,12 +114,13 @@ equilibrium_price <- function(sol, vp, K, Q_fringe = 0, c_fringe = 0) {
   Sf       <- function(p) if (p >= c_fringe) Q_fringe else 0
   s_interp <- approxfun(sol$p, sol$s, rule = 2)
 
-  # For the new VRR design, D(p) has a jump at p_f (from q_b above to q_d below).
-  # Check explicitly whether the market clears at p_f from the sloped side,
-  # i.e., K*s(p_f) + Sf(p_f) ∈ [q_b, q_d].  If so, return p* = p_f exactly.
-  if (vp$design == "new") {
-    supply_at_pf <- K * s_interp(vp$pf) + Sf(vp$pf)
-    if (supply_at_pf >= vp$qb && supply_at_pf <= vp$qd) {
+  # For new/new_4pt designs, D(p) has a jump at p_f (from q_b above to q_d below).
+  # Check explicitly whether market clears at p_f from the sloped side,
+  # i.e., K*s(p_f) + Sf(p_f) in [floor_lo, floor_hi].  If so, return p_f exactly.
+  if (vp$design %in% c("new", "new_4pt")) {
+    fd              <- vrr_floor_demand(vp)   # c(qb=..., qd=...)
+    supply_at_pf    <- K * s_interp(vp$pf) + Sf(vp$pf)
+    if (supply_at_pf >= fd["qb"] && supply_at_pf <= fd["qd"]) {
       return(list(p_star = vp$pf, note = "cleared at floor price"))
     }
   }
