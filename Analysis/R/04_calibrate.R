@@ -26,7 +26,7 @@
 source(file.path(.here, "01_vrr_demand.R"))
 
 BENCHMARK_YEARS <- c("2023/24", "2025/26", "2026/27")
-DATA_PATH       <- file.path(dirname(sys.frame(1)$ofile), "../../Data/cleaned/calibration_master.csv")
+DATA_PATH       <- file.path(.here, "../../Data/cleaned/calibration_master.csv")
 ACR_PLACEHOLDER <- 150   # $/MW-day — replace with IMM SotM values when available
 
 # -----------------------------------------------------------------------------
@@ -56,6 +56,10 @@ calibrate_year <- function(delivery_year, df = NULL, K = 3, acr = ACR_PLACEHOLDE
   vp <- make_vrr_params(row)
 
   # --- Market structure: strategic capacity from RSI_3 ---
+  # NOTE: mw_cleared = reliability_req * (1 + capacity_margin) = total available/installed
+  # capacity. Despite the column name, this is NOT the cleared quantity at the auction
+  # price; it is total available supply (verified: mw_cleared == rel_req*(1+cap_margin)
+  # exactly for all three benchmark years). This is the correct denominator for RSI_3.
   total_supply <- row$mw_cleared
   rel_req      <- row$reliability_req_mw
   rsi_3        <- row$rsi_3

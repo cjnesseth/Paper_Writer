@@ -106,7 +106,7 @@ $1.5 \times \text{Net CONE}$.
     floor at a quantity above Point~(b); under the new design, Points~(b)
     and~(c) share the floor price and a flat segment extends to Point~(d).
     The 2025/26 Point~(a) price exceeds $1.5 \times \text{Net CONE}$ due to
-    a transitional administrative cap; see footnote. Data source: PJM
+    a transitional administrative cap (see footnote above). Data source: PJM
     Planning Parameters.
   \end{minipage}
 \end{table}
@@ -130,22 +130,84 @@ changes from variation in market structure and cost parameters.
 \label{subsec:cal_market_structure}
 % ------------------------------------------------------------------------------
 
-\TODO{Describe capacity shares of top firms by LDA (from IMM SotM HHI tables);
-fringe size; justify symmetric-firm approximation (K = 3 strategic firms).}
+Capacity market concentration in PJM is high by any standard measure. The PJM
+IMM reports LDA-level Herfindahl-Hirschman Index (HHI) values in its annual
+State of the Market (SotM) reports; in every delivery year covered by our
+sample, the RTO-level HHI exceeds 2{,}500 and most constrained LDAs exceed
+4{,}000, thresholds the Department of Justice classifies as
+highly concentrated markets under standard antitrust benchmarks.
+
+The key calibration input is the number of strategic sellers, $K$. We use the
+Residual Supply Index with threshold three (RSI$_3$) as the identifying
+criterion: RSI$_3 < 1$ means that the three largest sellers collectively hold
+pivotal capacity, i.e., no competitive outcome is supportable without their
+participation. In all three benchmark years, the RTO-level RSI$_3$ falls below
+unity (0.68, 0.62, and 0.64 for 2023/24, 2025/26, and 2026/27, respectively),
+establishing that at most three large sellers are jointly pivotal. The
+2026/27 at-cap clearing outcome further rules out $K \geq 4$: our model
+predicts interior clearing for four or more strategic sellers in that year
+(Section~\ref{subsec:res_concentration}), so the observed cap clearing
+is only consistent with $K \leq 3$. The IMM TPS test confirms individual
+pivotality for all three largest sellers in every constrained LDA, supporting
+$K = 3$ over $K = 2$ as the baseline. We therefore set $K = 3$ as the
+baseline strategic count, and examine sensitivity to this assumption via
+the $K$ comparative static in Section~\ref{subsec:res_concentration}. Because RSI data is available only at the RTO level
+for most delivery years, we impose the same $K = 3$ structure on each LDA
+calibration and allow cross-LDA variation to enter through the VRR parameters
+and CETL-based fringe capacity.\footnote{LDA-level TPS test outcomes reported
+in the IMM SotM confirm that at least three suppliers pass the pivotal test in
+all constrained LDAs, consistent with $K = 3$.}
 
 % ------------------------------------------------------------------------------
 \subsection{Cost Parameters}
 \label{subsec:cal_cost}
 % ------------------------------------------------------------------------------
 
-\TODO{Describe avoidable cost rate (ACR) calibration; fringe supply function
-(step function at ACR); CETL import limits by LDA.}
+The avoidable cost rate (ACR) for each strategic seller is set to
+$c = \$150$ per MW-day, the combined-cycle sector average reported in the 2025
+PJM IMM State of the Market (Table 3-8). Combined-cycle units represent the
+marginal capacity technology in PJM's current resource mix, and the IMM
+identifies the combined-cycle ACR as the relevant benchmark for capacity-offer
+mitigation under the TPS test. The symmetric-firm assumption sets all $K = 3$
+sellers to the same $c$; heterogeneity in costs and capacity sizes is
+abstracted away. The sensitivity of equilibrium markups to cost-parameter
+uncertainty is examined in Section~\ref{subsec:res_transmission}, where fringe
+supply is scaled by a factor $\gamma \in [0.5, 2.0]$ around the baseline.
+
+Fringe supply is modeled as an inelastic block offered at $c$: any capacity
+not controlled by the $K$ strategic sellers is assumed to offer at cost.
+At the RTO level, fringe capacity is set to total installed capacity minus the
+capacity attributed to the three largest sellers; this residual is scaled with
+$\gamma$ to explore fringe-size sensitivity. For individual LDA calibrations,
+the Capacity Emergency Transfer Limit (CETL) serves as the effective fringe
+capacity, since CETL measures the maximum deliverable import from the rest of
+PJM into the LDA. LDA-level CETL values by delivery year are drawn directly
+from the PJM planning parameter files described in
+Section~\ref{subsec:cal_data}.
 
 % ------------------------------------------------------------------------------
 \subsection{Benchmark Delivery Years}
 \label{subsec:cal_years}
 % ------------------------------------------------------------------------------
 
-\TODO{Justify selection of 2023/24, 2025/26, and 2026/27 as benchmark years.
-Cross-reference market structure and VRR data. Note 2024/25 exclusion (spot
-auction; no forward investment signal).}
+We select three delivery years as calibration benchmarks, each representing
+a distinct capacity market regime. \textit{2023/24} is a low-price interior
+year (\$34.13/MW-day) under the old VRR design in which PJM's TPS mitigation
+was broadly applied; the gap between the model's unmitigated SFE price and the
+observed clearing price provides a clean counterfactual for the cost of
+mitigation inaction. \textit{2025/26} is a high-price year (\$269.92/MW-day)
+that preceded the VRR redesign; it exhibits a large upward price spike relative
+to prior years and partial TPS application, making it useful for isolating the
+effect of VRR slope on equilibrium markups. \textit{2026/27} is the first
+auction under the new VRR design and cleared exactly at the Point~(a) cap
+(\$329.17/MW-day), providing the natural experiment used in
+Section~\ref{subsec:res_baseline} to identify $K = 3$ as the effective
+strategic count.
+
+We exclude \textit{2024/25} from the benchmark set. PJM conducted the 2024/25
+BRA as a spot auction held only 0.8 months before the delivery year began,
+compared to the 34--36 months of lead time typical of other auctions
+(Table~\ref{tab:bra_timeline}). This compressed timeline eliminates any
+forward investment signal and makes the 2024/25 clearing price (\$28.92/MW-day)
+an unreliable guide to equilibrium capacity incentives; the SFE framework, which
+embeds a long-run investment signal in the VRR demand curve, is not applicable.

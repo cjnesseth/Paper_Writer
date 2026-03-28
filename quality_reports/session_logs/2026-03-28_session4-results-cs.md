@@ -72,3 +72,7 @@ Default LDA-specific ACR offer caps are in separate IMM BRA analysis reports.
 3. `Paper/sections/conclusion.tex`
 4. Abstract in `main.tex`
 5. Full paper proof + final PR/merge
+
+---
+**Context compaction (auto) at 02:25**
+Check git log and quality_reports/plans/ for current state.

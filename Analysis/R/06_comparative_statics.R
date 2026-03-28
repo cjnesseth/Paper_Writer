@@ -135,6 +135,15 @@ p_cs2b <- ggplot(cs2_df, aes(x = K, y = lerner, color = year, shape = year)) +
   geom_point(size = 2.5) +
   scale_color_manual(values = YEAR_COLORS, name = "Delivery year") +
   scale_shape_manual(values = YEAR_SHAPES, name = "Delivery year") +
+  scale_x_continuous(
+    breaks   = 2:10,
+    sec.axis = sec_axis(
+      transform = ~ 10000 / .x,
+      name   = "HHI (= 10,000 / K)",
+      breaks = 10000 / (2:10),
+      labels = as.character(round(10000 / (2:10)))
+    )
+  ) +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
   labs(
     title = "Lerner Index vs. Number of Strategic Sellers",

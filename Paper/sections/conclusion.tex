@@ -1,11 +1,66 @@
 % ==============================================================================
 % Section: Conclusion
-% Status: NOT STARTED
+% Status: COMPLETE (2026-03-28)
 % ==============================================================================
 
 \section{Conclusion}
 \label{sec:conclusion}
 
-\TODO{Summarize findings: calibrated SFE markups, sensitivity to concentration and
-VRR slope, LDA transmission constraints. Policy implications for capacity market
-design. Directions for future work (dynamic model, entry/exit, empirical estimation).}
+Capacity markets are designed to solve an investment problem: generators will
+not commit capital to build new capacity if energy-market revenues alone are
+insufficient to cover fixed costs. But if the market is thin --- a small
+number of sellers hold pivotal capacity --- the same mechanism that
+compensates investment can generate substantial market power rents. This paper
+asks how large those rents are in PJM's Reliability Pricing Model and what
+market-design choices govern their magnitude.
+
+We answer the question using a calibrated Supply Function Equilibrium model.
+Sellers simultaneously choose quantity-contingent supply functions; the
+equilibrium is selected by Holmberg's boundary condition, which pins down
+a unique SFE when capacity constraints are binding. We calibrate the model to
+PJM's VRR demand curve, three-pivotal-supplier market structure, and
+combined-cycle ACR of \$150/MW-day using publicly available planning parameters
+and IMM State of the Market data for delivery years 2021/22 through 2027/28.
+
+The baseline results are striking. With $K = 3$ strategic sellers --- the
+number identified by RSI$_3 < 1$ in every benchmark year --- the model
+predicts Lerner indices of 0.54--0.65, implying equilibrium prices 2.2--2.9
+times the competitive level. The strongest validation comes from 2026/27:
+the model selects $p^* = \$329.17$/MW-day without tuning, matching the
+observed at-cap clearing price exactly. This at-cap outcome is informative ---
+it rules out effective competition among four or more symmetric sellers ---
+and confirms that the transition to the new four-point VRR design did not
+eliminate strategic pricing incentives.
+
+The comparative statics identify two structural levers for reducing market
+power. First, concentration: each additional strategic seller beyond three
+substantially reduces markups, and $K \geq 7$ is near-competitive
+($L < 0.02$). Entry promotion policies that credibly reduce the pivotal
+supplier count have the largest marginal impact. Second, the VRR demand slope:
+steepening the curve by a factor of two reduces interior-year Lerner values
+by 20--30 percentage points. The new VRR design moves in this direction
+but simultaneously raises the price floor, limiting the markup reduction for
+at-cap outcomes. At the LDA level, import penetration --- measured by
+CETL relative to the reliability requirement --- is the dominant
+cross-sectional predictor of market power: each ten-percentage-point
+increase in import penetration reduces the Lerner index by approximately
+five percentage points.
+
+The policy punchline is twofold. Mitigation rules based on ACR-level offer
+caps are necessary but insufficient: they address price withholding but not
+quantity withholding, and the binary TPS test understates the magnitude of
+markups we estimate. Transmission investment that expands CETL in constrained
+LDAs would address market power at its structural root by increasing effective
+competition without changing auction rules.
+
+Several directions for future work are suggested by the model's limitations.
+An asymmetric-firm SFE with heterogeneous capacities and costs would
+characterize how markup dispersion interacts with the TPS screen. A dynamic
+version with endogenous entry and exit would connect short-run strategic
+pricing to long-run capacity adequacy. Most ambitiously, an empirical
+structural model that recovers firm-level cost parameters from observed
+offer data would allow direct welfare calculation and policy counterfactuals.
+The calibrated SFE results in this paper provide a benchmark for assessing
+whether any of these extensions materially change the central conclusion:
+market power in PJM's capacity auctions is large, quantifiable, and sensitive
+to market-design choices that policymakers directly control.

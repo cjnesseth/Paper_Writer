@@ -86,3 +86,7 @@ numerical method (deSolve::lsoda, restart at VRR kinks) noted
 2. R solver: 01_vrr_demand.R + 02_sfe_symmetric.R + 04_calibrate.R +
    05_results_baseline.R
 3. Calibration section stubs: market structure, cost parameters, delivery years
+
+---
+**Context compaction (auto) at 01:31**
+Check git log and quality_reports/plans/ for current state.

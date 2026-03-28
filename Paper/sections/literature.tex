@@ -68,9 +68,9 @@ supply.
 The effect of forward commitments on equilibrium supply functions is
 examined by \citet{Allaz1993_forward}, who show in a Cournot setting that
 forward markets reduce equilibrium markups through a Stackelberg-style
-commitment effect. \citet{Anderson2005_sfe_pricecaps} extend this analysis
-to the SFE setting, establishing that forward contracts and price caps both
-shift supply functions toward the competitive benchmark. Capacity commitments
+commitment effect. \citet{Anderson2005_sfe_pricecaps} extend the SFE framework to settings
+with both forward contracts and price caps, establishing existence conditions
+for equilibria under these combined constraints. Capacity commitments
 in the BRA are formally analogous to forward sales, so the static SFE applied
 to the auction game incorporates these disciplining effects into the
 equilibrium concept.
@@ -104,7 +104,7 @@ provides a useful calibration benchmark and validates numerical solvers, but
 imposes functional form restrictions violated by the piecewise-linear VRR
 curve in the PJM application. \citet{Niu2005_sfe_forward} extend the
 numerical framework to generators holding fixed forward contracts, and
-\citet{Rudkevich2004_sfe_applications} develops a piecewise-linear
+\citet{Rudkevich2004_sfe_applications} develop a piecewise-linear
 approximation scheme that handles non-differentiabilities at capacity
 constraints. In this paper we follow the backward-integration approach,
 numerically solving the symmetric ODE using the \texttt{deSolve} package in
@@ -125,34 +125,83 @@ extreme predicted markups.
 \label{subsec:lit_electricity_mp}
 % ------------------------------------------------------------------------------
 
-% California market power: structural measurement
-\cite{Borenstein2002_market_power}
+The literature on market power in restructured electricity markets has developed
+two complementary methodologies: counterfactual simulation and structural
+estimation. \citet{Borenstein2002_market_power} establish the counterfactual
+simulation template by decomposing the price-cost gap in California's
+restructured wholesale market into market power and scarcity components. Using
+a competitive benchmark derived from reported marginal costs, they find that
+market power accounts for a substantial share of the observed price-cost wedge,
+particularly during high-demand hours when residual demand is inelastic.
+Their decomposition method --- simulate competitive prices under the observed
+cost and demand conditions, then attribute the gap to strategic behavior ---
+is the direct antecedent to the approach used in this paper for capacity
+auctions. \citet{Wolak2003_measuring} extend this tradition by developing
+a unilateral market power measure derived directly from electricity bid
+data, exploiting the observation that a pivotal supplier's residual demand
+curve is effectively inelastic at the market equilibrium. The pivotal supplier
+concept underlying Wolak's measure is the same logic codified in PJM's
+Residual Supply Index and Three Pivotal Supplier test.
 
-% Unilateral market power: California
-\cite{Wolak2003_measuring}
+\citet{Wolfram1999_duopoly} provides the first empirical test of SFE
+predictions, using detailed bid data from the British electricity spot market
+duopoly (National Power and PowerGen) to compare observed offers against the
+Nash equilibrium predictions of the Klemperer-Meyer model. She finds that
+actual markups fall between the Cournot and competitive benchmarks, broadly
+consistent with the range of SFE equilibria, but closer to Cournot than the
+symmetric Nash equilibrium would predict. \citet{Sweeting2007_market_power}
+revisits the England and Wales market over a longer horizon (1995--2000) using
+a structural model and finds that offer behavior converged toward SFE
+predictions as generators accumulated experience with the market mechanism.
+Together, Wolfram and Sweeting establish that SFE provides empirically useful
+predictions for concentrated electricity spot markets, motivating its
+application here to the forward capacity auction setting.
 
-% Forward contracting reduces market power
-\cite{Wolak2007_quantifying}
-
-% Cournot simulation calibrated to US electricity markets -- methodologically related
-\cite{Bushnell2008_vertical}
-
-% Structural estimation of strategic behavior: E&W SFE test
-\cite{Sweeting2007_market_power}
-
-% Empirical test of SFE predictions: E&W duopoly
-\cite{Wolfram1999_duopoly}
-
-% Market power via SFE index
-% \cite{Salarkheili2012_market_power}
+\citet{Bushnell2008_vertical} extend the simulation approach to multiple US
+electricity markets and introduce vertical integration --- between generation
+and retail supply --- as a structural determinant of effective market
+concentration. Vertically integrated firms sell power to their own retail
+customers at regulated rates, reducing the incentive to withhold generation
+and thereby attenuating spot-market market power. Their cross-market evidence
+establishes that the structural features of seller positions (portfolio
+composition, contracting, vertical ownership) govern markup magnitudes as
+much as the number of firms. \citet{Wolak2007_quantifying} provides
+complementary evidence from the Australian NEM that forward contracts
+directly discipline spot bids, consistent with the Allaz-Vila mechanism
+discussed in Section~\ref{subsec:lit_sfe_theory}. The capacity commitment
+in PJM's BRA creates a form of forward obligation that in principle disciplines
+the subsequent capacity-auction markup --- though our results suggest this
+discipline is incomplete when the committed positions are themselves held by
+the same pivotal suppliers.
 
 % ------------------------------------------------------------------------------
 \subsection{Residual Demand and the Baker--Bresnahan Framework}
 \label{subsec:lit_residual_demand}
 % ------------------------------------------------------------------------------
 
-% Foundational residual demand methodology -- framing the Lerner index
-\cite{Baker1988_residual_demand}
+\citet{Baker1988_residual_demand} develop the foundational econometric
+framework for estimating the residual demand curve facing a single firm. The
+key insight is that a firm's market power is fully characterized by the
+elasticity of the residual demand it faces: the Lerner index equals the
+negative inverse of that elasticity at the equilibrium quantity. Estimating
+the residual demand curve --- total demand minus the supply forthcoming from
+rival firms at each price level --- requires instruments that shift rivals'
+costs without directly affecting the firm's own cost or demand. Baker and
+Bresnahan propose cost shifters for rivals as instruments and apply the
+framework to the US brewing industry.
+
+In the capacity auction context, the residual demand curve facing a strategic
+seller is a shifted version of PJM's VRR schedule: total VRR demand minus the
+aggregate supply of fringe and rival-strategic sellers at each price. The
+critical distinguishing feature of the PJM application is that the residual
+demand schedule is set \textit{administratively} by the regulator and
+published before each auction; sellers observe the VRR parameters directly.
+The Baker-Bresnahan problem of recovering the residual demand from market
+data does not arise here --- the demand curve is known in closed form. This
+observation is what enables the SFE calibration strategy: given the observed
+VRR schedule and the number of strategic sellers identified by the RSI$_3$
+test, the equilibrium supply function and implied Lerner index can be computed
+without instruments or demand estimation.
 
 % ------------------------------------------------------------------------------
 \subsection{Capacity Market Design}
