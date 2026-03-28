@@ -114,7 +114,19 @@ equilibrium_price <- function(sol, vp, K, Q_fringe = 0, c_fringe = 0) {
   Sf       <- function(p) if (p >= c_fringe) Q_fringe else 0
   s_interp <- approxfun(sol$p, sol$s, rule = 2)
 
-  # Excess supply function; root = equilibrium price
+  # For the new VRR design, D(p) has a jump at p_f (from q_b above to q_d below).
+  # Check explicitly whether the market clears at p_f from the sloped side,
+  # i.e., K*s(p_f) + Sf(p_f) ∈ [q_b, q_d].  If so, return p* = p_f exactly.
+  if (vp$design == "new") {
+    supply_at_pf <- K * s_interp(vp$pf) + Sf(vp$pf)
+    if (supply_at_pf >= vp$qb && supply_at_pf <= vp$qd) {
+      return(list(p_star = vp$pf, note = "cleared at floor price"))
+    }
+  }
+
+  # Excess supply using the sloped-segment definition of D(p) above each kink.
+  # The demand discontinuity is only relevant below p_f (new design); uniroot
+  # operates on a range where D(p) is smooth.
   excess <- function(p) K * s_interp(p) + Sf(p) - vrr_demand_scalar(p, vp)
 
   p_lo <- min(sol$p)
@@ -123,7 +135,6 @@ equilibrium_price <- function(sol, vp, K, Q_fringe = 0, c_fringe = 0) {
   e_hi <- excess(p_hi)
 
   if (e_lo * e_hi > 0) {
-    # No sign change: market clears at a boundary
     if (abs(e_hi) <= abs(e_lo)) {
       return(list(p_star = p_hi, note = "cleared at price cap"))
     } else {

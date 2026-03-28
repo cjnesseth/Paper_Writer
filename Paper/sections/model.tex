@@ -275,9 +275,17 @@ elastic demand). The Cournot upper bound on the markup is
 $L^{\text{Cournot}} = 1 / (K \cdot |D'(p^*) \cdot p^* / D(p^*)|)$, the
 standard inverse-elasticity rule evaluated at residual demand.
 
-Equation~\eqref{eq:sfe_ode} is solved numerically using the \texttt{lsoda}
-solver in R's \texttt{deSolve} package \citep{Anderson2008_sfe_asymmetric},
-which handles the mild stiffness introduced by the $1/(p-c)$ term as
-$p \downarrow c$. The piecewise nature of $D'(p)$ is accommodated by
-restarting the integration at each VRR kink point. Full details of the
-numerical implementation are provided in Section~\ref{sec:calibration}.
+Equation~\eqref{eq:sfe_ode} is solved numerically using a fourth-order
+Runge--Kutta (RK4) integrator with fixed step size $h = 0.05$\,\$/MW-day.
+To improve stability we apply the substitution $\tau = \bar{p} - p$, which
+converts the backward initial-value problem into a standard forward IVP
+with $s(0) = \bar{q}$. The piecewise nature of $D'(p)$ is accommodated by
+restarting the integration at each VRR kink point: the integration grid is
+split at $p_b$ (old design) or $p_f$ (new design), so the integrator never
+crosses a discontinuity in $D'(p)$ within a single step. Under the new
+design, $D(p)$ has a jump discontinuity at $p_f$ (from $q_b$ approaching
+from above to $q_d > q_b$ below); equilibrium is resolved by identifying
+$p^*$ as the price at which aggregate supply meets the sloped-segment demand
+from above, which coincides with $p_f$ when $K \cdot s(p_f) + S_f(p_f) =
+q_b$. Full details of the numerical implementation are provided in
+Section~\ref{sec:calibration}.

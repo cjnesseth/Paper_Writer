@@ -82,14 +82,17 @@ vrr_demand_scalar <- function(p, vp) {
 # Scalar only (used inside the ODE).
 # -----------------------------------------------------------------------------
 vrr_deriv_at <- function(p, vp) {
+  # Use strict upper inequalities at each boundary so that evaluation AT a kink
+  # point uses the lower-segment (right-continuous) derivative, matching the
+  # direction of integration (backward from p_bar: p decreases into each segment).
   if (vp$design == "old") {
-    if (p >= vp$pa) return(0)
-    if (p >= vp$pb) return((vp$qb - vp$qa) / (vp$pb - vp$pa))
-    return((vp$qc - vp$qb) / (0 - vp$pb))
+    if (p > vp$pa) return(0)                      # flat cap (above pa)
+    if (p > vp$pb) return((vp$qb - vp$qa) / (vp$pb - vp$pa))  # upper sloped segment
+    return((vp$qc - vp$qb) / (0 - vp$pb))         # lower sloped segment (includes pb)
   } else {
-    if (p >= vp$pa) return(0)
-    if (p >= vp$pf) return((vp$qb - vp$qa) / (vp$pf - vp$pa))
-    return(0)   # flat floor segment
+    if (p > vp$pa) return(0)                      # flat cap (above pa)
+    if (p > vp$pf) return((vp$qb - vp$qa) / (vp$pf - vp$pa))  # sloped segment
+    return(0)                                      # flat floor segment (includes pf)
   }
 }
 
