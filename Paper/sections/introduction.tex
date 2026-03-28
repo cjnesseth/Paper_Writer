@@ -53,9 +53,13 @@ results, and IMM State of the Market cost data.
 
 Four findings emerge. First, the baseline Lerner indices under $K = 3$
 symmetric strategic sellers are 0.54--0.65 across the three benchmark years.
-The 2026/27 equilibrium clears exactly at the VRR price cap (\$329.17/MW-day),
-matching the observed outcome without any calibration to the actual price ---
-a direct validation of the Holmberg boundary condition. Second, concentration
+The 2026/27 equilibrium clears at the VRR price cap (\$329.17/MW-day).
+This is a mechanical consequence of the Holmberg boundary condition: when
+$K = 3$ and the 2026/27 capacity margin is negative ($-0.2\%$), the ODE
+solution is forced to the cap. The result is informative not because the
+model guesses a dollar amount, but because $K \geq 4$ would predict interior
+clearing below the cap --- so the observed at-cap outcome structurally
+identifies $K \leq 3$ as the effective seller count. Second, concentration
 matters sharply: at $K = 4$, Lerner indices fall by 33--45 percentage points
 relative to $K = 3$; at $K = 7$, the equilibrium is nearly competitive.
 The observed 2026/27 at-cap outcome is consistent with $K \leq 3$ and

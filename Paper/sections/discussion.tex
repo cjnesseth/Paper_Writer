@@ -23,10 +23,12 @@ the absence of mitigation.
 Our calibrated SFE framework fills this gap. For all three benchmark years, the
 model predicts Lerner indices of 0.54--0.65 at $K = 3$. Translating to a
 price-cost ratio, this implies equilibrium prices 2.2--2.9 times the
-competitive level. The 2026/27 at-cap result is the most direct evidence: the
-model selects $p^* = \bar{p} = \$329.17$/MW-day without any calibration
-tuning, confirming that the new VRR design with $K = 3$ strategic sellers
-produces full rent extraction up to the Point~(a) cap. The IMM's TPS test
+competitive level. The 2026/27 at-cap result is the most informative for identification: the
+Holmberg boundary condition mechanically selects $p^* = \bar{p}$ when $K = 3$
+and capacity constraints bind, confirming that the 2026/27 market structure
+is consistent with $K = 3$ strategic sellers at the capacity ceiling. As
+discussed in Section~\ref{subsec:res_baseline}, the informativeness is in the
+at-cap versus interior binary, not the dollar amount of the clearing price. The IMM's TPS test
 correctly identifies all three years as requiring mitigation (RSI$_3 < 1$ in
 each case), but the binary outcome understates the severity of the market power
 problem: a Lerner index of 0.60 corresponds to a markup of \$90--\$180/MW-day above
@@ -99,23 +101,28 @@ markup that mitigation must eliminate to restore competitive outcomes.
 % ------------------------------------------------------------------------------
 
 Several modeling choices bound the scope of our conclusions. First, we impose
-symmetric firms: all $K = 3$ strategic sellers are assigned the same cost $c$
-and the same equilibrium supply function. In practice, the three largest PJM
-capacity holders differ in fuel mix, lead times, and portfolio composition.
-Asymmetric-firm SFE models are analytically tractable only in special
-cases \citep{Anderson2008_sfe_asymmetric}, and numerical extension to asymmetric costs would
-require adapting the RK4 solver to a system of $K$ coupled ODEs. We expect
-asymmetry to introduce dispersion around the symmetric Lerner values we report,
-with higher-cost sellers exercising less market power and lower-cost sellers
-exercising more.
+symmetric firms, as discussed and defended in Section~\ref{subsec:model_symmetric}.
+The reported Lerner values should be read as capacity-weighted average markups;
+actual sellers with below-average costs exercise more market power, and those
+with above-average costs exercise less. The asymmetric extension requires
+numerical solution of $K$ coupled ODEs \citep{Anderson2008_sfe_asymmetric},
+which we leave for future work.
 
 Second, our model is static: each auction is solved independently, and there
-is no dynamic entry, exit, or contracting. Long-run SFE models with endogenous
-capacity investment \citep{Joskow2007_capacity} could in principle rationalize the
-at-cap outcome differently --- for example, as the result of a capacity
-withholding equilibrium rather than a supply function equilibrium. We interpret
-our results as characterizing the short-run strategic incentives given the
-observed capacity positions, not as a full model of long-run capacity adequacy.
+is no dynamic entry, exit, or contracting. This limitation is more than
+technical. PJM's 2026/27 price spike coincides with a rapid acceleration in
+data-center load growth across the PJM footprint. If structural demand growth
+was outpacing capacity additions, the high clearing price could partly reflect
+a legitimate dynamic scarcity signal --- the kind of investment incentive
+that capacity markets are explicitly designed to provide --- rather than pure
+rent extraction by strategic sellers. The static SFE model attributes the
+entire gap between $p^*$ and $c$ to markup; it cannot separate the strategic
+component from the scarcity component. Importantly, the model's $K = 3$
+identification does not resolve this ambiguity: the at-cap structural test
+and the RSI$_3$ criterion identify pivotal market power regardless of whether
+the scarcity is demand-driven or supply-driven. Decomposing strategic markups
+from dynamic scarcity rents would require a long-run SFE with endogenous
+investment \citep{Joskow2007_capacity}, which we leave for future work.
 
 Third, we abstract from demand-side uncertainty. The VRR curve is treated as
 deterministic, whereas actual PJM auctions involve uncertainty over reliability

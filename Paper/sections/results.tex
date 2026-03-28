@@ -42,17 +42,21 @@ the implied Lerner index $L = (p^* - c)/p^*$.
   boundary condition is active.
 \end{table}
 
-The 2026/27 result provides the strongest validation of the model: the
-Holmberg boundary condition selects $p^* = \bar{p} = \$329.17$/MW-day, which
-matches the observed clearing price exactly. This is not a calibration fit ---
-the boundary condition is derived from theory (Proposition~\ref{prop:holmberg})
-and imposed without tuning. The fact that the model correctly predicts the
-at-cap outcome confirms that the 2026/27 market structure is consistent with
-$K = 3$ strategic sellers exercising full market power. For $K \geq 4$, the
-model predicts interior clearing below the cap (see
-Section~\ref{subsec:res_concentration}), meaning the at-cap outcome is
-informative: it rules out effective competition among four or more symmetric
-sellers in 2026/27.
+The 2026/27 result is the most informative for identification. The Holmberg
+boundary condition selects $p^* = \bar{p} = \$329.17$/MW-day for $K = 3$.
+It is important to be transparent about what this means: the matching of the
+observed clearing price is a \emph{mechanical} consequence of the boundary
+condition, not an independent forecast. Once $K = 3$ is assumed and the
+2026/27 capacity margin ($-0.2\%$) is tight enough to trigger the
+at-cap regime, the ODE solution is forced to $\bar{p}$ by construction.
+The dollar amount \$329.17 is simply the VRR Point~(a) price read from
+the planning parameters. The substantively informative content is the
+\emph{binary} at-cap versus interior outcome: for $K \geq 4$, the model
+predicts interior clearing strictly below the cap (see
+Section~\ref{subsec:res_concentration}), so the observed at-cap outcome
+is a structural test that identifies $K \leq 3$ as the maximal effective
+seller count in 2026/27. The model does not confirm the price; it confirms
+the structural regime.
 
 For 2023/24, the model predicts $p^* = \$330$ against an observed $p_{\text{actual}} = \$34$.
 The divergence is consistent with effective offer price mitigation. Under PJM's

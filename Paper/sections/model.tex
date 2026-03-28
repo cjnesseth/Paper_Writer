@@ -287,6 +287,25 @@ $L^{\text{Cournot}} = 1 / (K \cdot |D'(p^*) \cdot p^* / D(p^*)|)$, the
 standard inverse-elasticity rule evaluated at market demand (which equals the
 residual demand elasticity in the symmetric case).
 
+\paragraph{The symmetry assumption.}
+In reality, the three largest PJM capacity sellers hold heterogeneous
+portfolios: a mix of baseload nuclear, peaking gas, renewables, and
+demand response with widely differing cost structures and capacity sizes.
+Treating them as symmetric is a deliberate first-order approximation, not
+a statement about the actual market. The justification is tractability: the
+symmetric case reduces the $K$-dimensional system of coupled ODEs in
+equation~\eqref{eq:sfe_foc} to the single scalar ODE~\eqref{eq:sfe_ode},
+making the model calibratable from publicly available aggregate data. This
+is the standard approach in the calibrated SFE literature
+\citep{Green1992_british, Sioshansi2007_sfe_ercot}. The direction of the
+asymmetry bias on the average Lerner index is ambiguous: a lower-cost
+seller exercises more market power than the symmetric benchmark; a
+higher-cost seller exercises less. On average, these effects partially
+offset. We treat the symmetric Lerner as an estimate of the
+capacity-weighted average markup across the strategic sellers, and note
+that the spread around this average is an object of interest for future
+asymmetric extensions.
+
 Equation~\eqref{eq:sfe_ode} is solved numerically using a fourth-order
 Runge--Kutta (RK4) integrator with fixed step size $h = 0.05$\,\$/MW-day.
 To improve stability we apply the substitution $\tau = \bar{p} - p$, which
