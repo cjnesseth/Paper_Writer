@@ -113,8 +113,23 @@ Complete literature §2.3–2.4, add HHI secondary axis to fig02b, run proofread
 
 **Verification:** 3-pass LaTeX clean, 50 pages.
 
+### Session R4 — COMPLETED
+
+**sec6_allocative_cost.tex (~1,200 words):** "The Allocative Cost of Price Controls"
+- §6.1: tab_cap_comparison table — $\bar{p}$, $\bar{p}_S$, $p^*$, Net CONE, floor, binding gap for 2026/27 ($4.17) and 2027/28 ($8.44)
+- §6.2: Entry distortion — cap suppresses Hayek price signal; Anderson2005_sfe_pricecaps on SFE cap effects
+- §6.3: Floor's distinct role — investment adequacy mechanism; $175 < Net CONE at RTO ($212.14) but > Net CONE in SWMAAC ($171.02)
+- §6.4: Glaeser-Luttmer misallocation — price band ($175–$325) is non-competitive in $K=3$ regime
+
+**sec7_leadtime.tex (~900 words):** "Evaluating the Lead-Time Argument"
+- §7.1: Legal theory — investment-adequacy claim, not market conduct
+- §7.2: Lead-time record — 0.8 months (2024/25) vs. 10.2 months (2026/27) vs. 16.8 months (2027/28)
+- §7.3: Five channels — retirement deterrence, mobile resources, contracting, regulatory signaling, forward expectations
+- §7.4: Hayek (1945) + Weitzman (1974) — price suppression destroys information; schedule restoration is the correct remedy
+
+**Verification:** 3-pass LaTeX + BibTeX clean, 59 pages, zero undefined references.
+
 ### Remaining sessions
-- Session R4: New §§7-8 (Allocative Cost, Lead-Time) — sec6_allocative_cost.tex, sec7_leadtime.tex
 - Session R5: New §§9-10 ($21B claim, Policy Alternatives) — sec8_21billion.tex, sec9_policy_alternatives.tex
 - Session R6: Conclusion + abstract rewrite; literature prose
 - Session R7: QA + full compile + quality score ≥ 90
