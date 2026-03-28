@@ -45,35 +45,16 @@ function is PJM's explicit piecewise-linear VRR curve rather than a load-
 duration curve, and our market clears annually in a single forward auction
 rather than half-hourly in a spot pool.
 
-The multiplicity problem endemic to SFE is resolved by
-\citet{Holmberg2008_unique_sfe}, who shows that under conditions natural to
-capacity-constrained electricity markets---symmetric producers, inelastic
-demand, a price cap, and capacity constraints that bind with positive
-probability---the supply function equilibrium is unique. The key insight is
-that when rivals' capacity constraints are simultaneously binding, firm $i$
-faces perfectly inelastic residual demand; the monopoly optimum at that
-moment is to charge exactly the price cap. This ties the boundary condition
-of the ODE: each firm's supply function must equal its full installed
-capacity at the price cap. The arbitrary constant in the ODE solution is
-thereby pinned, selecting a unique trajectory. This result is central to the
-identification strategy of the present paper, since the VRR Point~(a) price
-serves as the price cap and the at-cap clearing outcomes in 2026/27 and
-2027/28 are precisely the event Holmberg requires to be positive probability.
-\citet{Holmberg2009_paybid} extends the uniqueness analysis to pay-as-bid
-auctions, showing that a unique symmetric equilibrium obtains there as well.
-\citet{Vasin2016_sfe_uniform} confirm existence and characterize additional
-properties of symmetric SFE in uniform-price settings with oligopolistic
-supply.
-
-The effect of forward commitments on equilibrium supply functions is
-examined by \citet{Allaz1993_forward}, who show in a Cournot setting that
-forward markets reduce equilibrium markups through a Stackelberg-style
-commitment effect. \citet{Anderson2005_sfe_pricecaps} extend the SFE framework to settings
-with both forward contracts and price caps, establishing existence conditions
-for equilibria under these combined constraints. Capacity commitments
-in the BRA are formally analogous to forward sales, so the static SFE applied
-to the auction game incorporates these disciplining effects into the
-equilibrium concept.
+A practical equilibrium selection criterion follows from
+\citet{Holmberg2008_unique_sfe}, who shows that in capacity-constrained
+electricity markets with stochastic demand the supply function equilibrium
+is unique: when rivals' capacity constraints simultaneously bind, each seller
+faces perfectly inelastic residual demand and optimally charges the price cap,
+tying the boundary condition of the ODE and selecting a unique trajectory.
+This paper uses this boundary condition as an equilibrium selection device
+in the deterministic BRA: each seller's supply function is required to equal
+full capacity at the VRR Point~(a) cap, with the at-cap clearing outcomes in
+2026/27 and 2027/28 confirming the condition is active in practice.
 
 Numerically, the symmetric SFE reduces to a single ODE integrable backward
 from the capacity boundary. For the asymmetric extension,
@@ -126,18 +107,13 @@ a tension at the heart of capacity markets: the sloped administrative demand
 curve that dampens boom-bust price cycles is precisely the curve whose shape
 governs the rent-extraction opportunities available to a strategic seller.
 
-The market power dimension of capacity auctions is examined in detail by
-\citet{Bowring2013_pjm}, who provides an overview of PJM's RPM with attention
-to the role of the Independent Market Monitor in detecting and mitigating
-anticompetitive behavior. Bowring documents the application of the TPS test
-and ACR mitigation across delivery years and LDAs, and notes that market
-power concerns are particularly acute in constrained LDAs where import
-capacity is limited. \citet{Vossler2009_price_caps} use laboratory experiments
-to study behavioral responses to soft price caps in uniform-price auction
-environments and find that caps do bind strategically---sellers' offers cluster
-near the cap, consistent with a focal equilibrium at the ceiling. Taken
-together, this literature motivates a structural approach to measuring the
-strategic markup that the binary TPS test can only detect but not quantify.
+\citet{Bowring2013_pjm} provides an overview of PJM's RPM with attention
+to the Independent Market Monitor's application of the TPS test and ACR
+mitigation across delivery years and LDAs, noting that price concerns are
+most acute in constrained LDAs where import capacity is limited. Taken
+together, this literature identifies the VRR slope and the uniform-price
+format as the key design features governing price outcomes under concentrated
+supply---the context in which the Shapiro settlement intervenes.
 
 % ------------------------------------------------------------------------------
 \subsection{Price Controls in Oligopolistic Markets}
