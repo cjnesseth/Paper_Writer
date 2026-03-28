@@ -201,10 +201,12 @@ functioning forward market. Second, the compressed lead times for 2022/23
 through 2024/25 may have contributed to the sharp price increase observed in
 2025/26: if new entrants were unable to respond to scarcity signals in time
 for those delivery years, the accumulated capacity shortfall would manifest
-as high prices in subsequent auctions. Our SFE simulation takes the VRR
-curve and capacity endowments as given and does not model the investment
-response to price signals, but this context is important when interpreting
-the 2024/25 and 2025/26 results.
+as high prices in subsequent auctions. Our SFE simulation takes the VRR curve and capacity endowments as given
+and does not model the investment response to price signals, but this
+context is important when interpreting the 2024/25 and 2025/26 results.
+The relationship between lead-time irregularity and the price-signaling
+function of capacity auctions is examined in detail in
+Section~\ref{sec:leadtime}.
 
 % ------------------------------------------------------------------------------
 \subsection{Market Power Mitigation: The Three Pivotal Supplier Test}
@@ -298,3 +300,83 @@ in Section~\ref{sec:model} provides a structural model that generates
 continuous, quantitative price-cost margin estimates and can explain this
 price variation through changes in the VRR curve parameters and the market
 structure documented here.
+
+% ------------------------------------------------------------------------------
+\subsection{The Shapiro Settlement: A Modified Demand Curve for 2026/27--2027/28}
+\label{subsec:inst_shapiro}
+% ------------------------------------------------------------------------------
+
+The high BRA clearing prices of 2025/26 and the anticipation of similarly
+elevated prices in subsequent auctions triggered a political intervention
+that directly modified the demand curve for two delivery years. On December
+30, 2024, the Office of Governor Josh Shapiro filed a complaint against
+PJM's tariff with the Federal Energy Regulatory Commission under Section
+206 of the Federal Power Act. The complaint's legal theory was that the
+VRR Point~(a) price cap was set too high given lower expectations for
+new entry in the near term \citep{PJM2025_settlement_slides}. Because
+compressed auction lead times (Section~\ref{subsec:inst_leadtime}) limited
+the ability of new generation to respond to high prices within upcoming
+delivery periods, the complaint argued that high prices would not produce
+efficient entry and instead represented an unjust and unreasonable rate.
+The proposed remedy was to lower the cap to $1.5 \times \text{Net CONE}$
+and remove reliance on Gross CONE in the Point~(a) calculation.
+
+Following confidential settlement discussions, PJM and the Governor's
+office announced an agreement in principle on January 28, 2025
+\citep{Shapiro2025_press_release}. The settlement was presented to the
+PJM Markets and Operations Committee on February 7, 2025, and PJM
+indicated a target filing date of February 14, 2025, with the 2026/27
+BRA scheduled for July 2025 and the 2027/28 BRA for December 2025
+\citep{PJM2025_settlement_slides}.
+
+\paragraph{Settlement terms.}
+The agreement imposes a price band on the demand curves for both delivery
+years:
+
+\begin{itemize}
+  \item \textbf{Price cap}: approximately \$325/MW-day UCAP (Unforced
+    Capacity), equivalent to \$256.75/MW-day in ICAP terms at the assumed
+    79\% accreditation of the dual-fuel combustion turbine reference unit.
+  \item \textbf{Price floor}: approximately \$175/MW-day UCAP (\$138.25/MW-day
+    ICAP), below which all available capacity clears regardless of the
+    VRR slope.
+\end{itemize}
+
+We denote the settlement cap as $\bar{p}_S \approx \$325$/MW-day (UCAP) and
+the floor as $\bar{p}_f \approx \$175$/MW-day (UCAP) to distinguish them
+from the existing VRR Point~(a) cap $\bar{p}$. Both values are indexed to
+the accreditation of the reference unit and may differ slightly from these
+round numbers when final ELCC values are determined.
+
+\paragraph{VRR curve mechanism.}
+The settlement does not impose an external price constraint on an otherwise
+unchanged auction. Instead, it modifies the shape of the VRR demand curve
+itself \citep{PJM2025_settlement_slides}:
+
+\begin{enumerate}
+  \item At prices above $\bar{p}_S$, the demand curve is flat (no capacity
+    with offers above the cap can clear);
+  \item Between $\bar{p}_S$ and $\bar{p}_f$, the existing VRR sloped segment
+    applies;
+  \item At prices at or below $\bar{p}_f$, the demand curve extends
+    horizontally to clear all available capacity at the floor price.
+\end{enumerate}
+
+This mechanism applies identically to the RTO demand curve and to every
+LDA demand curve. Clearing results continue to respect CETL transmission
+limitations \citep{PJM2025_settlement_slides}.
+
+\paragraph{The two-cap distinction.}
+The settlement introduces a second layer of price constraint on top of the
+VRR design already in place. The pre-existing Point~(a) cap $\bar{p}$ is
+calibrated to investment incentives (approximately $1.5 \times \text{Net
+CONE}$) and has been part of PJM's market design since 2007. The settlement
+cap $\bar{p}_S$ is lower and is motivated by near-term consumer cost
+concerns rather than investment-adequacy principles. Table~\ref{tab:bra_timeline}
+shows that $\bar{p} = \$329.17$/MW-day in 2026/27 --- only \$4.17 above
+$\bar{p}_S = \$325$/MW-day. At the RTO level, the settlement is barely
+binding; the effect is largest in constrained LDAs where local Point~(a)
+caps substantially exceeded \$325 in prior years. The analysis in
+Sections~\ref{sec:results}--\ref{sec:policy_alternatives} compares the SFE
+equilibrium price $p^*$ (computed against the unmodified VRR curve) to
+both caps, establishing where the settlement is and is not binding.

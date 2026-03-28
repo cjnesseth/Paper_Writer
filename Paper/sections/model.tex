@@ -214,14 +214,14 @@ arbitrary constant in the ODE and selecting a unique trajectory.
 
 In the PJM BRA, the price cap $\bar{p}$ equals the VRR Point~(a) price, and
 Assumption~\ref{assm:demand} ensures $D'(\bar{p}) = 0$ (the VRR is flat at
-the cap). The Holmberg conditions are met: PJM's reliability target requires
-essentially all installed capacity, so there is positive probability that
-aggregate supply reaches the ceiling at $\bar{p}$. The at-cap clearing
-outcomes in 2026/27 and 2027/28 (Table~\ref{tab:bra_timeline}) confirm that
-the boundary condition is active in those years. We therefore integrate the
-ODE~\eqref{eq:sfe_foc} \emph{backward} from the boundary condition
-$S_i(\bar{p}) = \bar{q}_i$, following the solution method of
-\citet{Green1992_british}.
+the cap). The at-cap clearing outcomes in 2026/27 and 2027/28
+(Table~\ref{tab:bra_timeline}) confirm that the boundary condition is active
+in those years, consistent with Holmberg's (\citeyear{Holmberg2008_unique_sfe})
+selection criterion: PJM's reliability target requires procuring essentially
+all installed capacity, making binding-capacity outcomes the empirically
+relevant case. We therefore integrate the ODE~\eqref{eq:sfe_foc} \emph{backward}
+from the boundary condition $S_i(\bar{p}) = \bar{q}_i$, following the solution
+method of \citet{Green1992_british}.
 
 % ------------------------------------------------------------------------------
 \subsection{The Symmetric Special Case}
