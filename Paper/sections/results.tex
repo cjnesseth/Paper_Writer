@@ -3,7 +3,7 @@
 % Status: COMPLETE (2026-03-28)
 % ==============================================================================
 
-\section{Results}
+\section{Results: Equilibrium Prices vs.\ the Shapiro Settlement}
 \label{sec:results}
 
 % ------------------------------------------------------------------------------
@@ -22,25 +22,43 @@ the implied price-cost margin (Lerner index) $L = (p^* - c)/p^*$.
   \centering
   \caption{Baseline SFE Equilibrium: $K = 3$, $c = \$150$/MW-day}
   \label{tab:baseline}
-  \begin{tabular}{lcccccc}
+  \begin{tabular}{lccccccc}
     \hline\hline
-    Year & Design & $\bar{p}$ & $p^*$ & $p_{\text{actual}}$ & $L$ & Outcome \\
+    Year & Design & $\bar{p}$ & $\bar{p}_S$ & $p^*$ & $p_{\text{actual}}$ & $L$ & Outcome \\
     \hline
-    2023/24 & Old & \$412 & \$330 & \$34  & 0.55 & Interior \\
-    2025/26 & Old & \$452 & \$426 & \$270 & 0.65 & Interior \\
-    2026/27 & New & \$329 & \$329 & \$329 & 0.54 & At cap \\
+    2023/24 & Old & \$412 & ---        & \$330 & \$34  & 0.55 & Interior \\
+    2025/26 & Old & \$452 & ---        & \$426 & \$270 & 0.65 & Interior \\
+    2026/27 & New & \$329 & \$325      & \$329 & \$329 & 0.54 & At cap \\
     \hline\hline
   \end{tabular}
   \smallskip
 
   \noindent\footnotesize
-  \textit{Notes:} $\bar{p}$ is the VRR Point~(a) price cap. $p^*$ is the
-  model-predicted SFE clearing price. $p_{\text{actual}}$ is the observed BRA
-  clearing price. $L$ is the price-cost margin (Lerner index) $(p^* - c)/p^*$. Prices in
-  \$/MW-day. ``Interior'' means equilibrium falls strictly inside $(c,\bar{p})$;
-  ``At cap'' means $S_i(\bar{p}) = \bar{q}_i$ for all $i$ and the Holmberg
-  boundary condition is active.
+  \textit{Notes:} $\bar{p}$ is the VRR Point~(a) price cap. $\bar{p}_S$ is the
+  Shapiro settlement cap (\$325/MW-day UCAP), applicable to the 2026/27 and
+  2027/28 delivery years; ``---'' indicates the settlement does not apply.
+  $p^*$ is the model-predicted SFE clearing price. $p_{\text{actual}}$ is the
+  observed BRA clearing price. $L$ is the price-cost margin (Lerner index)
+  $(p^* - c)/p^*$. Prices in \$/MW-day. ``Interior'' means equilibrium falls
+  strictly inside $(c,\bar{p})$; ``At cap'' means $S_i(\bar{p}) = \bar{q}_i$
+  for all $i$ and the Holmberg boundary condition is active.
 \end{table}
+
+The central finding of Table~\ref{tab:baseline} for the settlement evaluation
+is that the Shapiro cap is \emph{binding}: the SFE equilibrium price for
+2026/27, $p^* = \$329$/MW-day, exceeds the settlement cap $\bar{p}_S =
+\$325$/MW-day. The gap is small at the RTO level (\$4/MW-day, roughly 1\%),
+but it is structurally significant: it means that under the unmodified VRR
+curve and $K = 3$ strategic sellers, equilibrium prices would settle at the
+Point~(a) cap rather than the lower settlement cap. The settlement displaces
+$\$4$/MW-day at the RTO level, but it does so by preventing the
+capacity-constrained boundary from operating, eliminating the price signal
+that would otherwise inform entry decisions. For constrained LDAs, the
+binding gap is larger: 2025/26 LDA prices reached \$444--\$466/MW-day,
+and the 2026/27 LDA equilibria likewise clear at or near $\bar{p}$ (see
+Section~\ref{subsec:res_lda}), implying settlement displacement of
+\$115--\$141/MW-day. These binding gaps are evaluated further in
+Section~\ref{sec:21billion} against the \$21~billion savings claim.
 
 The 2026/27 result is the most informative for identification. The Holmberg
 boundary condition selects $p^* = \bar{p} = \$329.17$/MW-day for $K = 3$.

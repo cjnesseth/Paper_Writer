@@ -58,3 +58,67 @@ Complete literature §2.3–2.4, add HHI secondary axis to fig02b, run proofread
 - Address minor domain review items: m3 (2023/24 "no strategic withholding" wording),
   m4 (fringe cost footnote), m5 (table decimal precision)
 - PR to main
+
+---
+
+## Major Redirection: Shapiro Reframe (Sessions 1-2 of new revision arc)
+
+**Date:** 2026-03-28 (same day, new work)
+**New direction:** Revise paper around Shapiro FERC settlement as policy motivation.
+
+### Session R1 (scaffold)
+- New title: "Capping the Capacity Market: A Supply Function Equilibrium Analysis of Price Controls in PJM"
+- Added 5 bib entries: Shapiro2025_press_release, PJM2025_settlement_slides, Hayek1945_knowledge, Weitzman1974_prices, GlaeserLuttmer2003_rent
+- Scaffolded 4 new section stubs: sec6_allocative_cost, sec7_leadtime, sec8_21billion, sec9_policy_alternatives
+- Deleted discussion.tex (content to be disaggregated into new §§7-10)
+- Updated main.tex \input sequence; abstract placeholder inserted
+- Revision plan saved: quality_reports/plans/2026-03-28_revision_shapiro_reframe.md
+- Supporting sources added: Shapiro_Rationale.pdf, PJM settlement slides PDF
+
+### Session R2 (language substitution + calibration)
+- Systematic language pass across all existing sections:
+  - "market power" → "strategic pricing/markup" (preserved PJM institutional uses)
+  - "Lerner index" → "price-cost margin (Lerner index)" at first use; symbol L retained
+  - "structurally identifies" → "is consistent with"
+  - "identifying criterion" (calibration) → "calibration criterion"
+  - "cost of mitigation inaction" → "baseline interior equilibrium"
+  - Figure/table captions updated: "Lerner Index" → "Price-Cost Margin" throughout
+- Calibration status updated: all §§4.3-4.5 confirmed complete from prior sessions
+- Added Shapiro settlement robustness note to §4.5 linking benchmark years to binding/non-binding regimes
+- Commit b53697b pushed to PJM-Paper
+
+### Key design decisions recorded in plan
+- Complaint legal theory: "VRR cap too high given lower expectation for new entry" (not market power)
+- Shapiro's $500 counterfactual = unconstrained VRR Point(a) price, not strategic equilibrium
+- Settlement reshapes entire VRR curve (flat top $325, existing slope, flat bottom $175)
+- $175 floor is investment-adequacy mechanism; PJM itself calls it "supporting near-term investment"
+- Statistical tests (RSI, TPS) unchanged substantively — framing only
+
+### Remaining sessions
+- Session R3: Introduction rewrite, institutional §3.6 Shapiro subsection, results restructure
+- Session R4: New §§7-8 (Allocative Cost, Lead-Time)
+- Session R5: New §§9-10 ($21B claim, Policy Alternatives)
+- Session R6: Conclusion + abstract rewrite; literature prose
+- Session R7: QA + compile + quality score ≥ 90
+
+---
+
+### Session R3 — COMPLETED
+
+**3A (introduction.tex):** Full 5-paragraph rewrite — hook (complaint/settlement), two-cap distinction ($\bar{p}$ vs $\bar{p}_S$), SFE-as-counterfactual framing, 4 findings, 11-section road map.
+
+**3B (institutional.tex):** Added §3.4 forward ref to sec:leadtime; added §3.6 "The Shapiro Settlement" (~500 words) covering complaint legal theory, settlement terms ($325/$175 UCAP), VRR curve mechanism, two-cap notation.
+
+**3E (results.tex):** Section renamed to "Results: Equilibrium Prices vs.\ the Shapiro Settlement"; added $\bar{p}_S$ column to tab_baseline (N/A for 2023/24 and 2025/26, \$325 for 2026/27); added settlement-binding paragraph after table noting $p^* = \$329 > \$325$ at RTO level, larger gaps in LDAs, forward refs to §§5.5 and 8.
+
+**Verification:** 3-pass LaTeX clean, 50 pages.
+
+### Remaining sessions
+- Session R4: New §§7-8 (Allocative Cost, Lead-Time) — sec6_allocative_cost.tex, sec7_leadtime.tex
+- Session R5: New §§9-10 ($21B claim, Policy Alternatives) — sec8_21billion.tex, sec9_policy_alternatives.tex
+- Session R6: Conclusion + abstract rewrite; literature prose
+- Session R7: QA + full compile + quality score ≥ 90
+
+---
+**Context compaction (auto) at 16:35**
+Check git log and quality_reports/plans/ for current state.
