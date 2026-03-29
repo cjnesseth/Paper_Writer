@@ -1,0 +1,13 @@
+variable,value
+npv_tax_benefit_per_hh_2012_2025,10634
+npv_tax_benefit_per_hh_15yr,27174
+annual_tax_savings_2025,2210
+jlarc_elec_cost_low_annual,168
+jlarc_elec_cost_high_annual,444
+npv_elec_cost_low_15yr,2066
+npv_elec_cost_high_15yr,5459
+net_benefit_low_annual,2042
+net_benefit_high_annual,1766
+median_home_value,650000
+counterfactual_re_rate,1.145
+discount_rate,0.03

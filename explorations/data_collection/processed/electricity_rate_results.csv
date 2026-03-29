@@ -1,0 +1,10 @@
+variable,value,unit
+dc_load_mw,4140,MW
+total_dc_td_capex_B,22.0,USD_billion
+crf,0.0794,
+annual_rev_req_M,1747,USD_million
+residential_load_share,0.294,fraction
+annual_per_customer,218,USD
+monthly_per_customer,18,USD
+rate_impact_cents_kwh,1.89,cents
+npv_15yr_per_hh,2676,USD
