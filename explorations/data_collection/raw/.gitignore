@@ -5,3 +5,7 @@
 eia861_*/
 f8612*/
 census_tracts_va/
+loudoun_parcels_shp/
+loudoun_parcels.geojson
+loudoun_parcels_official.*
+loudoun_zoning.geojson
