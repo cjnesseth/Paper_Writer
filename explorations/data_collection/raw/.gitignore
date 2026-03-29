@@ -1,0 +1,7 @@
+# Raw downloaded data — too large for git
+# Re-download using scripts or checklist
+*.zip
+*.pdf
+eia861_*/
+f8612*/
+census_tracts_va/

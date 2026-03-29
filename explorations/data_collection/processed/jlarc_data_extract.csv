@@ -1,0 +1,66 @@
+variable,value,unit,source_page,notes
+# Virginia Data Center Industry Overview (JLARC 2024)
+va_dc_sites,150,count,5,approximate; ~340 buildings
+va_dc_buildings,340,count,5,across 150 sites
+va_dc_sqft_total,63000000,sqft,5,total across Virginia
+va_dc_acres,7200,acres,5,total land area
+va_dc_capacity_mw,5050,MW,5,based on 2024 peak load forecast; equiv to 2M households
+nova_dc_capacity_mw,4140,MW,7,Cushman & Wakefield 2024; 13% global capacity
+nova_global_share,0.13,fraction,7,of all reported global operational capacity
+nova_americas_share,0.25,fraction,7,of capacity in Americas region
+loudoun_share_va,0.50,fraction,5,approx half of VA DC industry (sites + sqft + energy)
+# Economic Impact (Table 2-1; annual average FY21-FY23)
+va_dc_jobs_total,74000,jobs,14,construction + operations + indirect/induced
+va_dc_jobs_construction,59000,jobs,15,80% of total
+va_dc_jobs_operations,15000,jobs,14,including 4400 direct
+va_dc_jobs_direct,39400,jobs,14,construction direct + operations direct
+va_dc_labor_income,5500000000,USD,14,annual
+va_dc_gdp,9100000000,USD,14,annual contribution to Virginia GDP
+nova_dc_jobs,50700,jobs,15,Northern Virginia region
+nova_dc_income,4300000000,USD,15,Northern Virginia region
+nova_dc_gdp,7200000000,USD,15,Northern Virginia region
+# Capital Investment
+va_dc_capex_annual,19500000000,USD,12,annual average FY21-FY23
+va_dc_capex_construction_share,0.20,fraction,12,construction = $3.8B
+va_dc_capex_equipment_share,0.68,fraction,12,IT/mechanical equipment = $13.3B
+va_dc_capex_land_share,0.06,fraction,12,land acquisition = $1.2B
+# Tax Revenue (FY23)
+loudoun_dc_revenue,733000000,USD,17,data center tax revenue
+loudoun_total_revenue,2392000000,USD,17,total local revenue
+loudoun_dc_revenue_share,0.31,fraction,17,31% of total local revenue
+prince_william_dc_revenue,110000000,USD,17,data center tax revenue
+prince_william_total_revenue,1522000000,USD,17,total local revenue
+prince_william_dc_revenue_share,0.07,fraction,17,7% of total
+# Tax Rates (per $100 assessed; JLARC Fig 2-5; confirmed VA Tax TY2024)
+loudoun_bpp_rate,4.15,per_100,18,business personal property rate
+loudoun_re_rate,0.865,per_100,VA_Tax,real estate tax rate TY2024
+fairfax_bpp_rate,4.57,per_100,18,
+prince_william_bpp_rate,3.70,per_100,VA_Tax,
+mecklenburg_bpp_rate,3.36,per_100,VA_Tax,
+henrico_bpp_rate,3.50,per_100,VA_Tax,
+# Sales Tax Exemption
+va_dc_exemption_savings,928600000,USD,20,total industry savings FY23
+va_dc_exemption_state_portion,683000000,USD,20,state portion of exempted amount
+va_dc_exemption_top5_share,0.82,fraction,20,top 5 companies got $759.3M
+va_dc_exemption_median_savings,5400000,USD,20,median per company
+va_dc_exemption_users_pct,0.90,fraction,8,~90% of industry by MW uses exemption
+va_dc_exemption_expires,2035,year,87,scheduled expiration
+# Operations
+dc_typical_sqft,250000,sqft,13,typical 250K sqft facility
+dc_typical_employees,50,FTE,13,per 250K sqft; half contract
+dc_construction_duration_months,15,months,14,12-18 months per building
+dc_construction_peak_workers,1500,workers,14,at height of construction
+dc_equipment_refresh_years,5,years,16,computer equipment replaced every 5 years
+dc_cost_low,250000000,USD,21,typical 250K sqft build cost
+dc_cost_high,325000000,USD,21,typical 250K sqft build cost
+# Residential Impacts (Ch 6)
+dc_near_residential_pct,0.29,fraction,77,within 200 ft of residential zoning
+dc_far_from_residential_pct,0.60,fraction,77,>500 ft from residential
+dc_noise_complaints_pct,0.10,fraction,77,10% generated noise complaints (15+ sites)
+dc_noise_range_low_db,40,dBA,75,measured at complaint locations
+dc_noise_range_high_db,59,dBA,75,measured at complaint locations
+# Energy (Summary)
+va_energy_demand_current_gwh,10000,GWh_monthly,iii,approximate baseline 2023
+va_energy_demand_unconstrained_2040_gwh,30000,GWh_monthly,iii,unconstrained scenario
+residential_cost_increase_low,14,USD_monthly,v,by 2040 real dollars
+residential_cost_increase_high,37,USD_monthly,v,by 2040 real dollars
