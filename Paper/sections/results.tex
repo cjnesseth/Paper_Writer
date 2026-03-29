@@ -73,7 +73,7 @@ the planning parameters. The substantively informative content is the
 predicts interior clearing strictly below the cap (see
 Section~\ref{subsec:res_concentration}), so the observed at-cap outcome
 is consistent with $K \leq 3$ as the maximal effective seller count
-in 2026/27. The model does not confirm the price; it confirms
+in 2026/27. The model does not confirm the price. It confirms
 the structural regime.
 
 For 2023/24, the model predicts $p^* = \$330$ against an observed $p_{\text{actual}} = \$34$.
@@ -81,7 +81,7 @@ The divergence is consistent with effective offer price mitigation. Under PJM's
 TPS rules, the three pivotal suppliers (RSI$_3 = 0.68$) had their offers capped
 at approximately the ACR level, and with an over-supplied market (capacity
 margin 9.9\%), the clearing price fell to \$34. The SFE $p^* = \$330$
-represents the \emph{unmitigated} equilibrium --- the price that would prevail
+represents the \emph{unmitigated} equilibrium, the price that would prevail
 if strategic sellers could bid without constraint. The 2025/26 gap ($p^* = \$426$
 vs.\ $p_{\text{actual}} = \$270$) is smaller, reflecting the tighter market
 conditions (capacity margin 1.6\%) and the price spike that occurred even under
@@ -152,6 +152,50 @@ zones.
   \checkmark\ indicates the market clears at the VRR price cap $\bar{p}$.
 \end{table}
 
+\begin{table}[ht]
+  \centering
+  \caption{Equilibrium Price and Price-Cost Margin by Cost Assumption ($K = 3$)}
+  \label{tab:cost_sensitivity}
+  \begin{tabular}{l cc cc cc}
+    \hline\hline
+    & \multicolumn{2}{c}{2023/24 (Old VRR)}
+    & \multicolumn{2}{c}{2025/26 (Old VRR)}
+    & \multicolumn{2}{c}{2026/27 (New VRR)} \\
+    \cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+    $c$ (\$/MW-day) & $p^*$ & $L$ & $p^*$ & $L$ & $p^*$ & $L$ \\
+    \hline
+    \$100 & \$314 & 0.68 & \$422 & 0.76 & \$329 & 0.70 \\
+    \$125 & \$322 & 0.61 & \$424 & 0.71 & \$329 & 0.62 \\
+    \$150 & \$330 & 0.55 & \$426 & 0.65 & \$329 & 0.54 \\
+    \$175 & \$338 & 0.48 & \$428 & 0.59 & \$329 & 0.47 \\
+    \$200 & \$346 & 0.42 & \$431 & 0.54 & \$329 & 0.39 \\
+    \hline\hline
+  \end{tabular}
+  \smallskip
+
+  \noindent\footnotesize
+  \textit{Notes:} $p^*$ is the SFE equilibrium price (\$/MW-day); $L = (p^* - c)/p^*$.
+  $K = 3$ throughout. Baseline calibration uses $c = \$150$/MW-day
+  (Table~\ref{tab:baseline}). For 2026/27, the Holmberg boundary condition
+  is active for all $c$ values shown, so $p^*$ equals the VRR Point~(a)
+  cap (\$329/MW-day) in all rows; only the Lerner index varies.
+\end{table}
+
+Table~\ref{tab:cost_sensitivity} examines sensitivity of the equilibrium
+price and price-cost margin to the assumed marginal cost $c$, ranging from
+\$100 to \$200 per MW-day around the baseline \$150 value. Two conclusions
+stand out. First, the qualitative finding that the settlement cap is binding
+in 2026/27 is fully robust: because the Holmberg boundary condition forces
+$p^* = \bar{p} = \$329$/MW-day whenever $K \leq 3$ and the capacity margin
+is tight, $p^*$ exceeds the settlement cap $\bar{p}_S = \$325$/MW-day
+for all cost assumptions shown. Second, the Lerner indices are moderately
+sensitive to $c$: in 2026/27 the margin ranges from $L = 0.39$ (at
+$c = \$200$) to $L = 0.70$ (at $c = \$100$), a range of 31 percentage
+points. The interior equilibria in 2023/24 and 2025/26 show limited
+price sensitivity to $c$ ($p^*$ varies by \$32 in 2023/24 and \$9 in
+2025/26 across the full cost range), reflecting the ODE's dampening of
+cost changes when the supply-side is not at the boundary.
+
 \noindent\textbf{Zone 1 ($K \leq 3$): High strategic markup, price cap binding.}
 For $K = 2$, the market clears at $\bar{p}$ in all three benchmark years,
 yielding Lerner indices of 0.64--0.67. The at-cap outcome is also produced by
@@ -189,8 +233,8 @@ sellers.
 
 Figure~\ref{fig:vrr_slope} shows the price-cost margin $L$ as a function of the VRR
 slope scaling factor. A factor of $f = 1$ corresponds to the baseline slope
-for each year; $f < 1$ means a flatter VRR (less elastic demand) and $f > 1$
-a steeper VRR (more elastic demand on the sloped segment).
+for each year, $f < 1$ means a flatter VRR (less elastic demand), and $f > 1$
+means a steeper VRR (more elastic demand on the sloped segment).
 
 \begin{figure}[ht]
   \centering
@@ -257,8 +301,8 @@ price reduction from the cap (\$329) to approximately \$215/MW-day. This
 suggests that expanding import capacity to the RTO would have a substantial
 effect on equilibrium pricing even without structural remedies to seller
 concentration. The implied cost-effectiveness of transmission investment versus
-divestiture depends on the marginal cost per MW of CETL capacity --- a
-comparison we leave for future work.
+divestiture depends on the marginal cost per MW of CETL capacity, a
+comparison I leave for future work.
 
 % ------------------------------------------------------------------------------
 \subsection{LDA-Level Exposure to the Settlement Cap}
@@ -284,7 +328,7 @@ LDAs above 0.60 in every year. The elevated price-cost margins are
 consistent with low import penetration ratios: across the sample,
 $\text{CETL}/\text{rel.~req.}$ averages 0.40, meaning strategic sellers
 must cover 60\% of the reliability requirement on average. In 2026/27,
-every LDA clears at or within \$0.50 of the \$329.17 price cap ---
+every LDA clears at or within \$0.50 of the \$329.17 price cap,
 perfectly consistent with the RTO result and confirming that the at-cap
 outcome is not an artifact of RTO aggregation.
 
@@ -329,7 +373,7 @@ structural divestiture. The cross-LDA variation confirms the comparative
 static from Section~\ref{subsec:res_transmission}: expanding the CETL is
 quantitatively as important as reducing strategic concentration for LDAs
 in the middle of the import-penetration distribution. For LDAs at the left
-tail --- PS, PS NORTH, COMED, and EMAAC --- even large CETL expansions
+tail (PS, PS NORTH, COMED, and EMAAC), even large CETL expansions
 would leave price-cost margins above 0.50 given the current number of
 strategic sellers, indicating that structural remedies are necessary to
 achieve competitive outcomes.

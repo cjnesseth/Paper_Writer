@@ -1,6 +1,7 @@
 % ==============================================================================
 % Section: Introduction
-% Status: COMPLETE (2026-03-28 Session 3 rewrite)
+% Status: COMPLETE (2026-03-29 -- findings and methodological note removed;
+%         colons/em-dashes replaced; prose tightened)
 % ==============================================================================
 
 \section{Introduction}
@@ -8,83 +9,55 @@
 
 On December 30, 2024, the Commonwealth of Pennsylvania filed a complaint
 with the Federal Energy Regulatory Commission alleging that PJM's capacity
-auction demand curve was miscalibrated: its price cap was set too high given
+auction demand curve was miscalibrated, with its price cap set too high given
 near-term expectations for new entry. The complaint cited PJM's July 2024
 Base Residual Auction for the 2025/26 delivery year, which cleared at
-\$269.92/MW-day --- an increase of more than 800 percent from the prior year
---- as evidence that the existing market design imposed unnecessary costs on
+\$269.92/MW-day, an increase of more than 800 percent from the prior year,
+as evidence that the existing market design imposed unnecessary costs on
 65 million consumers across 13 states \citep{Shapiro2025_press_release}.
 Six weeks later, on January 28, 2025, Governor Josh Shapiro announced an
-agreement with PJM: the demand curves for the 2026/27 and 2027/28 auctions
-would be modified to impose a price cap of approximately \$325/MW-day
-(unforced capacity, UCAP) and a price floor of approximately \$175/MW-day
-UCAP, applied to both the RTO and all constrained Locational Deliverability
-Areas \citep{PJM2025_settlement_slides}. The agreement was projected to save
-consumers over \$21 billion over the two delivery years.
+agreement with PJM in which the demand curves for the 2026/27 and 2027/28
+auctions would be modified to impose a price cap of approximately
+\$325/MW-day (unforced capacity, UCAP) and a price floor of approximately
+\$175/MW-day UCAP, applied to both the RTO and all constrained Locational
+Deliverability Areas \citep{PJM2025_settlement_slides}. The agreement was
+projected to save consumers over \$21 billion over the two delivery years.
 
 The settlement creates a two-tier price ceiling in PJM's capacity market.
 PJM's existing Variable Resource Requirement (VRR) curve already contains a
 design-level cap at Point~(a), set at approximately 1.5 times the Net Cost
-of New Entry --- an investment-adequacy ceiling calibrated to the annualized
-cost of a reference generating unit and intended to prevent prices from
-permanently exceeding the entry threshold. The settlement imposes a second,
-lower cap at $\bar{p}_S \approx \$325$/MW-day, below the Point~(a) level,
-while simultaneously adding a floor at $\bar{p}_f \approx \$175$/MW-day
+of New Entry (CONE), serving as an investment-adequacy ceiling calibrated to
+the annualized cost of a reference generating unit and intended to prevent
+prices from permanently exceeding the entry threshold. The settlement imposes
+a second, lower cap at $\bar{p}_S \approx \$325$/MW-day, below the Point~(a)
+level, while simultaneously adding a floor at $\bar{p}_f \approx \$175$/MW-day
 that clears all capacity offered at or below that level. The mechanism is
-implemented by reshaping the demand curve itself: a flat top at
+implemented by reshaping the demand curve itself, giving it a flat top at
 $\bar{p}_S$, the existing sloped segment between $\bar{p}_S$ and
 $\bar{p}_f$, and a flat bottom at $\bar{p}_f$ \citep{PJM2025_settlement_slides}.
-This paper asks: what price would PJM's 2026/27 and 2027/28 auctions have
-cleared at absent the settlement modification, and what are the consequences
-of suppressing prices to $\bar{p}_S$?
+This paper asks what price PJM's 2026/27 and 2027/28 auctions would have
+cleared at absent the settlement modification, and what the consequences of
+suppressing prices to $\bar{p}_S$ are.
 
-We answer the question using a calibrated Supply Function Equilibrium (SFE)
+I answer the question using a calibrated Supply Function Equilibrium (SFE)
 model of the PJM Base Residual Auction. In the model, $K$ symmetric
 strategic sellers simultaneously submit supply functions against PJM's VRR
 demand curve, which is publicly known before bidding. Following
 \citet{Klemperer1989_sfe} and \citet{Green1992_british}, equilibrium is
 characterized by a first-order ordinary differential equation (ODE) system
 in the sellers' supply functions, integrated backward from the
-capacity-constrained boundary. Equilibrium selection follows a Holmberg-motivated boundary condition:
-at the VRR Point~(a) cap, each seller's supply function equals its full
-installed capacity. This criterion is motivated by \citet{Holmberg2008_unique_sfe}'s
-uniqueness result for stochastic markets; in the deterministic BRA it is
-imposed as a selection device, and the at-cap clearing outcomes in 2026/27
-and 2027/28 confirm the condition is active in practice. We calibrate the model to three
-benchmark delivery years --- 2023/24 (low price, old VRR), 2025/26 (price
-spike, old VRR), and 2026/27 (at-cap, new VRR) --- using published PJM
-planning parameters, BRA clearing results, and IMM State of the Market cost
-data. The SFE equilibrium price $p^*$ is the counterfactual: where the
-unmodified VRR curve would have cleared under strategic bidding. This
-counterfactual is what is needed to evaluate the settlement's claim of
+capacity-constrained boundary. Equilibrium selection imposes the Holmberg
+boundary condition, requiring each seller's supply function to equal installed
+capacity at the VRR Point~(a) cap. This criterion is motivated by
+\citet{Holmberg2008_unique_sfe}'s uniqueness result for stochastic markets;
+in the deterministic BRA it is imposed as a selection device, and the at-cap
+clearing outcomes in 2026/27 and 2027/28 confirm the condition is active in
+practice. I calibrate the model to three benchmark delivery years using
+published PJM planning parameters, BRA clearing results, and IMM State of
+the Market cost data. The SFE equilibrium price $p^*$ is the counterfactual
+price at which the unmodified VRR curve would have cleared under strategic
+bidding, which is what is needed to evaluate the settlement's claim of
 \$21 billion in savings.
-
-Four findings emerge. First, under the observed market structure ---
-$K = 3$ pivotal suppliers with residual supply indices below unity ---
-SFE equilibrium prices reach the VRR Point~(a) cap in 2026/27 and exceed
-the settlement cap $\bar{p}_S = \$325$/MW-day. Price-cost margins (Lerner
-indices) are 0.54--0.65 across benchmark years. The at-cap 2026/27 outcome
-is consistent with $K \leq 3$: four or more symmetric sellers would predict
-interior clearing below the cap, so the observed at-cap outcome is
-consistent with a low effective strategic-seller count. Second, the settlement is
-binding. The SFE equilibrium $p^* = \$329$/MW-day at the RTO level and
-substantially higher in constrained LDAs (where 2025/26 prices reached
-\$444--\$466/MW-day); in both cases, equilibrium prices exceed
-$\bar{p}_S = \$325$/MW-day. Suppressing prices from $p^*$ to $\bar{p}_S$
-distorts entry incentives and destroys information about scarcity conditions
-\citep{Hayek1945_knowledge}. Third, the settlement's \$21 billion savings
-claim uses the unconstrained VRR Point~(a) price (approximately
-\$500/MW-day) as the counterfactual; our SFE model provides a structural
-alternative estimate that is lower but still exceeds the settlement cap.
-The difference between these counterfactuals is economically consequential:
-the Point~(a) counterfactual includes scarcity rents that are part of the
-market design, while the SFE model provides a calibrated market-clearing
-benchmark under the model's assumptions --- not a clean decomposition of
-scarcity versus conduct, since the static model cannot fully separate the two. Fourth, transmission expansion --- modeled as increases
-in the Capacity Emergency Transfer Limit (CETL) --- organically reduces
-equilibrium prices by shifting LDAs from cap-binding to interior-clearing
-regimes, addressing the structural source of high prices without suppressing
-price signals \citep{Weitzman1974_prices}.
 
 The remainder of the paper is organized as follows.
 Section~\ref{sec:literature} surveys the supply function equilibrium

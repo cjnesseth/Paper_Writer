@@ -1,8 +1,7 @@
 % ==============================================================================
 % Section: Literature Review
 % Paper: IO Paper 2 -- Calibrated SFE Simulation of Market Power in PJM RPM
-% Status: SKELETON -- headings and \cite{} only, no prose
-% Last updated: 2026-03-24
+% Status: COMPLETE (cut to ~2 pages per Revision_Instructions_2, 2026-03-28)
 % ==============================================================================
 
 \section{Literature Review}
@@ -16,167 +15,55 @@
 The supply function equilibrium concept, introduced by
 \citet{Klemperer1989_sfe}, considers an oligopoly in which each firm commits
 to a schedule mapping prices to quantities before demand is realized. Unlike
-Bertrand competition (commitment to a fixed price) or Cournot competition
-(commitment to a fixed quantity), the supply function strategy allows each
+Bertrand or Cournot competition, the supply function strategy allows each
 firm to adapt its output to whatever market price emerges after the demand
-shock is realized. \citeauthor{Klemperer1989_sfe} characterize the symmetric
-Nash equilibria of this game under additive demand uncertainty, showing that
+shock is realized. \citeauthor{Klemperer1989_sfe} show that symmetric Nash
 equilibria are characterized by a first-order differential equation whose
-solutions form a continuum: in general, any supply function tracing a
-trajectory between the competitive schedule (price equals marginal cost) and
-the Cournot schedule (as if rivals bid at capacity) constitutes a Nash
-equilibrium. The specific equilibrium realized depends on market coordination,
-and demand uncertainty is what disciplines firms to choose upward-sloping
-supply functions over fixed prices.
+solutions form a continuum between the competitive schedule and the Cournot
+schedule, with demand uncertainty disciplining firms to choose upward-sloping
+supply functions.
 
 \citet{Green1992_british} apply the Klemperer-Meyer framework to the England
-and Wales electricity spot market after privatization, modeling two dominant
-generators as strategic suppliers to a pool settled at a uniform price.
-Their calibrated duopoly shows that the Nash equilibrium in supply functions
-implies substantial markups above marginal cost---with prices near the top of
-the feasible equilibrium range---and that entry of additional firms (or
-divestiture into five units) would significantly reduce those markups. Green
-and Newbery establish the methodological template followed here: express
-demand as a known function of price, derive the symmetric first-order ODE,
-and integrate backward from the capacity-constrained boundary to obtain the
-equilibrium supply function. Their paper is the closest methodological
-antecedent to the present work, with the key difference that our demand
-function is PJM's explicit piecewise-linear VRR curve rather than a load-
-duration curve, and our market clears annually in a single forward auction
-rather than half-hourly in a spot pool.
-
-A practical equilibrium selection criterion follows from
-\citet{Holmberg2008_unique_sfe}, who shows that in capacity-constrained
-electricity markets with stochastic demand the supply function equilibrium
-is unique: when rivals' capacity constraints simultaneously bind, each seller
-faces perfectly inelastic residual demand and optimally charges the price cap,
-tying the boundary condition of the ODE and selecting a unique trajectory.
-This paper uses this boundary condition as an equilibrium selection device
-in the deterministic BRA: each seller's supply function is required to equal
-full capacity at the VRR Point~(a) cap, with the at-cap clearing outcomes in
-2026/27 and 2027/28 confirming the condition is active in practice.
-
-Numerically, the symmetric SFE reduces to a single ODE integrable backward
-from the capacity boundary. For the asymmetric extension,
-\citet{Anderson2008_sfe_asymmetric} develop an iterative algorithm that
-initializes each firm at the competitive schedule, solves its single-firm ODE
-holding rivals fixed, and updates simultaneously until convergence; this
-algorithm is the computational reference for the asymmetric case discussed in
-Section~\ref{subsec:cal_market_structure}. In this paper the symmetric case
-applies, and we solve the ODE backward from the Holmberg boundary using the
-\texttt{deSolve} package in R.
+and Wales electricity market, establishing the methodological template followed
+here: derive the symmetric ODE, integrate backward from the capacity-constrained
+boundary, and calibrate to observed market structure.
+\citet{Holmberg2008_unique_sfe} shows that in capacity-constrained electricity
+markets, the supply function equilibrium is unique when rivals' capacity
+constraints simultaneously bind, tying the ODE boundary condition and selecting
+a unique equilibrium trajectory. This paper applies that boundary condition as
+an equilibrium selection device in the deterministic BRA. For the asymmetric
+extension, \citet{Anderson2008_sfe_asymmetric} provide a convergent iterative
+algorithm. The symmetric case applies here and I solve the ODE backward from
+the Holmberg boundary using the \texttt{deSolve} package in R.
 
 % ------------------------------------------------------------------------------
 \subsection{Capacity Market Design}
 \label{subsec:lit_capacity_markets}
 % ------------------------------------------------------------------------------
 
-The economics literature on capacity market design originates from a
-fundamental coordination problem: competitive energy markets, subject to
-regulatory price caps, tend to suppress the scarcity rents that would
-otherwise finance investment in peaking generation. \citet{Joskow2007_capacity}
-formalize this ``missing money'' problem and demonstrate that even under
-competitive conditions, energy-only markets underinvest in reliability when
-price caps bind during scarcity events. \citet{Joskow2008_capacity_payments}
-examines the remedies, arguing that capacity payments can correct the
-underinvestment provided they are designed to replicate missing scarcity rents
-without creating perverse entry or exit incentives.
-
-A central design question is whether the procurement target should be fixed
-at the reliability requirement---a vertical demand schedule---or
-downward-sloping, as in PJM's VRR mechanism.
-\citet{Cramton2005_capacity} make the case for a sloped administrative demand
-curve on the grounds that a vertical schedule generates extreme price
-volatility near the reliability threshold: small fluctuations in supply
-produce large swings between the price cap and zero. A sloped demand curve
-trades some quantity variation for price stability and provides smoother
-investment incentives across the capacity cycle. \citet{Hobbs2007_rpm}
-provides a formal dynamic analysis of the PJM Reliability Pricing Model and
-confirm that the VRR curve substantially reduces price volatility relative to
-vertical demand, at the cost of modest deviations from the target reliability
-level.
-
-The uniform-price format of the BRA has also received attention.
-\citet{Cramton2007_uniform} defend the uniform-price auction over pay-as-bid
-alternatives, arguing that under the former, sellers have weaker incentives
-to shade their bids strategically and equilibrium prices are closer to the
-competitive outcome. \citet{CramtonOckenfels2012_capacity} extend this
-analysis to the broader landscape of capacity market design and examine the
-interaction between auction format and market power. These papers identify
-a tension at the heart of capacity markets: the sloped administrative demand
-curve that dampens boom-bust price cycles is precisely the curve whose shape
-governs the rent-extraction opportunities available to a strategic seller.
-
-\citet{Bowring2013_pjm} provides an overview of PJM's RPM with attention
-to the Independent Market Monitor's application of the TPS test and ACR
-mitigation across delivery years and LDAs, noting that price concerns are
-most acute in constrained LDAs where import capacity is limited. Taken
-together, this literature identifies the VRR slope and the uniform-price
-format as the key design features governing price outcomes under concentrated
-supply---the context in which the Shapiro settlement intervenes.
+The capacity market design literature originates from the ``missing money''
+problem: competitive energy markets, subject to regulatory price caps, suppress
+the scarcity rents that would otherwise finance investment in peaking generation
+\citep{Joskow2007_capacity, Joskow2008_capacity_payments}. PJM's Variable
+Resource Requirement curve is a downward-sloping administrative demand schedule
+designed to moderate the extreme price volatility that vertical demand generates
+near the reliability threshold \citep{Bowring2013_pjm}. This paper takes the
+VRR design as given and analyzes how its slope governs strategic markup
+opportunities under concentrated supply.
 
 % ------------------------------------------------------------------------------
 \subsection{Price Controls in Oligopolistic Markets}
 \label{subsec:lit_price_controls}
 % ------------------------------------------------------------------------------
 
-The economics of price controls in oligopolistic markets provides the
-theoretical foundation for the allocative analysis in
-Section~\ref{sec:allocative_cost}. The foundational reference is
-\citet{Weitzman1974_prices}, who shows that the choice between price
-instruments and quantity instruments for regulatory intervention depends
-on the relative slopes of the marginal benefit and marginal cost schedules.
-When the marginal cost schedule is steep (supply is inelastic in the short
-run) and the marginal benefit schedule is relatively flat (demand is elastic),
-price instruments dominate quantity instruments because they avoid the
-deadweight loss from misallocating constrained supply. Capacity markets
-present precisely this structure: short-run supply is inelastic (capacity
-is fixed within the delivery year) and the administrative demand curve has
-a downward-sloping segment whose elasticity the regulator can calibrate.
-Weitzman's analysis provides general intuition for the capacity market
-context: the VRR's explicit downward-sloping demand design embeds a
-preference for price instruments over fixed quantity mandates, an instrument
-choice that is more informationally efficient when the equilibrium price
-location is uncertain. Suppressing that price with a cap undermines the
-instrument the market design was built to use.
-
-\citet{GlaeserLuttmer2003_rent} demonstrate that binding price controls in
-markets with imperfect competition generate misallocation that is
-qualitatively different from the standard deadweight loss triangle. When
-quantity must be rationed below the unconstrained equilibrium, goods are
-allocated to those with the strongest relationships to sellers rather than
-to those with the highest willingness to pay, creating efficiency losses
-that are a multiple of the simple triangle. In capacity markets the
-analogue is resource allocation across time: a binding cap suppresses the
-scarcity signal that should direct investment toward future delivery years
-with highest expected returns, creating an efficiency loss that accumulates
-dynamically rather than appearing as a static deadweight triangle.
-
-In the SFE literature, \citet{Anderson2005_sfe_pricecaps} extend the
-Klemperer-Meyer framework to incorporate both price caps and forward
-contracts, establishing conditions under which equilibria with caps exist
-and characterizing how caps modify the ODE boundary condition. Their
-analysis shows that a price cap does not simply truncate the equilibrium
-supply function: it changes the strategic problem by altering the payoff at
-the capacity boundary. When the cap is below the unconstrained Holmberg
-boundary price, firms face a modified optimization at the cap level, and the
-equilibrium supply function differs from the uncapped case throughout the
-price range, not just at the ceiling. This result is directly relevant to
-the PJM application: the settlement does not merely cap revenues at
-\$325/MW-day, it modifies the entire strategic incentive structure facing
-the $K = 3$ sellers.
-
-\citet{Vossler2009_price_caps} provide experimental evidence that price caps
-induce focal behavior in uniform-price auction environments: offers cluster
-near the cap even when the unconstrained equilibrium would clear below it.
-Applied to PJM, this suggests that the settlement floor at \$175/MW-day
-may itself become a focal point in future auctions with ample supply, as
-sellers coordinate on offering just above the floor rather than competing
-down to marginal cost. Finally, \citet{Cramton2005_capacity} emphasize that
-the missing money problem --- the chronic revenue shortfall that motivates
-capacity markets in the first place --- is recreated if capacity market
-prices are suppressed below the investment threshold. The settlement floor
-at \$175/MW-day represents a partial recognition of this risk: PJM
-characterizes the floor as ``supporting near-term investment,'' an implicit
-acknowledgment that the cap side of the settlement poses the very problem
-that the capacity market was designed to solve.
+\citet{Weitzman1974_prices} shows that the choice between price and quantity
+regulatory instruments depends on the relative slopes of marginal benefit and
+marginal cost. When supply is inelastic in the short run, price instruments
+dominate. \citet{GlaeserLuttmer2003_rent} demonstrate that binding price
+controls in imperfectly competitive markets generate misallocation qualitatively
+different from the standard deadweight triangle. In the SFE literature, the
+analysis in Section~\ref{sec:allocative_cost} draws on these results to
+characterize the allocative consequences of the settlement's price band.
+\citet{Cramton2005_capacity} emphasize that the capacity market's primary
+function is to provide a long-run investment signal. A binding cap disrupts
+this signal precisely when it is most informative.
