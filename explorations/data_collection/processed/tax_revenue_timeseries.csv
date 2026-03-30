@@ -1,12 +1,15 @@
-year,dc_revenue_M,source
-2016,146,Loudoun County 2024
-2017,200,interpolated
-2018,250,interpolated
-2019,290,interpolated
-2020,330,Loudoun County 2024
-2021,480,interpolated
-2022,663,Loudoun County 2024
-2023,733,JLARC 2024
-2024,870,interpolated
-2025,1000,Loudoun County 2024
-2026,1370,NetChoice/Loudoun proj.
+year,dc_revenue_total_M,bpp_comp_equip_M,source_total,source_bpp
+2013,60,,FY2026 Budget narrative,
+2015,110,84.7,est (BPP x 1.3),FGOEDC Table 3 Jul 2021
+2016,146,117.2,Loudoun County 2024,FGOEDC Table 3 Jul 2021
+2017,195,150.5,est (BPP x 1.3),FGOEDC Table 3 Jul 2021
+2018,253,195.2,est (BPP x 1.3),FGOEDC Table 3 Jul 2021
+2019,330,254.7,est (BPP x 1.3),FGOEDC Table 3 Jul 2021
+2020,423,320.3,NetChoice/BOS 2020 presentation,FGOEDC Table 3 Jul 2021
+2021,508,391.7,est (BPP x 1.3),FGOEDC Table 3 Jul 2021 (prelim)
+2022,663,442,DC News Now / multiple,est (total x 0.67)
+2023,733,576,JLARC 2024 p.17,WUSA9 VERIFY (budgeted)
+2024,875,,Loudoun County FAQ,
+2025,895,,Supervisor Turner / WJLA Jan 2025,
+2026,1000,685,est,FY2026 Adopted Budget
+2027,1300,,FY2027 Proposed Budget,

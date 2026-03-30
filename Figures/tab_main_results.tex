@@ -1,0 +1,56 @@
+\begin{table}[htbp]
+\centering
+\caption{The Effect of Data Center Proximity on Residential Property Values}
+\label{tab:main}
+\small
+\begin{tabular}{lcccc}
+\toprule
+ & (1) & (2) & (3) & (4) \\
+ & Cross-Section & DiD Rings & Event Study & Repeat Sales \\
+\midrule
+\multicolumn{5}{l}{\textit{Panel A: Distance Ring Effects}} \\
+[3pt]
+Ring: 0-1 km & -0.0006 & -0.0307 \\ 
+  & (0.0227) & (0.0259) \\ 
+[3pt]
+Ring: 1-2 km & -0.0083 & -0.0170 \\ 
+  & (0.0139) & (0.0133) \\ 
+[3pt]
+Ring: 2-4 km & 0.0037 & -0.0145 \\ 
+  & (0.0114) & (0.0090) \\ 
+[3pt]
+\midrule
+\multicolumn{5}{l}{\textit{Panel B: Event Study Coefficients}} \\
+[3pt]
+t = -3 & -0.0096 \\ 
+  & (0.0110) \\ 
+[3pt]
+t = -2 & -0.0062 \\ 
+  & (0.0124) \\ 
+[3pt]
+t = +0 & -0.0042 \\ 
+  & (0.0073) \\ 
+[3pt]
+t = +1 & -0.0120 \\ 
+  & (0.0135) \\ 
+[3pt]
+t = +2 & 0.0424** \\ 
+  & (0.0186) \\ 
+[3pt]
+t = +3 & 0.0084 \\ 
+  & (0.0112) \\ 
+[3pt]
+\midrule
+Structural Controls & Yes & Yes & Yes & No \\
+Census Tract FE & Yes & Yes & Yes & -- \\
+Parcel FE & No & No & No & Yes \\
+Year-Quarter FE & Yes & Yes & Yes & Yes \\
+\midrule
+Observations & 41,130 & 21,935 & 21,935 & 3,996 \\
+R$^2$ (within) & 0.829 & 0.843 & 0.844 & 0.021 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}\small
+\item \textit{Notes:} Dependent variable is log sale price. Reference category: properties $>$4 km from nearest data center. Columns (1)--(3) use census tract fixed effects (74 tracts). Column (4) uses parcel fixed effects on the repeat-sales subsample. Standard errors clustered at the census tract level in parentheses. $^{***}p<0.01$, $^{**}p<0.05$, $^{*}p<0.1$.
+\end{tablenotes}
+\end{table}

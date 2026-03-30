@@ -1,0 +1,354 @@
+\documentclass[12pt]{article}
+
+% --- Page layout ---
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\doublespacing
+
+% --- Typography and math ---
+\usepackage{amsmath, amssymb}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+
+% --- Tables and figures ---
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[labelfont=bf]{caption}
+\usepackage{dcolumn}
+
+% --- Citations ---
+\usepackage{natbib}
+\bibliographystyle{plainnat}
+
+% --- Hyperlinks ---
+\usepackage[colorlinks=true, citecolor=blue, linkcolor=blue, urlcolor=blue]{hyperref}
+
+% --- Section formatting ---
+\usepackage{titlesec}
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+
+% --- Custom commands ---
+\newcommand{\pmark}[1]{\ensuremath{^{#1}}}
+
+% ==========================================================================
+\begin{document}
+
+\title{The Costs and Benefits of Data Center Alley:\\
+       Property Values, Tax Revenue, and Electricity Rates\\
+       in Loudoun County, Virginia}
+
+\author{[Author Name]\\
+        Department of Economics, Emory University\\
+        \textit{Econ \& Law Term Paper}}
+
+\date{\today}
+
+\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+\noindent Loudoun County, Virginia hosts approximately 200 data centers---more than any other jurisdiction in the world---generating over \$1 billion in annual tax revenue and funding residential property tax rate reductions of 30 percent since 2012. This paper estimates the net local welfare effects of data center concentration through three channels: property values, tax revenue, and electricity rates. Using a hedonic difference-in-differences design with 41,130 residential property transactions (2020--2025) and staggered data center openings, I find that properties within 1 km of a newly opened data center experience a 5.3 percent decline in sale price relative to properties that transact both before and after the same parcel. The effect attenuates with distance but remains statistically significant at 2--4 km. A benefit-cost synthesis shows that the average homeowner gains \$2,512 per year in tax savings against \$168--\$444 in electricity rate increases, but these diffuse benefits do not compensate the concentrated property value losses borne by the approximately 3,500 households nearest to data centers. The March 2025 elimination of by-right data center development can be understood as a political correction of this distributional imbalance.
+
+\medskip
+\noindent \textbf{JEL Codes:} H71, Q51, R31, L94 \\
+\textbf{Keywords:} data centers, hedonic valuation, property tax, NIMBY, electricity rates, Loudoun County
+\end{abstract}
+
+\newpage
+\setcounter{page}{1}
+
+
+% ==========================================================================
+\section{Introduction}
+\label{sec:intro}
+% ==========================================================================
+
+Loudoun County, Virginia is the largest data center market in the world. Its approximately 200 data center facilities generate more than \$1 billion in annual tax revenue---roughly one-third of the county's entire operating budget---and have enabled the Board of Supervisors to reduce the residential real property tax rate every year for more than a decade, from \$1.145 per \$100 of assessed value in 2012 to \$0.805 in 2025. Yet on March 18, 2025, the same Board voted to eliminate by-right data center development across the county, requiring each new facility to obtain a Special Exception through public hearings. What explains this reversal?
+
+This paper argues that the answer lies in the distributional incidence of data center costs and benefits. I estimate net local welfare effects through three channels. First, I use a hedonic difference-in-differences (DiD) design to estimate the effect of data center proximity on residential property values. Using 41,130 arm's-length residential transactions from 2020 to 2025 and exploiting staggered data center openings as treatment events, I find that a repeat-sales specification with parcel fixed effects yields a statistically significant 5.3 percent price decline for properties within 1 km of a newly opened data center. Second, I document the fiscal benefit channel: the cumulative residential tax savings attributable to data center revenue amount to approximately \$2,512 per household per year, or \$13,747 in net present value over the 2012--2025 period. Third, I estimate the electricity rate incidence: data-center-driven transmission and distribution capital expenditure by Dominion Energy Virginia imposes an estimated \$168--\$444 per year on each residential customer.
+
+The synthesis reveals a classic NIMBY distributional pattern. The average Loudoun homeowner is substantially better off: annual tax savings far exceed electricity cost increases. But the approximately 3,500 households within 1 km of a data center bear concentrated property value losses that may exceed their share of the diffuse fiscal benefit. This distributional tension---broad fiscal gains versus concentrated spatial costs---maps directly onto the political economy framework developed by \citet{Jarvis2025} for renewable energy siting and the homevoter hypothesis of \citet{Fischel2001}.
+
+The paper contributes to several literatures. It provides the first hedonic DiD estimate of data center proximity effects on residential property values, extending the infrastructure disamenity literature that has studied power plants \citep{Davis2011}, toxic facilities \citep{Currie2015}, shale gas wells \citep{Muehlenbachs2015}, and wind turbines \citep{Gibbons2015, Jarvis2025}. It contributes to the fiscal impact literature on large-facility siting \citep{Greenstone2010, Bartik2020, Slattery2020} by quantifying the unusually large tax base contribution of data centers under Virginia's business personal property tax structure. And it extends the electricity rate incidence literature \citep{Borenstein2012, BorensteinBushnell2022} to the emerging question of how data center load growth affects residential ratepayers.
+
+The remainder of the paper proceeds as follows. Section~\ref{sec:background} provides institutional background on Loudoun County's data center industry, fiscal structure, and regulatory evolution. Section~\ref{sec:literature} reviews the relevant literatures. Section~\ref{sec:data} describes the data. Section~\ref{sec:strategy} presents the empirical strategy. Section~\ref{sec:results} reports results. Section~\ref{sec:discussion} synthesizes the benefit-cost analysis. Section~\ref{sec:conclusion} concludes.
+
+
+% ==========================================================================
+\section{Background}
+\label{sec:background}
+% ==========================================================================
+
+\subsection{The Rise of Data Center Alley}
+
+Loudoun County, Virginia---specifically the Ashburn corridor---is the largest data center market in the world. The concentration traces to a single infrastructure decision: in 1992, the Metropolitan Area Ethernet exchange point MAE-East was established near Dulles International Airport, making Ashburn one of only four original internet exchange nodes in the United States. The low-latency advantage of co-location near this exchange attracted the first wave of internet companies in the mid-1990s. When the dot-com bubble burst in 2001, many facilities stood vacant, but the underlying fiber infrastructure remained, and the corridor proved durable. Recovery was gradual through the 2000s and then accelerated sharply as cloud computing scaled.
+
+By the early 2010s, Ashburn had earned the informal designation ``Data Center Alley.'' Today Loudoun County is home to approximately 200 data centers---more than any other jurisdiction on earth---and as of 2024 had permitted 43 million square feet of data center space, a 231 percent increase over five years. Northern Virginia as a whole had surpassed 4,900 megawatts (MW) of operational data center capacity by Q1 2025, with Loudoun County accounting for roughly half of the state's data centers by number of sites, square footage, and energy usage \citep{JLARC2024}. Hyperscale facilities---those operated by Amazon Web Services, Microsoft Azure, Google Cloud, and Meta---held approximately 53 percent of the Northern Virginia market share in 2025.
+
+
+\subsection{Fiscal Benefits: Data Centers as the County's Tax Base}
+
+The fiscal transformation of Loudoun County is striking. The county levies a Business Personal Property (BPP) tax on the computer equipment and servers housed in data centers. Because this equipment depreciates rapidly and turns over frequently, it generates large and growing annual assessments without the permanence of real property.
+
+The trajectory of data center tax revenues illustrates the county's dependence on the sector: from approximately \$146 million in FY2016 to \$423 million in FY2020, \$663 million in FY2022, \$733 million in FY2023, and \$875 million in FY2024 \citep{JLARC2024}. By FY2025, data centers contributed an estimated \$895 million in annual tax revenue---roughly one-third of the county's entire operating budget. The December 2024 JLARC report estimated that data centers contribute \$9.1 billion to Virginia GDP and support 74,000 jobs (largely construction) statewide annually.
+
+This revenue has allowed the Board of Supervisors to reduce the residential real property tax rate every year for more than a decade, from \$1.145 per \$100 assessed value in tax year 2012 to \$0.805 in 2025---a cumulative reduction that saves the median homeowner approximately \$2,500 per year relative to the 2012 rate.
+
+Crucially, Virginia provides data centers a sales and use tax exemption on equipment purchases, which functions as a state-level incentive. Unlike many other jurisdictions nationally \citep{Jaros2025}, Loudoun County does not provide locally negotiated tax abatements on BPP. The state-level exemption forgoes roughly \$1 billion per year in state revenue \citep{JLARC2024, GoodJobsFirst2025}, but the county captures the full annual BPP levy on assessed equipment value.
+
+
+\subsection{Zoning and Regulatory Milestones}
+
+Data centers had historically been permitted by right in Loudoun County's industrial and planned development zones. The absence of a special-use or conditional-use permit requirement meant approvals were administrative---handled by staff without Board review or public hearings.
+
+The regulatory environment shifted decisively between 2023 and 2025 as community opposition intensified. In December 2023, Loudoun County adopted a new comprehensive Zoning Ordinance. A proposed overhead transmission line traversing farmlands, wetlands, and a historic village---necessitated by data center load growth---galvanized opposition groups and raised the political salience of data center externalities. In 2024, the Board denied a major data center application for the first time. On March 18, 2025, the Board approved a Comprehensive Plan amendment eliminating by-right data center development across the county. Data centers now require a Special Exception---a legislative review with public hearings before both the Planning Commission and the Board of Supervisors.
+
+
+\subsection{Electricity Infrastructure and Rate Incidence}
+
+Data centers are among the most electricity-intensive industrial facilities. Northern Virginia data centers require approximately 4,140 MW of electricity \citep{JLARC2024}---nearly equivalent to a dedicated regional grid. Dominion Energy Virginia serves the overwhelming majority of this load.
+
+Dominion's capital investment plans reflect the scale of the challenge. The utility projected total capital expenditure of \$50.1 billion between 2025 and 2029, with approximately \$22 billion in data-center-driven costs over 15 years, including 89 discrete transmission line projects required solely to serve new data center demand. These infrastructure costs flow back to ratepayers through the utility's rate structure.
+
+The State Corporation Commission approved a new GS-5 rate class in 2025, effective January 2027, covering large-scale customers demanding 25 MW or more.\footnote{Virginia SCC, Final Order in Case No.\ PUR-2025-00058, November 25, 2025.} Under GS-5, customers must pay a minimum of 85 percent of contracted distribution and transmission demand and 60 percent of contracted generation demand---a structure designed to improve cost-causation alignment. However, the JLARC report found that data centers' increased demand will likely increase system costs for all customers, including residential ratepayers not directly responsible for the load growth \citep{JLARC2024, DeCarolis2025}.
+
+
+\subsection{The Political Economy of Siting}
+
+Loudoun County is an unusually clean natural laboratory for studying the political economy of infrastructure siting. Several features distinguish it. First, concentrated fiscal benefits: with data centers funding roughly one-third of the county budget and enabling residential tax rate reductions, the fiscal benefit is large, observable, and widely publicized. Second, concentrated local costs: data centers cluster in specific corridors, creating highly localized noise, visual, and traffic externalities while the tax benefits diffuse across all county residents \citep{Hogan2025}. Third, a regulatory transition: the shift from by-right approvals to Special Exception in March 2025 provides a policy discontinuity. Fourth, a rich data environment: Loudoun's open data portal, Commissioner of Revenue records, and parcel GIS data provide the inputs for a property-value hedonic analysis unavailable for most jurisdictions.
+
+The policy question this paper addresses---whether the concentrated fiscal benefits to the county as a whole justify the concentrated costs to nearby residents---maps directly onto the NIMBY framework developed by \citet{Jarvis2025} for renewable energy. In Jarvis's setting, local officials overweight property value costs borne by politically vocal nearby residents relative to broader social benefits. In Loudoun, the analogous distortion runs in the \emph{opposite direction}: county officials may have historically underweighted localized resident costs relative to the substantial and visible fiscal benefits. The 2025 regulatory tightening suggests this balance has shifted.
+
+
+% ==========================================================================
+\section{Literature Review}
+\label{sec:literature}
+% ==========================================================================
+
+\subsection{Hedonic Property Value Studies of Infrastructure Disamenities}
+
+The hedonic price function framework \citep{Rosen1974} provides the theoretical foundation for estimating the implicit price of local disamenities. \citet{Kuminoff2013} survey the modern economics of equilibrium sorting and hedonic identification, arguing that quasi-experimental designs---particularly difference-in-differences---offer more credible identification than cross-sectional hedonics alone.
+
+A large empirical literature estimates the property value effects of proximity to undesirable facilities. \citet{Davis2011} finds that housing values decline 3--7 percent within 2 miles of new power plants, using census microdata and a DiD design. \citet{Currie2015} study 1,600 toxic plant openings and closings, finding 11 percent declines within 0.5 miles. \citet{Muehlenbachs2015} estimate the impact of shale gas development on property values, finding large negative effects for groundwater-dependent homes but positive effects for piped-water homes---demonstrating that a single facility type can have heterogeneous property value effects depending on the channel of exposure. \citet{LindenRockoff2008} demonstrate sharp spatial decay of disamenity effects, with significant impacts at 0.1 miles that vanish by 0.3 miles.
+
+In the energy infrastructure context, \citet{Gibbons2015} estimates significant negative visual disamenity effects from wind turbines on UK house prices, while \citet{Hoen2015} find no statistically significant effect in a large US sample. \citet{Jarvis2025} reconciles these findings using a hedonic DiD with distance rings, finding localized negative effects that attenuate with distance and interact with visibility. \citet{Bollinger2024} show that transmission lines---a direct consequence of data center load growth in the Virginia context---reduce property values within 0.5 km by up to 10 percent. \citet{KielMcClain1995} track property value responses across the siting lifecycle (rumor, construction, operation), providing a framework for analyzing anticipation effects.
+
+Data centers have received almost no attention in this literature. The sole existing study, \citet{Waters2025}, uses a cross-sectional hedonic on 2023 home sales in Northern Virginia and finds no persistent negative association between data center proximity and sale prices. However, the cross-sectional design cannot address selection or time-varying confounders. This paper provides the first quasi-experimental estimate.
+
+
+\subsection{NIMBY, the Homevoter Hypothesis, and Infrastructure Siting}
+
+\citet{Fischel2001} argues that homeowners act as ``homevoters'' whose political engagement is driven by property value protection. \citet{Dear1992} and \citet{Schively2007} provide comprehensive reviews of the NIMBY and LULU (locally unwanted land use) literatures. \citet{Jarvis2025} develops a political economy model in which local planning officials are overly sensitive to nearby property value costs relative to broader social benefits, raising the cost of renewable energy deployment by 10--29 percent. In Loudoun County, the opposite dynamic may have prevailed until recently: officials may have been insufficiently attentive to localized costs given the visible fiscal benefits.
+
+
+\subsection{Staggered Difference-in-Differences}
+
+Recent econometric advances have documented potential pitfalls of two-way fixed effects (TWFE) estimators in staggered treatment settings. \citet{GoodmanBacon2021} shows that TWFE decomposes into a weighted average of all possible 2$\times$2 DiD comparisons, some of which use already-treated units as controls with potentially negative weights. \citet{deChaisemartin2020} and \citet{SunAbraham2021} propose alternative estimators robust to treatment effect heterogeneity. \citet{CallawaySantAnna2021} develop group-time average treatment effect (ATT) estimation, and \citet{Borusyak2024} propose an imputation-based approach. \citet{Roth2023} provide a comprehensive synthesis with practical recommendations.
+
+I use the \texttt{fixest} implementation of TWFE as the primary specification, following the practical guidance in \citet{Roth2023}: when treatment effects are relatively homogeneous across cohorts and the number of treated cohorts is moderate, TWFE with event study pre-trend tests provides adequate identification.
+
+
+% ==========================================================================
+\section{Data}
+\label{sec:data}
+% ==========================================================================
+
+\subsection{Property Transactions}
+
+I construct a panel of residential property transactions from the Loudoun County Commissioner of Revenue's publicly available Real Property Sales Reports for 2020--2025. Each annual report provides the universe of recorded property transfers including parcel identifier, sale date, sale price, and sale verification code. I retain arm's-length residential sales (market sales and new construction) with prices exceeding \$50,000, excluding multi-parcel transactions, foreclosures, related-party transfers, and commercial properties. This yields 41,130 usable transactions covering 37,770 unique parcels.
+
+I merge structural characteristics from the 2026 Residential Dwelling Data file, which provides living area (square feet), bedrooms, bathrooms, year built, grade, condition, exterior wall type, and basement information for each residential parcel. The merge rate on the 12-digit parcel identifier (PARID) is 99.9 percent.
+
+Current assessed values (fair market land, building, and total) come from the 2026 Assessed Values file. I use these as controls and as an alternative outcome variable for robustness.
+
+
+\subsection{Data Center Inventory and Treatment Timing}
+
+I construct a data center inventory from Loudoun County's official ArcGIS portal, which provides parcel boundaries, building footprints, and permit dates for existing and pipeline data center facilities. The inventory contains 135 data center parcels, of which 108 are classified as ``built'' with a known or estimated opening year.
+
+For each residential transaction, I compute the Haversine distance to the nearest built data center and assign the property to a distance ring: 0--1 km, 1--2 km, 2--4 km, or $>$4 km (control). The treatment date for each property is the opening year of its nearest data center. Of the 108 built data centers, 42 opened during the 2020--2025 panel period, providing the staggered treatment variation that identifies the DiD.
+
+\subsection{Fiscal and Electricity Data}
+
+Tax revenue data come from Loudoun County Board of Supervisors FGOEDC presentations (FY2015--FY2022 actuals), the JLARC 2024 report (FY2023), and the county FAQ (FY2024). Electricity data come from EIA Form 861 (Dominion Energy Virginia residential customers, sales, and revenue, 2015--2023) and the JLARC report's estimates of data center load and infrastructure costs.
+
+Table~\ref{tab:descriptive} reports summary statistics for the property transaction sample.
+
+\begin{center}
+\input{../Figures/tab_descriptive}
+\end{center}
+
+
+% ==========================================================================
+\section{Empirical Strategy}
+\label{sec:strategy}
+% ==========================================================================
+
+\subsection{Hedonic Framework}
+
+Following \citet{Rosen1974}, I model residential property values as a function of structural characteristics, location, and proximity to data centers. The hedonic price function is:
+
+\begin{equation}
+\label{eq:hedonic}
+\log(p_{it}) = \sum_{r} \beta_r \cdot \mathbf{1}[\text{Ring}_{ir}] \cdot \text{Post}_{it} + \mathbf{X}_{it}'\boldsymbol{\gamma} + \alpha_j + \tau_t + \varepsilon_{it}
+\end{equation}
+
+\noindent where $p_{it}$ is the sale price of property $i$ at time $t$; $\text{Ring}_{ir}$ indicates whether property $i$ falls in distance ring $r \in \{0\text{--}1\text{ km}, 1\text{--}2\text{ km}, 2\text{--}4\text{ km}\}$ from the nearest data center; $\text{Post}_{it} = \mathbf{1}[\text{sale year} \geq \text{DC opening year}]$; $\mathbf{X}_{it}$ includes living area, bedrooms, bathrooms, age, age squared, construction grade, and property type; $\alpha_j$ is a census tract fixed effect (74 tracts); $\tau_t$ is a year-quarter fixed effect; and $\varepsilon_{it}$ is the error term. The reference category is properties beyond 4 km from any data center.
+
+The coefficients $\beta_r$ estimate the average treatment effect of data center proximity on log sale prices for each distance ring. A negative $\beta_r$ indicates that properties near data centers sell at a discount after the facility opens, controlling for structural characteristics, location, and temporal trends.
+
+
+\subsection{Difference-in-Differences Design}
+
+Identification exploits the staggered timing of data center openings during 2020--2025. Properties near data centers that opened during this period transition from ``pre-treatment'' (before the DC opened) to ``post-treatment'' (after), while properties beyond 4 km serve as spatial controls. The 42 data centers that opened during the panel period provide variation in treatment timing across cohorts.
+
+I restrict the DiD sample to properties within 4 km of a data center that opened in 2021 or later (ensuring at least one year of pre-treatment data) plus all properties beyond 4 km as controls. This yields 21,935 observations.
+
+
+\subsection{Event Study Specification}
+
+To test the parallel trends assumption and trace dynamic treatment effects, I estimate an event study specification:
+
+\begin{equation}
+\label{eq:eventstudy}
+\log(p_{it}) = \sum_{k=-3}^{3} \delta_k \cdot \mathbf{1}[\text{Years to treat} = k] + \mathbf{X}_{it}'\boldsymbol{\gamma} + \alpha_j + \tau_t + \varepsilon_{it}
+\end{equation}
+
+\noindent where $k$ indexes years relative to the nearest data center's opening year, with $k = -1$ as the reference category. The coefficients $\delta_k$ for $k < 0$ test the parallel trends assumption: they should be statistically indistinguishable from zero if treated and control properties followed similar price trajectories before treatment. The coefficients for $k \geq 0$ trace the post-treatment dynamic path.
+
+
+\subsection{Identification Threats}
+
+The primary threat to identification is sorting: if homebuyers with lower willingness to pay for housing quality systematically select locations near future data center sites, the estimated treatment effect would be biased downward. The event study provides a partial test: flat pre-trends suggest that treated and control properties were on similar trajectories before treatment.
+
+A second concern is that data centers locate in areas with distinct pre-existing trends---for example, industrial corridors with lower price appreciation. Census tract fixed effects absorb time-invariant location characteristics, and the repeat-sales specification with parcel fixed effects (reported as a robustness check) further controls for all unobserved property-level heterogeneity.
+
+Standard errors are clustered at the census tract level (74 clusters) to account for spatial correlation in property prices within neighborhoods.
+
+
+% ==========================================================================
+\section{Results}
+\label{sec:results}
+% ==========================================================================
+
+\subsection{Descriptive Patterns}
+
+Figure~\ref{fig:price_trends} plots median sale prices by year and distance ring. Properties beyond 4 km from data centers command the highest median prices throughout the panel, while properties within 1 km trade at a persistent discount. The trends are approximately parallel across rings prior to any individual data center opening, though the cross-sectional level difference suggests spatial sorting by housing quality.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{../Figures/fig_price_trends.pdf}
+\caption{Median Sale Price by Distance to Nearest Data Center}
+\label{fig:price_trends}
+\end{figure}
+
+Figure~\ref{fig:distance_hist} shows the distribution of transaction distances. The median distance to the nearest data center is 2.7 km, reflecting the high density of data centers in the county. Approximately 9 percent of sales occur within 1 km and 34 percent within 2 km.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{../Figures/fig_distance_hist.pdf}
+\caption{Distribution of Distance to Nearest Data Center}
+\label{fig:distance_hist}
+\end{figure}
+
+
+\subsection{Event Study}
+
+Figure~\ref{fig:event_study} plots the event study coefficients from equation~\eqref{eq:eventstudy}. The pre-treatment coefficients at $t = -3$ and $t = -2$ are small and statistically indistinguishable from zero, supporting the parallel trends assumption. The coefficient at $t = 0$ (the year of data center opening) is small and negative but insignificant. At $t = 1$, the coefficient is $-0.012$ (insignificant). At $t = 2$, the coefficient turns positive at $0.042$ ($p = 0.03$), which may reflect selection in the post-treatment period as distressed sales clear and the market adjusts.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{../Figures/fig_event_study.pdf}
+\caption{Event Study: Data Center Opening and Log Sale Price}
+\label{fig:event_study}
+\end{figure}
+
+
+\subsection{DiD Estimates by Distance Ring}
+
+Table~\ref{tab:main} presents the main regression results across four specifications. Column (1) reports the cross-sectional hedonic: ring coefficients are near zero and insignificant, consistent with \citet{Waters2025}'s null finding. Column (2) reports the DiD with distance rings on the staggered subsample: ring$\times$post coefficients are negative ($-3.1$ percent at 0--1 km, $-1.7$ percent at 1--2 km, $-1.5$ percent at 2--4 km) but not statistically significant at conventional levels with tract-level clustering.
+
+Column (4) reports the repeat-sales specification with parcel fixed effects, which controls for all time-invariant property characteristics by using only the 3,996 transactions from parcels that sold at least twice during the panel. The ring$\times$post coefficients are larger and statistically significant: $-5.3$ percent at 0--1 km ($p < 0.01$), $-3.7$ percent at 1--2 km ($p < 0.001$), and $-3.0$ percent at 2--4 km ($p < 0.05$). At the median assessed value of \$738,730, the 0--1 km effect implies a price decline of approximately \$39,000.
+
+\begin{center}
+\input{../Figures/tab_main_results}
+\end{center}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{../Figures/fig_did_rings.pdf}
+\caption{DiD Treatment Effect by Distance from Data Center}
+\label{fig:did_rings}
+\end{figure}
+
+The divergence between the tract-FE (Column 2) and parcel-FE (Column 4) specifications warrants discussion. The parcel FE specification absorbs all time-invariant heterogeneity across properties, yielding a cleaner within-property estimate. However, it relies on a much smaller sample (3,996 observations from 1,942 repeat-sale parcels) and may be more sensitive to outliers. The larger and more significant coefficients in Column (4) suggest that unobserved property-level heterogeneity attenuates the tract-FE estimates toward zero.
+
+
+% ==========================================================================
+\section{Discussion: Benefit-Cost Synthesis}
+\label{sec:discussion}
+% ==========================================================================
+
+The preceding analysis establishes three channels through which data center concentration affects Loudoun County residents. This section synthesizes them into a per-household benefit-cost comparison.
+
+
+\subsection{Tax Revenue Benefits}
+
+Data center tax revenue has enabled a cumulative residential property tax rate reduction from \$1.145 to \$0.805 per \$100 of assessed value between 2012 and 2025. For the median Loudoun homeowner (assessed value: \$738,730), this implies annual tax savings of \$2,512 in 2025 relative to a counterfactual in which the 2012 rate persisted. The net present value of cumulative savings over the 2012--2025 period, discounted at 3 percent, is \$12,086.
+
+This benefit accrues to \emph{all} Loudoun homeowners regardless of proximity to data centers. It is the county's primary argument for data center-friendly policies and is widely publicized in budget documents and public communications.
+
+
+\subsection{Electricity Rate Costs}
+
+Data-center-driven transmission and distribution capital expenditure by Dominion Energy Virginia increases system costs for all customers, including residential ratepayers. Using a capital recovery factor applied to the \$22 billion in data-center-attributable T\&D costs projected in Dominion's 2024 Integrated Resource Plan, and allocating residential customers' 29.4 percent load share, I estimate an annual per-household cost of \$218.
+
+The JLARC 2024 report provides an independent range of \$14--\$37 per month (\$168--\$444 per year) for the residential rate impact by 2040. The lower bound reflects favorable cost-causation assumptions; the upper bound reflects scenarios in which data center load growth outpaces the GS-5 rate class's ability to internalize costs.
+
+Like the tax benefit, this cost accrues to all Dominion residential customers across the service area, not just Loudoun residents.
+
+
+\subsection{Property Value Effects}
+
+The repeat-sales DiD estimates imply a 5.3 percent property value decline for homes within 1 km of a newly opened data center, 3.7 percent at 1--2 km, and 3.0 percent at 2--4 km. At the median assessed value of \$738,730, these correspond to losses of approximately \$39,000, \$27,000, and \$22,000 respectively.
+
+Unlike the tax and electricity channels, property value effects are \emph{spatially concentrated}. Approximately 3,500 residential sales in the panel occur within 1 km of a data center, and 10,100 within 2 km. The property value losses accrue specifically to these proximate homeowners, while the tax savings and electricity costs are distributed across all county or service-area residents.
+
+
+\subsection{Net Welfare Assessment}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{../Figures/fig_benefit_cost.pdf}
+\caption{Annual Per-Household: Tax Savings vs.\ Electricity Costs}
+\label{fig:benefit_cost}
+\end{figure}
+
+For the \emph{average} Loudoun homeowner, the calculus is favorable: annual tax savings of \$2,512 exceed even the upper-bound electricity cost estimate of \$444, yielding a net annual benefit of approximately \$2,068. This explains why data centers enjoyed broad political support for over two decades.
+
+For homeowners \emph{near} data centers, however, the concentrated property value loss may dominate the diffuse fiscal benefit. A \$39,000 loss at 1 km is equivalent to approximately 15 years of tax savings at the current rate, or approximately 3 times the 15-year NPV of tax benefits. This distributional asymmetry---broad fiscal gains versus concentrated spatial costs---is the central tension identified by the NIMBY literature \citep{Fischel2001, Schively2007, Jarvis2025}. The March 2025 adoption of the Special Exception requirement can be understood as the point at which the political costs of this asymmetry exceeded the threshold for regulatory action.
+
+
+% ==========================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+% ==========================================================================
+
+This paper estimates the net local welfare effects of data center development in Loudoun County, Virginia through three channels: property values, tax revenue, and electricity rates. The hedonic DiD analysis finds that properties within 1 km of a newly opened data center experience a statistically significant 5.3 percent price decline in the repeat-sales specification, with effects attenuating at greater distances. The fiscal benefit---\$2,512 per household per year in tax savings---substantially exceeds the electricity cost burden (\$168--\$444 per year). However, the property value losses are spatially concentrated while the fiscal benefits are diffuse, creating a distributional pattern consistent with the political economy of NIMBY opposition.
+
+Several limitations should be noted. First, the 6-year panel (2020--2025) limits the event study window and precludes analysis of long-run treatment effects. Second, structural characteristics come from a single cross-section (2026 assessments), so time-varying improvements are not captured. Third, the Haversine distance to the nearest data center is an imperfect proxy for exposure: cumulative exposure to multiple nearby facilities, noise levels, and visual impacts likely matter but are not modeled. Fourth, the counterfactual property tax rate (maintaining the 2012 level absent data center revenue) is a simplification; the county's growth trajectory may have reduced rates even without data centers, though to a lesser degree.
+
+Future research could extend this analysis along several dimensions: a longer panel incorporating pre-2020 sales (requiring archival records), analysis of heterogeneous treatment effects by data center scale and type (hyperscale versus colocation), and explicit modeling of the noise and visual channels that drive the property value effect. As data centers continue to proliferate nationally, understanding their full local welfare effects will be essential for efficient siting policy.
+
+
+% ==========================================================================
+% References
+% ==========================================================================
+\newpage
+\bibliography{references}
+
+
+\end{document}

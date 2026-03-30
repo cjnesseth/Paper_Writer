@@ -54,3 +54,25 @@ CLAUDE.local.md
 # Output artifacts — uncomment lines below based on your preference
 # *.rds
 # output/**/*.rds
+
+# Raw downloaded data (re-download via scripts/02_download_county_data.sh)
+explorations/data_collection/raw/*.xlsx
+explorations/data_collection/raw/*.csv
+explorations/data_collection/raw/*.zip
+explorations/data_collection/raw/*.pdf
+explorations/data_collection/raw/eia861_*/
+explorations/data_collection/raw/f861*/
+explorations/data_collection/raw/census_tracts_va/
+explorations/data_collection/raw/loudoun_parcels_shp/
+explorations/data_collection/raw/*.geojson
+
+# Supporting papers (too large for git; re-gather from references)
+master_supporting_docs/supporting_papers/*.pdf
+
+# Compiled paper PDF (rebuild via pdflatex)
+paper/*.pdf
+
+# Large processed files (rebuild via R scripts)
+explorations/data_collection/processed/parcel_centroids.csv
+explorations/data_collection/processed/property_transactions_panel.csv
+explorations/data_collection/processed/hedonic_results.rds
