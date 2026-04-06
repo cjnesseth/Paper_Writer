@@ -1,0 +1,19 @@
+\begin{table}[htbp]
+\centering
+\caption{Robustness of Sun-Abraham ATT Across Specifications}
+\label{tab:robustness}
+\small
+\begin{tabular}{lccc}
+\toprule
+Specification & ATT & SE & N \\
+\midrule
+Sun-Abraham (main) & -0.0134 & 0.0048 & 18,398 \\
+Jackknife range [-0.0155, -0.0119] & -0.0134 & 0.0007 & 18,398 \\
+Callaway-Sant'Anna & -0.0601 & 0.0137 & 18,398 \\
+Placebo mean (p = 0.334) & -0.0070 & 0.0117 & 18,398 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}\small
+\item \textit{Notes:} Main specification from Table~\ref{tab:main}. Jackknife drops one census tract at a time (51 tracts). Placebo permutes treatment dates 500 times. Callaway-Sant'Anna uses repeated cross-sections with never-treated controls.
+\end{tablenotes}
+\end{table}

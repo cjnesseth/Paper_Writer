@@ -152,8 +152,8 @@ cat("\\midrule\n")
 treated <- desc_table %>% filter(within_4km == TRUE)
 control <- desc_table %>% filter(within_4km == FALSE)
 
-labels <- c("Sale Price ($)", "Living Area (sq ft)", "Bedrooms", "Bathrooms",
-            "Age (years)", "Distance to DC (km)", "Assessed Value ($)")
+labels <- c("Sale Price (\\$)", "Living Area (sq ft)", "Bedrooms", "Bathrooms",
+            "Age (years)", "Distance to DC (km)", "Assessed Value (\\$)")
 for (i in seq_along(desc_vars)) {
   v <- desc_vars[i]
   fmt <- if (v %in% c("sale_price", "fair_market_total")) ",.0f" else ".1f"
@@ -227,8 +227,7 @@ p_trends <- ggplot(price_trends, aes(x = sale_year, y = median_price, color = ri
   scale_color_manual(values = c("0-1 km" = "#b91c1c", "1-2 km" = primary_gold,
                                  "2-4 km" = accent_gray, "4+ km" = primary_blue),
                      name = "Distance Ring") +
-  labs(title = "Median Sale Price by Distance to Nearest Data Center",
-       x = "Year", y = "Median Price ($000s)") +
+  labs(x = "Year", y = "Median Price ($000s)") +
   theme_paper()
 ggsave(file.path(fig_dir, "fig_price_trends.pdf"), p_trends, width = 8, height = 5)
 message("Saved fig_price_trends.pdf")

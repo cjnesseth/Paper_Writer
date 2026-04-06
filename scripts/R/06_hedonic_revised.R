@@ -344,8 +344,8 @@ cat(" & Mean & SD & Mean & SD \\\\\n\\midrule\n")
 
 single <- balance %>% filter(!is_repeat)
 repeat_b <- balance %>% filter(is_repeat)
-labels <- c("Sale Price ($)", "Living Area (sq ft)", "Bedrooms", "Bathrooms",
-            "Age (years)", "Dist. to DC (km)", "Assessed Value ($)")
+labels <- c("Sale Price (\\$)", "Living Area (sq ft)", "Bedrooms", "Bathrooms",
+            "Age (years)", "Dist. to DC (km)", "Assessed Value (\\$)")
 for (i in seq_along(balance_vars)) {
   v <- balance_vars[i]
   dig <- if (v %in% c("sale_price", "fair_market_total")) 0 else 1
@@ -415,17 +415,24 @@ message("Heterogeneity by timing done")
 message("\n=== Generating Figures ===")
 
 # --- Sun-Abraham event study ---
-sa_coefs <- tidy(fit_sa, conf.int = TRUE) %>%
-  filter(grepl("cohort_permit", term)) %>%
-  mutate(event_time = as.integer(gsub(".*::", "", term)))
+# Use fixest's native period aggregation (tidy() misparses sunab term names)
+sa_agg <- summary(fit_sa, agg = "period")
+sa_ct  <- coeftable(sa_agg)
+sa_coefs <- data.frame(
+  event_time = as.integer(gsub("[^-0-9]", "", rownames(sa_ct))),
+  estimate   = sa_ct[, 1],
+  std.error  = sa_ct[, 2],
+  conf.low   = sa_ct[, 1] - 1.96 * sa_ct[, 2],
+  conf.high  = sa_ct[, 1] + 1.96 * sa_ct[, 2]
+)
 
-# Add reference point
-sa_coefs <- bind_rows(
+# Add reference point and restrict to [-4, 4] to match TWFE window
+sa_coefs <- rbind(
   sa_coefs,
-  data.frame(event_time = -1L, estimate = 0, conf.low = 0, conf.high = 0,
-             term = "ref", std.error = 0, statistic = 0, p.value = 1)
-) %>%
-  arrange(event_time)
+  data.frame(event_time = -1L, estimate = 0, std.error = 0, conf.low = 0, conf.high = 0)
+)
+sa_coefs <- sa_coefs[order(sa_coefs$event_time), ]
+sa_coefs <- sa_coefs[sa_coefs$event_time >= -4 & sa_coefs$event_time <= 4, ]
 
 p_sa <- ggplot(sa_coefs, aes(x = event_time, y = estimate)) +
   geom_hline(yintercept = 0, linetype = "dashed", color = accent_gray) +
@@ -433,8 +440,7 @@ p_sa <- ggplot(sa_coefs, aes(x = event_time, y = estimate)) +
   geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = 0.15, fill = primary_blue) +
   geom_line(color = primary_blue, linewidth = 0.9) +
   geom_point(color = primary_blue, size = 3) +
-  labs(title = "Sun-Abraham Event Study: Permit Date Treatment",
-       x = "Years Relative to Nearest DC Permit",
+  labs(x = "Years Relative to Nearest DC Permit",
        y = "Coefficient (log price)",
        caption = "Reference: t = -1. Resales only. Cohort-robust ATT (Sun & Abraham 2021).") +
   theme_paper()
@@ -509,46 +515,43 @@ sink(file.path(fig_dir, "tab_incidence.tex"))
 cat("\\begin{table}[htbp]\n\\centering\n")
 cat("\\caption{Distributional Incidence of Data Center Development}\n")
 cat("\\label{tab:incidence}\n\\small\n")
-cat("\\begin{tabular}{llcc}\n\\toprule\n")
-cat("Channel & Who Bears It & Annual (\\$) & Stock/Flow \\\\\n\\midrule\n")
-cat("\\multicolumn{4}{l}{\\textit{Benefits}} \\\\\n")
-cat(sprintf("Tax savings (upper bound) & All Loudoun homeowners & %s & Flow \\\\\n",
-    formatC(bc$value[bc$variable == "annual_tax_savings_2025"], big.mark = ",")))
+cat("\\begin{tabular}{llccc}\n\\toprule\n")
+cat("Channel & Who Bears It & Amount (\\$) & Type & Affected Pop. \\\\\n\\midrule\n")
+cat("\\multicolumn{5}{l}{\\textit{Benefits}} \\\\\n")
+cat(sprintf("Tax savings (upper bound) & Loudoun homeowners & %s/yr & Flow & ${\\sim}$130,000 hh \\\\\n",
+    formatC(bc$value[bc$variable == "annual_tax_savings_2025"], format = "f", digits = 0, big.mark = ",")))
 cat("\\midrule\n")
-cat("\\multicolumn{4}{l}{\\textit{Costs}} \\\\\n")
-cat(sprintf("Electricity (low est.) & All Dominion residential & %s & Flow \\\\\n",
-    formatC(bc$value[bc$variable == "jlarc_elec_cost_low_annual"], big.mark = ",")))
-cat(sprintf("Electricity (high est.) & All Dominion residential & %s & Flow \\\\\n",
-    formatC(bc$value[bc$variable == "jlarc_elec_cost_high_annual"], big.mark = ",")))
+cat("\\multicolumn{5}{l}{\\textit{Costs}} \\\\\n")
+cat(sprintf("Electricity (low est.) & Dominion residential & %s/yr & Flow & ${\\sim}$2.36M customers \\\\\n",
+    formatC(bc$value[bc$variable == "jlarc_elec_cost_low_annual"], format = "f", digits = 0, big.mark = ",")))
+cat(sprintf("Electricity (high est.) & Dominion residential & %s/yr & Flow & ${\\sim}$2.36M customers \\\\\n",
+    formatC(bc$value[bc$variable == "jlarc_elec_cost_high_annual"], format = "f", digits = 0, big.mark = ",")))
 
-# Property value effect from repeat-sales (most conservative)
-if (!is.null(fit_repeat)) {
-  coefs_rep <- tidy(fit_repeat)
-  pv_1km <- coefs_rep$estimate[grepl("0-1 km", coefs_rep$term)]
-  if (length(pv_1km) > 0) {
-    dollar_loss <- round(abs(pv_1km[1]) * 738730)
-    cat(sprintf("Property value (0--1 km) & Proximate homeowners & %s & Capitalized \\\\\n",
-        formatC(dollar_loss, big.mark = ",")))
-  }
+# Property value effects from ring specifications
+coefs_rings <- tidy(fit_did_rings)
+pv_1_2km <- coefs_rings$estimate[grepl("1-2 km", coefs_rings$term)]
+if (length(pv_1_2km) > 0) {
+  dollar_01 <- formatC(round(abs(coefs_rings$estimate[grepl("0-1 km", coefs_rings$term)][1]) * 738730),
+                        format = "f", digits = 0, big.mark = ",")
+  dollar_12 <- formatC(round(abs(pv_1_2km[1]) * 738730),
+                        format = "f", digits = 0, big.mark = ",")
+  cat(sprintf("Property value (0--1 km) & Proximate homeowners & %s & Capitalized & ${\\sim}$%s parcels \\\\\n",
+      dollar_01, formatC(n_unique_1km, big.mark = ",")))
+  cat(sprintf("Property value (1--2 km) & Proximate homeowners & %s & Capitalized & ${\\sim}$%s parcels \\\\\n",
+      dollar_12, formatC(n_unique_2km, big.mark = ",")))
 }
-
-cat("\\midrule\n")
-cat(sprintf("\\multicolumn{4}{l}{\\textit{Affected populations}} \\\\\n"))
-cat(sprintf("Loudoun homeowners & \\multicolumn{3}{l}{~130,000 households} \\\\\n"))
-cat(sprintf("Dominion residential & \\multicolumn{3}{l}{~2.36 million customers} \\\\\n"))
-cat(sprintf("Parcels within 1 km & \\multicolumn{3}{l}{%s unique parcels transacted 2020--2025} \\\\\n",
-    formatC(n_unique_1km, big.mark = ",")))
-cat(sprintf("Parcels within 2 km & \\multicolumn{3}{l}{%s unique parcels transacted 2020--2025} \\\\\n",
-    formatC(n_unique_2km, big.mark = ",")))
+cat("Cumulative exposure & --- & 0 & --- & --- \\\\\n")
 cat("\\bottomrule\n\\end{tabular}\n")
 cat("\\begin{tablenotes}\\small\n")
 cat("\\item \\textit{Notes:} Tax savings are an upper-bound estimate assuming the 2012\n")
-cat("property tax rate (\\$1.145/\\$100) would have persisted absent data center revenue.\n")
-cat("Electricity costs from JLARC (2024) range. Property value effect from\n")
-cat("repeat-sales parcel FE specification applied to median assessed value (\\$738,730).\n")
+cat("rate (\\$1.145/\\$100) would have persisted absent data center revenue.\n")
+cat("Electricity costs from JLARC (2024) range.\n")
+cat("Property value amounts from ring specifications applied to median assessed value\n")
+cat("(\\$738,730); the preferred cumulative exposure specification yields null effects.\n")
+cat("Parcel counts are unique parcels transacted 2020--2025.\n")
 cat("Populations differ across channels: tax savings accrue to Loudoun homeowners;\n")
-cat("electricity costs are distributed across Dominion's service territory;\n")
-cat("property value effects are spatially concentrated.\n")
+cat("electricity costs are distributed across Dominion's statewide service territory;\n")
+cat("property value effects, if real, are spatially concentrated.\n")
 cat("\\end{tablenotes}\n\\end{table}\n")
 sink()
 message("Saved tab_incidence.tex")

@@ -3,32 +3,30 @@
 \caption{Distributional Incidence of Data Center Development}
 \label{tab:incidence}
 \small
-\begin{tabular}{llcc}
+\begin{tabular}{llccc}
 \toprule
-Channel & Who Bears It & Annual (\$) & Stock/Flow \\
+Channel & Who Bears It & Amount (\$) & Type & Affected Pop. \\
 \midrule
-\multicolumn{4}{l}{\textit{Benefits}} \\
-Tax savings (upper bound) & All Loudoun homeowners & 2,512 & Flow \\
+\multicolumn{5}{l}{\textit{Benefits}} \\
+Tax savings (upper bound) & Loudoun homeowners & 2,512/yr & Flow & ${\sim}$130,000 hh \\
 \midrule
-\multicolumn{4}{l}{\textit{Costs}} \\
-Electricity (low est.) & All Dominion residential & 168 & Flow \\
-Electricity (high est.) & All Dominion residential & 444 & Flow \\
-Property value (0--1 km) & Proximate homeowners & 1.067e+04 & Capitalized \\
-\midrule
-\multicolumn{4}{l}{\textit{Affected populations}} \\
-Loudoun homeowners & \multicolumn{3}{l}{~130,000 households} \\
-Dominion residential & \multicolumn{3}{l}{~2.36 million customers} \\
-Parcels within 1 km & \multicolumn{3}{l}{3,236 unique parcels transacted 2020--2025} \\
-Parcels within 2 km & \multicolumn{3}{l}{12,506 unique parcels transacted 2020--2025} \\
+\multicolumn{5}{l}{\textit{Costs}} \\
+Electricity (low est.) & Dominion residential & 168/yr & Flow & ${\sim}$2.36M customers \\
+Electricity (high est.) & Dominion residential & 444/yr & Flow & ${\sim}$2.36M customers \\
+Property value (0--1 km) & Proximate homeowners & 17,410 & Capitalized & ${\sim}$3,236 parcels \\
+Property value (1--2 km) & Proximate homeowners & 22,679 & Capitalized & ${\sim}$12,506 parcels \\
+SA ATT (aggregate) & All within 4 km & 9,600 & Capitalized & ${\sim}$15,700 parcels \\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}\small
 \item \textit{Notes:} Tax savings are an upper-bound estimate assuming the 2012
-property tax rate (\$1.145/\$100) would have persisted absent data center revenue.
-Electricity costs from JLARC (2024) range. Property value effect from
-repeat-sales parcel FE specification applied to median assessed value (\$738,730).
+rate (\$1.145/\$100) would have persisted absent data center revenue.
+Electricity costs from JLARC (2024) range.
+Ring-specific property value amounts apply the ring coefficient to the median assessed value
+(\$738,730); the SA ATT row reports the Sun-Abraham aggregate treatment effect
+(\$9,600 $= 1.3\%$ of median value), which is the paper's summary measure of the housing effect.
 Populations differ across channels: tax savings accrue to Loudoun homeowners;
-electricity costs are distributed across Dominion's service territory;
-property value effects are spatially concentrated.
+electricity costs are distributed across Dominion's statewide service territory;
+property value effects, if real, are spatially concentrated.
 \end{tablenotes}
 \end{table}

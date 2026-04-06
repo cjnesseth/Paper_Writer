@@ -1,0 +1,26 @@
+\begin{table}[htbp]
+\centering
+\caption{Treatment-Effect Heterogeneity: Facility Size and Cohort Timing}
+\label{tab:appx_heterogeneity}
+\small
+\begin{tabular}{lccc}
+\toprule
+Interaction & Coefficient & SE & p-value \\
+\midrule
+\multicolumn{4}{l}{\textit{Panel A: Facility size ($>$500K sq ft vs smaller)}} \\
+Small DC $\times$ Post & -0.0273 & 0.0242 & 0.268 \\
+Large DC $\times$ Post & -0.0185 & 0.0120 & 0.134 \\
+Difference (Large -- Small) & 0.0089 & 0.0165 & 0.592 \\
+\midrule
+\multicolumn{4}{l}{\textit{Panel B: Cohort timing (permit 2019--2021 vs 2022+)}} \\
+Late cohort $\times$ Post & -0.0328 & 0.0274 & 0.241 \\
+Early cohort $\times$ Post & -0.0151 & 0.0140 & 0.292 \\
+Difference (Early -- Late) & 0.0178 & 0.0207 & 0.392 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}\small
+\item \textit{Notes:} Interacts the post-treatment indicator with a binary classifier of the nearest DC.
+Large DC defined as total project square footage above 500{,}000. Early cohort defined as permit year 2019--2021 (late = 2022+). Sample restricted to properties within 4 km. Census-tract and year-quarter fixed effects, structural controls, SE clustered at census tract.
+The ``Difference'' rows test whether treatment effects differ by subgroup.
+\end{tablenotes}
+\end{table}

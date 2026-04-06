@@ -1,0 +1,19 @@
+\begin{table}[htbp]
+\centering
+\caption{Joint Test of Parallel Pre-Trends}
+\label{tab:appx_pretrends}
+\small
+\begin{tabular}{lcccc}
+\toprule
+Specification & F-statistic & df (num.) & df (den.) & p-value \\
+\midrule
+Sun-Abraham (period aggregates) & 3.809 & 2 & 50 & 0.029 \\
+TWFE event study & 3.228 & 2 & 49 & 0.048 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}\small
+\item \textit{Notes:} Joint Wald test on pre-treatment lead coefficients at event times $-2$ and $-3$ (t=-1 is the reference).
+Event time $-4$ is excluded because only 2 observations fall in that bin, both from the sparse 2024 cohort (14 parcels) observed in 2020; its coefficient (-0.062, SE 0.008) is a numerical artifact of bin sparsity rather than evidence of a pre-trend.
+Models estimated with census-tract and year-quarter fixed effects, structural controls, SE clustered at census tract.
+\end{tablenotes}
+\end{table}

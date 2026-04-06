@@ -6,51 +6,34 @@
 \begin{tabular}{lcccc}
 \toprule
  & (1) & (2) & (3) & (4) \\
- & Cross-Section & DiD Rings & Event Study & Repeat Sales \\
+ & TWFE Rings & Cum.\ Exp.\ (sqft) & Cum.\ Exp.\ (count) & Repeat Sales \\
+ & Tract FE & Tract FE & Tract FE & Parcel FE \\
 \midrule
-\multicolumn{5}{l}{\textit{Panel A: Distance Ring Effects}} \\
-[3pt]
-Ring: 0-1 km & -0.0006 & -0.0307 \\ 
-  & (0.0227) & (0.0259) \\ 
-[3pt]
-Ring: 1-2 km & -0.0083 & -0.0170 \\ 
-  & (0.0139) & (0.0133) \\ 
-[3pt]
-Ring: 2-4 km & 0.0037 & -0.0145 \\ 
-  & (0.0114) & (0.0090) \\ 
-[3pt]
-\midrule
-\multicolumn{5}{l}{\textit{Panel B: Event Study Coefficients}} \\
-[3pt]
-t = -3 & -0.0096 \\ 
-  & (0.0110) \\ 
-[3pt]
-t = -2 & -0.0062 \\ 
-  & (0.0124) \\ 
-[3pt]
-t = +0 & -0.0042 \\ 
-  & (0.0073) \\ 
-[3pt]
-t = +1 & -0.0120 \\ 
-  & (0.0135) \\ 
-[3pt]
-t = +2 & 0.0424** \\ 
-  & (0.0186) \\ 
-[3pt]
-t = +3 & 0.0084 \\ 
-  & (0.0112) \\ 
-[3pt]
+Ring: 0--1 km $\times$ Post & -0.0236 & & & -0.0144 \\
+ & (0.0152) & & & (0.0204) \\
+[2pt]
+Ring: 1--2 km $\times$ Post & -0.0307$^{***}$ & & & -0.0331$^{***}$ \\
+ & (0.0105) & & & (0.0087) \\
+[2pt]
+Ring: 2--4 km $\times$ Post & -0.0163$^{***}$ & & & -0.0209$^{**}$ \\
+ & (0.0051) & & & (0.0101) \\
+[2pt]
+DC sq ft within 2 km (M) & & 0.0013 & & \\
+ & & (0.0040) & & \\
+[2pt]
+DC count within 2 km & & & -0.0006 & \\
+ & & & (0.0014) & \\
 \midrule
 Structural Controls & Yes & Yes & Yes & No \\
-Census Tract FE & Yes & Yes & Yes & -- \\
+Census Tract FE & Yes & Yes & Yes & --- \\
 Parcel FE & No & No & No & Yes \\
 Year-Quarter FE & Yes & Yes & Yes & Yes \\
 \midrule
-Observations & 41,130 & 21,935 & 21,935 & 3,996 \\
-R$^2$ (within) & 0.829 & 0.843 & 0.844 & 0.021 \\
+Observations & 18,397 & 31,333 & 31,333 & 3,390 \\
+R$^2$ (within) & 0.815 & 0.836 & 0.836 & 0.018 \\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}\small
-\item \textit{Notes:} Dependent variable is log sale price. Reference category: properties $>$4 km from nearest data center. Columns (1)--(3) use census tract fixed effects (74 tracts). Column (4) uses parcel fixed effects on the repeat-sales subsample. Standard errors clustered at the census tract level in parentheses. $^{***}p<0.01$, $^{**}p<0.05$, $^{*}p<0.1$.
+\item \textit{Notes:} Dependent variable is log sale price. Treatment is an indicator for sale occurring after the permit year of the nearest data center. Columns (1) and (4) estimate distance-ring effects with reference category $>$4 km from any data center. Columns (2) and (3) use continuous cumulative exposure: total built data center square footage (millions) and count of facilities within 2 km, respectively, both time-varying based on permit dates. Structural controls are living area, bedrooms, bathrooms, age, age squared, construction grade, and property type. Standard errors clustered at the census tract level in parentheses. $^{***}p<0.01$, $^{**}p<0.05$, $^{*}p<0.1$.
 \end{tablenotes}
 \end{table}

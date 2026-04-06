@@ -1,0 +1,25 @@
+\begin{table}[htbp]
+\centering
+\caption{Treatment Timing Robustness: Permit Year vs.\ Opening Year}
+\label{tab:appx_opening}
+\small
+\begin{tabular}{lcccc}
+\toprule
+& \multicolumn{2}{c}{Permit year (main)} & \multicolumn{2}{c}{Opening year} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5}
+Ring & Coef. & SE & Coef. & SE \\
+\midrule
+0-1 km & -0.0236 & 0.0152 & -0.0368 & 0.0164 \\
+1-2 km & -0.0307 & 0.0105 & -0.0420 & 0.0085 \\
+2-4 km & -0.0163 & 0.0051 & -0.0207 & 0.0064 \\
+\midrule
+SA ATT & -0.0134 & 0.0048 & -0.0182 & 0.0058 \\
+Observations & \multicolumn{2}{c}{18,397} & \multicolumn{2}{c}{18,432} \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}\small
+\item \textit{Notes:} TWFE DiD with census-tract and year-quarter fixed effects.
+Reference category: 4+ km. Controls: living area, bedrooms, bathrooms, age, age squared, construction grade, property type. SE clustered at census tract.
+SA ATT row reports the Sun-Abraham cohort-robust ATT under each timing convention.
+\end{tablenotes}
+\end{table}
