@@ -1,175 +1,36 @@
 % ==============================================================================
 % Section: The Allocative Cost of Price Controls
-% Status: COMPLETE (2026-03-28 Session R4)
+% Status: TRIMMED (2026-04-07 — collapsed from 4 subsections to 2 paragraphs)
 % ==============================================================================
 
-\section{The Allocative Cost of Price Controls}
+\section{Allocative Implications of the Price Band}
 \label{sec:allocative_cost}
 
-The Shapiro settlement imposes a hard cap at $\bar{p}_S = \$325$/MW-day UCAP
-on PJM's capacity demand curve for the 2026/27 and 2027/28 delivery years.
-Section~\ref{sec:results} established that the SFE equilibrium $p^* = \$329$
-exceeds $\bar{p}_S$ in 2026/27, so the settlement is binding by \$4/MW-day at
-the RTO level and by \$115--\$141/MW-day in 2025/26 constrained LDAs. Binding
-a price cap below the equilibrium changes market outcomes through two channels:
-a revenue transfer from capacity sellers to buyers, and a distortion of the
-entry and exit incentives that the capacity price is designed to convey. This
-section analyzes both channels. Section~\ref{sec:21billion} quantifies the
-revenue transfer in relation to the \$21~billion savings claim.
+The settlement cap's allocative significance depends on its proximity to the
+investment threshold. In 2026/27, Net CONE is \$212.14/MW-day; the settlement
+cap at \$325/MW-day exceeds it by 53\%, so the cap alone does not prevent new
+entry from being financially viable. The more substantive concern is
+informational: because the cap binds in consecutive years (2026/27 and
+2027/28), potential entrants observe the cap rather than the unconstrained
+equilibrium price and cannot distinguish between a market that would have
+cleared at \$333 and one that would have cleared far above \$325. This
+uncertainty reduces the informativeness of the capacity price for investment
+decisions \citep{Anderson2005_sfe_pricecaps}, a concern amplified in
+constrained LDAs where local Net CONE values exceed the settlement cap
+(e.g., PS and PS NORTH Net CONE $= \$369$/MW-day in 2026/27).
 
-% ------------------------------------------------------------------------------
-\subsection{Revenue Transfer and the Net CONE Benchmark}
-\label{subsec:alloc_transfer}
-% ------------------------------------------------------------------------------
+The \$175/MW-day floor operates differently: it prevents price collapse in
+over-supplied conditions, functioning as an investment adequacy mechanism
+rather than a cost-reduction measure \citep{PJM2025_settlement_slides}. At
+the RTO level, the floor falls below Net CONE (\$212.14) and does not
+guarantee full cost recovery. Combined with the cap, the settlement creates
+a price band (\$175--\$325) that is neither the competitive equilibrium
+($c \approx \$150$) nor the SFE benchmark ($p^* \approx$ \$329--\$333).
+For $K = 3$, the SFE equilibrium falls above the band, so the cap truncates
+the price signal rather than confirming it. A formal welfare accounting---
+comparing deadweight losses from the truncated investment signal against
+consumer savings from lower cleared prices---is outside the scope of this
+paper; the observation here is that the cap is close enough to Net CONE to
+leave entry incentives broadly intact, and the remaining allocative concern
+is informational rather than direct cost recovery.
 
-Table~\ref{tab:cap_comparison} summarizes the key price levels and the implied
-revenue transfer per MW-year under the settlement. For the 2026/27 delivery
-year, the SFE equilibrium falls at the VRR Point~(a) price $\bar{p} = \$329.17$/MW-day,
-yielding a binding gap of \$4.17/MW-day relative to the settlement cap. At
-365 days per year, this corresponds to a revenue transfer of approximately
-\$1,522 per MW-year at the RTO level. For 2027/28, the VRR Point~(a) price
-under the new design is \$333.44/MW-day, implying a binding gap of \$8.44/MW-day
-and a revenue transfer of approximately \$3,081 per MW-year.
-
-\begin{table}[ht]
-  \centering
-  \caption{Settlement Price Levels vs.\ SFE Equilibrium and Net CONE (2026/27 and 2027/28)}
-  \label{tab:cap_comparison}
-  \begin{tabular}{lcccccc}
-    \hline\hline
-    Year & $\bar{p}$ & $\bar{p}_S$ & $p^*$ & Net CONE & $\bar{p}_f$ &
-      $p^* - \bar{p}_S$ \\
-    \hline
-    2026/27 & \$329.17 & \$325.00 & \$329.17 & \$212.14 & \$175.00 & \$4.17 \\
-    2027/28 & \$333.44 & \$325.00 & \$333.44 & \$242.52 & \$179.55 & \$8.44 \\
-    \hline\hline
-  \end{tabular}
-  \smallskip
-
-  \noindent\footnotesize
-  \textit{Notes:} All prices in \$/MW-day UCAP. $\bar{p}$ is the VRR Point~(a)
-  price cap; $\bar{p}_S = \$325$/MW-day is the Shapiro settlement cap;
-  $p^* = \bar{p}$ because the SFE clears at the cap for $K \leq 3$ (both years
-  observed at-cap in BRA data); Net CONE is the published Net Cost of New Entry
-  for the RTO zone \citep{PJM2025_settlement_slides}; $\bar{p}_f$ is the
-  settlement floor (Point~(b)/(c) in the new VRR curve); $p^* - \bar{p}_S$ is
-  the binding gap. Revenue transfer per MW-year $= (p^* - \bar{p}_S) \times 365$.
-\end{table}
-
-The revenue transfer from sellers to buyers per MW-year is modest relative to
-the settlement's stated savings: \$1,522 and \$3,081 per MW-year in 2026/27
-and 2027/28, respectively, compared to the \$21~billion aggregate claim, which
-uses a counterfactual price of over \$500/MW-day and a much larger binding gap.
-Section~\ref{sec:21billion} reconciles these estimates. The relevant comparison
-here is not the size of the transfer per MW-year, but its proximity to the Net
-CONE investment threshold. In 2026/27, Net CONE is \$212.14/MW-day. The
-settlement cap at \$325/MW-day is well above Net CONE (ratio 1.53), so in
-isolation the cap does not prevent new entry from being financially viable:
-a generator earning \$325/MW-day exceeds its Net CONE by 53\%. The investment
-distortion from the cap alone is therefore limited in 2026/27.
-
-% ------------------------------------------------------------------------------
-\subsection{Entry Distortion and the Informational Role of Prices}
-\label{subsec:alloc_entry}
-% ------------------------------------------------------------------------------
-
-The more substantive allocative concern is not whether prices remain above
-Net CONE today, but whether suppressing the price signal degrades the
-forward-looking information that investors use to evaluate entry decisions
-for the 2028/29 delivery year and beyond. \citet{Hayek1945_knowledge}
-argues that prices perform an indispensable coordinative function: they
-aggregate and transmit dispersed private knowledge about scarcity conditions
-that no central authority can replicate. In a capacity market, the scarcity
-signal is the gap between the clearing price and Net CONE. A price of
-\$329/MW-day signals acute scarcity (\$117/MW-day above Net CONE in 2026/27).
-Capping it at \$325/MW-day preserves the directional signal but compresses
-the magnitude.
-
-The informational loss is larger when the cap is binding in consecutive
-years. If the 2027/28 auction also clears at the settlement cap (\$325 with
-$\bar{p} = \$333.44$ and Net CONE $= \$242.52$), potential entrants observe
-only the cap rather than the unconstrained equilibrium price. They cannot
-distinguish between ``the market would have cleared at \$333, signaling
-\$91/MW-day above Net CONE'' and ``the market is capped and might have
-cleared anywhere above \$325.'' This uncertainty reduces the informativeness
-of the capacity price for investment decisions, a concern also raised in the
-price-caps-in-SFE literature \citep{Anderson2005_sfe_pricecaps}.
-
-The settlement's applicability to constrained LDAs amplifies this effect.
-In 2026/27, all LDA-level SFE equilibria fall at or near the respective
-VRR Point~(a) caps (Section~\ref{subsec:res_lda}), but the binding gap
-between $p^*$ and $\bar{p}_S$ is structurally larger in tightly constrained
-LDAs because those LDAs face steeper demand curves and higher Net CONE values
-(e.g., PS and PS NORTH Net CONE $= \$369$/MW-day in 2026/27, far above both
-$\bar{p}_S$ and $\bar{p}$). In such LDAs, the settlement cap truncates a
-price signal that was already struggling to attract investment.
-
-% ------------------------------------------------------------------------------
-\subsection{The Floor's Distinct Allocative Role}
-\label{subsec:alloc_floor}
-% ------------------------------------------------------------------------------
-
-The \$175/MW-day floor is not the mirror image of the cap. It operates as
-an investment adequacy mechanism: all capacity offered at or below \$175/MW-day
-UCAP is procured at the floor price, regardless of whether the market would
-have cleared there \citep{PJM2025_settlement_slides}. PJM characterizes the
-floor explicitly as ``supporting near-term investment,'' a characterization
-that reflects its role in preventing the price from collapsing in over-supplied
-market conditions and protecting the revenue stream for marginal capacity.
-
-A natural benchmark for evaluating the floor is Net CONE. If the floor exceeds
-Net CONE, it provides a revenue guarantee above the investment threshold,
-functioning as an implicit subsidy to existing capacity that may not be needed
-for reliability. At the RTO level, the 2026/27 floor ($\$177.24$/MW-day in
-VRR parameters) is \emph{below} Net CONE ($\$212.14$/MW-day): the floor does
-not guarantee full cost recovery and thus does not over-compensate existing
-generators on net. In the SWMAAC zone, however, the relationship inverts:
-SWMAAC Net CONE is \$171.02/MW-day while the floor is \$177.24/MW-day, so the
-floor exceeds the local investment threshold by \$6.22/MW-day and provides
-above-cost revenue to SWMAAC capacity.
-
-The floor's interaction with the cap creates a price band: outcomes between
-\$175 and \$325 are interior equilibria. Outcomes outside this band are
-truncated. For $K = 3$, the SFE equilibrium in 2026/27 falls at \$329,
-above the band. The settlement cap therefore does not allow the capacity
-price to reach the strategic equilibrium. It instead pins the outcome to
-the top of the band. From the perspective of the standard missing-money
-literature \citep{Cramton2005_capacity, Joskow2008_capacity_payments}, a
-price floor is a design-level intervention to correct the missing money
-problem in energy-only markets. Applying a floor simultaneously with a
-cap creates an internally inconsistent incentive: the cap signals that
-scarcity is not severe enough to warrant prices above \$325, while the
-floor signals that prices below \$175 are inadequate to support investment.
-The two signals are not contradictions only if the competitive equilibrium
-falls in the interior of the band, which it does not under the $K = 3$
-structural regime the SFE model identifies.
-
-% ------------------------------------------------------------------------------
-\subsection{The Price Band as a Non-Competitive Equilibrium}
-\label{subsec:alloc_band}
-% ------------------------------------------------------------------------------
-
-\citet{GlaeserLuttmer2003_rent} demonstrate in the context of residential
-rent control that binding price controls generate misallocation beyond the
-standard deadweight triangle: when quantity is rationed below the market-
-clearing level, allocation is distorted away from highest-willingness-to-pay
-consumers. The direct mechanism (relationship-based allocation in rental
-housing) does not translate to capacity markets, where all capacity
-offering at or below the cap clears. The relevant analogue for capacity
-markets is inter-temporal: a binding cap suppresses the price signal that
-should direct investment toward future delivery years with the highest
-expected scarcity, creating an efficiency loss that accumulates dynamically
-rather than appearing as a static misallocation of current capacity.
-
-The settlement band (\$175--\$325) defines a price interval that is
-neither the competitive equilibrium ($c \approx \$150$, far below the
-floor) nor the model-predicted benchmark price ($p^* \approx \$329$--\$333,
-above the cap). It is an administratively imposed outcome. Whether this
-intervention is welfare-improving depends on whether the gap between $p^*$
-and $\bar{p}_S$ (of order \$4--\$8/MW-day) justifies the associated
-information loss and investment distortion from cap-binding. The SFE model
-suggests this gap is modest (1--3\% above the cap) at the RTO level.
-The cap's revenue transfer benefit is small relative to its informational
-cost under the model's assumptions. Section~\ref{sec:policy_alternatives}
-considers whether structural remedies can reduce $p^*$ itself, rather than
-truncating the equilibrium price signal.

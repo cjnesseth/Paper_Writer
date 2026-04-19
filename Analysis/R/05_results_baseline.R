@@ -24,7 +24,7 @@ cat("  Baseline SFE Results: Symmetric K=3, ACR=150 $/MW-day\n")
 cat("=============================================================\n\n")
 
 # --- Calibration ---
-cal_list <- calibrate_all(K = 3, acr = ACR_PLACEHOLDER)
+cal_list <- calibrate_all(K = 3, acr = ACR_BASELINE)
 print_calibration_summary(cal_list)
 
 # --- Solve ODE for each benchmark year ---
@@ -77,9 +77,8 @@ cat(strrep("=", 80), "\n\n")
 cat("Notes:\n")
 cat("  - p*       : SFE equilibrium clearing price ($/MW-day)\n")
 cat("  - p_actual : Observed BRA clearing price ($/MW-day)\n")
-cat("  - Lerner   : (p* - ACR) / p*  [ACR = ", ACR_PLACEHOLDER, "$/MW-day]\n")
-cat("  - Benchmark years: 2023/24 (low, old VRR), 2025/26 (spike, old),\n")
-cat("                     2026/27 (at-cap, new VRR)\n\n")
+cat("  - Lerner   : (p* - ACR) / p*  [ACR = ", ACR_BASELINE, "$/MW-day]\n")
+cat("  - Benchmark years: all 7 completed BRAs (2021/22 through 2027/28)\n\n")
 
 # --- Save solution objects for downstream scripts (comparative statics) ---
 baseline_results <- results

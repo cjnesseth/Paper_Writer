@@ -8,9 +8,9 @@
 \label{sec:introduction}
 
 On December 30, 2024, the Commonwealth of Pennsylvania filed a complaint
-with the Federal Energy Regulatory Commission alleging that PJM's capacity
+with the Federal Energy Regulatory Commission (FERC) alleging that PJM's capacity
 auction demand curve was miscalibrated, with its price cap set too high given
-near-term expectations for new entry. The complaint cited PJM's July 2024
+near term expectations for new entry. The complaint cited PJM's July 2024
 Base Residual Auction for the 2025/26 delivery year, which cleared at
 \$269.92/MW-day, an increase of more than 800 percent from the prior year,
 as evidence that the existing market design imposed unnecessary costs on
@@ -18,59 +18,51 @@ as evidence that the existing market design imposed unnecessary costs on
 Six weeks later, on January 28, 2025, Governor Josh Shapiro announced an
 agreement with PJM in which the demand curves for the 2026/27 and 2027/28
 auctions would be modified to impose a price cap of approximately
-\$325/MW-day (unforced capacity, UCAP) and a price floor of approximately
+\$325/MW-day UCAP and a price floor of approximately
 \$175/MW-day UCAP, applied to both the RTO and all constrained Locational
 Deliverability Areas \citep{PJM2025_settlement_slides}. The agreement was
 projected to save consumers over \$21 billion over the two delivery years.
 
-The settlement creates a two-tier price ceiling in PJM's capacity market.
-PJM's existing Variable Resource Requirement (VRR) curve already contains a
-design-level cap at Point~(a), set at approximately 1.5 times the Net Cost
-of New Entry (CONE), serving as an investment-adequacy ceiling calibrated to
-the annualized cost of a reference generating unit and intended to prevent
-prices from permanently exceeding the entry threshold. The settlement imposes
-a second, lower cap at $\bar{p}_S \approx \$325$/MW-day, below the Point~(a)
-level, while simultaneously adding a floor at $\bar{p}_f \approx \$175$/MW-day
-that clears all capacity offered at or below that level. The mechanism is
-implemented by reshaping the demand curve itself, giving it a flat top at
-$\bar{p}_S$, the existing sloped segment between $\bar{p}_S$ and
-$\bar{p}_f$, and a flat bottom at $\bar{p}_f$ \citep{PJM2025_settlement_slides}.
+The settlement reshapes PJM's VRR demand
+curve by imposing a cap at $\bar{p}_S \approx \$325$/MW-day below the
+existing design-level cap at Point~(a), and adding a floor at
+$\bar{p}_f \approx \$175$/MW-day (Section~\ref{subsec:inst_shapiro}).
 This paper asks what price PJM's 2026/27 and 2027/28 auctions would have
 cleared at absent the settlement modification, and what the consequences of
 suppressing prices to $\bar{p}_S$ are.
 
-I answer the question using a calibrated Supply Function Equilibrium (SFE)
+I answer the question using a calibrated SFE
 model of the PJM Base Residual Auction. In the model, $K$ symmetric
 strategic sellers simultaneously submit supply functions against PJM's VRR
 demand curve, which is publicly known before bidding. Following
 \citet{Klemperer1989_sfe} and \citet{Green1992_british}, equilibrium is
-characterized by a first-order ordinary differential equation (ODE) system
+characterized by a first order ordinary differential equation (ODE) system
 in the sellers' supply functions, integrated backward from the
-capacity-constrained boundary. Equilibrium selection imposes the Holmberg
+capacity constrained boundary. Equilibrium selection imposes the Holmberg
 boundary condition, requiring each seller's supply function to equal installed
 capacity at the VRR Point~(a) cap. This criterion is motivated by
 \citet{Holmberg2008_unique_sfe}'s uniqueness result for stochastic markets;
-in the deterministic BRA it is imposed as a selection device, and the at-cap
-clearing outcomes in 2026/27 and 2027/28 confirm the condition is active in
-practice. I calibrate the model to three benchmark delivery years using
-published PJM planning parameters, BRA clearing results, and IMM State of
-the Market cost data. The SFE equilibrium price $p^*$ is the counterfactual
-price at which the unmodified VRR curve would have cleared under strategic
-bidding, which is what is needed to evaluate the settlement's claim of
-\$21 billion in savings.
+in the deterministic BRA it is imposed as a selection device. Because the
+boundary condition forces $p^* = \bar{p}$ whenever it is active, the 2026/27
+and 2027/28 at-cap outcomes are consistent with the maintained assumption of
+$K \leq 3$ strategic sellers but do not independently test the dollar value
+of the clearing price; the model's substantive content is the
+\emph{regime}---at-cap versus interior---and its dependence on $K$, together
+with the markup level when the equilibrium is interior. I calibrate the
+model to all seven completed BRA delivery years (2021/22 through 2027/28)
+using published PJM planning parameters, BRA clearing results, and
+Independent Market Monitor (IMM) State of the Market cost data. The SFE
+equilibrium price $p^*$ is the counterfactual clearing price under strategic
+bidding against the unmodified VRR curve; when the boundary condition is
+active, $p^*$ equals the design-level Point~(a) cap by construction, which
+is what distinguishes the SFE counterfactual from the VRR Point~(a)
+benchmark used in the settlement's \$21~billion savings figure.
 
 The remainder of the paper is organized as follows.
-Section~\ref{sec:literature} surveys the supply function equilibrium
-literature, the capacity market design literature, and the economics of
-price controls in oligopolistic markets. Section~\ref{sec:institutional}
-reviews PJM's institutional context, including the VRR mechanism, auction
-irregularities, and the Shapiro settlement. Section~\ref{sec:model}
-develops the theoretical SFE model. Section~\ref{sec:calibration} describes
-data sources and calibration. Section~\ref{sec:results} presents SFE
-equilibrium prices and comparative statics relative to the settlement cap.
-Section~\ref{sec:allocative_cost} analyzes the allocative consequences of
-the settlement's price band for entry, exit, and information.
-Section~\ref{sec:leadtime} evaluates the lead-time argument underlying
-the complaint. Section~\ref{sec:21billion} examines the \$21~billion
-savings claim. Section~\ref{sec:policy_alternatives} considers structural
-alternatives to price caps. Section~\ref{sec:conclusion} concludes.
+Section~\ref{sec:literature} reviews the literature.
+Sections~\ref{sec:institutional}--\ref{sec:calibration} describe the
+institutional setting, model, and calibration.
+Section~\ref{sec:results} presents the main results and comparative statics.
+Section~\ref{sec:allocative_cost} discusses the allocative implications
+of the price band for investment signaling. Section~\ref{sec:21billion}
+evaluates the \$21~billion claim. Section~\ref{sec:conclusion} concludes.

@@ -38,18 +38,24 @@ theme_paper <- function(base_size = 11) {
       plot.title    = element_text(face = "bold", size = base_size + 2),
       axis.title    = element_text(size = base_size),
       legend.position = "bottom",
-      panel.grid.minor = element_blank()
+      panel.grid.minor = element_blank(),
+      panel.border  = element_rect(colour = "grey70", fill = NA, linewidth = 0.4)
     )
 }
 
 YEAR_COLORS <- c(
-  "2023/24" = primary_blue,
-  "2025/26" = highlight_orange,
-  "2026/27" = negative_red
+  "2021/22" = "#1a5276",     # dark navy
+  "2022/23" = "#5dade2",     # light blue
+  "2023/24" = "#27ae60",     # dark green
+  "2024/25" = "#f5b041",     # light amber
+  "2025/26" = "#c0392b",     # dark red
+  "2026/27" = "#e67e22",     # light orange
+  "2027/28" = "#2c3e50"      # dark charcoal
 )
-YEAR_SHAPES <- c("2023/24" = 16, "2025/26" = 17, "2026/27" = 15)
+YEAR_SHAPES <- c("2021/22" = 0, "2022/23" = 1, "2023/24" = 2,
+                 "2024/25" = 6, "2025/26" = 17, "2026/27" = 15, "2027/28" = 8)
 
-cal_list <- calibrate_all(K = 3, acr = ACR_PLACEHOLDER)
+cal_list <- calibrate_all(K = 3, acr = ACR_BASELINE)
 
 cat("Running comparative statics...\n\n")
 

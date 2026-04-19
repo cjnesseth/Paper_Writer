@@ -8,8 +8,14 @@ SKIPPED — no target BRAs assigned
 Total pages: 798
 RSI table found on page 336
 RSI rows parsed (all BRAs): 21
-Rows after filtering to ['2022/23']: 6
+Rows after filtering to ['2021/22', '2022/23']: 12
 Extracted rows:
+  2021/22   RTO              rsi_1=0.80  rsi_3=0.68  n=122  pivotal=122
+  2021/22   EMAAC            rsi_1=0.71  rsi_3=0.22  n=14  pivotal=14
+  2021/22   PSEG             rsi_1=0.20  rsi_3=0.01  n=5  pivotal=5
+  2021/22   ATSI             rsi_1=0.01  rsi_3=0.00  n=2  pivotal=2
+  2021/22   ComEd            rsi_1=0.08  rsi_3=0.02  n=5  pivotal=5
+  2021/22   BGE              rsi_1=0.23  rsi_3=0.00  n=3  pivotal=3
   2022/23   RTO              rsi_1=0.81  rsi_3=0.73  n=130  pivotal=130
   2022/23   MAAC             rsi_1=0.69  rsi_3=0.37  n=25  pivotal=25
   2022/23   EMAAC            rsi_1=1.25  rsi_3=0.64  n=7  pivotal=7

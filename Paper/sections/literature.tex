@@ -1,16 +1,10 @@
 % ==============================================================================
 % Section: Literature Review
-% Paper: IO Paper 2 -- Calibrated SFE Simulation of Market Power in PJM RPM
-% Status: COMPLETE (cut to ~2 pages per Revision_Instructions_2, 2026-03-28)
+% Status: STYLE EDIT (2026-04-07 — removed subsection headers)
 % ==============================================================================
 
 \section{Literature Review}
 \label{sec:literature}
-
-% ------------------------------------------------------------------------------
-\subsection{Supply Function Equilibria: Theory}
-\label{subsec:lit_sfe_theory}
-% ------------------------------------------------------------------------------
 
 The supply function equilibrium concept, introduced by
 \citet{Klemperer1989_sfe}, considers an oligopoly in which each firm commits
@@ -33,13 +27,13 @@ constraints simultaneously bind, tying the ODE boundary condition and selecting
 a unique equilibrium trajectory. This paper applies that boundary condition as
 an equilibrium selection device in the deterministic BRA. For the asymmetric
 extension, \citet{Anderson2008_sfe_asymmetric} provide a convergent iterative
-algorithm. The symmetric case applies here and I solve the ODE backward from
-the Holmberg boundary using the \texttt{deSolve} package in R.
-
-% ------------------------------------------------------------------------------
-\subsection{Capacity Market Design}
-\label{subsec:lit_capacity_markets}
-% ------------------------------------------------------------------------------
+algorithm; \citet{Holmberg2007_asymmetric} establishes existence and uniqueness
+results for the constant-marginal-cost, asymmetric-capacity case.
+\citet{Rudkevich1998_poolco} provide an early application of supply function
+analysis to competitive poolco electricity markets, bridging the canonical
+Klemperer--Meyer theory and applied generation-market modeling. The symmetric
+case applies here and I solve the ODE backward from the Holmberg boundary
+using the \texttt{deSolve} package in R.
 
 The capacity market design literature originates from the ``missing money''
 problem: competitive energy markets, subject to regulatory price caps, suppress
@@ -50,11 +44,6 @@ designed to moderate the extreme price volatility that vertical demand generates
 near the reliability threshold \citep{Bowring2013_pjm}. This paper takes the
 VRR design as given and analyzes how its slope governs strategic markup
 opportunities under concentrated supply.
-
-% ------------------------------------------------------------------------------
-\subsection{Price Controls in Oligopolistic Markets}
-\label{subsec:lit_price_controls}
-% ------------------------------------------------------------------------------
 
 \citet{Weitzman1974_prices} shows that the choice between price and quantity
 regulatory instruments depends on the relative slopes of marginal benefit and
@@ -67,3 +56,4 @@ characterize the allocative consequences of the settlement's price band.
 \citet{Cramton2005_capacity} emphasize that the capacity market's primary
 function is to provide a long-run investment signal. A binding cap disrupts
 this signal precisely when it is most informative.
+

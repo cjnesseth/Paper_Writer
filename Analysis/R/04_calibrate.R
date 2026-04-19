@@ -2,10 +2,10 @@
 # 04_calibrate.R
 # Load calibration_master.csv and extract parameters for each benchmark year.
 #
-# Benchmark years (from session log 2026-03-27):
-#   2023/24 -- low price, old VRR design
-#   2025/26 -- price spike, old VRR design
-#   2026/27 -- at-cap, new VRR design
+# Benchmark years: all seven completed BRAs with RSI data
+#   2021/22 through 2024/25 -- old VRR design, interior equilibria
+#   2025/26 -- old VRR design, price spike year
+#   2026/27, 2027/28 -- new VRR design, at-cap equilibria
 #
 # Strategic capacity calibration (K = 3):
 #   RSI_3 = (total_supply - Q_top3) / reliability_req
@@ -14,8 +14,9 @@
 #   =>  Q_fringe = total_supply - Q_top3
 #
 # Cost parameter:
-#   c = acr ($/MW-day), sector-average avoidable cost rate from IMM SotM.
-#   Placeholder value 150 $/MW-day used pending full ACR extraction from IMM PDFs.
+#   c = acr ($/MW-day), sector-average Avoidable Cost Rate for Combined Cycle
+#   units, rounded from the IMM 2025 State of the Market Report, Table 7-38
+#   (published value: $149.32/MW-day; rounded to $150 for presentation).
 # =============================================================================
 
 .here <- local({
@@ -25,9 +26,9 @@
 })
 source(file.path(.here, "01_vrr_demand.R"))
 
-BENCHMARK_YEARS <- c("2023/24", "2025/26", "2026/27")
+BENCHMARK_YEARS <- c("2021/22", "2022/23", "2023/24", "2024/25", "2025/26", "2026/27", "2027/28")
 DATA_PATH       <- file.path(.here, "../../Data/cleaned/calibration_master.csv")
-ACR_PLACEHOLDER <- 150   # $/MW-day — replace with IMM SotM values when available
+ACR_BASELINE    <- 150   # $/MW-day -- IMM 2025 SotM Table 7-38 (CC = $149.32, rounded)
 
 # -----------------------------------------------------------------------------
 # load_calibration_data()
@@ -45,7 +46,7 @@ load_calibration_data <- function(path = DATA_PATH) {
 # Returns a named list with:
 #   delivery_year, vp (vrr_params), K, c, q_bar, Q_fringe, p_actual, rel_req
 # -----------------------------------------------------------------------------
-calibrate_year <- function(delivery_year, df = NULL, K = 3, acr = ACR_PLACEHOLDER) {
+calibrate_year <- function(delivery_year, df = NULL, K = 3, acr = ACR_BASELINE) {
   if (is.null(df)) df <- load_calibration_data()
 
   row <- df[df$delivery_year == delivery_year, ]
@@ -56,10 +57,13 @@ calibrate_year <- function(delivery_year, df = NULL, K = 3, acr = ACR_PLACEHOLDE
   vp <- make_vrr_params(row)
 
   # --- Market structure: strategic capacity from RSI_3 ---
-  # NOTE: mw_cleared = reliability_req * (1 + capacity_margin) = total available/installed
-  # capacity. Despite the column name, this is NOT the cleared quantity at the auction
-  # price; it is total available supply (verified: mw_cleared == rel_req*(1+cap_margin)
-  # exactly for all three benchmark years). This is the correct denominator for RSI_3.
+  # We use the `mw_cleared` column as a proxy for total offered / available supply
+  # when inverting RSI_3 to recover Q_top3. The PJM BRA XLSX "MW" column reports
+  # the quantity that cleared at the auction price, which equals (or is very close
+  # to) the total offered supply when at-cap (boundary condition binds) and slightly
+  # less than offered supply in interior years (marginal offers not cleared). For
+  # the seven delivery years in the sample the difference is small; see
+  # capacity_margin column for the observed gap vs. reliability_req_mw.
   total_supply <- row$mw_cleared
   rel_req      <- row$reliability_req_mw
   rsi_3        <- row$rsi_3
@@ -93,7 +97,7 @@ calibrate_year <- function(delivery_year, df = NULL, K = 3, acr = ACR_PLACEHOLDE
 # calibrate_all(K, acr)
 # Calibrate all three benchmark years. Returns a named list.
 # -----------------------------------------------------------------------------
-calibrate_all <- function(K = 3, acr = ACR_PLACEHOLDER) {
+calibrate_all <- function(K = 3, acr = ACR_BASELINE) {
   df  <- load_calibration_data()
   cal <- lapply(BENCHMARK_YEARS, calibrate_year, df = df, K = K, acr = acr)
   names(cal) <- BENCHMARK_YEARS

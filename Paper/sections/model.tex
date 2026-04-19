@@ -1,15 +1,12 @@
 % ==============================================================================
 % Section: Model
-% Status: COMPLETE (2026-03-27)
+% Status: STYLE EDIT (2026-04-07 — removed subsection headers, paragraph headers)
 % ==============================================================================
 
 \section{Model}
 \label{sec:model}
 
-% ------------------------------------------------------------------------------
-\subsection{Setup}
 \label{subsec:model_setup}
-% ------------------------------------------------------------------------------
 
 The BRA is modeled as a static, complete-information game in which sellers
 simultaneously submit supply functions before the auction clears. This
@@ -60,21 +57,12 @@ receives the same clearing price $p^*$ for its committed capacity. The
 \end{equation}
 In equilibrium, $S_i(p^*) = R_i(p^*)$. Because $D(\cdot)$ and all rivals'
 strategies are publicly known before the auction, there is no demand
-uncertainty: the residual demand curve each seller faces is deterministic.%
-\footnote{Holmberg's \citeyear{Holmberg2008_unique_sfe} uniqueness proof
-  formally requires stochastic demand with positive probability of all
-  capacity being demanded. In the deterministic BRA setting, the boundary
-  condition $s(\bar{p}) = \bar{q}$ is imposed as a selection criterion
-  motivated by that result. The at-cap clearing outcomes in 2026/27 and
-  2027/28 confirm the condition is active in practice.}
+uncertainty: the residual demand curve each seller faces is deterministic.
 This determinism means firms observe the VRR parameters before submitting
 offers. The boundary condition is imposed as an equilibrium selection
-criterion, as discussed in Section~\ref{subsec:model_selection}.
+criterion, as discussed below.
 
-% ------------------------------------------------------------------------------
-\subsection{The VRR Demand Schedule}
 \label{subsec:model_vrr}
-% ------------------------------------------------------------------------------
 
 PJM's Variable Resource Requirement curve is a piecewise-linear,
 publicly-announced downward-sloping demand schedule. Under the old design
@@ -112,7 +100,6 @@ The flat floor segment at $p_f$ means that clearing prices cannot fall below
 $p_f$ along the VRR, changing the elasticity profile that sellers face and
 thus the equilibrium markup. The comparative static in
 Section~\ref{subsec:res_vrr} isolates this design change.
-
 The slope $D'(p)$ is piecewise constant and satisfies:
 
 \begin{assumption}
@@ -122,10 +109,7 @@ The slope $D'(p)$ is piecewise constant and satisfies:
   $D(\cdot)$ is known to all players before the auction.
 \end{assumption}
 
-% ------------------------------------------------------------------------------
-\subsection{Firm Optimization and the SFE Condition}
 \label{subsec:model_foc}
-% ------------------------------------------------------------------------------
 
 Seller $i$ chooses $S_i(\cdot)$ to maximize profit. Taking rivals'
 supply functions as fixed, the profit at any market-clearing price $p$ is
@@ -175,10 +159,7 @@ sellers compete ($K$ large) or the VRR slope is steep (large $|D'|$), the
 system requires a smaller markup at each price, pushing the equilibrium
 supply function toward the competitive schedule.
 
-% ------------------------------------------------------------------------------
-\subsection{Equilibrium Selection and the Boundary Condition}
 \label{subsec:model_selection}
-% ------------------------------------------------------------------------------
 
 The ODE system~\eqref{eq:sfe_foc} generally admits a continuum of solutions.
 \citet{Klemperer1989_sfe} show that under demand uncertainty, the set of
@@ -187,7 +168,6 @@ Cournot schedule (where each firm behaves as if rivals are at capacity) and
 below by the competitive schedule (where $p = c$). Any trajectory between
 these two stationary solutions is a Nash equilibrium. This multiplicity
 complicates both prediction and comparative statics.
-
 I select from this continuum using the boundary condition from the
 following result, which applies to the capacity-auction setting:
 
@@ -211,7 +191,6 @@ price sacrifices revenue without reducing quantity (since residual demand is
 inelastic), and any higher price is infeasible. This forces the supply
 function to pass through the point $(\bar{p},\, \bar{q}_i)$, tying the
 arbitrary constant in the ODE and selecting a unique trajectory.
-
 In the PJM BRA, the price cap $\bar{p}$ equals the VRR Point~(a) price, and
 Assumption~\ref{assm:demand} ensures $D'(\bar{p}) = 0$ (the VRR is flat at
 the cap). The at-cap clearing outcomes in 2026/27 and 2027/28
@@ -223,10 +202,7 @@ relevant case. I therefore integrate the ODE~\eqref{eq:sfe_foc} \emph{backward}
 from the boundary condition $S_i(\bar{p}) = \bar{q}_i$, following the solution
 method of \citet{Green1992_british}.
 
-% ------------------------------------------------------------------------------
-\subsection{The Symmetric Special Case}
 \label{subsec:model_symmetric}
-% ------------------------------------------------------------------------------
 
 For calibration and comparative statics I begin with the symmetric case in
 which all $K$ strategic sellers are identical: $\bar{q}_i = \bar{q}$ and
@@ -242,11 +218,9 @@ Under Assumption~\ref{assm:fringe}, $S_f'(p) = 0$ almost everywhere.
 Rearranging~\eqref{eq:sfe_sym_raw} for $s'(p)$ yields the \emph{symmetric
 SFE ordinary differential equation}:
 \begin{equation}
-  \boxed{
     s'(p) \;=\; \frac{1}{K-1}
     \left[ D'(p) + \frac{s(p)}{p - c} \right],
     \quad p \in [c,\, \bar{p}),
-  }
   \label{eq:sfe_ode}
 \end{equation}
 with boundary condition $s(\bar{p}) = \bar{q}$. This is a first-order,
@@ -287,36 +261,16 @@ $L^{\text{Cournot}} = 1 / (K \cdot |D'(p^*) \cdot p^* / D(p^*)|)$, the
 standard inverse-elasticity rule evaluated at market demand (which equals the
 residual demand elasticity in the symmetric case).
 
-\paragraph{The symmetry assumption.}
-In reality, the three largest PJM capacity sellers hold heterogeneous
-portfolios: a mix of baseload nuclear, peaking gas, renewables, and
-demand response with widely differing cost structures and capacity sizes.
-Treating them as symmetric is a deliberate first-order approximation, not
-a statement about the actual market. The justification is tractability: the
-symmetric case reduces the $K$-dimensional system of coupled ODEs in
-equation~\eqref{eq:sfe_foc} to the single scalar ODE~\eqref{eq:sfe_ode},
-making the model calibratable from publicly available aggregate data. This
-is the standard approach in the calibrated SFE literature
-\citep{Green1992_british, Sioshansi2007_sfe_ercot}. The direction of the
-asymmetry bias on the average price-cost margin is ambiguous: a lower-cost
-seller has a higher markup than the symmetric benchmark; a
-higher-cost seller has a lower one. On average, these effects partially
-offset. I treat the symmetric Lerner as an estimate of the
-capacity-weighted average markup across the strategic sellers, and note
-that the spread around this average is an object of interest for future
-asymmetric extensions.
-
+Treating the three largest PJM sellers as symmetric is a tractability
+assumption: it reduces the $K$-dimensional coupled ODE
+system~\eqref{eq:sfe_foc} to the scalar ODE~\eqref{eq:sfe_ode}, making
+the model calibratable from publicly available aggregate data. This is
+the standard approach in the calibrated SFE literature
+\citep{Green1992_british, Sioshansi2007_sfe_ercot}. I treat the symmetric
+Lerner index as an estimate of the capacity-weighted average markup; the
+spread around this average is an object of interest for future asymmetric
+extensions.
 Equation~\eqref{eq:sfe_ode} is solved numerically using a fourth-order
-Runge--Kutta (RK4) integrator with fixed step size $h = 0.05$\,\$/MW-day.
-To improve stability I apply the substitution $\tau = \bar{p} - p$, which
-converts the backward initial-value problem into a standard forward IVP
-with $s(0) = \bar{q}$. The piecewise nature of $D'(p)$ is accommodated by
-restarting the integration at each VRR kink point: the integration grid is
-split at $p_b$ (old design) or $p_f$ (new design), so the integrator never
-crosses a discontinuity in $D'(p)$ within a single step. Under the new
-design, $D(p)$ has a jump discontinuity at $p_f$ (from $q_b$ approaching
-from above to $q_d > q_b$ below). Equilibrium is resolved by identifying
-$p^*$ as the price at which aggregate supply meets the sloped-segment demand
-from above, which coincides with $p_f$ when $K \cdot s(p_f) + S_f(p_f) =
-q_b$. Full details of the numerical implementation are provided in
-Section~\ref{sec:calibration}.
+Runge--Kutta integrator with fixed step size $h = 0.05$\,\$/MW-day,
+integrating backward from the boundary condition $s(\bar{p}) = \bar{q}$.
+

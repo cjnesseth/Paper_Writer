@@ -1,98 +1,53 @@
 % ==============================================================================
 % Section: Calibration
-% Status: COMPLETE (2026-03-28 Session 2) -- all subsections written;
-%         statistical language reframed; robustness note added to §4.5
+% Status: STYLE EDIT (2026-04-07 — removed subsection/paragraph headers)
 % ==============================================================================
 
 \section{Calibration}
 \label{sec:calibration}
 
-% ------------------------------------------------------------------------------
-\subsection{Data Sources}
 \label{subsec:cal_data}
-% ------------------------------------------------------------------------------
 
 The calibration draws on four publicly available datasets produced by PJM
-and the PJM Independent Market Monitor (IMM).
-
-\paragraph{PJM Planning Parameters.}
-PJM publishes the planning parameters for each BRA in advance of the
-auction, including the VRR curve anchor points, Net CONE, CETL, and
-reliability requirement for every LDA. These files are available in Excel
-format and provide the complete VRR demand schedule that sellers observe
-when submitting capacity offers. I processed the planning parameter files
-for delivery years 2021/22 through 2028/29 using a custom parser that
-extracts LDA-level parameters for each VRR design vintage and handles the
-three-point (old) and four-point (new) curve specifications separately.
-Spot-checks against published PJM summary tables confirm accuracy (e.g.,
-2023/24 RTO Net CONE = \$274.96 per MW-day).
-
-\paragraph{PJM BRA Results.}
-Following each auction, PJM releases clearing prices and quantities by LDA.
-I processed seven completed auctions (2021/22 through 2027/28). The
-2028/29 BRA had not yet been conducted at the time of data collection.
-Clearing results are verified against PJM press releases (e.g., 2025/26
-RTO clearing = \$269.92 per MW-day; 2026/27 RTO clearing = \$329.17).
-
-\paragraph{PJM IMM State of the Market Reports.}
-The PJM IMM publishes an annual State of the Market (SotM) report containing
-auction-by-auction summaries of market concentration, TPS test outcomes, and
-offer-curve characteristics. I extracted Residual Supply Index values and
-participant counts from the relevant report volumes using a PDF-parsing
-pipeline. Volume 2022 covers delivery years through 2022/23, and Volume 2025
-covers delivery years 2023/24 through 2027/28. Due to layout variation
-across report vintages, RSI data is available for a subset of LDAs and
-delivery years, as documented in Table~\ref{tab:tps_results}. The 2021/22
-delivery year predates the RSI extraction window and is excluded from the
-market structure analysis.
-
-\paragraph{Auction Lead Times.}
-BRA settlement dates and delivery-year start dates were coded manually from
-PJM auction notices and verified against the data in
-Table~\ref{tab:bra_timeline}. Lead time is defined as the number of calendar
-months between the BRA settlement date and the first day of the delivery
-year. The highly irregular lead-time pattern documented in
-Section~\ref{subsec:inst_leadtime} is incorporated as a covariate in the
-calibration of the investment-signal environment.
-
+and the IMM.
+PJM publishes VRR curve anchor points, Net CONE, CETL, and reliability
+requirements for every LDA in advance of each BRA. I compiled planning
+parameter files for delivery years 2021/22 through 2028/29, covering both
+the three-point (old) and four-point (new) curve designs.
+PJM releases clearing prices and quantities by LDA after each auction;
+the sample covers seven completed auctions (2021/22 through 2027/28),
+verified against PJM press releases.
+Residual Supply Index values and participant counts are drawn from the
+IMM's annual State of the Market reports (Volumes 2022 and 2025). RSI data
+is available for a subset of LDAs and delivery years, as documented in
+Table~\ref{tab:tps_results}.
+Lead time is defined as the number of calendar months between the BRA
+settlement date and the first day of the delivery year
+(Table~\ref{tab:bra_timeline}).
 The four datasets are joined at the LDA--delivery-year level to produce a
 master panel with 110 observations spanning 17 LDAs and seven delivery years
 (2021/22 through 2027/28).
 
-% ------------------------------------------------------------------------------
-\subsection{VRR Curve Parameters}
 \label{subsec:cal_vrr}
-% ------------------------------------------------------------------------------
 
 Table~\ref{tab:vrr_params} reports the VRR curve parameters for the RTO
 under both the old and new designs for the six delivery years with complete
 BRA data. Under the old design, Point~(a) equals $1.5 \times \text{Net CONE}$
 and Point~(b) equals $0.75 \times \text{Net CONE}$ by construction, so the
 ratio $p_{a} / p_{b} = 2$ is exact for all old-design years except 2025/26,
-where a transitional administrative cap produced a Point~(a) price above the
-standard $1.5 \times \text{Net CONE}$ multiple.\footnote{The 2025/26 Net CONE
-of \$228.81 per MW-day implies a standard cap of \$343.22, but the published
-Point~(a) was \$451.61. This discrepancy reflects the fact that VRR anchor
-points are fixed at planning-parameter publication and may diverge from the
-final Net CONE if energy and ancillary service revenues are revised
-substantially between publication and auction. I use the published anchor
-points as the realized VRR parameters in all calibrations.}
+where a transitional administrative cap produced a Point~(a) price (\$451.61)
+above the standard $1.5 \times \text{Net CONE}$ multiple (\$343.22), because
+VRR anchor points are fixed at planning-parameter publication and may diverge
+from the final Net CONE. I use the published anchor points as the realized VRR
+parameters throughout.
 Under the new design, Points~(b) and~(c) equal the explicit floor price of
 approximately \$177--\$179 per MW-day, and Point~(a) is calibrated by FERC
-Order ER25-1357.\footnote{The new-design Point~(a) prices (\$329.17 for
-  2026/27, \$333.44 for 2027/28) are not exactly $1.5 \times \text{Net CONE}$
-  ($1.5 \times \$212.14 = \$318.21$ and $1.5 \times \$242.52 = \$363.78$
-  respectively). The \$329.17 figure reflects the settlement implementation:
-  FERC Order ER25-1357, which implemented both the new VRR design and the
-  settlement's cap provision, produced a Point~(a) approximately \$4 above the
-  nominal settlement cap of \$325/MW-day UCAP. The precise derivation follows
-  the same dynamic as the 2025/26 deviation (see footnote above): VRR anchor
-  points are fixed from planning parameters published before the auction and
-  may incorporate accreditation adjustments that produce a Point~(a) differing
-  from a simple Net CONE multiple. I treat the published \$329.17 and
-  \$333.44 as the effective VRR boundary conditions and note that the
-  settlement's flat-top at \$325 creates a binding gap of \$4.17 and \$8.44
-  respectively below these Point~(a) values.}
+Order ER25-1357. The new-design Point~(a) prices (\$329.17 for 2026/27,
+\$333.44 for 2027/28) do not equal simple Net CONE multiples because they
+reflect the settlement implementation and are fixed from planning parameters
+published before each auction. The settlement's flat-top at \$325/MW-day
+creates binding gaps of \$4.17 and \$8.44 respectively below these
+Point~(a) values.
 
 \begin{table}[H]
   \centering
@@ -115,34 +70,19 @@ Order ER25-1357.\footnote{The new-design Point~(a) prices (\$329.17 for
 
   \begin{minipage}{0.92\textwidth}
     \footnotesize \textit{Note:} Prices in nominal dollars per MW-day;
-    quantities in MW. Under the old design, Point~(c) is the zero-price
-    floor at a quantity above Point~(b); under the new design, Points~(b)
-    and~(c) share the floor price and a flat segment extends to Point~(d).
-    The 2025/26 Point~(a) price exceeds $1.5 \times \text{Net CONE}$ due to
-    a transitional administrative cap (see footnote above). Data source: PJM
-    Planning Parameters.
+    quantities in MW. The 2025/26 Point~(a) price exceeds
+    $1.5 \times \text{Net CONE}$ due to a transitional administrative cap.
+    Source: PJM Planning Parameters.
   \end{minipage}
 \end{table}
 
 The panel encompasses 110 LDA--delivery-year cells with observed clearing
-prices across 17 LDAs. The three benchmark calibration years used throughout
-Sections~\ref{sec:model} and~\ref{sec:results} are selected to represent
-three distinct capacity market regimes: \textit{2023/24}, a low-price year
-under the old VRR design exhibiting equilibrium prices consistent with
-competitive pricing under TPS mitigation
-(\$34.13 per MW-day, $\mathrm{RSI}_3 = 0.68$); \textit{2025/26}, a
-high-price year under the old VRR design that preceded the redesign
-(\$269.92 per MW-day, $\mathrm{RSI}_3 = 0.62$); and \textit{2026/27},
-the first auction under the new VRR design, which cleared at exactly the
-Point~(a) cap (\$329.17 per MW-day, $\mathrm{RSI}_3 = 0.64$). Together,
-these three years span the full range of price outcomes in the sample and
-allow the comparative static analysis to isolate the effect of VRR design
-changes from variation in market structure and cost parameters.
+prices across 17 LDAs. All seven completed BRA years are used in the
+analysis: five old-design years (2021/22 through 2025/26) spanning clearing
+prices from \$28.92 to \$269.92/MW-day, and two new-design years (2026/27
+and 2027/28) that both cleared at exactly the Point~(a) cap.
 
-% ------------------------------------------------------------------------------
-\subsection{Market Structure}
 \label{subsec:cal_market_structure}
-% ------------------------------------------------------------------------------
 
 Capacity market concentration in PJM is high by any standard measure. The PJM
 IMM reports LDA-level Herfindahl-Hirschman Index (HHI) values in its annual
@@ -155,8 +95,8 @@ The key calibration input is the number of strategic sellers, $K$. I use the
 Residual Supply Index with threshold three (RSI$_3$) as the calibration
 criterion: RSI$_3 < 1$ means that the three largest sellers collectively hold
 pivotal capacity, i.e., no competitive outcome is supportable without their
-participation. In all three benchmark years, the RTO-level RSI$_3$ falls below
-unity (0.68, 0.62, and 0.64 for 2023/24, 2025/26, and 2026/27, respectively),
+participation. In all seven delivery years, the RTO-level RSI$_3$ falls below
+unity (ranging from 0.62 to 0.73; Table~\ref{tab:tps_results}),
 consistent with at most three large sellers being jointly pivotal. The
 2026/27 at-cap clearing outcome is also consistent with $K \leq 3$: the
 model predicts interior clearing for four or more symmetric sellers in that
@@ -169,21 +109,24 @@ baseline strategic count, and examine sensitivity to this assumption via
 the $K$ comparative static in Section~\ref{subsec:res_concentration}. Because RSI data is available only at the RTO level
 for most delivery years, I impose the same $K = 3$ structure on each LDA
 calibration and allow cross-LDA variation to enter through the VRR parameters
-and CETL-based fringe capacity.\footnote{LDA-level TPS test outcomes reported
-in the IMM SotM confirm that at least three suppliers pass the pivotal test in
-all constrained LDAs, consistent with $K = 3$.}
+and CETL-based fringe capacity. This homogeneity across LDAs is a known
+limitation. Where the IMM reports $\text{RSI}_1 < 1$ (e.g., BGE, DEOK in
+certain years), a single supplier is pivotal and the effective $K$ is closer
+to one; the symmetric $K = 3$ calibration there understates local market
+power. Conversely, in LDAs with $\text{RSI}_3 > 1$, three suppliers are not
+jointly pivotal and $K = 3$ overstates concentration. LDA-level Lerner
+indices should therefore be read as applying a common structural assumption
+to heterogeneous local conditions rather than as LDA-specific estimates.
 
-% ------------------------------------------------------------------------------
-\subsection{Cost Parameters}
 \label{subsec:cal_cost}
-% ------------------------------------------------------------------------------
 
-The avoidable cost rate (ACR) for each strategic seller is set to
+The ACR for each strategic seller is set to
 $c = \$150$ per MW-day, the combined-cycle sector average reported in the 2025
-PJM IMM State of the Market (Table 3-8). Combined-cycle units represent the
-marginal capacity technology in PJM's current resource mix, and the IMM
-identifies the combined-cycle ACR as the relevant benchmark for capacity-offer
-mitigation under the TPS test. The symmetric-firm assumption sets all $K = 3$
+PJM IMM State of the Market \citep[Table~7-38, \$149.32/MW-day, rounded]{MonitoringAnalytics2025_sotm}.
+Combined-cycle units represent the marginal capacity technology in PJM's
+current resource mix, and the IMM identifies the combined-cycle ACR as the
+relevant benchmark for capacity-offer mitigation under the TPS test
+\citep{MonitoringAnalytics2025_sotm, MonitoringAnalytics2025_bra2627}. The symmetric-firm assumption sets all $K = 3$
 sellers to the same $c$, and heterogeneity in costs and capacity sizes is
 abstracted away. It is important to note that the ACR is a proxy for
 opportunity cost, not its direct measure. The true avoidable cost of
@@ -195,51 +138,35 @@ heterogeneity across strategic sellers. The sensitivity of equilibrium
 markups to this approximation is examined directly in
 Table~\ref{tab:cost_sensitivity}, which varies $c$ over
 \$100--\$200 per MW-day at $K = 3$ and shows that the qualitative
-settlement-binding finding is robust across this range.
+settlement-binding finding is robust across this range. The range is also
+informative as a bracketing device: applying a uniform ACR of \$100/MW-day
+to all three strategic sellers yields an upper Lerner bound of 0.70 in the
+2026/27 at-cap equilibrium, while a uniform ACR of \$200/MW-day yields a
+lower bound of 0.39. Heterogeneous-cost configurations whose sector-average
+ACR is within this range need not produce a Lerner index strictly between
+these symmetric bounds---the symmetric SFE is not a proven envelope---but
+the bracketing analysis establishes that the central Lerner estimate of
+0.54 at $c = \$150$ is not an artifact of a narrow assumed cost level.
 
 Fringe supply is modeled as an inelastic block offered at $c$: any capacity
 not controlled by the $K$ strategic sellers is assumed to offer at cost.
 At the RTO level, fringe capacity is set to total installed capacity minus the
 capacity attributed to the three largest sellers. This residual is scaled with
 $\gamma$ to explore fringe-size sensitivity. For individual LDA calibrations,
-the Capacity Emergency Transfer Limit (CETL) serves as the effective fringe
+CETL serves as the effective fringe
 capacity, since CETL measures the maximum deliverable import from the rest of
 PJM into the LDA. LDA-level CETL values by delivery year are drawn directly
 from the PJM planning parameter files described in
 Section~\ref{subsec:cal_data}.
 
-% ------------------------------------------------------------------------------
-\subsection{Benchmark Delivery Years}
 \label{subsec:cal_years}
-% ------------------------------------------------------------------------------
 
-I select three delivery years as calibration benchmarks, each representing
-a distinct capacity market regime. \textit{2023/24} is a low-price interior
-year (\$34.13/MW-day) under the old VRR design in which PJM's TPS mitigation
-was broadly applied. The gap between the model's unmitigated SFE price and the
-observed clearing price is consistent with an interior equilibrium of
-the model and illustrates the effect of offer-price mitigation. \textit{2025/26} is a high-price year (\$269.92/MW-day)
-that preceded the VRR redesign. It exhibits a large upward price spike relative
-to prior years and partial TPS application, making it useful for isolating the
-effect of VRR slope on equilibrium markups. \textit{2026/27} is the first auction under the new VRR design and cleared
-at the Point~(a) cap (\$329.17/MW-day), making it the most informative
-benchmark year for assessing whether the maintained model is consistent with
-a low effective strategic-seller count.
+I calibrate and solve the model for all seven completed BRA delivery years
+(2021/22 through 2027/28), spanning both VRR design regimes and the full
+range of observed market conditions. Five auctions (2021/22 through 2025/26)
+were conducted under the old three-point VRR design; two (2026/27 and
+2027/28) under the new four-point design with an explicit price floor. The
+SFE is a static game in which sellers submit supply functions against the
+VRR curve; the auction mechanism is structurally identical across all seven
+years regardless of lead time, so no year is excluded on timing grounds.
 
-The three benchmark years also span the range of outcomes relative to the
-Shapiro settlement cap of \$325/MW-day (Section~\ref{sec:institutional}).
-In 2023/24, the settlement would be entirely non-binding ($p^* = \$330$ exceeds
-\$325 but clearing occurred at \$34 under mitigation; the settlement cap is
-irrelevant). In 2026/27, the settlement cap is binding at the RTO level
-($p^* = \$329 > \$325$). This span allows the policy analysis in
-Sections~\ref{sec:allocative_cost}--\ref{sec:policy_alternatives} to evaluate
-both binding and non-binding settlement scenarios.
-
-I exclude \textit{2024/25} from the benchmark set. PJM conducted the 2024/25
-BRA as a spot auction held only 0.8 months before the delivery year began,
-compared to the approximately 37 months of the 2021/22 auction, the most
-recent held near the three-year forward horizon the RPM was designed around
-(Table~\ref{tab:bra_timeline}). This compressed timeline eliminates any
-forward investment signal and makes the 2024/25 clearing price (\$28.92/MW-day)
-an unreliable guide to equilibrium capacity incentives. The SFE framework, which
-embeds a long-run investment signal in the VRR demand curve, is not applicable.
