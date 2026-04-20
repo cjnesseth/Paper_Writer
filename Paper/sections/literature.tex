@@ -6,28 +6,30 @@
 \section{Literature Review}
 \label{sec:literature}
 
-The supply function equilibrium concept, introduced by
-\citet{Klemperer1989_sfe}, considers an oligopoly in which each firm commits
-to a schedule mapping prices to quantities before demand is realized. Unlike
-Bertrand or Cournot competition, the supply function strategy allows each
-firm to adapt its output to whatever market price emerges after the demand
+The supply function equilibrium concept, formalized for the demand-uncertainty
+case by \citet{Klemperer1989_sfe}, considers an oligopoly in which each firm
+commits to a schedule mapping prices to quantities before demand is realized.
+Unlike Bertrand or Cournot competition, the supply function strategy allows
+each firm to adapt its output to whatever market price emerges after the demand
 shock is realized. \citeauthor{Klemperer1989_sfe} show that symmetric Nash
 equilibria are characterized by a first-order differential equation whose
-solutions form a continuum between the competitive schedule and the Cournot
-schedule, with demand uncertainty disciplining firms to choose upward-sloping
-supply functions.
+solutions form a continuum bounded above by the Cournot schedule and below by
+the Bertrand schedule (which coincides with the competitive schedule $p = c$
+under constant marginal cost, as in the present calibration), with demand
+uncertainty disciplining firms to choose upward-sloping supply functions.
 
 \citet{Green1992_british} apply the Klemperer-Meyer framework to the England
 and Wales electricity market, establishing the methodological template followed
 here: derive the symmetric ODE, integrate backward from the capacity-constrained
 boundary, and calibrate to observed market structure.
 \citet{Holmberg2008_unique_sfe} shows that in capacity-constrained electricity
-markets, the supply function equilibrium is unique when rivals' capacity
-constraints simultaneously bind, tying the ODE boundary condition and selecting
-a unique equilibrium trajectory. This paper applies that boundary condition as
+markets, the symmetric supply function equilibrium is unique when rivals'
+capacity constraints simultaneously bind with positive probability, tying the
+ODE boundary condition and selecting a unique equilibrium trajectory. This paper applies that boundary condition as
 an equilibrium selection device in the deterministic BRA. For the asymmetric
-extension, \citet{Anderson2008_sfe_asymmetric} provide a convergent iterative
-algorithm; \citet{Holmberg2007_asymmetric} establishes existence and uniqueness
+extension, \citet{Anderson2008_sfe_asymmetric} develop a discretization-based
+approximation scheme with provable convergence as the demand-shock grid is
+refined; \citet{Holmberg2007_asymmetric} establishes existence and uniqueness
 results for the constant-marginal-cost, asymmetric-capacity case.
 \citet{Rudkevich1998_poolco} provide an early application of supply function
 analysis to competitive poolco electricity markets, bridging the canonical
@@ -40,20 +42,21 @@ problem: competitive energy markets, subject to regulatory price caps, suppress
 the scarcity rents that would otherwise finance investment in peaking generation
 \citep{Joskow2007_capacity, Joskow2008_capacity_payments}. PJM's Variable
 Resource Requirement curve is a downward-sloping administrative demand schedule
-designed to moderate the extreme price volatility that vertical demand generates
-near the reliability threshold \citep{Bowring2013_pjm}. This paper takes the
+that adds elasticity relative to the vertical demand curve it replaced and
+integrates scarcity pricing into the capacity clearing process
+\citep{Bowring2013_pjm}. This paper takes the
 VRR design as given and analyzes how its slope governs strategic markup
 opportunities under concentrated supply.
 
 \citet{Weitzman1974_prices} shows that the choice between price and quantity
 regulatory instruments depends on the relative slopes of marginal benefit and
 marginal cost. When supply is inelastic in the short run, price instruments
-dominate. \citet{GlaeserLuttmer2003_rent} demonstrate that binding price
-controls in imperfectly competitive markets generate misallocation qualitatively
+dominate. \citet{GlaeserLuttmer2003_rent} demonstrate in the rent-control context that
+binding price controls generate consumption misallocation qualitatively
 different from the standard deadweight triangle. In the SFE literature, the
 analysis in Section~\ref{sec:allocative_cost} draws on these results to
 characterize the allocative consequences of the settlement's price band.
-\citet{Cramton2005_capacity} emphasize that the capacity market's primary
-function is to provide a long-run investment signal. A binding cap disrupts
+\citet{Cramton2005_capacity} emphasize that a central function of the capacity
+market is to provide a long-run investment signal. A binding cap disrupts
 this signal precisely when it is most informative.
 

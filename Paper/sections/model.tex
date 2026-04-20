@@ -8,10 +8,13 @@
 
 \label{subsec:model_setup}
 
-The BRA is modeled as a static, complete-information game in which sellers
-simultaneously submit supply functions before the auction clears. This
-formulation follows \citet{Klemperer1989_sfe} and, for the electricity market
-application, \citet{Green1992_british}. The timing is: (1) PJM publishes the
+The BRA is modeled as a static game in which sellers simultaneously submit
+supply functions before the auction clears. This formulation follows
+\citet{Klemperer1989_sfe}, whose original framework admits demand uncertainty,
+and its deterministic-demand application to electricity markets in
+\citet{Green1992_british}. Because the VRR curve is deterministic, I use the
+Klemperer--Meyer ODE characterization as an equilibrium selection device
+rather than as an equilibrium concept derived from demand uncertainty. The timing is: (1) PJM publishes the
 VRR curve parameters for the upcoming delivery year; (2) sellers submit
 supply functions; (3) PJM clears the auction at the uniform price where
 aggregate supply meets the VRR curve; (4) sellers deliver committed capacity
@@ -162,27 +165,35 @@ supply function toward the competitive schedule.
 \label{subsec:model_selection}
 
 The ODE system~\eqref{eq:sfe_foc} generally admits a continuum of solutions.
-\citet{Klemperer1989_sfe} show that under demand uncertainty, the set of
-symmetric supply function equilibria is an interval bounded above by the
-Cournot schedule (where each firm behaves as if rivals are at capacity) and
-below by the competitive schedule (where $p = c$). Any trajectory between
-these two stationary solutions is a Nash equilibrium. This multiplicity
-complicates both prediction and comparative statics.
+\citet{Klemperer1989_sfe} show that under demand uncertainty with bounded
+support, the set of symmetric supply function equilibria is a connected
+interval of trajectories bounded above by the Cournot schedule (where each
+firm behaves as if rivals are at capacity) and below by the Bertrand schedule
+(which coincides with the competitive schedule $p = c$ under constant
+marginal cost, as in this paper's calibration). Any trajectory between these
+two stationary solutions is a Nash equilibrium. This multiplicity complicates
+both prediction and comparative statics.
 I select from this continuum using the boundary condition from the
 following result, which applies to the capacity-auction setting:
 
 \begin{proposition}[\citealt{Holmberg2008_unique_sfe}]
   \label{prop:holmberg}
-  Suppose sellers are symmetric, demand is inelastic above the price cap
-  $\bar{p}$, and the probability that aggregate demand reaches the capacity
-  ceiling is strictly positive. Then there exists a unique symmetric supply
-  function equilibrium. In this equilibrium each seller's supply function
-  satisfies the boundary condition
+  Suppose (i) sellers are symmetric, (ii) demand is perfectly inelastic below
+  the price cap $\bar{p}$ and zero above, (iii) seller cost is strictly
+  convex, twice continuously differentiable, with marginal cost below the cap
+  at full capacity, and (iv) the probability that aggregate demand reaches
+  the capacity ceiling is strictly positive. Then there exists a unique
+  symmetric supply function equilibrium. In this equilibrium each seller's
+  supply function satisfies the boundary condition
   \begin{equation}
     S_i(\bar{p}) \;=\; \bar{q}_i \quad \text{for all } i.
     \label{eq:bc}
   \end{equation}
 \end{proposition}
+
+Holmberg's original proof is under demand uncertainty. In the deterministic
+BRA studied here I impose~\eqref{eq:bc} as an equilibrium selection device
+rather than deriving it from the theorem.
 
 The intuition is direct. When rivals' capacity constraints simultaneously
 bind, seller $i$ faces perfectly inelastic residual demand. Its monopoly
@@ -199,8 +210,9 @@ in those years, consistent with Holmberg's (\citeyear{Holmberg2008_unique_sfe})
 selection criterion: PJM's reliability target requires procuring essentially
 all installed capacity, making binding-capacity outcomes the empirically
 relevant case. I therefore integrate the ODE~\eqref{eq:sfe_foc} \emph{backward}
-from the boundary condition $S_i(\bar{p}) = \bar{q}_i$, following the solution
-method of \citet{Green1992_british}.
+from the boundary condition $S_i(\bar{p}) = \bar{q}_i$ given by
+\citet{Holmberg2008_unique_sfe}; the underlying capacity-constrained
+intersection appears geometrically in \citet{Green1992_british}.
 
 \label{subsec:model_symmetric}
 
@@ -266,7 +278,7 @@ assumption: it reduces the $K$-dimensional coupled ODE
 system~\eqref{eq:sfe_foc} to the scalar ODE~\eqref{eq:sfe_ode}, making
 the model calibratable from publicly available aggregate data. This is
 the standard approach in the calibrated SFE literature
-\citep{Green1992_british, Sioshansi2007_sfe_ercot}. I treat the symmetric
+\citep{Green1992_british, Rudkevich1998_poolco}. I treat the symmetric
 Lerner index as an estimate of the capacity-weighted average markup; the
 spread around this average is an object of interest for future asymmetric
 extensions.

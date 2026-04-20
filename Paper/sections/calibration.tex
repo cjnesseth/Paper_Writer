@@ -123,10 +123,13 @@ to heterogeneous local conditions rather than as LDA-specific estimates.
 The ACR for each strategic seller is set to
 $c = \$150$ per MW-day, the combined-cycle sector average reported in the 2025
 PJM IMM State of the Market \citep[Table~7-38, \$149.32/MW-day, rounded]{MonitoringAnalytics2025_sotm}.
-Combined-cycle units represent the marginal capacity technology in PJM's
-current resource mix, and the IMM identifies the combined-cycle ACR as the
-relevant benchmark for capacity-offer mitigation under the TPS test
-\citep{MonitoringAnalytics2025_sotm, MonitoringAnalytics2025_bra2627}. The symmetric-firm assumption sets all $K = 3$
+Combined-cycle units are the dominant marginal gas technology in PJM's
+current resource mix, so I use the combined-cycle sector-average ACR as a
+technology proxy for the generic strategic seller's going-forward cost. The
+TPS offer cap itself is applied on a unit-specific basis using each
+resource's Net ACR \citep{MonitoringAnalytics2025_sotm,
+MonitoringAnalytics2025_bra2627}; plant-level cost data needed for a more
+granular calibration are not publicly available at the portfolio level. The symmetric-firm assumption sets all $K = 3$
 sellers to the same $c$, and heterogeneity in costs and capacity sizes is
 abstracted away. It is important to note that the ACR is a proxy for
 opportunity cost, not its direct measure. The true avoidable cost of
