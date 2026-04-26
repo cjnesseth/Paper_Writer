@@ -1,32 +1,132 @@
 % ==============================================================================
 % Section: Institutional Background
-% Status: STYLE EDIT (2026-04-07 — removed subsection headers, bold, short paras)
+% Status: REVISED (2026-04-26 — added auction primitives, participants, clearing
+%         mechanism for auction-theory readers; existing VRR/TPS/Shapiro
+%         material preserved as later subsections)
 % ==============================================================================
 
 \section{Institutional Background}
 \label{sec:institutional}
 
-\label{subsec:inst_rpm}
+\label{subsec:inst_primitives}
 
 PJM Interconnection operates the largest competitive wholesale electricity
-market in North America, coordinating approximately 182{,}000 megawatts of
-generating capacity across thirteen states and the District of Columbia.
-PJM implemented the Reliability Pricing Model (RPM) in 2007 to address the
-``missing money'' problem: a forward capacity market in which suppliers submit
-offers against a downward-sloping administrative demand schedule, the VRR
-curve, and the market clears at a uniform price
-\citep{Bowring2013_pjm, PJM_Manual18, Pfeifenberger2011_rpm}. The primary
-procurement mechanism is the Base Residual Auction.
-Capacity procurement occurs separately for Locational Deliverability Areas, geographic sub-regions constrained by transmission import limits.
-The Capacity Emergency Transfer Limit (CETL) governs the maximum competitive
-imports available to each LDA \citep{PJM_Manual20A}. The panel covers the RTO
-and sixteen sub-LDAs across delivery years 2021/22 through 2027/28.
+market in North America, coordinating approximately 201{,}000 megawatts of
+installed generating capacity across thirteen states and the District of
+Columbia. Its capacity market, the Reliability Pricing Model (RPM), was
+introduced in 2007 to procure forward commitments to be available to
+produce energy during a future delivery year \citep{Bowring2013_pjm,
+PJM_Manual18, Pfeifenberger2011_rpm}. A capacity commitment is distinct
+from the energy itself, which is sold separately in PJM's day-ahead and
+real-time markets: the capacity payment compensates a resource for
+standing ready, while energy payments compensate it for actual generation
+when called upon.
 
-\label{subsec:inst_vrr}
+The market exists to address the ``missing-money'' problem. Regulatory
+price caps in the wholesale energy market suppress the scarcity rents
+that would otherwise finance investment in peaking generation, leaving
+energy revenues insufficient to recover the fixed costs of new entry
+\citep{Joskow2007_capacity, Joskow2008_capacity_payments,
+Cramton2005_capacity}. RPM fills the gap with a separate forward
+instrument that pays for availability and so completes the revenue
+stream needed for resource adequacy.
+
+The primary procurement mechanism is the Base Residual Auction (BRA),
+held approximately three years before the start of the delivery year
+that the auction procures for. Sellers submit offers, PJM clears the
+auction at a uniform price, and cleared resources receive that clearing
+price, in dollars per megawatt-day, for every day of the twelve-month
+delivery year, paid out as monthly capacity revenue. The 2026/27
+delivery year, for example, was procured in the BRA held in July 2025;
+the clearing price set in that auction governs payments to cleared
+resources from June 2026 through May 2027. Recent BRAs have run on
+compressed lead times relative to the canonical three-year forward
+design (Table~\ref{tab:bra_timeline}); the implications of this
+compression for entry response and for the Shapiro complaint are
+discussed below.
+
+Capacity is denominated in unforced capacity (UCAP) terms rather than
+nameplate installed capacity (ICAP). Each resource's accreditation
+ratio is the fraction of nameplate capacity it is expected to deliver
+during system stress, accounting for forced outages and, more recently,
+Effective Load Carrying Capability (ELCC) adjustments for intermittent
+and energy-limited resources \citep{PJM_Manual18, PJM_Manual20A}. The
+reference dual-fuel combustion turbine used in PJM's planning
+parameters has an accreditation of approximately 79\%, so a 100~MW
+nameplate unit clears as 79~MW of UCAP and is paid the clearing price
+on those 79~MW. Throughout the paper, prices and quantities are stated
+in UCAP terms unless noted otherwise.
+
+\label{subsec:inst_participants}
+
+The bidders in a BRA are owners of capacity resources: existing
+generators (the dominant category by both count and cleared MW),
+demand response providers, planned new generation, and behind-the-meter
+distributed resources. Multi-unit ownership is the norm, with large
+generation owners typically participating with portfolios of dozens to
+hundreds of resources spread across multiple Locational Deliverability
+Areas (LDAs). Offers are submitted on a per-resource basis rather than
+at the firm level, so a single firm enters the auction as a collection
+of resource-level offers rather than as a single bidder with a
+portfolio supply schedule. There is no buy-side bidding in the
+classical sense; PJM acts as the administrative buyer on behalf of
+Load Serving Entities (LSEs), submitting demand for the RTO and for
+each LDA through the Variable Resource Requirement (VRR) curve
+described below.
+
+A resource-level offer is a sealed price-quantity pair, denominated in
+dollars per megawatt-day of UCAP, that specifies the minimum payment at
+which the resource is willing to commit. Conceptually the offer is a
+going-forward cost: the per-MW payment the resource needs above
+expected energy and ancillary-service revenues to remain available
+during the delivery year. For an existing resource this is a short-run
+avoidable cost (operations, maintenance, and forgone alternative use);
+for new entry it is the annualized fixed cost net of expected energy
+revenues. The PJM Independent Market Monitor (IMM) computes a
+resource-specific Net Avoidable Cost Rate (Net ACR) that serves both
+as a default offer cap under mitigation and as the cost benchmark
+referenced in the calibration of Section~\ref{sec:calibration}
+\citep{MonitoringAnalytics2025_sotm}.
+
+A cleared resource takes on a Capacity Performance obligation: it must
+be available to produce energy when PJM declares Performance Assessment
+Hours during the delivery year, and non-performance triggers a charge
+calibrated to a multiple of Net CONE \citep{PJM_Manual18}. The
+performance obligation completes the meaning of the capacity commitment
+and ties the forward payment to delivery-year availability. The penalty
+mechanics are not modeled in this paper; the SFE setup in
+Section~\ref{sec:model} treats committed capacity as delivered.
+
+\label{subsec:inst_clearing}
+
+Clearing is a one-sided sealed-bid uniform-price auction. PJM aggregates
+the resource-level offers in each LDA into an upward-stepping supply
+schedule and intersects it with the LDA's VRR demand curve; the
+intersection price is the LDA clearing price, and every resource whose
+offer lies at or below that price clears its full offered quantity at
+the uniform clearing price. Clearing is solved jointly across the RTO
+and the constrained sub-LDAs subject to Capacity Emergency Transfer
+Limit (CETL) constraints that bound the imports each LDA can receive
+from the rest of the system \citep{PJM_Manual20A}. When a CETL
+constraint binds, the LDA's clearing price separates from the RTO
+price and the constrained LDA pays a locational premium.
+
+In auction-theoretic terms, the BRA is a one-sided, sealed-bid,
+uniform-price, multi-unit, multi-product mechanism with a publicly
+known administrative demand schedule. The multi-unit dimension reflects
+each seller's portfolio of resources within an LDA; the multi-product
+dimension reflects the joint clearing across LDAs subject to CETL. The
+publicly known demand curve, the VRR, is the primitive on which the
+supply function equilibrium analysis in Sections~\ref{sec:model}
+and~\ref{sec:results} rests, and it is the object that the 2025 Shapiro
+settlement modified.
+
+The empirical panel covers the RTO and sixteen sub-LDAs across delivery
+years 2021/22 through 2027/28.
 
 The VRR curve is the administrative demand schedule presented to sellers in
-each BRA \citep{PJM_Manual18}. Under the old design (delivery years
-2021/22 to 2025/26), it is defined by three anchor points: Point~(a), the
+each BRA \citep{PJM_Manual18}. Under the old design (used for delivery years
+2021/22 through 2025/26), it is defined by three anchor points: Point~(a), the
 price cap at $1.5 \times \text{Net CONE}$, Point~(b) at
 $0.75 \times \text{Net CONE}$ at the reliability requirement, and Point~(c)
 at zero price above the reliability requirement \citep{Bowring2013_pjm,
@@ -35,8 +135,8 @@ generating unit, net of projected energy and ancillary service revenues,
 computed independently for each LDA \citep{PJM_Manual18, PJM_Manual20A}.
 FERC approved a restructured VRR curve design in 2025 \citep{FERC2025_ER25-1357},
 taking effect with the 2026/27 delivery year. The redesign added a fourth
-anchor point creating an explicit price floor at approximately \$177--\$179
-per MW-day, eliminating the collapse to zero price for surplus capacity.
+anchor point, creating an explicit price floor at approximately \$177--\$179
+per MW-day and eliminating the collapse to zero price for surplus capacity.
 
 Table~\ref{tab:bra_timeline} documents the BRA timeline and RTO clearing
 outcomes for all seven completed auctions in the sample. Both auctions
@@ -57,10 +157,10 @@ Sections~\ref{sec:model}--\ref{sec:results}.
     2021/22 & May 2018    & 37.0 & \$140.00 & \$321.57 & Old & No \\
     2022/23 & May 2021    & 12.5 & \$50.00  & \$260.50 & Old & No \\
     2023/24 & July 2022   & 11.0 & \$34.13  & \$274.96 & Old & No \\
-    2024/25 & May 2024    &  0.8 & \$28.92  & \$293.19 & Old & No \\
-    2025/26 & August 2024 &  9.9 & \$269.92 & \$228.81 & Old & No \\
-    2026/27 & July 2025   & 10.2 & \$329.17 & \$212.14 & New & Yes \\
-    2027/28 & January 2026 & 16.8 & \$333.44 & \$242.52 & New & Yes \\
+    2024/25 & December 2022 & 17.8 & \$28.92  & \$293.19 & Old & No \\
+    2025/26 & July 2024     & 10.1 & \$269.92 & \$228.81 & Old & No \\
+    2026/27 & July 2025     & 10.2 & \$329.17 & \$212.14 & New & Yes \\
+    2027/28 & December 2025 & 17.7 & \$333.44 & \$242.52 & New & Yes \\
     \bottomrule
   \end{tabular}
   \vspace{3pt}
@@ -72,16 +172,8 @@ Sections~\ref{sec:model}--\ref{sec:results}.
   \end{minipage}
 \end{table}
 
-\label{subsec:inst_leadtime}
-
-BRA lead times compressed from 37 months (2021/22) to 0.8 months (2024/25)
-before partial restoration to 10.2 and 16.8 months for the settlement years
-(Table~\ref{tab:bra_timeline}).
-
-\label{subsec:inst_tps}
-
 PJM's primary market power mitigation mechanism is the Three Pivotal Supplier
-(TPS) test. Supplier $i$ is \emph{pivotal} in LDA $\ell$ if removing $i$'s
+(TPS) test. Supplier $i$ is pivotal in LDA $\ell$ if removing $i$'s
 capacity would cause aggregate supply to fall short of the reliability
 requirement. The Residual Supply Index for $k$ suppliers is defined as
 \begin{equation}
@@ -95,62 +187,52 @@ Mitigation is triggered when $\mathrm{RSI}_1 \leq 1$ or $\mathrm{RSI}_3 \leq 1$,
 capping affected suppliers' offers at their Net Avoidable Cost Rate (ACR)
 \citep{Bowring2013_pjm, MonitoringAnalytics2025_sotm}.
 
-Table~\ref{tab:tps_results} summarizes TPS test outcomes across LDAs and
-delivery years. Three patterns stand out. First, $\mathrm{RSI}_3$ falls below unity
-for every LDA and every delivery year, so the TPS mitigation threshold is met
-throughout the sample. Second, concentration is strikingly persistent (RTO
-$\mathrm{RSI}_3$ ranges only 0.62--0.73 across six years). Third, the most
-extreme concentration appears in small sub-LDAs where a single seller can be
-individually pivotal ($\mathrm{RSI}_1 = 0$ in BGE and DEOK).
+Table~\ref{tab:tps_results} summarizes RTO-level TPS test outcomes for the six
+delivery years with complete IMM data. $\mathrm{RSI}_3$ is below 1 in every
+year, ranging from 0.62 to 0.73, so the mitigation threshold is met throughout
+the sample and concentration is persistent. The IMM also publishes
+LDA-level RSI values in its annual State of the Market reports; the
+cross-sectional snapshots corroborate this RTO pattern and document
+individual pivotality in several small constrained LDAs
+\citep{MonitoringAnalytics2025_sotm}.
 
 \begin{table}[H]
   \centering
-  \caption{TPS Test Results: Residual Supply Indices by LDA and Delivery Year}
+  \caption{TPS Test Results at the RTO Level: Residual Supply Indices by Delivery Year}
   \label{tab:tps_results}
-  \begin{tabular}{llcccc}
+  \begin{tabular}{lcccc}
     \toprule
-    Delivery Year & LDA   & $\mathrm{RSI}_1$ & $\mathrm{RSI}_3$ &
+    Delivery Year & $\mathrm{RSI}_1$ & $\mathrm{RSI}_3$ &
       Participants & All Pivotal \\
     \midrule
-    2022/23 & RTO   & 0.81 & 0.73 & 130 & Yes \\
-    2022/23 & MAAC  & 0.69 & 0.37 &  25 & Yes \\
-    2022/23 & EMAAC & 1.25 & 0.64 &   7 & Yes \\
-    2022/23 & COMED & 0.43 & 0.36 &  14 & Yes \\
-    2022/23 & BGE   & 0.00 & 0.00 &   1 & Yes \\
-    2022/23 & DEOK  & 0.00 & 0.00 &   1 & Yes \\
-    \midrule
-    2023/24 & RTO   & 0.78 & 0.68 & 134 & Yes \\
-    2023/24 & MAAC  & 0.78 & 0.40 &  11 & Yes \\
-    \midrule
-    2024/25 & RTO   & 0.77 & 0.64 & 133 & Yes \\
-    2024/25 & MAAC  & 0.59 & 0.11 &   9 & Yes \\
-    2024/25 & EMAAC & 0.48 & 0.00 &   2 & Yes \\
-    \midrule
-    2025/26 & RTO   & 0.82 & 0.62 & 128 & Yes \\
-    2026/27 & RTO   & 0.82 & 0.64 & 153 & Yes \\
-    2027/28 & RTO   & 0.82 & 0.63 & 155 & Yes \\
+    2022/23 & 0.81 & 0.73 & 130 & Yes \\
+    2023/24 & 0.78 & 0.68 & 134 & Yes \\
+    2024/25 & 0.77 & 0.64 & 133 & Yes \\
+    2025/26 & 0.82 & 0.62 & 128 & Yes \\
+    2026/27 & 0.82 & 0.64 & 153 & Yes \\
+    2027/28 & 0.82 & 0.63 & 155 & Yes \\
     \bottomrule
   \end{tabular}
   \vspace{3pt}
 
   \begin{minipage}{0.92\textwidth}
     \footnotesize \textit{Note:} ``All Pivotal'' indicates $\mathrm{RSI}_1 < 1$
-    for each seller individually. Source: PJM IMM State of the Market reports,
-    various years.
+    for each of the three largest sellers individually. Source: PJM IMM State
+    of the Market reports, various years.
   \end{minipage}
 \end{table}
 
 \label{subsec:inst_shapiro}
 
 The high BRA clearing prices of 2025/26 and the anticipation of similarly
-elevated prices in subsequent auctions triggered a political intervention
+elevated prices in subsequent auctions triggered political intervention
 that directly modified the demand curve for two delivery years. On December
 30, 2024, the Office of Governor Josh Shapiro filed a complaint against
 PJM's tariff with the Federal Energy Regulatory Commission under Section
 206 of the Federal Power Act. The complaint's legal theory was that the
 VRR Point~(a) price cap was set too high given lower expectations for
 new entry in the near term \citep{PJM2025_settlement_slides}. Because
-compressed auction lead times (Section~\ref{subsec:inst_leadtime}) limited
+compressed auction lead times (Table~\ref{tab:bra_timeline}) limited
 the ability of new generation to respond to high prices within upcoming
 delivery periods, the complaint argued that high prices would not produce
 efficient entry and instead represented an unjust and unreasonable rate.
@@ -169,11 +251,7 @@ years: a price cap at approximately \$325/MW-day UCAP (Unforced Capacity),
 equivalent to \$256.75/MW-day in Installed Capacity (ICAP) terms at the assumed 79\%
 accreditation of the dual-fuel combustion turbine reference unit, and a
 price floor at approximately \$175/MW-day UCAP (\$138.25/MW-day ICAP),
-below which all available capacity clears regardless of the VRR slope.
-
-The settlement cap is denoted as $\bar{p}_S \approx \$325$/MW-day (UCAP) and
-the floor as $\bar{p}_f \approx \$175$/MW-day (UCAP) to distinguish them
-from the existing VRR Point~(a) cap $\bar{p}$. Both values are indexed to
+below which all available capacity clears regardless of the VRR slope. The settlement cap is denoted as $\bar{p}_S \approx \$325$/MW-day (UCAP) and the floor as $\bar{p}_f \approx \$175$/MW-day (UCAP) to distinguish them from the existing VRR Point~(a) cap $\bar{p}$. Both values are indexed to
 the accreditation of the reference unit and may differ slightly from these
 round numbers when final Effective Load Carrying Capability (ELCC) values are determined.
 
@@ -184,9 +262,7 @@ curve is flat (no capacity with offers above the cap can clear). Between $\bar{p
 and $\bar{p}_f$, the existing VRR sloped segment applies.
 At prices at or below $\bar{p}_f$, the demand curve extends
 horizontally to clear all available capacity at the floor price. This mechanism applies
-identically to the RTO demand curve and to every
-LDA demand curve. Clearing results continue to respect CETL transmission
-limitations \citep{PJM2025_settlement_slides, FERC2025_ER25-1357}.
+identically to the RTO demand curve and to every LDA demand curve. Clearing results continue to respect CETL transmission limitations \citep{PJM2025_settlement_slides, FERC2025_ER25-1357}.
 The pre-existing Point~(a) cap $\bar{p}$ is calibrated to investment
 incentives (approximately $1.5 \times \text{Net CONE}$), while the settlement cap
 $\bar{p}_S$ is lower and is motivated by near-term consumer cost concerns.
