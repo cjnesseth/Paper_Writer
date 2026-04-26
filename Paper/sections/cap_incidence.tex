@@ -1,0 +1,95 @@
+% ==============================================================================
+% Section: Cap-Incidence Across Regimes
+% Status: NEW (2026-04-26 — Phase A of cap-incidence pivot)
+% ==============================================================================
+
+\section{Cap-Incidence Across Regimes}
+\label{sec:cap_incidence}
+
+This section documents which administrative constraint was binding in each
+of PJM's seven completed Base Residual Auctions: the TPS mitigation cap
+based on Net ACR, the design-level VRR Point~(a) cap, or the Shapiro
+settlement cap that took effect for the 2026/27 and 2027/28 delivery
+years. The cap-incidence panel reframes the dramatic price changes
+observed across the sample period as a regime change in the binding
+administrative constraint rather than a behavioral shift in seller
+strategy.
+
+\input{tables/tab_cap_incidence}
+
+Three regimes are visible in Table~\ref{tab:cap_incidence}, distinguished
+by the joint pattern of clearing price, capacity margin, and IMM-applied
+mitigation activity.
+
+The first regime, covering 2021/22 through 2024/25, is one of comfortable
+supply margins and cost-anchored clearing. The IMM-published reserve
+margin in excess of the Installed Reserve Margin (IRM) was strongly
+positive in 2023/24 and 2024/25 (+5{,}687~MW and +3{,}278~MW respectively;
+data for 2021/22 and 2022/23 are not in the IMM panel I assembled), and
+clearing prices ranged from \$29 to \$140/MW-day, well below both the
+sector-average Net ACR and the design-level VRR Point~(a) cap of
+\$391--\$482/MW-day. TPS mitigation was applied to a small share of
+generation resources (0.0\% in 2022/23, 7.3\% in 2023/24, 2.2\% in
+2024/25), but with the marginal cleared offer well below any active cap,
+mitigation operative for a minority of supra-marginal resources did not
+pin the clearing outcome. The classification ``TPS active'' for 2023/24
+and 2024/25 records the IMM mitigation activity without claiming that the
+mitigation cap determined the clearing price; ``None'' for 2021/22 and
+2022/23 records a slack market in which mitigation was either inactive
+or not reported in locally available IMM data.
+
+The second regime, in 2025/26, is a transition. The reserve margin in
+excess of IRM turned slightly negative for the first time
+(\textminus205~MW), the clearing price jumped from \$29 in the
+preceding auction to \$270/MW-day, and TPS mitigation rose to 5.5\% of
+resources. Yet \$270 remains far below the design Point~(a) of
+\$452/MW-day, so no administrative cap was binding the clearing.
+2025/26 is the auction in which the underlying supply--demand balance
+tightened materially without any cap yet binding the headline outcome.
+
+The third regime, comprising 2026/27 and 2027/28, is one of
+cap-binding clearing under negative reserve excess. Both auctions
+cleared at the new-design VRR Point~(a) value, which under the
+Shapiro/PJM settlement embodies the agreed maximum price (the nominal
+\$325/MW-day target translates to \$329.17 and \$333.44 in 2026/27 and
+2027/28 respectively after year-specific accreditation and Net~CONE
+adjustments). The reserve margin in excess of IRM was \textminus493~MW
+in 2026/27 and \textminus6{,}517~MW in 2027/28, with the IMM declaring
+both auctions ``not competitive''
+\citep{MonitoringAnalytics2025_sotm}.\footnote{The IMM SoM 2025
+reports the 2026/27 reserve shortfall in two forms: the panel-consistent
+``Reserve cleared in excess of IRM UCAP'' figure of \textminus493~MW
+used here, and a parallel calculation reported as ``208.7~MW short of
+the required reserve level of 21{,}561.9~MW'' computed against a
+different reserve baseline. Both characterize a marginal shortfall.}
+The drop in TPS mitigation application from 6.3\% in 2026/27 to 1.0\%
+in 2027/28 is consistent with the settlement cap moving sufficiently
+close to the underlying offer distribution that fewer individual offers
+exceeded their unit-specific Net ACR caps.
+
+The cap-incidence panel offers a direct answer to a recurring question
+about the post-settlement auctions: did seller behavior change between
+the slack and tight regimes, or did the binding administrative
+constraint change while the underlying competitive process remained
+similar? The data favor the latter interpretation. Across the sample,
+the SFE machinery developed in Section~\ref{sec:model} predicts
+strategic markups that are far above observed slack-year clearings and
+mechanically equal to the cap in tight years. The honest reading is
+that the SFE identifies the at-cap versus interior \emph{regime},
+conditional on supply margin and concentration, but does not
+independently identify the dollar clearing price in either regime.
+What identifies clearing in the data is the lowest binding
+administrative constraint: cost in slack years, the settlement cap in
+tight years. The apparent dramatic price change between regimes is
+therefore at least in part a regime change in which constraint binds,
+not a structural shift in strategic conduct.
+
+This reading does not contradict the IMM's substantive assessment. The
+IMM attributes the underlying scarcity in 2026/27 and 2027/28 to data
+center load growth rather than to any change in seller behavior or to
+the settlement itself \citep{MonitoringAnalytics2025_sotm}. The
+contribution of the cap-incidence panel is to make that interpretation
+visible at a glance and to anchor the more detailed counterfactual
+discussion in Section~\ref{sec:21billion} in observable cap-incidence
+facts rather than in model-implied prices that are mechanically tied to
+whichever cap is operative.

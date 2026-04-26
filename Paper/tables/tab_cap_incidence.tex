@@ -1,0 +1,49 @@
+\begin{table}[H]
+  \centering
+  \caption{Cap-Incidence Panel: Which Administrative Constraint Was Binding,
+    PJM Base Residual Auctions 2021/22--2027/28 (RTO Level)}
+  \label{tab:cap_incidence}
+  \small
+  \begin{tabular}{lcccccrcl}
+    \toprule
+             & VRR     & Clearing & Net      & VRR     & Settle.   & Reserve   & TPS     & Binding   \\
+    Year     & Design  & price    & ACR      & Pt~(a)  & cap       & excess IRM (MW) & mitig.\ & cap       \\
+    \midrule
+    2021/22 & Old & \$140 & \$150 & \$482 & --- & --- & --- & None \\
+    2022/23 & Old & \$50 & \$150 & \$391 & --- & --- & 0.0\% & None \\
+    2023/24 & Old & \$34 & \$150 & \$412 & --- & +5,687 & 7.3\% & TPS active \\
+    2024/25 & Old & \$29 & \$150 & \$440 & --- & +3,278 & 2.2\% & TPS active \\
+    2025/26 & Old & \$270 & \$150 & \$452 & --- & -205 & 5.5\% & TPS active \\
+    2026/27 & New & \$329 & \$150 & \$329 & \$325 & -492 & 6.3\% & Settlement \\
+    2027/28 & New & \$333 & \$150 & \$333 & \$325 & -6,516 & 1.0\% & Settlement \\
+    \bottomrule
+  \end{tabular}
+  \vspace{3pt}
+
+  \begin{minipage}{0.96\textwidth}
+    \footnotesize \textit{Notes:} Prices in nominal \$/MW-day UCAP.
+    Net ACR is the IMM-published sector-average Avoidable Cost Rate
+    (\$149.32, rounded to \$150) used as the default mitigation offer cap
+    for resources subject to the Three Pivotal Supplier (TPS) test.
+    VRR Pt~(a) is the design-level price cap on the unmodified Variable
+    Resource Requirement curve. Settlement cap is the Shapiro/PJM
+    \$325/MW-day UCAP cap that took effect for the 2026/27 and 2027/28
+    delivery years. Reserve excess IRM (MW) is committed UCAP minus
+    IRM-implied required reserves (negative = shortfall). TPS mitigation
+    percentage is the share of generation resources that submitted Capacity
+    Performance offers and had unit-specific Market Seller Offer Caps
+    calculated by the IMM. Binding cap classification: ``Settlement'' =
+    cleared within 2\% of the new-design Point~(a), which under the
+    Shapiro/PJM agreement embodies the settlement cap; ``TPS active'' =
+    TPS mitigation calculated for $\geq 1$\% of resources with clearing
+    more than 5\% below Point~(a), indicating mitigation operative for
+    some marginal resources but not pinning headline clearing; ``None'' =
+    clearing well below all administrative caps with TPS mitigation
+    calculated for $<1$\% of resources.
+    Sources: PJM BRA results (clearing prices, cleared MW, reliability
+    requirement); IMM State of the Market Reports 2021--2025, Section 5
+    Capacity (TPS mitigation counts, reserve-margin panel).
+    The 2021/22 BRA (held May 2018) predates locally-available IMM SoMs,
+    so TPS mitigation and reserve-excess data are reported as ``---''.
+  \end{minipage}
+\end{table}

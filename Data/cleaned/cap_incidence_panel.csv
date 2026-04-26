@@ -1,0 +1,8 @@
+"delivery_year","vrr_design","clearing_price","net_acr","vrr_pt_a_price","settlement_cap","reserve_excess_irm_mw","tps_pct","binding_cap"
+"2021/22","old",140,150,482.36,NA,NA,NA,"None"
+"2022/23","old",50,150,390.75,NA,NA,0,"None"
+"2023/24","old",34.13,150,412.44,NA,5687.1,7.27816550348953,"TPS active"
+"2024/25","old",28.92,150,439.79,NA,3278.8,2.17842323651452,"TPS active"
+"2025/26","old",269.92,150,451.61,NA,-205.1,5.45129579982127,"TPS active"
+"2026/27","new",329.17,150,329.17,325,-492.7,6.34184068058778,"Settlement"
+"2027/28","new",333.44,150,333.44,325,-6516.6,1.03626943005181,"Settlement"
