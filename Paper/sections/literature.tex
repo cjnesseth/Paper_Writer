@@ -19,26 +19,24 @@ under constant marginal cost, as in the present calibration), with demand
 uncertainty disciplining firms to choose upward-sloping supply functions.
 
 \citet{Green1992_british} apply the Klemperer-Meyer framework to the England
-and Wales electricity market, establishing the methodological template followed
-here: derive the symmetric ODE, integrate backward from the capacity-constrained
+and Wales electricity market, establishing the methodological template I follow: derive the symmetric ODE, integrate backward from the capacity-constrained
 boundary, and calibrate to observed market structure.
-\citet{Holmberg2008_unique_sfe} shows that in capacity-constrained electricity
-markets, the symmetric supply function equilibrium is unique when rivals'
+\citet{Holmberg2008_unique_sfe} shows that in capacity constrained electricity
+markets, the symmetric SFE is unique when rivals'
 capacity constraints simultaneously bind with positive probability, tying the
-ODE boundary condition and selecting a unique equilibrium trajectory. This paper applies that boundary condition as
-an equilibrium selection device in the deterministic BRA. For the asymmetric
+ODE boundary condition and selecting a unique equilibrium trajectory. This paper applies that boundary condition as an equilibrium selection device in the deterministic BRA. For the asymmetric
 extension, \citet{Anderson2008_sfe_asymmetric} develop a discretization-based
 approximation scheme with provable convergence as the demand-shock grid is
-refined; \citet{Holmberg2007_asymmetric} establishes existence and uniqueness
-results for the constant-marginal-cost, asymmetric-capacity case.
+refined. \citet{Holmberg2007_asymmetric} establishes existence and uniqueness
+results for the constant marginal cost, asymmetric capacity case.
 \citet{Rudkevich1998_poolco} provide an early application of supply function
 analysis to competitive poolco electricity markets, bridging the canonical
-Klemperer--Meyer theory and applied generation-market modeling. The symmetric
+Klemperer-Meyer theory and applied generation market modeling. The symmetric
 case applies here and I solve the ODE backward from the Holmberg boundary
-using the \texttt{deSolve} package in R.
+using the deSolve package in R.
 
-The capacity market design literature originates from the ``missing money''
-problem: competitive energy markets, subject to regulatory price caps, suppress
+The capacity market design literature originates from the "missing money"
+problem, where competitive energy markets, subject to regulatory price caps, suppress
 the scarcity rents that would otherwise finance investment in peaking generation
 \citep{Joskow2007_capacity, Joskow2008_capacity_payments}. PJM's Variable
 Resource Requirement curve is a downward-sloping administrative demand schedule
@@ -51,9 +49,9 @@ opportunities under concentrated supply.
 \citet{Weitzman1974_prices} shows that the choice between price and quantity
 regulatory instruments depends on the relative slopes of marginal benefit and
 marginal cost. When supply is inelastic in the short run, price instruments
-dominate. \citet{GlaeserLuttmer2003_rent} demonstrate in the rent-control context that
+dominate. \citet{GlaeserLuttmer2003_rent} demonstrate in the rent control context that
 binding price controls generate consumption misallocation qualitatively
-different from the standard deadweight triangle. In the SFE literature, the
+different from the standard deadweight triangle. The
 analysis in Section~\ref{sec:allocative_cost} draws on these results to
 characterize the allocative consequences of the settlement's price band.
 \citet{Cramton2005_capacity} emphasize that a central function of the capacity

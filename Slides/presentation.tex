@@ -29,6 +29,10 @@
 \setbeamercolor{alerted text}{fg=accentRed}
 \setbeamercolor{progress bar}{fg=primaryBlue, bg=primaryDark!20}
 
+% Source-note command for plots and tables
+\newcommand{\srcnote}[1]{%
+  \vspace{0.2em}{\scriptsize\color{gray!70!black}\textit{Source:} #1}}
+
 % Graphics path
 \graphicspath{{../Figures/}}
 
@@ -46,19 +50,34 @@
 % ---------- 1. Title ----------
 \maketitle
 
-% ---------- 2. The $21B puzzle ----------
-\begin{frame}{The \$21 Billion Question}
+% ---------- 2. PJM in the industry ----------
+\begin{frame}{PJM at a Glance}
   \begin{itemize}
-    \item \textbf{Dec 2024:} Pennsylvania files FERC complaint after the
-          2025/26 auction clears at \$269.92/MW-day (+800\%{} YoY).
-    \item \textbf{Jan 2025:} Shapiro--PJM settlement caps the 2026/27 and
-          2027/28 auctions at \textbf{\$325} with a \textbf{\$175} floor.
-    \item \textbf{The claim:} over \textbf{\$21 billion} in two-year consumer
-          savings.
+    \item Regional transmission organization covering 13 states plus DC,
+          about 65 million customers and 180 GW of capacity
+    \item Operates three wholesale markets
+      \begin{itemize}
+        \item Energy pays for electricity produced
+        \item Ancillary services pay for reserves and grid support
+        \item Capacity pays for availability three years ahead
+      \end{itemize}
+    \item This paper studies the capacity market (annual BRA under RPM)
   \end{itemize}
 \end{frame}
 
-% ---------- 3. Research Question ----------
+% ---------- 3. The $21B puzzle ----------
+\begin{frame}{The \$21 Billion Question}
+  \begin{itemize}
+    \item In December 2024, Pennsylvania filed a FERC complaint after the
+          2025/26 auction cleared at \$269.92/MW-day, an 800\% jump
+    \item In January 2025, the Shapiro-PJM settlement capped the 2026/27
+          and 2027/28 auctions at \$325/MW-day with a \$175/MW-day floor
+    \item Settlement claims over \$21 billion in two-year
+          consumer savings
+  \end{itemize}
+\end{frame}
+
+% ---------- 4. Research Question ----------
 \begin{frame}{Research Question}
   \vfill
   \begin{center}
@@ -70,144 +89,182 @@
   \vfill
 \end{frame}
 
-% ---------- 4. PJM's VRR demand curve ----------
-\begin{frame}{The VRR Demand Curve}
+% ---------- 5. PJM's VRR demand curve ----------
+\begin{frame}{The VRR Curve Slopes Only in Scarcity}
   \begin{columns}[T,onlytextwidth]
     \column{0.55\textwidth}
     \begin{center}
-      \begin{tikzpicture}[scale=0.85]
-        \draw[->, thick] (0,0) -- (6.0,0);
-        \node[below] at (3.0,-0.2) {\small Capacity};
-        \draw[->, thick] (0,0) -- (0,5.0);
-        \node[rotate=90, above] at (-0.3,2.5) {\small Price};
-        \draw[primaryBlue, very thick] (0.6,4.3) -- (2.8,4.3);
-        \draw[primaryBlue, very thick] (2.8,4.3) -- (4.3,1.8);
-        \draw[primaryBlue, very thick] (4.3,1.8) -- (5.8,1.8);
-        \filldraw[primaryDark] (2.8,4.3) circle (2.5pt);
-        \node[above] at (2.8,4.4) {\small (a)};
-        \filldraw[primaryDark] (4.3,1.8) circle (2.5pt);
-        \node[above right] at (4.3,1.8) {\small (b)};
-        \filldraw[primaryDark] (5.8,1.8) circle (2.5pt);
-        \node[above] at (5.8,1.9) {\small (c)};
+      \begin{tikzpicture}[scale=0.62]
+        % Axes
+        \draw[->, thick] (0,0) -- (7.2,0) node[right] {\small $Q$};
+        \draw[->, thick] (0,0) -- (0,5.9) node[above] {\small Price};
+        % Reference dashed at Net CONE / Point (b)
+        \draw[gray!30, dashed] (0,2.12) -- (4.80,2.12);
+        % VRR curve -- flat top at admin cap, slope to zero; touches y-axis
+        \draw[primaryBlue, very thick] (0,5.0) -- (2.5,5.0);
+        \draw[primaryBlue, very thick] (2.5,5.0) -- (6.5,0);
+        % Point labels
+        \filldraw[primaryDark] (2.5,5.0) circle (2.5pt);
+        \node[above] at (2.5,5.1) {\small (a)};
+        \filldraw[primaryDark] (4.80,2.12) circle (2.5pt);
+        \node[above right] at (4.80,2.12) {\small (b)};
+        % Y-axis price labels + ticks
+        \node[left] at (-0.1,5.0) {\small \$500};
+        \node[left] at (-0.1,2.12) {\small \$212};
+        \draw (-0.1,5.0) -- (0.1,5.0);
+        \draw (-0.1,2.12) -- (0.1,2.12);
       \end{tikzpicture}
     \end{center}
 
     \column{0.42\textwidth}
+    \small
     \begin{itemize}
-      \item Price falls as committed capacity rises.
-      \item Flat above (a): admin.\ cap.
-      \item Slope (a)--(b): scarcity region.
-      \item Flat below (b): excess supply.
+      \item Flat above (a) at the administrative cap
+      \item Slopes from (a) through (b) at Net CONE in the scarcity region
+      \item No pre-settlement floor: curve continues to fall
     \end{itemize}
   \end{columns}
+
+  {\scriptsize\color{gray!70!black}\textit{Source:} stylized from PJM
+  2026/27 VRR parameters}
 \end{frame}
 
-% ---------- 5. Settlement as overlay ----------
-\begin{frame}{The Settlement as Cap + Floor}
+% ---------- 6. Settlement as overlay ----------
+\begin{frame}{The Settlement Bounds the Clearing Price}
   \begin{columns}[T,onlytextwidth]
     \column{0.55\textwidth}
     \begin{center}
-      \begin{tikzpicture}[scale=0.85]
-        \draw[->, thick] (0,0) -- (6.0,0);
-        \node[below] at (3.0,-0.2) {\small Capacity};
-        \draw[->, thick] (0,0) -- (0,5.0);
-        \node[rotate=90, above] at (-0.3,2.5) {\small Price};
-        \fill[accentRed!10] (0.6,1.4) rectangle (5.8,3.6);
-        \draw[gray!60, thick] (0.6,4.3) -- (2.8,4.3);
-        \draw[gray!60, thick] (2.8,4.3) -- (4.3,1.8);
-        \draw[gray!60, thick] (4.3,1.8) -- (5.8,1.8);
-        \draw[accentRed, very thick] (0.6,3.6) -- (5.8,3.6);
-        \node[accentRed, above] at (3.0,3.6) {\small $\bar{p}_S = \$325$};
-        \draw[primaryBlue, very thick] (0.6,1.4) -- (5.8,1.4);
-        \node[primaryBlue, below] at (3.0,1.4) {\small $\bar{p}_f = \$175$};
+      \begin{tikzpicture}[scale=0.62]
+        % Axes
+        \draw[->, thick] (0,0) -- (7.2,0) node[right] {\small $Q$};
+        \draw[->, thick] (0,0) -- (0,5.9) node[above] {\small Price};
+        % Non-binding VRR (dashed light gray): above cap and below floor
+        % Slope runs from (0,5) to (6.5,0); slope = -10/13, so at y=3.25 x=2.275, at y=1.75 x=4.225
+        \draw[gray!55, thick, dashed] (0,5.0) -- (2.275,3.25);
+        \draw[gray!55, thick, dashed] (4.225,1.75) -- (6.5,0);
+        % Non-binding cap/floor extensions (faint dashed)
+        \draw[accentRed!25, thick, dashed] (2.275,3.25) -- (6.5,3.25);
+        \draw[primaryBlue!25, thick, dashed] (0,1.75) -- (4.225,1.75);
+        % EFFECTIVE MARKET DEMAND CURVE (bold composite)
+        % Cap-binding region
+        \draw[accentRed, very thick] (0,3.25) -- (2.275,3.25);
+        % VRR-binding region
+        \draw[gray!85!black, very thick] (2.275,3.25) -- (4.225,1.75);
+        % Floor-binding region
+        \draw[primaryBlue, very thick] (4.225,1.75) -- (6.5,1.75);
+        % Kink points (intersections)
+        \filldraw[primaryDark] (2.275,3.25) circle (2.5pt);
+        \filldraw[primaryDark] (4.225,1.75) circle (2.5pt);
+        % Y-axis price labels + ticks
+        \node[left, accentRed] at (-0.1,3.25) {\small \$325};
+        \node[left, primaryBlue] at (-0.1,1.75) {\small \$175};
+        \draw (-0.1,5.0) -- (0.1,5.0);
+        \draw[accentRed] (-0.1,3.25) -- (0.1,3.25);
+        \draw[primaryBlue] (-0.1,1.75) -- (0.1,1.75);
+        % In-plot cap/floor labels
+        \node[accentRed, above] at (1.15,3.25) {\small $\bar{p}_S$};
+        \node[primaryBlue, below] at (5.5,1.75) {\small $\bar{p}_f$};
       \end{tikzpicture}
     \end{center}
 
     \column{0.42\textwidth}
+    \small
     \begin{itemize}
-      \item Cap at \textbf{\$325} truncates from above.
-      \item Floor at \textbf{\$175} supports from below.
-      \item 2026/27 and 2027/28 only, RTO + constrained LDAs.
+      \item Cap at \$325 truncates from above
+      \item Floor at \$175 supports from below
+      \item Applies only to 2026/27 and 2027/28, RTO and LDAs
     \end{itemize}
   \end{columns}
+
+  {\scriptsize\color{gray!70!black}\textit{Source:} Shapiro--PJM
+  settlement (Jan 2025) on the stylized VRR curve}
 \end{frame}
 
-% ---------- 6. Model setup ----------
+% ---------- 7. Model setup ----------
 \begin{frame}{Model: Supply Function Equilibrium}
-  $K$ symmetric strategic sellers bid supply functions against PJM's VRR
-  demand. Following Klemperer \& Meyer (1989):
+  $K$ symmetric sellers bid supply functions against the VRR demand,
+  in the tradition of Klemperer--Meyer (1989)
   \vfill
   \begin{equation*}
     s'(p) \;=\; \frac{D'(p) \,+\, s(p)/(p - c)}{K - 1}
   \end{equation*}
   \vfill
   \begin{itemize}
-    \item Boundary: $s(\bar{p}) = \bar{q}$ \hfill (Holmberg 2008)
-    \item Fringe: competitive block $Q_f$ offered at cost $c$.
-    \item Equilibrium price $p^*$: where $K\cdot s(p^*) + Q_f = D(p^*)$.
+    \item Holmberg (2008) boundary $s(\bar{p}) = \bar{q}$ selects the equilibrium
+    \item Competitive fringe offers a block $Q_f$ at cost $c$
+    \item $p^*$ solves $K \cdot s(p^*) + Q_f = D(p^*)$
   \end{itemize}
 \end{frame}
 
-% ---------- 7. At-cap is mechanical ----------
+% ---------- 8. At-cap is mechanical ----------
 \begin{frame}{The At-Cap Regime Is Mechanical}
   \begin{itemize}
-    \item When $K \leq 3$, the interior ODE cannot clear demand below $\bar{p}$.
-    \item Market then clears at $\bar{p}$ by construction.
-    \item The dollar value is read off PJM's planning parameters, not
-          predicted by the model.
+    \item When $K \leq 3$, the interior ODE cannot clear demand below $\bar{p}$
+    \item The market then clears at $\bar{p}$ \emph{by construction}
+          via the boundary condition
+    \item The \$329 and \$333 figures come from PJM's VRR Point~(a),
+          not from an independent price forecast
   \end{itemize}
   \vfill
   \begin{center}
     \alert{The substantive content is the \textit{regime}
-    (at-cap vs.\ interior) and its dependence on $K$.}
+    (at-cap vs.\ interior) and its dependence on $K$}
   \end{center}
 \end{frame}
 
-% ---------- 8. Calibration ----------
+% ---------- 9. Calibration ----------
 \begin{frame}{Calibration}
   \begin{itemize}
-    \item \textbf{$K = 3$} strategic sellers --- all seven BRA years show
-          RSI$_3 < 1$ at the RTO level.
-    \item \textbf{$c = \$150$/MW-day} --- combined-cycle sector ACR
-          (IMM 2025).
-    \item \textbf{VRR curve, demand, CETL} from PJM planning filings.
+    \item Number of strategic sellers set to $K = 3$
+      \begin{itemize}
+        \item All seven BRA years show RSI$_3 < 1$ at the RTO level
+      \end{itemize}
+    \item Marginal cost set to $c = \$150$/MW-day
+      \begin{itemize}
+        \item Combined-cycle sector ACR from IMM (2025); this paper's
+              choice, not the IMM's own recommended benchmark
+      \end{itemize}
+    \item VRR curve, demand, and CETL drawn from PJM planning filings
   \end{itemize}
 \end{frame}
 
-% ---------- 9. Baseline results ----------
-\begin{frame}{Baseline SFE Equilibrium}
+% ---------- 10. Baseline results ----------
+\begin{frame}{Baseline SFE: New Design Years Clear at the Cap}
   \begin{center}
-    \small
-    \begin{tabular}{lcccc}
+    \scriptsize
+    \begin{tabular}{lccccc}
       \toprule
-      Year & Design & $p^*$ & Actual & Outcome \\
+      Year & Design & $p^*$ & Actual & Margin & Outcome \\
       \midrule
-      2021/22 & Old & \$405 & \$140 & Interior \\
-      2022/23 & Old & \$310 & \$50  & Interior \\
-      2023/24 & Old & \$330 & \$34  & Interior \\
-      2024/25 & Old & \$358 & \$29  & Interior \\
-      2025/26 & Old & \$426 & \$270 & Interior \\
+      2021/22 & Old & \$405 & \$140 & $+6.8\%$  & Interior \\
+      2022/23 & Old & \$310 & \$50  & $+9.2\%$  & Interior \\
+      2023/24 & Old & \$330 & \$34  & $+9.9\%$  & Interior \\
+      2024/25 & Old & \$358 & \$29  & $+11.7\%$ & Interior \\
+      2025/26 & Old & \$426 & \$270 & $+1.6\%$  & Interior \\
       \midrule
-      \textbf{2026/27} & \textbf{New} & \textbf{\$329} & \textbf{\$329} & \textbf{At cap} \\
-      \textbf{2027/28} & \textbf{New} & \textbf{\$333} & \textbf{\$333} & \textbf{At cap} \\
+      \textbf{2026/27} & \textbf{New} & \textbf{\$329} & \textbf{\$329} & \alert{$-0.2\%$} & \textbf{At cap} \\
+      \textbf{2027/28} & \textbf{New} & \textbf{\$333} & \textbf{\$333} & \alert{$-4.7\%$} & \textbf{At cap} \\
       \bottomrule
     \end{tabular}
   \end{center}
-  \vspace{0.4em}
-  \footnotesize Old-design gaps reflect unmodeled TPS mitigation.
+  \srcnote{PJM BRA reports; $p^*$ from SFE model at $K{=}3$, $c{=}\$150$.
+  Margin = (cleared $-$ reliability req.)/reliability req.; \alert{new-design
+  years cleared short}}
 \end{frame}
 
-% ---------- 10. Key finding: K transition ----------
+% ---------- 11. Key finding: K transition ----------
 \begin{frame}{Markups Collapse Between $K = 3$ and $K = 4$}
   \begin{center}
-    \includegraphics[height=0.75\textheight]{fig02b_K_lerner.pdf}
+    \includegraphics[height=0.55\textheight]{fig02b_K_lerner.pdf}
   \end{center}
+  \srcnote{SFE Lerner index $L = (p^*-c)/p^*$ from numerical ODE solution
+  at $K \in \{2,\dots,10\}$; 2026/27 PJM parameters, baseline calibration}
 \end{frame}
 
-% ---------- 11. The $21B reassessment ----------
-\begin{frame}{The \$21 Billion, Reassessed}
+% ---------- 12. The $21B reassessment ----------
+\begin{frame}{Same Arithmetic, Different Counterfactual}
   \begin{center}
-    \small
+    \footnotesize
     \begin{tabular}{lccc}
       \toprule
       Counterfactual & 2026/27 & 2027/28 & Two-year total \\
@@ -219,40 +276,38 @@
       \bottomrule
     \end{tabular}
   \end{center}
-  \vspace{1em}
+  \srcnote{Savings = (counterfactual $-$ cap) $\times$ MW $\times$ 365,
+  RTO level; constrained LDAs add more. \emph{Caveat:} both years cleared
+  short of reliability req., so at-cap is overdetermined and magnitude is
+  Point~(a)-sensitive}
   \begin{center}
-    \alert{Same arithmetic. Different counterfactual.}
+    \alert{The \$21B figure depends on the counterfactual chosen}
   \end{center}
 \end{frame}
 
-% ---------- 12. Limitations ----------
+% ---------- 13. Limitations ----------
 \begin{frame}{Limitations}
   \begin{itemize}
-    \item \textbf{TPS mitigation} not modeled endogenously --- may be the
-          true binding constraint absent the settlement.
-    \item \textbf{Symmetric firms} --- cost heterogeneity bracketed,
-          not solved.
-    \item \textbf{$K = 3$ imposed at LDA level} where RSI data is sparse.
-    \item \textbf{Static model} --- no retirement or entry response to
-          suppressed prices.
+    \item New-design years cleared short of reliability req.: at-cap is
+          overdetermined (strategic mechanism vs.\ physical scarcity)
+    \item TPS mitigation not endogenous, may be the true binding constraint
+    \item Firms assumed symmetric (cost heterogeneity bracketed)
+    \item Holmberg boundary used as selection rule, not derived
+    \item Static model - no retirement or entry response
   \end{itemize}
 \end{frame}
 
-% ---------- 13. Implications & Conclusion ----------
-\begin{frame}{What the Settlement Does --- and What It Doesn't}
+% ---------- 14. Implications & Conclusion ----------
+\begin{frame}{What the Settlement Does, and What It Does Not}
   \begin{itemize}
-    \item The cap \textbf{truncates the price signal};
-          it does not alter the conditions that place the
-          equilibrium there.
-    \item Three structural channels --- \textbf{transmission},
-          \textbf{VRR slope}, \textbf{entry} --- reduce markups
-          without truncating the signal.
-    \item Temporary price suppression is not a substitute for
-          structural reform.
+    \item Cap \$325 sits 53\% above Net CONE (\$212) - entry remains
+          viable, so the concern is informational not cost recovery
+    \item Structural channels (transmission, steeper VRR, entry) reduce
+          markups without truncating the signal
+    \item Temporary suppression is not a substitute for structural reform
   \end{itemize}
-  \vfill
   \begin{center}
-    \large Thank you.
+    \large Thank you
   \end{center}
 \end{frame}
 

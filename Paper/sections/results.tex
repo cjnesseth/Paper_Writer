@@ -19,18 +19,18 @@ the implied price-cost margin (Lerner index) $L = (p^* - c)/p^*$.
   \centering
   \caption{Baseline SFE Equilibrium: $K = 3$, $c = \$150$/MW-day}
   \label{tab:baseline}
-  \begin{tabular}{lccccccc}
+  \begin{tabular}{lcccccccc}
     \toprule
-    Year & Design & $\bar{p}$ & $\bar{p}_S$ & $p^*$ & $p_{\text{actual}}$ & $L$ & Outcome \\
+    Year & Design & $\bar{p}$ & $\bar{p}_S$ & $p^*$ & $p_{\text{actual}}$ & Margin & $L$ & Outcome \\
     \midrule
-    2021/22 & Old & \$482 & ---        & \$405 & \$140 & 0.63 & Interior \\
-    2022/23 & Old & \$391 & ---        & \$310 & \$50  & 0.52 & Interior \\
-    2023/24 & Old & \$412 & ---        & \$330 & \$34  & 0.55 & Interior \\
-    2024/25 & Old & \$440 & ---        & \$358 & \$29  & 0.58 & Interior \\
-    2025/26 & Old & \$452 & ---        & \$426 & \$270 & 0.65 & Interior \\
+    2021/22 & Old & \$482 & ---        & \$405 & \$140 & $+6.8\%$  & 0.63 & Interior \\
+    2022/23 & Old & \$391 & ---        & \$310 & \$50  & $+9.2\%$  & 0.52 & Interior \\
+    2023/24 & Old & \$412 & ---        & \$330 & \$34  & $+9.9\%$  & 0.55 & Interior \\
+    2024/25 & Old & \$440 & ---        & \$358 & \$29  & $+11.7\%$ & 0.58 & Interior \\
+    2025/26 & Old & \$452 & ---        & \$426 & \$270 & $+1.6\%$  & 0.65 & Interior \\
     \midrule
-    2026/27 & New & \$329 & \$325      & \$329 & \$329 & 0.54 & At cap \\
-    2027/28 & New & \$333 & \$325      & \$333 & \$333 & 0.55 & At cap \\
+    2026/27 & New & \$329 & \$325      & \$329 & \$329 & $-0.2\%$  & 0.54 & At cap \\
+    2027/28 & New & \$333 & \$325      & \$333 & \$333 & $-4.7\%$  & 0.55 & At cap \\
     \bottomrule
   \end{tabular}
   \vspace{3pt}
@@ -39,7 +39,9 @@ the implied price-cost margin (Lerner index) $L = (p^* - c)/p^*$.
     \footnotesize \textit{Notes:} $\bar{p}$: VRR Point~(a) price cap.
     $\bar{p}_S$: Shapiro settlement cap (\$325/MW-day UCAP);
     ``---'' indicates the settlement does not apply. Prices in \$/MW-day.
-    ``Interior'': equilibrium falls strictly inside $(c,\bar{p})$;
+    Margin $= (Q_{\text{cleared}} - Q_{\text{reliability req}}) / Q_{\text{reliability req}}$;
+    negative values indicate the auction cleared below the reliability
+    requirement. ``Interior'': equilibrium falls strictly inside $(c,\bar{p})$;
     ``At cap'': $S_i(\bar{p}) = \bar{q}_i$ for all $i$.
     Source: PJM BRA clearing data and SFE model.
   \end{minipage}
@@ -168,9 +170,10 @@ equation~\eqref{eq:sfe_ode}.
 
 The structural implication is direct: the observed 2026/27 at-cap outcome
 ($p^* = \$329$) is consistent with $K \leq 3$ but inconsistent with $K \geq 4$
-(which would predict interior clearing at \$228 or below). This makes 2026/27
-a useful natural experiment for establishing the effective number of strategic
-sellers.
+(which would predict interior clearing at \$228 or below). This is a
+model-based inference, not an identification result: under the maintained SFE
+specification, $K \geq 4$ cannot rationalize the at-cap regime, but $K$ itself
+is not identified from the auction data.
 
 \label{subsec:res_vrr}
 

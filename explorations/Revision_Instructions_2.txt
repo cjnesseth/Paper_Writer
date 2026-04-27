@@ -1,0 +1,82 @@
+## 1. Add Cost Sensitivity Table
+
+Create Table 5b immediately after Table 5. Show equilibrium price p* and Lerner index L for:
+- c ∈ {$100, $125, $150, $175, $200} per MW-day
+- K = 3 (baseline)
+- All three benchmark years (2023/24, 2025/26, 2026/27)
+
+Add one paragraph interpreting the table: note the range of L across cost assumptions and state which qualitative conclusions are robust vs. sensitive.
+
+## 2. Fix the $21B Comparison
+
+In Section 9.2, either:
+
+**Option A (preferred):** Complete the LDA-level revenue transfer calculation. Use LDA clearing quantities from BRA results. Sum RTO + LDA transfers. Report the complete two-year aggregate and compare directly to $21B.
+
+**Option B (if data unavailable):** Narrow the claim. Change "the SFE counterfactual implies a two-year transfer of approximately $612 million" to "the SFE counterfactual implies a two-year transfer of approximately $612 million at the RTO level; constrained LDAs contribute additional transfers not computed here due to data limitations."
+
+Remove any language criticizing the $21B figure that isn't supported by a complete alternative calculation.
+
+## 3. Insert Circularity Language in Introduction
+
+Add this paragraph at the end of the introduction (before "The remainder of the paper..."):
+
+> A methodological note is warranted. The SFE model's at-cap prediction for 2026/27 follows mechanically from the Holmberg boundary condition when K ≤ 3. The observed at-cap clearing is therefore consistent with our maintained assumptions but does not independently validate them. The model's substantive content lies in distinguishing between at-cap and interior regimes across values of K, and in quantifying the settlement's binding gap—not in predicting the specific dollar clearing price, which equals the VRR Point (a) by construction when the boundary condition is active.
+
+## 4. Add Limitations Paragraph
+
+Insert a new subsection 9.4 titled "Limitations" before Section 10:
+
+> **9.4 Limitations**
+>
+> The findings rest on maintained assumptions whose validity cannot be fully tested. First, we assume K = 3 symmetric sellers with identical costs; actual PJM suppliers differ in technology, cost structure, and contract positions. The symmetric Lerner index should be interpreted as a central estimate, not a precise measurement. Second, the Holmberg boundary condition is derived for stochastic-demand markets; in the deterministic BRA, it is imposed as an equilibrium selection criterion. Alternative selection rules would yield different equilibrium prices. Third, our static model treats capacity as exogenous and cannot quantify entry distortions from the settlement. Fourth, we do not model TPS mitigation endogenously; the gap between predicted ($330) and actual ($34) prices in 2023/24 suggests mitigation effects our model does not capture. These limitations bound the precision of our quantitative estimates but do not affect the qualitative finding that the settlement cap is binding under concentrated supply.
+
+## 5. Cut the Paper
+
+Reduce the following sections as specified:
+
+### Section 2 (Literature Review): Cut from ~4 pages to ~2 pages
+- 2.1: Keep first paragraph (Klemperer-Meyer setup). Cut detailed discussion of equilibrium continuum. Keep Green-Newbery citation and one sentence on its relevance.
+- 2.2: Keep Joskow-Tirole missing money reference. Cut detailed discussion of Cramton-Stoft and Hobbs et al. One paragraph total.
+- 2.3: Keep Weitzman and Glaeser-Luttmer citations with one-sentence descriptions. Cut extended discussion of Anderson-Xu and Vossler et al.
+
+### Section 3 (Institutional Background): Cut from ~9 pages to ~4 pages
+- 3.1: Two paragraphs max. Cite Bowring (2013) for details.
+- 3.2: One paragraph. The VRR formula is in Section 4; don't duplicate.
+- 3.3: Keep Table 1. Cut prose to one paragraph introducing the table.
+- 3.4: One paragraph. The lead-time point is made; don't belabor.
+- 3.5: Keep Table 2. Cut prose to two paragraphs.
+- 3.6: Keep. This is the settlement description—essential.
+
+### Section 8 (Lead-Time Argument): Cut from ~6 pages to ~2 pages
+- 8.1: Two sentences. The complaint's theory is already stated in Section 3.6.
+- 8.2: One paragraph with the key numbers (10.2 months, 16.8 months).
+- 8.3: Cut the five-channel enumeration to a single paragraph. State that prices inform decisions beyond direct construction without listing each channel separately.
+- 8.4: Cut entirely. The Hayek point is made elsewhere.
+- 8.5: Cut. Redundant summary.
+
+### Section 10 (Policy Alternatives): Cut from ~5 pages to ~1.5 pages
+- Consolidate 10.1–10.4 into one paragraph each (four short paragraphs).
+- Keep Table 9 but cut the extended prose discussion.
+- Cut 10.5 (Comparative Assessment). The table speaks for itself.
+
+### References
+- Remove references no longer cited after cuts.
+
+## Do Not Do
+
+- Do not add structural estimation of K
+- Do not add asymmetric-firm extensions
+- Do not add dynamic entry modeling
+- Do not add endogenous TPS mitigation
+- Do not add formal welfare analysis
+- Do not add new sections or analyses
+- Do not change the core model (Sections 4–6)
+
+## Style Notes
+
+- Maintain the existing notation (p*, p̄, p̄_S, K, L, etc.)
+- Keep all equations unchanged
+- Preserve all existing tables and figures except as noted
+- Maintain formal academic tone
+- After cuts, verify all internal cross-references still work

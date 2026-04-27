@@ -1,115 +1,269 @@
 % ==============================================================================
-% Section: Evaluating the $21 Billion Claim
-% Status: STYLE EDIT (2026-04-07 — removed subsection headers)
+% Section: Capped Auctions — Case Studies and Policy Implications
+% Status: REVISED (2026-04-26 — Phase C of cap-incidence pivot)
+%   Replaces the SFE-as-counterfactual framing with the IMM unrestricted-VRR
+%   counterfactual; promotes existing concession passages to load-bearing
+%   prose; absorbs lead-time and structural-alternatives content from
+%   previously-separate sec7_leadtime and sec9_policy_alternatives.
 % ==============================================================================
 
-\section{Evaluating the \$21~Billion Claim}
+\section{Capped Auctions: Case Studies and Policy Implications}
 \label{sec:21billion}
 
-\label{subsec:21b_counterfactual}
+The cap-incidence panel of Section~\ref{sec:cap_incidence} and the bunching
+diagnostic of Section~\ref{sec:bunching} together establish that the
+binding administrative constraint changed across the sample period from
+the cost-basis Net ACR cap (slack years) to the Shapiro/PJM settlement
+cap (2026/27 and 2027/28), without a corresponding behavioral shift in
+seller bidding. This section turns to the dollar consequences. I treat
+the two capped auctions as case studies, anchor the counterfactual in
+the IMM's published unrestricted-VRR scenario, and discuss the
+reconciliation with the \$21~billion consumer-savings claim, lead-time
+compression, and structural alternatives to direct price control.
 
-Pennsylvania's January 28, 2025 announcement stated that the settlement
-would save consumers ``over \$21~billion over the next two years''
-\citep{Shapiro2025_press_release}. The arithmetic is straightforward:
-(counterfactual price $-$ \$325) $\times$ cleared quantity $\times$ 2 years.
-Shapiro's stated counterfactual is ``over \$500/MW-Day''
-\citep{Shapiro2025_press_release}, consistent with the pre-settlement VRR
-Point~(a) price visualized in PJM's settlement consultation
-\citep{PJM2025_settlement_slides}. But the VRR Point~(a) price
-is not a strategic equilibrium price. It is the maximum of the
-administrative demand schedule: the price at which the VRR curve becomes
-perfectly inelastic. In equilibrium, the capacity market clears where supply
-meets the VRR schedule, which, as Section~\ref{sec:results} shows, may occur
-anywhere in the range $[c, \bar{p}]$ depending on market structure. The VRR
-counterfactual therefore uses an administrative ceiling rather than a
-market-clearing benchmark.
+% ------------------------------------------------------------------------------
+\subsection{The 2026/27 Auction: Marginal Shortfall, Price Suppression}
+\label{subsec:case_2026}
+% ------------------------------------------------------------------------------
 
-The SFE model provides a structural alternative: $p^*$, the equilibrium
-price under strategic bidding against the \emph{unmodified} VRR curve. In
-2026/27, $p^* = \$329.17$/MW-day; in 2027/28, $p^* = \$333.44$/MW-day.
-Both equilibria fall at the respective VRR Point~(a) caps because the
-Holmberg boundary condition is active for $K \leq 3$, but they are
-substantially below the \$500 figure in Shapiro's claim.
+The 2026/27 BRA cleared at \$329.17/MW-day, which under the new VRR
+design embodies the settlement cap. The market cleared 314~MW below the
+RTO reliability requirement of 134{,}519.5~MW (a 0.23\% shortfall), and
+493~MW below the IRM-implied reserve target; the IMM declared the auction
+``not competitive'' \citep{MonitoringAnalytics2025_sotm}. Capacity Performance offers had
+unit-specific Market Seller Offer Caps calculated for 6.3\% of
+generation resources, and the offer-cap composition (Table~\ref{tab:bunching})
+shows roughly half of resources at their default ACR cost-basis cap and
+35\% as price-takers.
 
-\label{subsec:21b_scenarios}
+The IMM's mechanical counterfactual scenario re-clears the same offers
+against the unrestricted (pre-settlement) VRR demand curve and yields
+total revenues of \$19.29~billion, a 19.7\% increase over the
+\$16.12~billion actual revenue \citep{MonitoringAnalytics2025_sotm}.
+The counterfactual operates almost entirely through the price channel:
+under the unrestricted VRR, the clearing price would have settled
+higher on the demand curve while the cleared quantity would have changed
+modestly. With reserve margin only marginally negative, the cap
+truncated the price signal more than it truncated the quantity
+procured.
 
-Table~\ref{tab:21billion} compares the implied revenue transfer under two
-counterfactual scenarios for the 2026/27 and 2027/28 delivery years,
-using RTO-level cleared quantities from the published BRA results.
+% ------------------------------------------------------------------------------
+\subsection{The 2027/28 Auction: Material Shortfall, Quantity Rationing}
+\label{subsec:case_2027}
+% ------------------------------------------------------------------------------
 
-\begin{table}[ht]
+The 2027/28 BRA cleared at \$333.44/MW-day, again at the new-design
+Point~(a). The market cleared 6{,}623~MW below the RTO reliability
+requirement of 141{,}101~MW, a 4.7\% shortfall that the IMM
+characterized as material; the auction was declared ``not competitive''
+on the same basis as 2026/27. Unit-specific MSOCs were calculated for only
+1.0\% of resources, consistent with the settlement cap moving close
+enough to the underlying offer distribution that fewer individual
+offers exceeded their cost-basis caps.
+
+The IMM unrestricted-VRR counterfactual produces total revenues of
+\$26.32~billion, a 60.4\% increase over the \$16.41~billion actual
+revenue \citep{MonitoringAnalytics2025_sotm}. The disproportionately
+large revenue increase relative to 2026/27 reflects two compounding
+channels: a higher counterfactual price as the unrestricted VRR allows
+clearing further up the demand curve, and a higher counterfactual
+cleared quantity as offers above the settlement cap that were excluded
+under the actual auction would have cleared. A back-of-envelope
+decomposition: at a counterfactual price of \$500/MW-day and the
+actual cleared quantity of 134{,}478~MW over 366 days, revenues would
+be approximately \$24.6~billion. The IMM's \$26.32~billion estimate
+exceeds this by roughly \$1.7~billion, implying counterfactual cleared
+quantity of approximately 144{,}000~MW---9{,}500~MW above actual and
+roughly equal to the reliability requirement plus a positive reserve
+margin. Under the IMM scenario, in other words, the unrestricted
+auction would have procured both higher prices and adequate capacity;
+under the cap, the auction procured neither.
+
+The 2027/28 case is thus the cleanest evidence in the sample of the
+quantity-rationing channel of a binding administrative cap. In
+2026/27 the cap suppressed the price signal but procurement was
+nearly adequate; in 2027/28 the cap suppressed prices and excluded
+the marginal supply needed to meet the reliability requirement.
+
+% ------------------------------------------------------------------------------
+\subsection{Reconciling the \$21 Billion Savings Claim}
+\label{subsec:21b_comparison}
+% ------------------------------------------------------------------------------
+
+Pennsylvania's January 28, 2025 announcement projected consumer savings
+of ``over \$21~billion over the next two years''
+\citep{Shapiro2025_press_release}. The arithmetic uses a counterfactual
+price ``over \$500/MW-Day'' \citep{Shapiro2025_press_release},
+consistent with the pre-settlement VRR Point~(a) price visualized in
+PJM's settlement consultation \citep{PJM2025_settlement_slides}, applied
+to two delivery years of cleared quantity.
+
+Table~\ref{tab:capped_revenue} compares the actual cleared revenue to
+the IMM unrestricted-VRR counterfactual and to a uniform-\$500 price
+counterfactual at actual cleared quantities.
+
+\begin{table}[H]
   \centering
-  \caption{Revenue Transfer Under Two Counterfactual Scenarios (RTO Level)}
-  \label{tab:21billion}
+  \caption{Capacity Market Revenue Under Counterfactual Cap Regimes
+    (System Total)}
+  \label{tab:capped_revenue}
   \small
-  \begin{tabular}{lcccccc}
+  \begin{tabular}{lcccc}
     \toprule
-    & \multicolumn{2}{c}{Counterfactual price} &
-      \multicolumn{2}{c}{Annual revenue transfer} &
-      \multicolumn{1}{c}{Two-year} \\
-    \cmidrule(lr){2-3}\cmidrule(lr){4-5}
-    Scenario & 2026/27 & 2027/28 & 2026/27 & 2027/28 & total \\
+                                                 & 2026/27 & 2027/28 & Two-year & Implied \\
+    Scenario                                     & revenue & revenue & total    & savings \\
     \midrule
-    VRR Point~(a) [Shapiro] & \$500 & \$500 & \$8.57B & \$8.59B & \$17.16B \\
-    SFE equilibrium [this paper] & \$329 & \$333 & \$0.20B & \$0.41B & \$0.61B \\
-    \midrule
-    Settlement cap & \$325 & \$325 & --- & --- & --- \\
+    Actual (settlement-modified VRR)             & \$16.12B & \$16.41B & \$32.53B & --- \\
+    \addlinespace
+    IMM unrestricted-VRR counterfactual          & \$19.29B & \$26.32B & \$45.62B & \$13.08B \\
+    \quad \textit{Percent increase vs.\ actual}  & +19.7\%  & +60.4\%  & +40.2\%  & --- \\
+    \addlinespace
+    \$500/MW-day at actual cleared MW            & \$24.51B & \$24.60B & \$49.10B & \$16.57B \\
+    \addlinespace
+    Stated Pennsylvania claim                    & ---      & ---      & $\sim$\$21B & $\sim$\$21B \\
     \bottomrule
   \end{tabular}
   \vspace{3pt}
 
-  \begin{minipage}{0.92\textwidth}
-    \footnotesize \textit{Notes:} All prices in \$/MW-day UCAP. Annual revenue
-    transfer $= (p_{\text{counterfactual}} - \$325) \times Q \times 365$,
-    where $Q = 134{,}205$~MW (2026/27) and $Q = 134{,}478$~MW (2027/28).
-    Source: PJM BRA clearing data and SFE model.
+  \begin{minipage}{0.96\textwidth}
+    \footnotesize \textit{Notes:} Revenues in nominal dollars over the
+    twelve-month delivery year (366 days for 2027/28). The IMM
+    unrestricted-VRR counterfactual holds offers fixed and re-clears
+    against the pre-settlement VRR demand curve; reported figures are
+    from the IMM 2025 State of the Market Report
+    \citep{MonitoringAnalytics2025_sotm}. The \$500/MW-day scenario
+    multiplies the actual cleared UCAP (134{,}205~MW in 2026/27,
+    134{,}478~MW in 2027/28) by Pennsylvania's stated counterfactual
+    price; this scenario corresponds to the Pennsylvania-stated
+    counterfactual but holds quantity at the capped level rather than
+    re-clearing demand. The \$21~billion claim
+    \citep{Shapiro2025_press_release} reflects additional revenue
+    contributions from constrained Locational Deliverability Areas
+    where local Point~(a) prices substantially exceeded \$325/MW-day in
+    prior years. Savings figures are differences between the
+    counterfactual scenario and the actual outcome.
   \end{minipage}
 \end{table}
 
-Using \$500/MW-day as the counterfactual and RTO-level quantities, the
-two-year revenue transfer is \$17.16~billion. The stated \$21~billion figure
-includes contributions from constrained LDAs. The structural SFE estimate
-implies a two-year revenue transfer of approximately \$612~million at the
-RTO level---roughly 35~times smaller---because the 2026/27 strategic
-equilibrium falls near the design ceiling, not because the settlement
-eliminates large rents. The two counterfactuals differ not because one is
-wrong, but because they answer different questions: the VRR counterfactual
-measures the gap between the design-level cap and the settlement cap, while
-the SFE counterfactual measures the reduction in the predicted clearing
-price attributable to the price band.
+The IMM unrestricted-VRR counterfactual implies two-year savings of
+\$13.08~billion at the system level: about three-fifths of the
+\$21~billion figure but more than seven-tenths of the \$16.57~billion
+implied by Shapiro's counterfactual price applied to actual cleared
+MW. Three observations follow.
 
-\label{subsec:21b_limitations}
+First, the IMM counterfactual is not a full behavioral counterfactual.
+It re-clears with offers held fixed against an alternative demand
+curve, which captures the mechanical effect of restoring the
+unrestricted VRR but not the strategic re-bidding sellers would
+undertake in a no-cap world. The behavioral counterfactual would
+typically yield a clearing price below the IMM mechanical estimate,
+because in the unrestricted scenario supply tightness loosens (the
+unrestricted VRR procures more capacity), and a less-tight market
+clears at lower equilibrium prices for any given level of seller
+strategy.
 
-The findings rest on maintained assumptions whose validity cannot be fully
-tested. First, I assume $K = 3$ symmetric sellers with identical costs.
-Actual PJM suppliers differ in technology, cost structure, and contract
-positions, so the symmetric Lerner index should be interpreted as a central
-estimate, not a precise measurement. Second, the Holmberg boundary condition
-is derived for stochastic-demand markets; in the deterministic BRA, it is
-imposed as an equilibrium selection criterion, and alternative selection
-rules would yield different equilibrium prices. Third, the static model
-treats capacity as exogenous and cannot quantify entry distortions from the
-settlement. A complete savings calculation should account for retirements
-accelerated by lower prices and entry decisions informed by the observed
-2026/27 and 2027/28 clearing prices; the \$21~billion figure and the SFE
-estimate both hold quantity fixed. Fourth, even if greenfield entry is
-infeasible within the 10-month lead time of the 2026/27 BRA, auction prices
-inform decisions beyond direct construction. The clearest such margin is
-retirement deterrence \citep{Cramton2005_capacity}; additional margins---
-demand response registration, bilateral contracting, and forward expectations
-for 2028/29 and beyond---are plausibly affected as well, so the informational
-cost of suppressing the price signal extends beyond the settlement's two-year
-window. Fifth, I do not model TPS mitigation endogenously; the gap between
-predicted and actual prices in old-design years suggests mitigation effects
-the model does not capture. If TPS mitigation would have produced offer
-caps near the settlement cap in 2026/27 absent the settlement, the
-SFE-based transfer of \$612~million overstates the settlement's true
-reduction in payments; the observed old-design gap between $p^*$ and
-$p_{\text{actual}}$ cannot be used to rule this out, because TPS screening
-in those years occurred with capacity margins of 9.9\% and 11.7\% where the
-test was much more likely to be triggered than in the at-cap 2026/27 and
-2027/28 auctions, where RSI$_3$ was binding but TPS application is
-regime-dependent. These limitations bound the precision of the quantitative
-estimates but do not affect the qualitative finding that the settlement cap
-is binding under concentrated supply.
+Second, the gap between the IMM \$13.08~billion and the stated
+\$21~billion is partly accounted for by constrained-LDA effects that
+the system-level IMM scenario does not separately enumerate. Constrained
+LDAs have local Point~(a) prices substantially above the system-level
+value, so revenue increases under an unrestricted scenario are
+correspondingly larger.
 
+Third, the structural significance of either savings figure depends on
+how the savings are interpreted. If they represent rents transferred
+from sellers to consumers in years when scarcity is real, they reduce
+the incentive for entry and retirement deferral that the capacity
+market is designed to provide. If they represent rents that would have
+gone to sellers exercising market power, they are unambiguously
+welfare-improving. Section~\ref{sec:cap_incidence} argues that the
+binding constraint in 2026/27 and 2027/28 was the settlement cap
+overlaid on a market entering scarcity, not a strategic-conduct
+phenomenon driven by seller behavior; under that interpretation the
+savings come at the cost of a truncated investment signal during the
+years it would have been most informative.
+
+% ------------------------------------------------------------------------------
+\subsection{Lead-Time Compression and Entry Response}
+\label{subsec:case_leadtime}
+% ------------------------------------------------------------------------------
+
+A key feature of the 2026/27 and 2027/28 BRAs was their compressed
+lead time. Table~\ref{tab:bra_timeline} shows that the 2025/26 BRA
+was held only 10.1~months before the start of the delivery year and
+the 2026/27 BRA only 10.2~months ahead, against a canonical three-year
+forward design. The 2027/28 auction partially restored lead time at
+17.7~months. Lead-time compression sharpens the cap-incidence question
+because it bounds how quickly supply can respond to high price signals.
+
+Even ignoring the cap, a 10-month horizon falls well short of the
+36--48~months needed for greenfield gas generation. It is non-trivial,
+however, for resources with shorter deployment horizons of 6--18 months,
+including demand response, battery storage, and capacity upgrades to
+existing plants. More importantly for the cap-incidence framing, auction
+prices inform decisions beyond direct construction: retirement
+deterrence (high prices reduce the probability that marginal capacity
+exits), demand response and storage registrations (which respond to
+financial incentives on short timescales), portfolio contracting,
+regulatory and interconnection signaling, and forward expectations for
+delivery years beyond the immediate cap window.
+
+Retirement signaling is the clearest of these channels: the capacity
+market's investment-inducement function includes price signals that
+deter premature retirement of units that can still provide capacity
+when scarcity is most acute \citep{Cramton2005_capacity}. A two-year
+cap during a tight-supply episode disrupts this signal precisely in
+the years when it would have been most informative. The structural
+remedy is schedule restoration, which PJM is pursuing, rather than
+price suppression, which removes the price instrument the market
+design was built to use.
+
+% ------------------------------------------------------------------------------
+\subsection{Structural Alternatives to Direct Price Control}
+\label{subsec:case_alternatives}
+% ------------------------------------------------------------------------------
+
+The cap is not the only available instrument for reducing capacity
+market clearing prices when the underlying market is supply-constrained.
+Three structural channels would reduce equilibrium prices without
+truncating the price signal.
+
+\paragraph{Transmission expansion and competitive imports.} Expanding
+the Capacity Emergency Transfer Limit (CETL) of import-constrained LDAs
+adds competitive supply from outside the constrained area at the
+relevant LDA's clearing. The LDA cross-section in
+Section~\ref{subsec:res_transmission} shows that a 10-percentage-point
+increase in import penetration (CETL relative to reliability requirement)
+is associated with a 4--6-point reduction in the local price-cost
+margin. The relevant regulatory instrument is PJM's Regional
+Transmission Expansion Plan directed toward import-constrained LDAs
+\citep{PJM_RTEP}.
+
+\paragraph{VRR curve recalibration via slope rather than truncation.}
+Steepening the slope of the VRR demand curve disciplines the supply
+function at every price below the cap rather than via direct
+truncation at the cap. FERC Order ER25-1357 modified the VRR design in
+this general direction, though primarily through cap/floor truncation
+rather than pure slope change \citep{FERC2025_ER25-1357}; further
+recalibration would reduce equilibrium prices through the
+demand-elasticity channel rather than through price truncation.
+
+\paragraph{Entry and deconcentration.} The cap-incidence framework
+implies that the cap binds when the supply margin turns negative; the
+structural alternative is supply-side intervention to restore positive
+reserve margins. Interconnection queue reform and expanded demand
+response and battery storage participation are the relevant levers
+\citep{FERC2023_order2023, FERC2024_order2023A}. The IMM's attribution
+of 2026/27 and 2027/28 scarcity to data center load growth implies
+that demand-side intervention---load-queue management for new large
+loads---is also potentially in scope
+\citep{MonitoringAnalytics2025_sotm}.
+
+Each of these channels would reduce capacity market clearing prices
+through changes in market structure or demand-curve shape rather than
+through truncation at an administrative ceiling. Whether any particular
+change is warranted depends on regulatory objectives, cost--benefit
+considerations, and political-economy factors outside the scope of this
+paper. The contribution here is to identify the mechanism underlying
+the cap's binding outcomes and to delineate alternatives that operate
+on the structural conditions producing those outcomes rather than on
+the cleared price directly.
