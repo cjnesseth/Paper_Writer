@@ -98,9 +98,11 @@ the true settlement-induced reduction in capacity payments.
 
 \label{subsec:res_concentration}
 
-Figure~\ref{fig:K_lerner} and Table~\ref{tab:K_sensitivity} report the
-equilibrium price-cost margin $L$ as a function of the number of strategic sellers $K$,
-holding calibration-year parameters fixed. The results reveal three qualitative
+Figure~\ref{fig:K_lerner} reports the equilibrium price-cost margin $L$
+as a function of the number of strategic sellers $K$, holding
+calibration-year parameters fixed
+(Table~\ref{tab:K_sensitivity} in Appendix~\ref{app:figures} reports
+the underlying numerical values). The results reveal three qualitative
 zones.
 
 \begin{figure}[ht]
@@ -112,33 +114,6 @@ zones.
     parameters for each benchmark year. Shaded region indicates at-cap outcomes
     where $S_i(\bar{p}) = \bar{q}_i$.}
 \end{figure}
-
-\begin{table}[ht]
-  \centering
-  \caption{Equilibrium Price and Price-Cost Margin by $K$ (Baseline Calibration)}
-  \label{tab:K_sensitivity}
-  \begin{tabular}{lccc|ccc|ccc}
-    \toprule
-    & \multicolumn{3}{c|}{2023/24 (Old VRR)} &
-      \multicolumn{3}{c|}{2025/26 (Old VRR)} &
-      \multicolumn{3}{c}{2026/27 (New VRR)} \\
-    $K$ & $p^*$ & $L$ & cap & $p^*$ & $L$ & cap & $p^*$ & $L$ & cap \\
-    \midrule
-    2  & 412 & 0.64 & \checkmark & 452 & 0.67 & \checkmark & 329 & 0.54 & \checkmark \\
-    3  & 330 & 0.55 &            & 426 & 0.65 &            & 329 & 0.54 & \checkmark \\
-    4  & 215 & 0.30 &            & 261 & 0.42 &            & 228 & 0.34 & \\
-    5  & 168 & 0.11 &            & 184 & 0.19 &            & 177 & 0.15 & \\
-    7  & 151 & 0.01 &            & 152 & 0.01 &            & 152 & 0.01 & \\
-    10 & 151 & 0.01 &            & 151 & 0.01 &            & 151 & 0.01 & \\
-    \bottomrule
-  \end{tabular}
-  \vspace{3pt}
-
-  \begin{minipage}{0.92\textwidth}
-    \footnotesize \textit{Notes:} Prices in \$/MW-day. $L = (p^* - c)/p^*$; $c = \$150$/MW-day.
-    \checkmark\ indicates the market clears at the VRR price cap $\bar{p}$.
-  \end{minipage}
-\end{table}
 
 \input{tables/tab_cost_sensitivity}
 
@@ -236,10 +211,11 @@ Lerner indices range from 0.48 (DEOK in 2025/26) to 0.70 (PS and PS NORTH
 in 2025/26), with most LDAs above 0.60 in every year. In 2026/27, every LDA
 clears at or within \$0.50 of the price cap, confirming that the at-cap
 outcome is not an artifact of RTO aggregation.
-Figure~\ref{fig:cetl_scatter} shows that LDAs with higher import penetration
-($\text{CETL}/\text{rel.~req.}$) systematically exhibit lower markups: a
-10-percentage-point increase in import penetration is associated with a
-4--6-point reduction in the price-cost margin.
+LDAs with higher import penetration ($\text{CETL}/\text{rel.~req.}$)
+systematically exhibit lower markups: a 10-percentage-point increase in
+import penetration is associated with a 4--6-point reduction in the
+price-cost margin (Figure~\ref{fig:cetl_scatter} in
+Appendix~\ref{app:figures}).
 
 \begin{figure}[ht]
   \centering
@@ -249,15 +225,5 @@ Figure~\ref{fig:cetl_scatter} shows that LDAs with higher import penetration
   {\small\noindent\textit{Notes:} Source: SFE model calibrated to PJM planning
     parameters and CETL data by LDA. $\dagger$: market cleared at or within
     \$0.50 of the VRR price cap. LDAs ordered by 2026/27 margin.}
-\end{figure}
-
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=0.85\textwidth]{../Figures/fig06_cetl_scatter.pdf}
-  \caption{Higher Import Penetration Systematically Reduces Local Markups}
-  \label{fig:cetl_scatter}
-  {\small\noindent\textit{Notes:} Source: SFE model calibrated to PJM planning
-    parameters and CETL data by LDA. Each point is one LDA-year observation;
-    dashed lines are ordinary least squares (OLS) trends by year.}
 \end{figure}
 

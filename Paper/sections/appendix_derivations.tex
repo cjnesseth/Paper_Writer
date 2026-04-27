@@ -1,0 +1,70 @@
+% ==============================================================================
+% Appendix: SFE Derivations
+% ==============================================================================
+
+\section{Supply Function Equilibrium Derivations}
+\label{app:derivations}
+
+This appendix derives the supply function equilibrium first-order
+condition~\eqref{eq:sfe_foc} stated in Section~\ref{sec:model}, the
+symmetric reduction~\eqref{eq:sfe_ode}, and the Cournot upper bound on
+the markup.
+
+\subsection{Marginal Revenue and the SFE First-Order Condition}
+\label{app:foc_derivation}
+
+Seller $i$'s profit at clearing price $p$ is
+$\pi_i = (p - c) \cdot S_i(p)$, since marginal cost is constant at $c$.
+Maximization is equivalent to maximizing profit along the residual demand
+curve $R_i(\cdot)$ defined in equation~\eqref{eq:resid}. If seller $i$
+considers increasing its offered quantity by $\mathrm{d}q$ at price $p$,
+the market-clearing price must move by $\mathrm{d}p$ to preserve the
+clearing identity~\eqref{eq:clearing}:
+\begin{equation}
+  \mathrm{d}p
+  \;=\; \frac{\mathrm{d}q}{D'(p) - \sum_{j \neq i} S_j'(p) - S_f'(p)}.
+  \label{eq:dprice}
+\end{equation}
+Because $D'(p) < 0$ and $S_j'(p) \geq 0$, the denominator is strictly
+negative: an increase in supply lowers the clearing price. Marginal
+revenue at $p$ is then
+\begin{equation}
+  \text{MR}_i(p)
+  \;=\; p + \frac{S_i(p)}{D'(p) - \sum_{j \neq i} S_j'(p) - S_f'(p)}.
+  \label{eq:mr}
+\end{equation}
+Setting $\text{MR}_i(p) = c$ and rearranging yields
+equation~\eqref{eq:sfe_foc}, the system of $K$ coupled first-order ODEs
+characterizing the supply function equilibrium. This is the $K$-seller
+generalization of \citet{Green1992_british}'s equation~(3) for the
+symmetric duopoly and of the general condition in
+\citet{Anderson2008_sfe_asymmetric}.
+
+\subsection{Symmetric Reduction}
+\label{app:symmetric_derivation}
+
+In a symmetric Nash equilibrium $S_i(p) = s(p)$ for all $i$. Substituting
+into~\eqref{eq:sfe_foc} gives
+\begin{equation}
+  s(p) \;=\; -(p - c)
+  \Bigl[D'(p) - (K-1)\,s'(p) - S_f'(p)\Bigr].
+  \label{eq:sfe_sym_raw}
+\end{equation}
+Under Assumption~\ref{assm:fringe} the fringe is a step function, so
+$S_f'(p) = 0$ almost everywhere. Solving~\eqref{eq:sfe_sym_raw} for
+$s'(p)$ yields the symmetric SFE ODE~\eqref{eq:sfe_ode} reported in the
+body, with boundary condition $s(\bar{p}) = \bar{q}$ from
+Proposition~\ref{prop:holmberg}.
+
+\subsection{Cournot Upper Bound}
+\label{app:cournot}
+
+The Cournot upper bound on the markup follows from the inverse-elasticity
+rule applied at market demand:
+\begin{equation}
+  L^{\text{Cournot}} \;=\; \frac{1}{K \cdot |D'(p^*) \cdot p^* / D(p^*)|}.
+  \label{eq:cournot_bound}
+\end{equation}
+This equals the residual-demand elasticity in the symmetric case and
+provides a useful sanity check on the SFE-implied Lerner indices reported
+in Section~\ref{sec:results}.

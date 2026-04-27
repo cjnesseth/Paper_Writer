@@ -110,29 +110,10 @@ The slope $D'(p)$ is piecewise constant and satisfies
 
 \label{subsec:model_foc}
 
-Seller $i$ chooses $S_i(\cdot)$ to maximize profit. Taking rivals'
-supply functions as fixed, the profit at any market clearing price $p$ is
-$\pi_i = p \cdot S_i(p) - c \cdot S_i(p) = (p - c) \cdot S_i(p)$, since
-marginal cost is constant at $c$. The seller's problem is equivalent to
-maximizing profit along its residual demand curve $R_i(\cdot)$. At
-price $p$, if seller $i$ considers increasing its offered quantity by
-$\mathrm{d}q$, the market clearing price must fall by $\mathrm{d}p$ to
-preserve equation~\eqref{eq:clearing}:
-\begin{equation}
-  \mathrm{d}p
-  \;=\; \frac{\mathrm{d}q}{D'(p) - \sum_{j \neq i} S_j'(p) - S_f'(p)}.
-  \label{eq:dprice}
-\end{equation}
-Since $D'(p) < 0$ and $S_j'(p) \geq 0$, the denominator is strictly
-negative, so any increase in supply lowers the clearing price. The seller's
-marginal revenue from increasing quantity at price $p$ is:
-\begin{equation}
-  \text{MR}_i(p)
-  \;=\; p + \frac{S_i(p)}{D'(p) - \sum_{j \neq i} S_j'(p) - S_f'(p)}.
-  \label{eq:mr}
-\end{equation}
-Setting marginal revenue equal to marginal cost $c$ yields the
-\emph{supply function equilibrium condition}:
+Seller $i$ chooses $S_i(\cdot)$ to maximize $(p - c) \cdot S_i(p)$ along
+its residual demand curve $R_i(\cdot)$. Setting marginal revenue equal
+to marginal cost yields the supply function equilibrium first-order
+condition
 
 \begin{proposition}
   \label{prop:sfe_foc}
@@ -148,15 +129,13 @@ Setting marginal revenue equal to marginal cost $c$ yields the
   functions $\{S_1, \ldots, S_K\}$.
 \end{proposition}
 
-Equation~\eqref{eq:sfe_foc} is the $K$-seller generalization of the
-first-order condition derived by \citet{Green1992_british} for the symmetric
-duopoly (their equation~3) and of the general condition in
-\citet{Anderson2008_sfe_asymmetric} (their equation~1). Its economic content
-is straightforward: seller $i$ equates its residual-demand markup $(p - c)$
-to the inverse of the residual demand elasticity at that price. When more
-sellers compete ($K$ large) or the VRR slope is steep (large $|D'|$), the
-system requires a smaller markup at each price, pushing the equilibrium
-supply function toward the competitive schedule.
+The full derivation is in Appendix~\ref{app:foc_derivation}.
+Equation~\eqref{eq:sfe_foc} is the $K$-seller generalization of
+\citet{Green1992_british}'s symmetric duopoly first-order condition.
+Economically, seller $i$ equates the residual-demand markup $(p - c)$ to
+the inverse of the residual demand elasticity at that price; more
+sellers or steeper VRR demand both reduce the equilibrium markup at each
+price.
 
 \label{subsec:model_selection}
 
@@ -189,85 +168,55 @@ Holmberg's original proof is under demand uncertainty. In the deterministic
 BRA studied here I impose~\eqref{eq:bc} as an equilibrium selection device
 rather than deriving it from the theorem.
 
-The intuition: when rivals' capacity constraints simultaneously bind,
-seller $i$ faces perfectly inelastic residual demand and its optimum is
-to price at the cap $\bar{p}$. Any lower price sacrifices revenue without
-gaining quantity, and any higher price is infeasible. This forces the
-supply function through $(\bar{p},\, \bar{q}_i)$, pinning the arbitrary
-constant in the ODE. In the PJM BRA, $\bar{p}$ equals the VRR Point~(a)
-price, and Assumption~\ref{assm:demand} gives $D'(\bar{p}) = 0$ (the VRR
-is flat at the cap). The at-cap clearing outcomes in 2026/27 and 2027/28
-(Table~\ref{tab:bra_timeline}) confirm the boundary condition is active
-in those years, consistent with the \citet{Holmberg2008_unique_sfe}
-selection criterion. PJM's reliability target requires procuring nearly
-all installed capacity, so binding-capacity outcomes are the empirically
-relevant case. I therefore integrate~\eqref{eq:sfe_foc} \emph{backward}
-from the boundary condition $S_i(\bar{p}) = \bar{q}_i$.
+The intuition is that when rivals' capacity constraints bind, residual
+demand is perfectly inelastic and the seller's optimum is to price at
+the cap, forcing the supply function through $(\bar{p}, \bar{q}_i)$ and
+pinning the arbitrary constant in the ODE. The at-cap clearing outcomes
+in 2026/27 and 2027/28 (Table~\ref{tab:bra_timeline}) confirm the
+boundary condition is active in those years. I therefore
+integrate~\eqref{eq:sfe_foc} \emph{backward} from $S_i(\bar{p}) =
+\bar{q}_i$.
 
 \label{subsec:model_symmetric}
 
-For calibration and comparative statics, I begin with the symmetric case in
-which all $K$ strategic sellers are identical with $\bar{q}_i = \bar{q}$ and
-$c_i = c$ for all $i$. In a symmetric Nash equilibrium,
-$S_i(p) = s(p)$ for all $i$. Substituting into
-equation~\eqref{eq:sfe_foc}:
-\begin{equation}
-  s(p) \;=\; -\bigl(p - c\bigr)
-    \Bigl[D'(p) - (K-1)\,s'(p) - S_f'(p)\Bigr].
-  \label{eq:sfe_sym_raw}
-\end{equation}
-Under Assumption~\ref{assm:fringe}, $S_f'(p) = 0$ almost everywhere.
-Rearranging~\eqref{eq:sfe_sym_raw} for $s'(p)$ yields the symmetric
-SFE ordinary differential equation
+For calibration and comparative statics, I begin with the symmetric case
+in which $\bar{q}_i = \bar{q}$ and $c_i = c$ for all $i$ and
+$S_i(p) = s(p)$ in equilibrium. Substituting into~\eqref{eq:sfe_foc} and
+solving for $s'(p)$ (full steps in
+Appendix~\ref{app:symmetric_derivation}) yields the symmetric SFE
+ordinary differential equation
 \begin{equation}
     s'(p) \;=\; \frac{1}{K-1}
     \left[ D'(p) + \frac{s(p)}{p - c} \right],
     \quad p \in [c,\, \bar{p}),
   \label{eq:sfe_ode}
 \end{equation}
-with boundary condition $s(\bar{p}) = \bar{q}$. This is a first-order,
-nonautonomous ODE in the single unknown function $s(\cdot)$. It is
-the $K$-firm generalization of \citeauthor{Green1992_british}'s
-equation~(3), to which it reduces when $K = 2$ and $S_f \equiv 0$.
+with boundary condition $s(\bar{p}) = \bar{q}$. This is the $K$-firm
+generalization of \citeauthor{Green1992_british}'s equation~(3), to
+which it reduces when $K = 2$ and $S_f \equiv 0$.
 
-Equation~\eqref{eq:sfe_ode} has a direct economic interpretation. The
-$D'(p)$ term captures the direct effect of price on demand: when demand is
-more responsive (larger $|D'|$), the equilibrium supply function is
-steeper in price. The $s(p)/(p-c)$ term is a markup-boundary feedback:
-as $p \to c$ from above, it diverges and keeps $s'(p)$ bounded, enforcing
-the lower boundary and ruling out below-cost offers. Well above $c$, the
-feedback partially offsets $D'(p)$, so the supply function is steeper
-than a linear interpolation between $c$ and $\bar{p}$ would predict.
-More competitors (larger $K$) divide the denominator and flatten each
-firm's supply function toward the competitive benchmark.
+Equation~\eqref{eq:sfe_ode} has a direct economic interpretation: the
+$D'(p)$ term tightens supply when demand is more responsive, the
+$s(p)/(p-c)$ feedback enforces the lower boundary $p = c$ and rules out
+below-cost offers, and larger $K$ divides the denominator, flattening
+each firm's supply function toward the competitive benchmark.
 
-The equilibrium clearing price $p^*$ is found by solving
+The equilibrium clearing price $p^*$ solves
 \begin{equation}
   K \cdot s(p^*) + S_f(p^*) = D(p^*)
   \label{eq:clearing_sym}
 \end{equation}
-for $p^*$ after integrating~\eqref{eq:sfe_ode} backward from $\bar{p}$.
-The implied price-cost margin (Lerner index) is
-\begin{equation}
-  L \;=\; \frac{p^* - c}{p^*}
-  \label{eq:lerner}
-\end{equation}
-which measures the equilibrium price-cost margin reported in
-Section~\ref{sec:results}. The competitive benchmark corresponds to $c = p^*$
-($L = 0$), attained as $K$ approaches infinity or as $|D'(p)|$ approaches infinity (perfectly
-elastic demand). The Cournot upper bound on the markup is
-$L^{\text{Cournot}} = 1 / (K \cdot |D'(p^*) \cdot p^* / D(p^*)|)$, the
-standard inverse elasticity rule evaluated at market demand (which equals the
-residual demand elasticity in the symmetric case).
+after integrating~\eqref{eq:sfe_ode} backward from $\bar{p}$, with implied
+Lerner index $L = (p^* - c)/p^*$. The competitive benchmark $L = 0$ is
+attained as $K \to \infty$ or $|D'(p)| \to \infty$; the Cournot upper
+bound is derived in Appendix~\ref{app:cournot}.
 
-Treating the three largest PJM sellers as symmetric is a tractability
-assumption. It reduces the $K$-dimensional coupled ODE
-system~\eqref{eq:sfe_foc} to the scalar ODE~\eqref{eq:sfe_ode}, which is
-calibratable from publicly available aggregate data. This is the standard
-approach in the calibrated SFE literature \citep{Green1992_british,
-Rudkevich1998_poolco}. The symmetric Lerner index approximates the
-capacity-weighted average markup; asymmetric extensions are left for
-future work. Equation~\eqref{eq:sfe_ode} is solved numerically with a
-fourth-order Runge-Kutta integrator using fixed step size $h =
-0.05$\,\$/MW-day, integrating backward from $s(\bar{p}) = \bar{q}$.
+Treating the three largest PJM sellers as symmetric reduces the
+$K$-dimensional system~\eqref{eq:sfe_foc} to the scalar
+ODE~\eqref{eq:sfe_ode}, which is calibratable from publicly available
+aggregate data---the standard approach in the calibrated SFE literature
+\citep{Green1992_british, Rudkevich1998_poolco}. I
+solve~\eqref{eq:sfe_ode} numerically with a fourth-order Runge-Kutta
+integrator at fixed step size $h = 0.05$\,\$/MW-day, integrating
+backward from $s(\bar{p}) = \bar{q}$.
 
