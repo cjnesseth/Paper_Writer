@@ -1,105 +1,114 @@
-# CLAUDE.MD -- Academic Project Development with Claude Code
+# CLAUDE.md — PJM Capacity Auction SFE Paper
 
-**Project:** IO Paper 2: Calibrated SFE Simulation of Market Power in PJM Capacity Auctions
-**Branch:** main
-
----
-
-## Core Principles
-
-- **Plan first** -- enter plan mode before non-trivial tasks; save plans to `quality_reports/plans/`
-- **Verify after** -- compile/render and confirm output at the end of every task
-- **Single source of truth** -- Paper `.tex` is authoritative; slides derive from it
-- **Quality gates** -- nothing ships below 80/100
-- **[LEARN] tags** -- when corrected, save `[LEARN:category] wrong → right` to MEMORY.md
+**Paper:** *Capping the Capacity Market: A Supply Function Equilibrium Analysis of Price Controls in PJM*
+**Active branch:** `PJM-Paper` (ahead of `main`; PR not yet opened)
+**Working title before pivot:** "Calibrated SFE Simulation of Market Power in PJM Capacity Auctions" — the project re-framed around the Jan 2025 Shapiro settlement and its $325/MW-day cap. Old framing artifacts may still appear in stale notes.
 
 ---
 
-## Folder Structure
+## Core principles
+
+- **Plan first** for non-trivial work. Save plans to `quality_reports/plans/YYYY-MM-DD_description.md`.
+- **Verify after** every task: compile the paper, render figures, confirm output. See `.claude/rules/verification-protocol.md`.
+- **Single source of truth:** the LaTeX in `Paper/` is authoritative. Slides, figures, and any Quarto derivatives must follow.
+- **Quality gates** in `.claude/rules/quality-gates.md`: 80 = commit, 90 = PR, 95 = submission.
+- **Auto-memory** at `~/.claude/projects/-home-chris-projects-Paper-Writer/memory/` is the persistence mechanism — write/update memories there, not in CLAUDE.md or MEMORY.md in the repo root.
+
+---
+
+## Repo layout (what actually exists)
 
 ```
-io-paper-2/
-├── CLAUDE.MD                    # This file
-├── .claude/                     # Rules, skills, agents, hooks
-├── Bibliography_base.bib        # Zotero-exported .bib
-├── Paper/                       # Main paper .tex + sections
-│   ├── main.tex
-│   ├── sections/                # Modular \input sections
-│   └── tables/                  # Generated .tex tables
-├── Figures/                     # Publication-ready figures
-├── Data/                        # Raw + cleaned data
-│   ├── raw/
-│   └── cleaned/
-├── Analysis/                    # R scripts (estimation, simulation)
-├── Preambles/header.tex         # LaTeX preamble
-├── Slides/                      # (Future) Beamer presentation slides
-├── scripts/                     # Utility scripts
-├── quality_reports/             # Plans, session logs, merge reports
-├── explorations/                # Research sandbox (see rules)
-├── templates/                   # Session log, quality report templates
-└── master_supporting_docs/      # Reference papers
+Paper_Writer/
+├── CLAUDE.md                    ← this file
+├── Bibliography_base.bib        ← Zotero export (used as ../Bibliography_base from Paper/)
+├── Paper/
+│   ├── main.tex                 ← entry point; \input{header} from ../Preambles
+│   ├── sections/                ← see "Current sections" below
+│   └── tables/                  ← R-generated .tex tables
+├── Preambles/header.tex         ← loaded via TEXINPUTS=../Preambles
+├── Figures/                     ← fig01–fig06, fig_bunching (PDFs from R)
+├── Data/{raw,cleaned}/          ← inputs and calibration_master.csv
+├── Analysis/
+│   ├── *.py                     ← parsers (01–04): planning params, BRA results, IMM/HHI, master compile
+│   └── R/                       ← 01_vrr_demand → 10_bunching (the SFE solver pipeline)
+├── Slides/                      ← presentation.tex (15-min Beamer/metropolis) + speaker scripts
+├── Quarto/                      ← only emory-clean.scss; no active .qmd files for this paper
+├── scripts/                     ← quality_score.py, run_pipeline.sh, sync_to_docs.sh
+├── quality_reports/{plans,session_logs,merges}/
+├── explorations/                ← sandbox; see exploration-fast-track.md
+├── templates/                   ← session-log.md, quality-report.md, etc.
+├── master_supporting_docs/      ← reference papers (PDF processing rule applies)
+├── docs/                        ← deployed slide HTML (sync target)
+└── guide/, README.md            ← public-facing project documentation
 ```
 
 ---
 
-## Commands
+## Current paper state (as of 2026-04-27, latest commit `65dc0c5`)
 
+All sections written. Zero `\TODO` stubs. Body 37 pages, total 45.
+
+| # | File | Topic |
+|---|------|-------|
+| 1 | `introduction.tex` | Shapiro complaint → settlement; $325/$175 cap-and-floor |
+| 2 | `literature.tex` | Capacity markets, SFE theory, market power |
+| 3 | `institutional.tex` | PJM RPM, VRR, BRA process, cap mechanics |
+| 4 | `model.tex` | SFE setup, FOCs, ODE, at-cap (Holmberg) regime |
+| 5 | `calibration.tex` | All 7 BRAs (2021/22 → 2027/28); ACR, RSI, fringe |
+| 6 | `results.tex` | Baseline markups + comparative statics |
+| 7 | `cap_incidence.tex` | Cap-incidence panel (Phase A pivot, 2026-04) |
+| 8 | `bunching.tex` | Aggregate bunching diagnostic (Phase B pivot) |
+| 9 | `sec8_21billion.tex` | Case study: $21B claim deconstruction (Phase C) |
+| 10 | `conclusion.tex` | Three findings; policy implications |
+| A1 | `appendix_derivations.tex` | SFE math |
+| A2 | `appendix_figures.tex` | Supporting figures |
+
+`sec9_policy_alternatives.tex` exists in the folder but is **not** included in `main.tex` — old draft material, do not re-include without asking.
+
+The previously listed `discussion.tex` no longer exists; its content was absorbed into §§ 7–10.
+
+---
+
+## Compile commands
+
+Paper (3 passes from `Paper/`):
 ```bash
-# Paper compilation (3-pass, from Paper/ directory)
-cd Paper && TEXINPUTS=../Preambles:$TEXINPUTS pdflatex -interaction=nonstopmode main.tex
-BIBINPUTS=..:$BIBINPUTS bibtex main
-TEXINPUTS=../Preambles:$TEXINPUTS pdflatex -interaction=nonstopmode main.tex
-TEXINPUTS=../Preambles:$TEXINPUTS pdflatex -interaction=nonstopmode main.tex
+cd Paper && \
+  TEXINPUTS=../Preambles:$TEXINPUTS pdflatex -interaction=nonstopmode main.tex && \
+  BIBINPUTS=..:$BIBINPUTS bibtex main && \
+  TEXINPUTS=../Preambles:$TEXINPUTS pdflatex -interaction=nonstopmode main.tex && \
+  TEXINPUTS=../Preambles:$TEXINPUTS pdflatex -interaction=nonstopmode main.tex
+```
+The `TEXINPUTS=../Preambles` is required — `\input{header}` will not resolve without it.
 
-# Slide compilation (future -- 3-pass XeLaTeX)
-cd Slides && TEXINPUTS=../Preambles:$TEXINPUTS xelatex -interaction=nonstopmode file.tex
-BIBINPUTS=..:$BIBINPUTS bibtex file
-TEXINPUTS=../Preambles:$TEXINPUTS xelatex -interaction=nonstopmode file.tex
-TEXINPUTS=../Preambles:$TEXINPUTS xelatex -interaction=nonstopmode file.tex
-
-# Quality score
-python scripts/quality_score.py Paper/main.tex
+Slides (3 passes from `Slides/`, `pdflatex` not xelatex):
+```bash
+cd Slides && \
+  pdflatex -interaction=nonstopmode presentation.tex && \
+  pdflatex -interaction=nonstopmode presentation.tex && \
+  pdflatex -interaction=nonstopmode presentation.tex
 ```
 
----
+Quality score: `python scripts/quality_score.py Paper/main.tex`
 
-## Quality Thresholds
-
-| Score | Gate | Meaning |
-|-------|------|---------|
-| 80 | Commit | Good enough to save |
-| 90 | PR | Ready for circulation |
-| 95 | Excellence | Submission-ready |
+R pipeline (from repo root): scripts in `Analysis/R/` are numbered 01–10 and meant to be run in order. They produce `.rds` files and the figures/tables consumed by `main.tex`.
 
 ---
 
-## Skills Quick Reference
+## Working with me on this project
 
-| Command | What It Does |
-|---------|-------------|
-| `/compile-latex [file]` | 3-pass LaTeX + bibtex |
-| `/proofread [file]` | Grammar/typo review |
-| `/review-r [file]` | R code quality review |
-| `/validate-bib` | Cross-reference citations |
-| `/commit [msg]` | Stage, commit, PR, merge |
-| `/lit-review [topic]` | Literature search + synthesis |
-| `/research-ideation [topic]` | Research questions + strategies |
-| `/interview-me [topic]` | Interactive research interview |
-| `/review-paper [file]` | Manuscript review |
-| `/data-analysis [dataset]` | End-to-end R analysis |
-| `/devils-advocate` | Challenge research design |
+- Skills are auto-discovered from `.claude/skills/` — invoke any of them via the Skill tool when their description matches. I do not need an enumeration here.
+- Path-scoped rules in `.claude/rules/` load automatically when matching files are touched. Read them when relevant; don't re-derive their content.
+- Domain non-obvious: PJM auction *date* ≠ delivery year. Lead times in `Analysis/04_compile_master.py` were caught wrong in April 2026 — see the BRA-dates feedback memory before citing any auction date.
+- Reviewer agents (`tikz-reviewer`, `domain-reviewer`, `proofreader`, `r-reviewer`, `pedagogy-reviewer`, `slide-auditor`, `verifier`, `quarto-critic`/`-fixer`, `beamer-translator`) are configured under `.claude/agents/` and exposed via the Agent tool.
 
 ---
 
-## Current Paper State
+## What to do if context is fresh
 
-| Section | File | Status | Description |
-|---------|------|--------|-------------|
-| Introduction | `sections/introduction.tex` | Stub | Market power in capacity markets; SFE simulation approach |
-| Literature | `sections/literature.tex` | Skeleton | Citations only, no prose; 5 subsections |
-| Institutional | `sections/institutional.tex` | Stub | PJM RPM, VRR curve, BRA process, mitigation rules |
-| Model | `sections/model.tex` | Stub | SFE setup, FOCs, ODE system, equilibrium selection |
-| Calibration | `sections/calibration.tex` | Stub | PJM data sources, parameter choices, baseline structure |
-| Results | `sections/results.tex` | Stub | Baseline markups + 4 comparative statics |
-| Discussion | `sections/discussion.tex` | Stub | Compare to IMM metrics; VRR and transmission policy |
-| Conclusion | `sections/conclusion.tex` | Stub | Policy implications |
+1. Read this file.
+2. Read the most recent plan in `quality_reports/plans/`.
+3. `git log --oneline -10` and `git status` for current state.
+4. Read MEMORY index (loaded automatically) and any memory it points to.
+5. State your understanding before acting.
