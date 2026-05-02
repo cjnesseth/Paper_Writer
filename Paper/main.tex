@@ -8,7 +8,7 @@
 % ==============================================================================
 
 % --- Title page ---
-\title{Capping the Capacity Market: A Supply Function Equilibrium Analysis of Price Controls in PJM}
+\title{Price Suppression and Reliability Shortfall in PJM's Capacity Market}
 \author{}
 \date{\today}
 \maketitle
@@ -16,30 +16,31 @@
 
 \begin{abstract}
 \singlespacing
-In January 2025, Pennsylvania Governor Josh Shapiro negotiated a settlement
-reshaping PJM's capacity market demand curve: a price cap at \$325 per
-megawatt-day (MW-day) of unforced capacity (UCAP) and a price floor at
-\$175/MW-day UCAP for the 2026/27 and 2027/28 delivery years, projected to
-save consumers over \$21~billion. I evaluate this intervention using a
-Supply Function Equilibrium (SFE) model calibrated to all seven completed
-Base Residual Auctions (BRAs). Under the maintained assumption of $K \leq 3$
-collectively pivotal suppliers, the model's equilibrium lies in an at-cap
-regime in which the Holmberg boundary condition mechanically fixes the
-clearing price at the Variable Resource Requirement (VRR) Point~(a) value,
-so the 2026/27 and 2027/28 outcomes are consistent with the model's
-structural regime rather than an independent forecast of the dollar price.
-The substantive quantitative result is the binding gap between the VRR
-Point~(a) value (\$329/MW-day in 2026/27) and the settlement cap
-(\$325/MW-day)---\$4--\$8/MW-day at the Regional Transmission Organization
-(RTO) level, with larger gaps in constrained Locational Deliverability Areas
-(LDAs)---and the transition from at-cap to interior clearing between $K = 3$
-and $K = 4$. Using the SFE rather than the unconstrained VRR Point~(a) as
-the counterfactual, the implied two-year RTO-level revenue transfer is
-approximately \$612~million, substantially smaller than the \$21~billion
-figure. Because both 2026/27 and 2027/28 cleared below their reliability
-requirements, however, the at-cap outcome is consistent with both the
-strategic mechanism and physical scarcity, and the counterfactual magnitude
-is sensitive to which Point~(a) represents the pre-settlement benchmark.
+The January 2025 Shapiro settlement modified PJM's capacity-auction
+demand curve to impose a price cap of approximately \$325 per
+megawatt-day of unforced capacity (UCAP) and a price floor of
+approximately \$175/MW-day on the 2026/27 and 2027/28 Base Residual
+Auctions, with a projected consumer benefit of over \$21~billion.
+Standard price-control theory predicts that a binding ceiling on a
+tight market truncates both the price signal and the quantity
+procured at the cap. I evaluate the connection by combining a
+calibrated symmetric supply function equilibrium of PJM's seven
+completed auctions with the Independent Market Monitor's
+unrestricted-VRR counterfactual. The SFE confirms that under
+IMM-reported concentration ($\mathrm{RSI}_3 < 1$) the unconstrained
+equilibrium clears at the design-level Point~(a) cap and the
+settlement cap binds. The cap-incidence panel shows that a quantity
+shortfall relative to the reliability requirement emerged in both
+capped years (0.23\% in 2026/27 and 4.7\% in 2027/28), with no
+comparable shortfall in any prior auction in the sample. The IMM's
+mechanical counterfactual implies a system-level two-year revenue
+difference of \$13.08~billion and would have procured approximately
+9{,}500~MW more capacity in 2027/28, against a Pennsylvania-stated
+figure of approximately \$21~billion that mixes the price and
+quantity channels. Under any reading consistent with real
+underlying scarcity, the cap induces a quantity shortfall and
+truncates the investment signal precisely in the years it would
+have been most informative.
 \end{abstract}
 
 \newpage
@@ -59,13 +60,9 @@ is sensitive to which Point~(a) represents the pre-settlement benchmark.
 
 \input{sections/calibration}
 
-\input{sections/results}
-
 \input{sections/cap_incidence}
 
-\input{sections/bunching}
-
-\input{sections/sec8_21billion}
+\input{sections/case_studies}
 
 \input{sections/conclusion}
 
@@ -75,13 +72,5 @@ is sensitive to which Point~(a) represents the pre-settlement benchmark.
 
 \newpage
 \bibliography{../Bibliography_base}
-
-% ==============================================================================
-% Appendix
-% ==============================================================================
-
-\appendix
-\input{sections/appendix_derivations}
-\input{sections/appendix_figures}
 
 \end{document}

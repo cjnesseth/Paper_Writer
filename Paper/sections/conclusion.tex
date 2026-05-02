@@ -1,57 +1,69 @@
 % ==============================================================================
 % Section: Conclusion
-% Status: STYLE EDIT (2026-04-07 — removed bold labels, flowing prose)
+% Status: REWRITTEN (2026-05-02) — laser-focus rewrite. Theory-data connection
+%   + $21B reconciliation paragraph + lead-time + welfare reading.
 % ==============================================================================
 
 \section{Conclusion}
 \label{sec:conclusion}
 
-Three findings emerge from the calibrated SFE analysis. First, the settlement
-cap is binding under concentrated supply: with $K \leq 3$ pivotal suppliers,
-the SFE equilibrium for 2026/27 falls at the VRR Point~(a) cap of
-\$329.17/MW-day, exceeding the settlement cap $\bar{p}_S = \$325$ by
-\$4.17/MW-day at the RTO level and by \$115--\$141/MW-day in constrained
-LDAs. Second, the \$21~billion savings figure depends on the counterfactual:
-using the SFE equilibrium rather than the VRR Point~(a) price yields a
-two-year RTO transfer of approximately \$612~million, substantially smaller
-than the stated figure; both magnitudes are sensitive to which Point~(a) the
-pre-settlement VRR is taken to fix, and the at-cap outcome in 2026/27 and
-2027/28---each of which cleared below its reliability requirement---is
-consistent with both the SFE mechanism and physical scarcity
-(Sections~\ref{sec:cap_incidence} and~\ref{subsec:case_2027}). Third, structural channels can reduce prices without truncating the
-signal: CETL expansion through PJM's Regional Transmission Expansion
-Plan \citep{PJM_RTEP}, VRR slope recalibration that disciplines supply
-at every price below the cap rather than via direct truncation
-\citep{FERC2025_ER25-1357}, and supply-side intervention via
-interconnection-queue reform and expanded demand response and storage
-participation \citep{FERC2023_order2023, FERC2024_order2023A} each
-lower the SFE equilibrium through changes in market structure or
-demand-curve shape rather than through price truncation.
+Standard price-control theory predicts that a binding ceiling on a
+tight market truncates the price signal and produces a quantity
+shortfall against the planning target. PJM's two capped delivery
+years, 2026/27 and 2027/28, show both effects: clearing prices pinned
+at the new-design Point~(a) value and cleared capacity short of the
+reliability requirement by 314~MW and 6{,}623~MW, respectively
+(Section~\ref{sec:case_studies}). The shortfall emerged in the same
+years the cap became binding (Section~\ref{sec:cap_incidence}), with
+no comparable shortfall in any prior auction in the sample. The
+textbook prediction and the empirical realization line up.
 
-The settlement cap's allocative significance depends on its proximity
-to the investment threshold. In 2026/27, the cap of \$325/MW-day exceeds
-RTO Net CONE (\$212.14) by 53\%, so the cap alone does not prevent
-new entry from being financially viable. The more substantive concern
-is informational: because the cap binds in consecutive years, potential
-entrants observe the cap rather than the unconstrained equilibrium price
-and cannot distinguish a market that would have cleared at \$333 from
-one that would have cleared far above \$325, reducing the
-informativeness of the capacity price for investment decisions
-\citep{Hogan2005_energy_adequacy, Joskow2008_capacity_payments}---a
-concern amplified in constrained LDAs where local Net CONE values
-exceed the settlement cap (e.g., PS and PS NORTH Net CONE
-$= \$369$/MW-day in 2026/27).
+The Pennsylvania-stated savings figure of approximately
+\$21~billion compares actual revenue under the settlement-modified
+VRR to a counterfactual price ``over \$500/MW-day''
+\citep{Shapiro2025_press_release} applied to the capped quantity, and
+so mixes the price and quantity channels. The IMM's mechanical
+unrestricted-VRR counterfactual, which holds offers fixed and
+re-clears against the pre-settlement demand curve, implies two-year
+revenues of \$45.62~billion against actual \$32.53~billion---a
+system-level difference of \$13.08~billion---and would have procured
+approximately 9{,}500~MW more capacity in 2027/28
+(Table~\ref{tab:capped_revenue}). Treating the difference as
+``savings'' conflates a price reduction with a quantity-rationing
+shortfall: under the cap, consumers paid less, and---in 2027/28
+particularly---the auction procured less than the reliability target.
 
-The model's contribution is evaluative rather than prescriptive. A temporary
-cap can reduce payments, but the comparative statics show that the
-underlying concentration and transmission conditions generating high
-equilibrium prices are what place the equilibrium at the cap in the first
-place. The structural channels identified in the comparative statics
-(CETL expansion, VRR slope, entry) would reduce equilibrium markups through
-market structure rather than by truncating the price signal; the model does
-not rank reforms or quantify their welfare consequences, and whether any
-particular change is warranted depends on regulatory objectives and
-cost--benefit considerations outside its scope. Natural extensions include an
-asymmetric-firm SFE, a dynamic model connecting markups to capacity adequacy,
-and an empirical structural model recovering firm-level costs from offer data.
+Lead-time compression amplifies the investment-signal cost. The
+2025/26, 2026/27, and 2027/28 BRAs were held with 10--18 months of
+lead time against a canonical three-year forward design
+(Table~\ref{tab:bra_timeline}). A 10-month horizon is too short for
+greenfield gas but non-trivial for demand response, battery storage,
+and capacity upgrades to existing plants; auction prices inform
+retirement-deferral decisions on the same timescale
+\citep{Cramton2005_capacity}. A two-year cap during a tight-supply
+episode therefore disrupts the retirement and short-deployment
+signal precisely in the years when it would have been most
+informative, with the new four-point VRR design potentially
+recovering some of that signal in subsequent auctions
+\citep{FERC2025_ER25-1357}.
 
+The welfare reading depends on whether the underlying scarcity is
+real or strategic. If sellers were exercising market power and the
+unconstrained equilibrium reflected rents above efficient scarcity
+prices, the cap is unambiguously welfare-improving. If the underlying
+scarcity is real---driven by load growth and supply tightening, which
+the IMM attributes to data-center demand
+\citep{MonitoringAnalytics2025_sotm}---the cap induces a
+quantity shortage in years when capacity adequacy is most needed and
+truncates the very price signal the capacity market exists to send.
+The cap-incidence panel of Section~\ref{sec:cap_incidence}, the
+declared ``not competitive'' status of both auctions, and the
+realization of the textbook ceiling-induced shortfall together favor
+the latter reading.
+
+The paper is restricted to evaluating the connection between the
+standard price-control prediction and the PJM evidence. Two natural
+extensions for distinguishing scarcity from conduct quantitatively
+are an asymmetric-firm SFE that recovers seller-specific costs from
+offer data, and a dynamic capacity-adequacy model connecting markups
+to entry and retirement decisions.

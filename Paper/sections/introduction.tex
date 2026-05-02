@@ -1,60 +1,62 @@
 % ==============================================================================
 % Section: Introduction
-% Status: COMPLETE (2026-03-29 -- findings and methodological note removed;
-%         colons/em-dashes replaced; prose tightened)
+% Status: REWRITTEN (2026-05-02) — laser-focus rewrite. Lead with the puzzle:
+%   binding cap, observed shortage, the consequences this paper traces.
 % ==============================================================================
 
 \section{Introduction}
 \label{sec:introduction}
 
-On December 30, 2024, the Commonwealth of Pennsylvania filed a complaint
-with the Federal Energy Regulatory Commission (FERC) alleging that PJM's capacity
-auction demand curve was miscalibrated, with its price cap set too high given
-near term expectations for new entry. The complaint cited PJM's July 2024
-Base Residual Auction (BRA) for the 2025/26 delivery year, which cleared at
-\$269.92/MW-day, an increase of more than 800 percent from the prior year,
-as evidence that the existing market design imposed unnecessary costs on
-65 million consumers across 13 states and the District of Columbia
-\citep{Shapiro2025_press_release}.
-Six weeks later, on January 28, 2025, Governor Josh Shapiro announced an
-agreement with PJM in which the demand curves for the 2026/27 and 2027/28
-auctions would be modified to impose a price cap of approximately
-\$325/MW-day unforced capacity (UCAP) and a price floor of approximately
-\$175/MW-day UCAP, applied to both the Regional Transmission
-Organization (RTO) and all constrained Locational
-Deliverability Areas (LDA) \citep{Shapiro2025_press_release, PJM2025_settlement_slides}. The agreement was
-projected to save consumers over \$21 billion over the two delivery years.
+On January 28, 2025, Pennsylvania Governor Josh Shapiro announced an
+agreement with PJM Interconnection that capped capacity prices in the
+2026/27 and 2027/28 Base Residual Auctions at approximately
+\$325/MW-day of unforced capacity (UCAP) and floored them at
+approximately \$175/MW-day \citep{Shapiro2025_press_release,
+PJM2025_settlement_slides}. The settlement followed a Section 206
+complaint filed against PJM's tariff one month earlier
+\citep{PJM2025_settlement_slides} and was projected by the
+Commonwealth to save consumers over \$21~billion across the two
+delivery years \citep{Shapiro2025_press_release}.
 
-The settlement reshaped PJM's Variable Resource Requirement (VRR) demand
-curve by imposing a cap at $\bar{p}_S \approx \$325$/MW-day below the
-existing design-level cap at Point~(a), and adding a floor at
-$\bar{p}_f \approx \$175$/MW-day (Section~\ref{subsec:inst_shapiro}).
-This paper asks what price PJM's 2026/27 and 2027/28 auctions would have
-cleared at absent the settlement modification, and what the consequences of
-suppressing prices to $\bar{p}_S$ are.
+Standard price-control theory delivers a sharp prediction. A binding
+ceiling on a market that would otherwise clear above the cap
+truncates supply at the cap; if the supply willing to clear at the
+cap is short of the planning target, the auction clears short.
+\citet{Weitzman1974_prices} formalizes the logic in the
+prices-vs-quantities framework, and
+\citet{GlaeserLuttmer2003_rent} document a distinct allocative
+consequence: misallocation across heterogeneous demanders,
+qualitatively different from the standard deadweight triangle. The
+Shapiro cap, layered on top of a publicly known administrative demand
+curve and a concentrated supply, is a direct candidate for these
+predictions.
 
-I answer the question using a calibrated Supply Function Equilibrium (SFE)
-model of the PJM BRA. In the model, $K$ symmetric
-strategic sellers simultaneously submit supply functions against PJM's VRR
-demand curve, which is publicly known before bidding. Following
-\citet{Klemperer1989_sfe} and \citet{Green1992_british}, equilibrium is
-characterized by a first order ordinary differential equation (ODE) system
-in the sellers' supply functions, integrated backward from the
-capacity constrained boundary. Equilibrium selection imposes the Holmberg
-boundary condition, requiring each seller's supply function to equal installed
-capacity at the VRR Point~(a) cap. This criterion is motivated by
-\citet{Holmberg2008_unique_sfe}'s uniqueness result for stochastic markets, and in the deterministic BRA it is imposed as a selection device. Because the
-boundary condition forces $p^* = \bar{p}$ whenever it is active, the 2026/27
-and 2027/28 at-cap outcomes are consistent with the maintained assumption of
-$K \leq 3$ strategic sellers but do not independently test the dollar value
-of the clearing price. The model's substantive content is the
-regime (at-cap versus interior) and its dependence on $K$, together
-with the markup level when the equilibrium is interior. I calibrate the
-model to seven completed BRA delivery years (2021/22 through 2027/28)
-using published PJM planning parameters, BRA clearing results, and
-Independent Market Monitor (IMM) State of the Market cost data. The SFE
-equilibrium price $p^*$ is the counterfactual clearing price under strategic
-bidding against the unmodified VRR curve. When the boundary condition is
-active, $p^*$ equals the design-level Point~(a) cap by construction, which
-is what distinguishes the SFE counterfactual from the VRR Point~(a)
-benchmark used in the settlement's \$21~billion savings figure.
+Both capped auctions cleared short of the reliability requirement.
+The 2026/27 BRA cleared 314~MW below the requirement (a 0.23\%
+shortfall; 492~MW below the IRM-implied reserve target); the 2027/28
+BRA cleared 6{,}623~MW below the requirement (a 4.7\% shortfall;
+6{,}517~MW below the IRM target). The PJM Independent Market Monitor (IMM) declared both
+auctions ``not competitive'' \citep{MonitoringAnalytics2025_sotm}, and
+an IMM mechanical scenario that re-clears the same offers against the
+unrestricted (pre-settlement) VRR curve implies that approximately
+9{,}500~MW more capacity would have cleared in 2027/28---enough to
+restore the reliability requirement plus a positive reserve margin.
+The shortage emerged when the cap began to bind, and not before.
+
+This paper traces the connection. Section~\ref{sec:theory} states the
+textbook ceiling logic and uses the symmetric supply function
+equilibrium of \citet{Klemperer1989_sfe}, \citet{Green1992_british},
+and \citet{Holmberg2008_unique_sfe} to characterize the unconstrained
+equilibrium price; under the IMM-reported concentration
+($\mathrm{RSI}_3 < 1$), the equilibrium is at the cap and the
+settlement cap binds. Section~\ref{sec:cap_incidence} documents
+which administrative constraint was binding in each of the seven
+completed BRAs and shows that the shortage emerged in the same years
+the cap began to bind.
+Section~\ref{sec:case_studies} develops the dollar and physical
+consequences of the cap in each capped auction: in 2026/27 the cap
+suppressed price more than quantity; in 2027/28 it suppressed both.
+Section~\ref{sec:conclusion} reads the announced \$21~billion savings
+claim in light of the shortfall and discusses the welfare and
+investment-signal implications of a binding cap during a tight-supply
+episode.

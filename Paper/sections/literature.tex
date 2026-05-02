@@ -1,6 +1,10 @@
 % ==============================================================================
 % Section: Literature Review
-% Status: STYLE EDIT (2026-04-07 — removed subsection headers)
+% Status: EXPANDED (2026-05-02 v2) — absorbs SFE coverage that left with the
+%   Model section cut; adds Anderson-Xu price-cap SFE, Hogan energy-only,
+%   Hobbs RPM dynamic analysis, Vasin uniform-price SFE, Wolfram empirical
+%   duopoly, Wolak/Borenstein market-power measurement, Cramton-Ockenfels
+%   capacity design.
 % ==============================================================================
 
 \section{Literature Review}
@@ -8,44 +12,88 @@
 
 The supply function equilibrium concept, formalized by
 \citet{Klemperer1989_sfe} for demand-uncertainty oligopolies in which
-each firm commits to a price-quantity schedule before demand realizes,
-yields symmetric Nash equilibria characterized by a first-order
-differential equation whose solutions form a continuum bounded above by
-the Cournot schedule and below by the competitive schedule $p = c$.
-\citet{Green1992_british} apply this framework to the England and Wales
-electricity market, establishing the methodological template I follow:
-derive the symmetric ODE, integrate backward from the capacity-constrained
-boundary, and calibrate to observed market structure.
-\citet{Holmberg2008_unique_sfe} shows that in capacity-constrained
-electricity markets the symmetric SFE is unique when rivals' capacity
-constraints simultaneously bind with positive probability, providing the
-boundary condition I use as an equilibrium selection device in the
-deterministic BRA. For the asymmetric extension,
+each firm commits to a price-quantity schedule before demand
+realizes, characterizes symmetric Nash equilibria by a first-order
+differential equation whose solutions form a continuum bounded above
+by the Cournot schedule and below by the competitive schedule
+$p = c$. Under demand uncertainty with bounded support, every
+trajectory between the two stationary solutions is itself a Nash
+equilibrium, so prediction and comparative statics require an
+equilibrium-selection criterion. \citet{Green1992_british} apply this
+framework to the England and Wales electricity market and establish
+the methodological template now standard in the calibrated SFE
+literature: derive the symmetric ODE, integrate backward from the
+capacity-constrained boundary, and calibrate to observed market
+structure. \citet{Holmberg2008_unique_sfe} shows that in
+capacity-constrained electricity markets the symmetric SFE is unique
+when rivals' capacity constraints simultaneously bind with positive
+probability, providing the boundary condition I use as an
+equilibrium-selection device in the deterministic BRA.
 \citet{Anderson2008_sfe_asymmetric} and \citet{Holmberg2007_asymmetric}
-develop existence and convergence results;
-\citet{Rudkevich1998_poolco} bridges the canonical Klemperer-Meyer
-theory and applied generation-market modeling. I solve the symmetric
-ODE backward from the Holmberg boundary using the deSolve package in R.
+extend the existence and characterization results to asymmetric
+firms; \citet{Rudkevich1998_poolco} bridges the canonical
+Klemperer-Meyer theory and applied generation-market modeling.
 
-The capacity market design literature originates from the "missing money"
-problem, where competitive energy markets, subject to regulatory price caps, suppress
-the scarcity rents that would otherwise finance investment in peaking generation
-\citep{Joskow2007_capacity, Joskow2008_capacity_payments}. PJM's Variable
-Resource Requirement curve is a downward-sloping administrative demand schedule
-that adds elasticity relative to the vertical demand curve it replaced and
-integrates scarcity pricing into the capacity clearing process
-\citep{Bowring2013_pjm}. This paper takes the
-VRR design as given and analyzes how its slope governs strategic markup
-opportunities under concentrated supply.
+Empirical and applied work has refined the SFE for electricity
+markets. \citet{Wolfram1999_duopoly} provides the canonical empirical
+test in the England and Wales duopoly and finds prices consistent
+with a strategic SFE rather than the competitive limit;
+\citet{Sweeting2007_market_power} extends the analysis through
+restructuring. \citet{Sioshansi2007_sfe_ercot} fits the SFE to ERCOT
+balancing-market data and assesses its predictive performance.
+\citet{Baldick2004_linear_sfe} develop a tractable
+linear-affine variant useful for transmission-constrained networks,
+and \citet{Vasin2016_sfe_uniform} characterize the SFE specifically
+for uniform-price auction mechanisms of the kind PJM operates.
+\citet{Anderson2005_sfe_pricecaps} is the most direct theoretical
+antecedent of the present paper: they derive supply function
+equilibria in spot markets with contracts and price caps and show
+that a binding cap pushes the equilibrium toward the capacity-cap
+boundary, with quantity rationed at the cap when supply is
+insufficient. The settlement studied here is one practical
+realization of that mechanism.
 
-\citet{Weitzman1974_prices} shows that the choice between price and quantity
-regulatory instruments depends on the relative slopes of marginal benefit and
-marginal cost. When supply is inelastic in the short run, price instruments
-dominate. \citet{GlaeserLuttmer2003_rent} demonstrate in the rent control context that
-binding price controls generate consumption misallocation qualitatively
-different from the standard deadweight triangle.
-\citet{Cramton2005_capacity} emphasize that a central function of the capacity
-market is to provide a long-run investment signal: a binding cap disrupts
-this signal precisely when it is most informative, motivating the
-allocative discussion in Section~\ref{sec:conclusion}.
+The capacity-market design literature originates from the
+``missing-money'' problem: regulatory price caps in the wholesale
+energy market suppress the scarcity rents that would otherwise
+finance investment in peaking generation, leaving energy revenues
+insufficient to recover fixed costs of new entry
+\citep{Joskow2007_capacity, Joskow2008_capacity_payments}.
+\citet{Cramton2005_capacity} and \citet{CramtonOckenfels2012_capacity}
+develop the design principles for a forward capacity instrument with
+a sloped administrative demand curve, and
+\citet{Cramton2007_uniform} defends uniform-price auctions over
+discriminatory alternatives in this setting. PJM's Reliability
+Pricing Model is analyzed dynamically by \citet{Hobbs2007_rpm}, whose
+proposal informed the design of the VRR curve, and
+\citet{Bowring2013_pjm} provides the institutional account from the
+Independent Market Monitor's perspective; \citet{Pfeifenberger2011_rpm}
+offers an early performance assessment. \citet{Hogan2005_energy_adequacy}
+articulates the energy-only alternative, in which scarcity prices in
+the wholesale energy market are allowed to clear at administrative
+ceilings calibrated to the value of lost load and so deliver the
+investment signal that capacity-market advocates argue is otherwise
+missing.
 
+The economics of binding price ceilings is foundational.
+\citet{Weitzman1974_prices} shows that the choice between price and
+quantity instruments depends on the relative slopes of marginal
+benefit and marginal cost; when supply is inelastic in the short
+run, price instruments dominate. \citet{GlaeserLuttmer2003_rent}
+demonstrate, in the rent-control context, that binding ceilings
+generate a distinctive consumption misallocation across
+heterogeneous demanders, qualitatively different from the standard
+deadweight triangle. Experimental evidence in
+\citet{Vossler2009_price_caps} confirms the qualitative shortage
+prediction in laboratory uniform-price wholesale-electricity
+markets. The empirical market-power literature on restructured
+electricity markets---\citet{Wolak2003_measuring},
+\citet{Borenstein2002_market_power}, and
+\citet{Bushnell2008_vertical}---supplies the methodological backdrop
+for distinguishing competitive from strategic clearing and motivates
+the cap-incidence diagnostic of
+Section~\ref{sec:cap_incidence}. The applied question of this paper
+is the realization of these classical predictions in PJM's capacity
+market under the Shapiro settlement, with attention to the
+investment-signal cost of a binding cap during a tight-supply
+episode \citep{Cramton2005_capacity}.
