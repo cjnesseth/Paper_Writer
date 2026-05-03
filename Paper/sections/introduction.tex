@@ -1,7 +1,5 @@
 % ==============================================================================
 % Section: Introduction
-% Status: REWRITTEN (2026-05-02) — laser-focus rewrite. Lead with the puzzle:
-%   binding cap, observed shortage, the consequences this paper traces.
 % ==============================================================================
 
 \section{Introduction}
@@ -10,53 +8,34 @@
 On January 28, 2025, Pennsylvania Governor Josh Shapiro announced an
 agreement with PJM Interconnection that capped capacity prices in the
 2026/27 and 2027/28 Base Residual Auctions at approximately
-\$325/MW-day of unforced capacity (UCAP) and floored them at
+\$325/MW-day of unforced capacity (UCAP) and set a floor at
 approximately \$175/MW-day \citep{Shapiro2025_press_release,
 PJM2025_settlement_slides}. The settlement followed a Section 206
 complaint filed against PJM's tariff one month earlier
 \citep{PJM2025_settlement_slides} and was projected by the
 Commonwealth to save consumers over \$21~billion across the two
-delivery years \citep{Shapiro2025_press_release}.
-
-Standard price-control theory delivers a sharp prediction. A binding
+delivery years \citep{Shapiro2025_press_release}. Standard price control theory predicts that a
 ceiling on a market that would otherwise clear above the cap
-truncates supply at the cap; if the supply willing to clear at the
+causes a shortage of supply at the cap. When the supply willing to clear at the
 cap is short of the planning target, the auction clears short.
 \citet{Weitzman1974_prices} formalizes the logic in the
-prices-vs-quantities framework, and
+prices-versus-quantities framework, and
 \citet{GlaeserLuttmer2003_rent} document a distinct allocative
-consequence: misallocation across heterogeneous demanders,
-qualitatively different from the standard deadweight triangle. The
-Shapiro cap, layered on top of a publicly known administrative demand
-curve and a concentrated supply, is a direct candidate for these
-predictions.
+consequence in the rent control context. Ceilings misallocate
+consumption across heterogeneous demanders. The Shapiro cap,
+layered on top of a publicly known administrative demand curve and a
+concentrated supply, is a direct candidate for these predictions.
 
 Both capped auctions cleared short of the reliability requirement.
-The 2026/27 BRA cleared 314~MW below the requirement (a 0.23\%
-shortfall; 492~MW below the IRM-implied reserve target); the 2027/28
-BRA cleared 6{,}623~MW below the requirement (a 4.7\% shortfall;
-6{,}517~MW below the IRM target). The PJM Independent Market Monitor (IMM) declared both
-auctions ``not competitive'' \citep{MonitoringAnalytics2025_sotm}, and
-an IMM mechanical scenario that re-clears the same offers against the
-unrestricted (pre-settlement) VRR curve implies that approximately
-9{,}500~MW more capacity would have cleared in 2027/28---enough to
-restore the reliability requirement plus a positive reserve margin.
-The shortage emerged when the cap began to bind, and not before.
-
-This paper traces the connection. Section~\ref{sec:theory} states the
-textbook ceiling logic and uses the symmetric supply function
-equilibrium of \citet{Klemperer1989_sfe}, \citet{Green1992_british},
-and \citet{Holmberg2008_unique_sfe} to characterize the unconstrained
-equilibrium price; under the IMM-reported concentration
-($\mathrm{RSI}_3 < 1$), the equilibrium is at the cap and the
-settlement cap binds. Section~\ref{sec:cap_incidence} documents
-which administrative constraint was binding in each of the seven
-completed BRAs and shows that the shortage emerged in the same years
-the cap began to bind.
-Section~\ref{sec:case_studies} develops the dollar and physical
-consequences of the cap in each capped auction: in 2026/27 the cap
-suppressed price more than quantity; in 2027/28 it suppressed both.
-Section~\ref{sec:conclusion} reads the announced \$21~billion savings
-claim in light of the shortfall and discusses the welfare and
-investment-signal implications of a binding cap during a tight-supply
-episode.
+The 2026/27 BRA cleared 314~MW below the requirement, a 0.23\%
+shortfall, and 492~MW below the IRM-implied reserve target. The
+2027/28 BRA cleared 6{,}623~MW below the requirement, a 4.7\%
+shortfall, and 6{,}517~MW below the IRM target. The PJM Independent
+Market Monitor (IMM) declared both auctions "not competitive"
+\citep{MonitoringAnalytics2025_sotm}, and an IMM mechanical scenario
+that re-clears the same offers against the unrestricted
+(pre-settlement) VRR curve implies that approximately 9{,}500~MW more
+capacity would have cleared in 2027/28. That additional capacity is
+enough to restore the reliability requirement plus a positive reserve
+margin. The shortage emerged when the cap began to bind and not
+before. This paper traces that connection.

@@ -1,27 +1,24 @@
 % ==============================================================================
 % Section: A Price-Cap Lens on the Shapiro Settlement
-% Status: REWRITTEN (2026-05-02) — replaces former \section{Model} as part of
-%   laser-focus rewrite. SFE machinery moved to references; appendix removed.
 % ==============================================================================
 
 \section{A Price-Cap Lens on the Shapiro Settlement}
 \label{sec:theory}
 \label{subsec:theory_ceiling}%
 
-Standard price-control theory delivers a sharp prediction for a binding
-ceiling on a competitively cleared market. When the regulator imposes a
+Standard price control theory's prediction is that when the regulator imposes a
 cap $\bar p_S$ below the unconstrained clearing price $p^*$, demand at
-$\bar p_S$ exceeds the quantity sellers will provide; the gap between
+$\bar p_S$ exceeds the quantity sellers will provide. The gap between
 $D(\bar p_S)$ and $S(\bar p_S)$ is the shortage.
 \citet{Weitzman1974_prices} formalizes the choice between price and
 quantity instruments under uncertainty, and
-\citet{GlaeserLuttmer2003_rent} document a distinct allocative
-consequence of binding ceilings: misallocation across heterogeneous
-demanders, qualitatively different from the standard deadweight
-triangle.
+\citet{GlaeserLuttmer2003_rent} document a separate allocative
+consequence of binding ceilings. Binding ceilings misallocate
+consumption across heterogeneous demanders, beyond the standard
+deadweight triangle.
 
 The Shapiro settlement applies this framework directly to PJM's Reliability
-Pricing Model. The settlement modifies the Variable Resource Requirement
+Pricing Model. The settlement modifies the VRR
 curve to be flat for all $p \geq \bar p_S = \$325$/MW-day UCAP and adds
 a flat segment at $\underline p_S \approx \$175$/MW-day for low prices
 (Section~\ref{subsec:inst_shapiro}). The capped auction therefore clears
@@ -29,57 +26,59 @@ whatever capacity sellers offer at or below $\bar p_S$. If aggregate
 offers at the cap fall short of the reliability requirement $q_b$ (the
 Point~(b) quantity in the VRR curve), the auction clears at
 $(\bar p_S, Q_{\text{offered}})$ with $Q_{\text{offered}} < q_b$, and
-two consequences are visible separately:
-a truncated price signal on the upper segment, and---if supply is
-tight---a quantity shortfall against the planning target. Which of these
-channels was operative in 2026/27 and 2027/28 is the empirical question
-of Sections~\ref{sec:cap_incidence} and~\ref{sec:case_studies}.
+two consequences are visible separately. The price signal is cut off
+on the upper segment, and where supply is tight the cleared quantity
+falls short of the planning target. Which of these channels was
+operative in 2026/27 and 2027/28 is the empirical question I aim to answer.
 
 \label{subsec:theory_sfe}%
-To distinguish a binding cap from a redundant one, the paper uses the
+To distinguish a binding cap from a redundant one, this paper uses the
 symmetric supply function equilibrium (SFE) of
 \citet{Klemperer1989_sfe} as a characterization of the unconstrained
 equilibrium price. The setup follows the calibrated-electricity-market
-template of \citet{Green1992_british}: $K$ symmetric pivotal sellers
-with constant marginal cost $c$ submit nondecreasing supply schedules
-$S_i(\cdot)$ against the publicly known VRR demand curve $D(\cdot)$,
-alongside a competitive fringe of size $\bar Q_f$ pricing at $c$.
-Equilibrium is selected by the \citet{Holmberg2008_unique_sfe} boundary
-condition, which requires each seller's supply function to attain its
-capacity at the design-level Point~(a) cap, denoted $\bar p$ to
-distinguish it from the lower settlement cap $\bar p_S$. Under symmetry the
-equilibrium reduces to a scalar first-order ODE in the per-firm supply
-function $s(p)$, integrated backward from $s(\bar p) = \bar q$;
-the derivation is standard \citep{Klemperer1989_sfe, Green1992_british,
-Rudkevich1998_poolco} and is not reproduced here.
+template of \citet{Green1992_british}. There are $K$ symmetric pivotal
+sellers with constant marginal cost $c$ submitting nondecreasing supply
+schedules $S_i(\cdot)$ against the publicly known VRR demand curve
+$D(\cdot)$, alongside a competitive fringe of size $\bar Q_f$ pricing
+at $c$. Equilibrium is selected by the
+\citet{Holmberg2008_unique_sfe} boundary condition, which requires each
+seller's supply function to attain its capacity at the operative
+Point~(a) cap, denoted $\bar p$. In capped delivery years $\bar p$
+coincides with the settlement value $\bar p_S$ described
+in Section~\ref{subsec:inst_shapiro}. In pre-settlement years $\bar p$
+is the old-design Point~(a) ($1.5 \times \text{Net CONE}$). Under
+symmetry the equilibrium reduces to a scalar first-order ODE in the
+per-firm supply function $s(p)$, integrated backward from
+$s(\bar p) = \bar q$. The derivation is standard
+\citep{Klemperer1989_sfe, Green1992_british, Rudkevich1998_poolco} and
+is not reproduced here.
 
-The model's content for this paper is binary. The \emph{at-cap regime}
+The model's content for this paper is binary. The at-cap regime
 ($p^* = \bar p$) obtains whenever rivals' capacity constraints
 simultaneously bind, that is, when $K$ pivotal sellers cannot meet
-residual demand at any interior price. The \emph{interior regime}
-($p^* < \bar p$) holds otherwise. The Shapiro cap $\bar p_S < \bar p$
-binds in the at-cap regime by construction; in the interior regime it
-binds only if $\bar p_S < p^*$. Numerical solution of the symmetric ODE
-for the calibrations of Section~\ref{sec:calibration} yields the at-cap
-regime for $K \leq 3$ and the interior regime for $K \geq 4$; the
-price-cost margin falls by roughly 20--25 percentage points across
-this regime change.\footnote{For 2026/27 with $c = \$150$/MW-day, the
-symmetric SFE clears at the cap ($p^* = \bar p = \$329$, $L = 0.54$)
-under $K = 3$ and at $p^* \approx \$228$ ($L = 0.34$) under $K = 4$.
-The qualitative pattern is the same for the other six calibration
-years.}
+residual demand at any interior price. Otherwise the interior regime
+($p^* < \bar p$) holds. Solving the symmetric
+ODE for the calibrations of Section~\ref{sec:calibration} gives the
+at-cap regime for $K \leq 3$ and the interior regime for $K \geq 4$,
+with the price-cost margin falling by roughly 20 to 25 percentage points
+across this regime change.
 
-PJM's auction concentration is consistent with the $K \leq 3$ regime.
-The IMM reports $\mathrm{RSI}_3 < 1$ in every sample year
+PJM's auction concentration fits the $K \leq 3$ regime. The IMM reports
+$\mathrm{RSI}_3 < 1$ in every sample year
 (Table~\ref{tab:tps_results}), meaning the three largest sellers are
 collectively pivotal at the reliability requirement. A symmetric $K=3$
-calibration is therefore the natural choice and is maintained throughout.
-The SFE plays a focused role in what follows: it identifies which
-auctions feature a binding settlement cap, and it supplies an
-unconstrained-market counterfactual price against which the cap's
-effect on cleared MW can be measured in
-Section~\ref{sec:case_studies}. In the at-cap regime, the SFE matches
-the observed clearing price by construction, not as an independent
-empirical test: its content for this paper is the regime
-classification itself, with the dollar value of $\bar p$ read directly
-from PJM's planning parameters.
+calibration is therefore the natural choice and is maintained
+throughout.
+
+The SFE plays a narrow role in my analysis, functioning as a way to show
+that, under the IMM-reported concentration, the relevant unconstrained
+equilibrium belongs to the at-cap regime. In that regime the SFE
+matches the observed clearing price by construction, not as an
+independent empirical test, and the dollar value of $\bar p$ is read
+directly from PJM's planning parameters. The classification rests on
+a symmetric representation of the three pivotal sellers, and a fully
+asymmetric calibration could shift the regime boundary. The IMM-
+reported pivotality and the persistent gap between sector average avoidable cost rate (ACR)
+and observed clearing prices both point in the at-cap direction, but
+the symmetry assumption is the most prominent caveat on the regime
+claim.

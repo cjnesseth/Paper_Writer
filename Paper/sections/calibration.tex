@@ -1,6 +1,5 @@
 % ==============================================================================
 % Section: Data and Calibration
-% Status: SLIMMED (2026-05-02) — laser-focus rewrite
 % ==============================================================================
 
 \section{Data and Calibration}
@@ -9,10 +8,10 @@
 The calibration draws on four publicly available datasets. PJM publishes
 VRR curve anchor points, Net CONE, CETL, and reliability requirements
 in advance of each BRA, and clearing prices and quantities by LDA after
-each auction. The Independent Market Monitor (IMM) reports HHI, Residual
-Supply Indices, and Capacity Performance offer-cap composition in its
+each auction. The IMM reports Herfindahl-Hirschman Indices (HHI), Residual
+Supply Indices (RSI), and Capacity Performance offer-cap composition in its
 annual State of the Market reports. I join the four datasets at the
-LDA-delivery-year level into a master panel covering all seven completed
+LDA delivery year level into a master panel covering all seven completed
 BRAs, 2021/22 through 2027/28.
 
 Table~\ref{tab:vrr_params} reports the RTO VRR parameters. Under the old
@@ -42,22 +41,24 @@ and Point~(a) is set by FERC Order ER25-1357.
   \vspace{3pt}
 
   \begin{minipage}{0.92\textwidth}
-    \footnotesize \textit{Note:} Prices in nominal dollars per MW-day;
+    \footnotesize \textit{Note:} Prices in nominal dollars per MW-day,
     quantities in MW. Pt.~(b)~MW is the reliability requirement.
     Source: PJM Planning Parameters.
   \end{minipage}
 \end{table}
 
 I set $K = 3$ symmetric strategic sellers based on the IMM's
-Residual Supply Index. Across the six sample years with published IMM
-RSI data (2022/23 onward; the 2021/22 BRA predates the available IMM
-panel), $\mathrm{RSI}_3 < 1$ at the RTO level (Table~\ref{tab:tps_results}),
-meaning the three largest sellers are collectively pivotal: no
-competitive outcome is supportable without their participation. RTO HHI
-exceeds 2{,}500 in every sample year, with most constrained LDAs above
-4{,}000---highly concentrated by Department of Justice benchmarks.
+RSI. Across the six sample years with published IMM
+RSI data (2022/23 onward, since the 2021/22 BRA predates the available
+IMM panel), $\mathrm{RSI}_3 < 1$ at the RTO level
+(Table~\ref{tab:tps_results}). The three largest sellers are
+collectively pivotal, meaning no competitive outcome is supportable
+without their participation. RTO HHI exceeds 2{,}500 in every sample
+year, with most constrained LDAs above 4{,}000. These values qualify
+as highly concentrated by Department of Justice benchmarks.
 Sensitivity of the at-cap conclusion to $K$ is bounded by
-Section~\ref{subsec:theory_sfe}: at $K = 4$ the at-cap regime breaks.
+Section~\ref{subsec:theory_sfe}, where at $K = 4$ the at-cap regime
+breaks.
 
 The constant marginal cost is set to $c = \$150$/MW-day, the
 combined-cycle sector average reported in the 2025 IMM State of the
