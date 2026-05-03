@@ -93,3 +93,13 @@ User feedback: literature review should absorb the SFE pedigree that left with t
 - [ ] User review and title confirmation.
 - [ ] Optional polish pass for remaining proofreader items.
 - [ ] Commit when user approves.
+
+## Follow-up Increments (2026-05-03)
+
+- `0beb919` — recompiled and committed the user's manual edits across `main.tex`, `calibration.tex`, `cap_incidence.tex`, `case_studies.tex`, `conclusion.tex`, `institutional.tex`, `introduction.tex`, `literature.tex`, `model.tex`. 24 pages.
+- `fb925b2` — rewrote the abstract on the puzzle / mechanism / strategy / findings template, expanding acronyms (UCAP, IMM, SFE, VRR) on first use except PJM.
+- `00a59a9` — propagated the institutional headline-vs-operative cap clarification: `model.tex` now states `\bar p_S = $329.17` (2026/27) and `$333.44` (2027/28) instead of `$325`; `tab_cap_incidence` Settle. cap column updated to operative values with extended footnote pointing back to §3.
+- `b1607ea` — merged sections 4+5 → "Framework and Calibration" and 6+7 → "Empirical Results" by demoting calibration and case_studies to subsections.
+- `76614a5` — per user follow-up, dropped the introduced subsection headings; merged sections now have a single section heading each. Final flat structure is six sections (Introduction → Conclusion). Conclusion cross-ref to case studies now resolves to "Section 5".
+
+PDF still 24 pages. All compiles clean (`pdflatex` 3-pass + `bibtex`, no errors, no undefined references).
