@@ -6,22 +6,29 @@
   \small
   \begin{tabular}{lcccccrcl}
     \toprule
-             & VRR     & Clearing & Net      & VRR     & Settle.   & Reserve   & TPS     & Binding   \\
-    Year     & Design  & price    & ACR      & Pt~(a)  & cap       & excess IRM (MW) & mitig.\ & cap       \\
+             & VRR     & Clearing & Net      & VRR     & Settle.\ cap        & Reserve   & TPS     & Binding   \\
+    Year     & Design  & price    & ACR      & Pt~(a)  & ($\bar p_S$)        & excess IRM (MW) & mitig.\ & cap       \\
     \midrule
     2021/22 & Old & \$140 & \$150 & \$482 & --- & --- & --- & None \\
     2022/23 & Old & \$50 & \$150 & \$391 & --- & --- & 0.0\% & None \\
     2023/24 & Old & \$34 & \$150 & \$412 & --- & +5,687 & 7.3\% & TPS active \\
     2024/25 & Old & \$29 & \$150 & \$440 & --- & +3,278 & 2.2\% & TPS active \\
     2025/26 & Old & \$270 & \$150 & \$452 & --- & -205 & 5.5\% & TPS active \\
-    2026/27 & New & \$329 & \$150 & \$329 & \$325 & -492 & 6.3\% & Settlement \\
-    2027/28 & New & \$333 & \$150 & \$333 & \$325 & -6,516 & 1.0\% & Settlement \\
+    2026/27 & New & \$329 & \$150 & \$329 & \$329 & -492 & 6.3\% & Settlement \\
+    2027/28 & New & \$333 & \$150 & \$333 & \$333 & -6,516 & 1.0\% & Settlement \\
     \bottomrule
   \end{tabular}
   \vspace{3pt}
 
   \begin{minipage}{0.96\textwidth}
     \footnotesize \textit{Notes:} Prices in nominal \$/MW-day UCAP.
+    The ``Settle.\ cap'' column reports the operative new-design
+    Point~(a) value $\bar p_S$ that FERC Order ER25-1357
+    implemented for each capped year (\$329.17 in 2026/27, \$333.44 in
+    2027/28); the headline figure of approximately \$325 cited in the
+    Shapiro/PJM announcement is narrative shorthand and is not the
+    dollar value used in any quantitative comparison
+    (Section~\ref{subsec:inst_shapiro}).
     Reserve excess IRM is committed UCAP minus IRM-implied required
     reserves (negative = shortfall). TPS mitigation reports the share
     of resources for which the IMM calculated unit-specific Market
