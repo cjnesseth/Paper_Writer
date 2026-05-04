@@ -103,3 +103,29 @@ User feedback: literature review should absorb the SFE pedigree that left with t
 - `76614a5` — per user follow-up, dropped the introduced subsection headings; merged sections now have a single section heading each. Final flat structure is six sections (Introduction → Conclusion). Conclusion cross-ref to case studies now resolves to "Section 5".
 
 PDF still 24 pages. All compiles clean (`pdflatex` 3-pass + `bibtex`, no errors, no undefined references).
+
+## Citation Round (2026-05-03 cont'd)
+
+User added six new bib entries manually (DOJ/FTC merger guidelines, Brattle CONE, PJM 2027/28 reserve target shortfall report, PJM 2027/28 BRA press release, PJM BRA results, PJM RPM Planning Parameters). Bibliography_base.bib is hook-protected, so the workflow throughout this session was: I draft entries, the user pastes, I add citations.
+
+- `5edc07f` — first pass of citations: HHI threshold (DOJ/FTC), greenfield-gas lead time (Brattle + shortfall report), eligible resources (Manual 18), data-center scarcity (IMM SoM + shortfall report), 2027/28 result (PJM press release + shortfall report), and IMM SoM cite firmed up at K=3 calibration step and TPS table footnote.
+- `ec924de` — reviewer round: softened the "LDAs above 4,000" claim to "still higher concentration in many constrained LDAs"; rewrote conclusion lead-time sentence so PJM Manual 18 only supports the eligible-resource-type claim; removed the "not competitive" → real-scarcity inference and replaced with a more careful formulation noting the finding prevents a full welfare conclusion without unit-level offer data; Table 4 footnote now points at MA 2026 historical tables in Section 5.
+- `693c61e` — Tables 1 and 3 source notes cite `PJM_BRA_results` and `PJM_planning_parameters` collective references.
+- `dbdc686` — reviewer flagged the natbib `(Various yearsa/b)` disambiguation. Rewrote table source notes in plain prose ("PJM Base Residual Auction Results, various years"); kept entries in bibliography via `\nocite`.
+- `a317e31` — recompile after user changed bib year fields to "Various years (auction results)" / "Various years (planning parameters)" so the bibliography listing also displays cleanly with no a/b suffix.
+- `aaedfc8` — abstract correction: cap years did not have the strictly lowest RSI_3 (2025/26 was 0.62 vs 0.64/0.63), so "the most concentrated residual supply" overclaimed. Reworded to "residual supply remained highly concentrated and reserve margins reached their tightest levels in the sample."
+- `bd70d62` — user-tightened abstract to ~190 words, single paragraph, with conditional welfare close.
+
+## Acronym Audit (2026-05-03 cont'd)
+
+User asked for first-use definition check after all the rewrites.
+
+- `4588e0f` — eight acronyms had first prose use without definition: BRA, IRM, VRR (introduction); SFE, ODE, ERCOT (literature); RTO, FERC (institutional). All defined at first use.
+- `3195683` — five acronyms were defined twice after the previous round: BRA, VRR, UCAP (intro then institutional); SFE (literature then model); IRM (intro then cap_incidence). Removed the parenthetical at the second occurrence so each acronym is defined exactly once.
+- `e9ad157` — picked up outstanding bib additions and this session log.
+
+PDF settled at 25 pages. All compiles clean.
+
+## Voice / Style Guide Discussion
+
+User raised the question of a portable `Voice.md` across projects. The existing `master_supporting_docs/supporting_tone/STYLE_GUIDE.md` (created in a prior session, dated 2026-05-03 13:54) already covers voice, punctuation, sentence rhythm, repetition discipline, synonym bank, and pre-submission checklist. Recommended placement: `~/.claude/Voice.md` as canonical, optionally symlinked from a dotfiles repo, with a one-liner pointer in each project's `CLAUDE.md`. Awaiting decision on whether to copy the existing guide as-is, distill a leaner version, or set up the symlink structure.
