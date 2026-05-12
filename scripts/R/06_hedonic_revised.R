@@ -418,8 +418,11 @@ message("\n=== Generating Figures ===")
 # Use fixest's native period aggregation (tidy() misparses sunab term names)
 sa_agg <- summary(fit_sa, agg = "period")
 sa_ct  <- coeftable(sa_agg)
+# Restrict to sale_year::k rows; other rows (e.g. I(age^2)) parse spuriously
+sa_period_rows <- grepl("^sale_year::", rownames(sa_ct))
+sa_ct <- sa_ct[sa_period_rows, , drop = FALSE]
 sa_coefs <- data.frame(
-  event_time = as.integer(gsub("[^-0-9]", "", rownames(sa_ct))),
+  event_time = as.integer(sub("^sale_year::", "", rownames(sa_ct))),
   estimate   = sa_ct[, 1],
   std.error  = sa_ct[, 2],
   conf.low   = sa_ct[, 1] - 1.96 * sa_ct[, 2],

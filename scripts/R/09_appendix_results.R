@@ -247,8 +247,11 @@ message("  Saved tab_appx_opening.tex")
 # SA event study figure for opening-year timing
 sa_open_agg <- summary(fit_sa_open, agg = "period")
 sa_open_ct  <- coeftable(sa_open_agg)
+# Restrict to sale_year::k rows; other rows (e.g. I(age^2)) parse spuriously
+sa_open_period_rows <- grepl("^sale_year::", rownames(sa_open_ct))
+sa_open_ct <- sa_open_ct[sa_open_period_rows, , drop = FALSE]
 sa_open_coefs <- data.frame(
-  event_time = as.integer(gsub("[^-0-9]", "", rownames(sa_open_ct))),
+  event_time = as.integer(sub("^sale_year::", "", rownames(sa_open_ct))),
   estimate   = sa_open_ct[, 1],
   std.error  = sa_open_ct[, 2]
 )
@@ -376,7 +379,11 @@ message("  Event time -4 (2 obs, 2024 cohort): coef=", round(em4_coef, 4),
 # SA period-aggregated pre-trends: manual Wald on event times -2, -3 only
 sa_period <- summary(fit_sa, agg = "period")
 sa_period_ct <- coeftable(sa_period)
-et_vec <- as.integer(gsub("[^-0-9]", "", rownames(sa_period_ct)))
+# Restrict to sale_year::k rows; other rows (e.g. I(age^2)) parse spuriously
+sa_period_rows <- grepl("^sale_year::", rownames(sa_period_ct))
+et_vec <- rep(NA_integer_, nrow(sa_period_ct))
+et_vec[sa_period_rows] <- as.integer(sub("^sale_year::", "",
+                                          rownames(sa_period_ct)[sa_period_rows]))
 pre_idx <- which(et_vec %in% c(-2, -3))
 
 if (length(pre_idx) >= 2) {
