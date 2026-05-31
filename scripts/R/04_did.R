@@ -1,22 +1,57 @@
 # ==============================================================================
-# 04_did.R -- Event-study difference-in-differences (ROBUSTNESS)
+# 04_did.R -- Event-study difference-in-differences (ROBUSTNESS estimator)
 # ==============================================================================
-# Package: fixest (installed).  Implements Eq. (eq:eventstudy) in the paper:
-#   Y_st = alpha_s + gamma_t + sum_{tau != -1} beta_tau * 1[s=VA] 1[t-t*=tau]
+# Implements Eq. (eq:eventstudy):
+#   Y_st = alpha_s + gamma_t + sum_{k != -1} beta_k 1[s=VA] 1[t-t*=k]
 #          + X_st' delta + e_st
-# SEs clustered at state; wild cluster bootstrap (fwildclusterboot or
-# fixest's vcov) given few clusters. Run for entry and exit (reentry later).
+# using fixest (installed). Runs on data/tidy/panel_state_month.rds. In an offline
+# dev environment that panel is the SYNTHETIC sample -> outputs are labeled SAMPLE
+# and are for pipeline validation only (they must recover the injected effects:
+# retail +$6/MWh when VA is in RGGI; emissions -12%). NOT manuscript findings.
+#
+# Inference caveat: with a single treated unit, cluster-robust SEs are not valid;
+# the real pipeline uses SCM permutation + wild cluster bootstrap. Here we report
+# point estimates to demonstrate recovery.
 # ==============================================================================
 source(if (file.exists("scripts/R/00_setup.R")) "scripts/R/00_setup.R" else if (file.exists("00_setup.R")) "00_setup.R" else file.path(Sys.getenv("RGGI_ROOT"), "scripts", "R", "00_setup.R"))
+suppressPackageStartupMessages(library(fixest))
 
-run_event_study <- function(panel, outcome, event_date, controls = NULL,
-                            leads = 12, lags = 12) {
-  if (!requireNamespace("fixest", quietly = TRUE))
-    stop("Install fixest: install.packages('fixest')")
-  # TODO(Phase 3): construct relative-time dummies around event_date;
-  #   fixest::feols(<outcome> ~ i(rel_time, treat, ref = -1) + controls |
-  #                 state + month, cluster = ~state); return model + tidy coefs.
-  stop("Not implemented (Phase 3).")
+# Build relative-time event-study around a given event date, windowed to +/- win.
+run_event_study <- function(panel, outcome, event_date, controls = c("gas","hdd","cdd"),
+                            win = 18L) {
+  dt <- as.data.table(panel)[, treat := as.integer(state == TREATED_STATE)]
+  ev_idx <- function(d) (as.integer(format(d, "%Y")) * 12L + as.integer(format(d, "%m")))
+  dt[, rel := ev_idx(month) - ev_idx(event_date)]
+  dt <- dt[abs(rel) <= win]
+  dt[, rel := factor(rel, levels = sort(unique(rel)))]
+  rhs_ctrl <- if (length(controls)) paste("+", paste(controls, collapse = " + ")) else ""
+  fml <- as.formula(sprintf("%s ~ i(rel, treat, ref = '-1') %s | state + month",
+                            outcome, rhs_ctrl))
+  feols(fml, data = dt, warn = FALSE, notes = FALSE)
 }
 
-if (sys.nframe() == 0) message("[04_did] stub -- implement in Phase 3.")
+# Average post-event dynamic effect (simple mean of post coefficients).
+avg_post_effect <- function(model) {
+  ct <- as.data.table(coeftable(model), keep.rownames = "term")
+  post <- ct[grepl("rel::", term) & !grepl("rel::-", term)]
+  mean(post$Estimate)
+}
+
+if (sys.nframe() == 0) {
+  panel <- readRDS(file.path(DIRS$data_tidy, "panel_state_month.rds"))
+  is_synth <- isTRUE(panel$synthetic[1])
+  tag <- if (is_synth) "SAMPLE" else "REAL"
+  truth <- list(entry = +6.0, exit = -6.0)  # injected retail effect (sample only)
+
+  lines <- c(sprintf("DiD event study (%s data)", tag), strrep("-", 40))
+  for (ev in c("entry", "exit")) {
+    m <- run_event_study(panel, "retail", EVENTS[[ev]])
+    eff <- avg_post_effect(m)
+    save_result(m, sprintf("did_%s_retail", ev))
+    lines <- c(lines, sprintf("%-6s retail: avg post effect = %+.2f $/MWh%s",
+                              ev, eff,
+                              if (is_synth) sprintf("  (injected truth %+.1f)", truth[[ev]]) else ""))
+  }
+  writeLines(lines, "/tmp/did_out.txt")
+  message(paste(lines, collapse = "\n"))
+}

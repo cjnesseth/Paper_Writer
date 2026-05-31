@@ -4,8 +4,7 @@
 % Engine: pdfLaTeX.  Compile from this directory (Paper/) with:
 %   TEXINPUTS=../Preambles:$TEXINPUTS pdflatex -interaction=nonstopmode rggi_carbon_pricing_reverse.tex
 %   BIBINPUTS=..:$BIBINPUTS bibtex rggi_carbon_pricing_reverse
-%   TEXINPUTS=../Preambles:$TEXINPUTS pdflatex -interaction=nonstopmode rggi_carbon_pricing_reverse.tex
-%   TEXINPUTS=../Preambles:$TEXINPUTS pdflatex -interaction=nonstopmode rggi_carbon_pricing_reverse.tex
+%   (then two more pdflatex passes)
 %
 % Structure rule: ALL numbers, tables, and figures are produced by scripts/R/*
 % and pulled in via \input{../Tables/...} and \includegraphics{...}.
@@ -30,7 +29,7 @@
 
 \begin{abstract}
 \noindent
-\PENDING{Abstract.} Virginia is the only U.S. state to enter, exit, and re-enter a
+\PENDING{Abstract.} Virginia is the only U.S.\ state to enter, exit, and re-enter a
 carbon cap-and-trade program (the Regional Greenhouse Gas Initiative, RGGI) within a
 five-year span. Because the exit was driven by a change in gubernatorial administration
 rather than by economic conditions, the timing of treatment is plausibly exogenous. We
@@ -53,29 +52,100 @@ electricity markets; emissions leakage; policy reversal.\\
 
 % ==============================================================================
 \section{Introduction}\label{sec:intro}
-% --- Sec 1.1 Motivation; 1.2 Research Questions; 1.3 Contribution ---
-\TODO{Phase 5 prose.} Carbon cap-and-trade is the dominant market-based climate policy
-instrument in the United States, yet credible causal evidence on its effects is scarce
-because clean counterfactuals are rare. Virginia provides a unique natural experiment.
 
-\paragraph{Research questions.} \TODO{prose around the four questions:}
-(i) the causal effect of Virginia's RGGI exit on retail prices, wholesale prices, and
-\co{} emissions; (ii) symmetry of exit vs.\ entry effects; (iii) the extent of within-PJM
-emissions leakage; (iv) whether re-entry replicates the entry effects.
+Cap-and-trade is the dominant market-based instrument for regulating greenhouse-gas
+emissions in the United States, yet credible causal evidence on its effects remains
+surprisingly thin. The difficulty is one of inference rather than data: carbon markets are
+adopted by jurisdictions that differ systematically from non-adopters, and they are rarely
+turned off, so the analyst seldom observes a clean counterfactual for what a participating
+economy would have looked like absent the policy. Most of what we know about the Regional
+Greenhouse Gas Initiative (RGGI), the longest-running U.S.\ carbon market, comes from
+comparisons of participating to non-participating states or from decompositions of observed
+emissions trends. These designs have taught us a great deal---most notably that much of the
+emissions decline in RGGI states is attributable to the shale-gas boom and the Great
+Recession rather than to the cap itself \citep{Murray2015_rggi_attribution}---but they
+struggle to isolate the policy's own contribution from the many confounders that move with it.
 
-\paragraph{Contribution.} \TODO{prose:} first empirical study of a carbon-market
-\emph{exit}; a test for asymmetry/hysteresis exploiting a rare reversal; within-RTO (PJM)
-leakage estimates under sub-national pricing; a paired entry/exit/re-entry design on a
-single treated unit. Early illustrative evidence appears in \citet{Murray2015_rggi_attribution}.
+Virginia offers a rare opportunity to make progress. It is the only U.S.\ state to have
+\emph{entered}, \emph{exited}, and is scheduled to \emph{re-enter} a carbon cap-and-trade
+program within a five-year span. Virginia joined RGGI in January 2021 under the Virginia
+Clean Economy Act \citep{VCEA2020}; following a change in gubernatorial administration, the
+Air Pollution Control Board repealed the enabling regulation and the state left the program
+after the December 2023 auction \citep{VAAPCB2023_repeal}; and, after a further change in
+administration, Virginia is scheduled to re-enter in July 2026. Crucially, the proximate
+cause of the 2023 exit was political---a new governor with the authority to direct the
+rulemaking---rather than a response to electricity-market or macroeconomic conditions. This
+political origin makes the \emph{timing} of the withdrawal plausibly exogenous to the
+electricity-price and emissions outcomes we study, which is precisely the condition that
+comparison-of-trends designs typically cannot satisfy.
+
+This paper uses Virginia's reversal to ask four questions. First, what was the causal effect
+of the December 2023 exit on retail electricity prices, wholesale prices, and carbon-dioxide
+emissions? Second, are the effects of \emph{exiting} a carbon market symmetric to the effects
+of \emph{entering} one, or does participation leave a durable imprint---through irreversible
+investment, for instance---that a withdrawal does not undo? Third, how much of any emissions
+change in Virginia leaks across state lines within the PJM Interconnection, the wholesale
+market in which Virginia sits? Fourth, does the scheduled 2026 re-entry reproduce the entry
+effects, providing an additional, prospective test?
+
+Answering these questions requires a counterfactual Virginia. We construct one with the
+synthetic control method \citep{Abadie2010_synth,Abadie2015_comparative,Abadie2021_using_synth},
+building a weighted combination of donor states---both non-RGGI states in PJM and states that
+remained in RGGI throughout---that tracks Virginia's pre-treatment price and emissions
+trajectories. We complement the synthetic control with an event-study
+difference-in-differences specification and with synthetic difference-in-differences
+\citep{Arkhangelsky2021_sdid}, and we conduct inference appropriate to a single treated unit
+and a small number of clusters \citep{Cattaneo2021_prediction,Cameron2008_bootstrap}. The
+empirical content of the paper rests entirely on public data---retail prices from the U.S.\
+Energy Information Administration, hourly emissions from the EPA's continuous emissions
+monitoring system, wholesale prices from PJM, and allowance prices from RGGI---so that the
+analysis is fully reproducible and does not depend on proprietary utility records.
+
+The paper makes four contributions. It provides, to our knowledge, the first causal estimate
+of the effect of \emph{removing} a carbon market, complementing a literature focused almost
+entirely on adoption. It exploits the entry/exit pairing to test for asymmetry and hysteresis
+in carbon-pricing effects---a question with direct bearing on whether temporary participation
+yields lasting benefits, and one that the policy-reversal literature has raised in other
+settings \citep{Greenstone2002_caa,Walker2013_reallocation} but never tested for a carbon
+market. It delivers an event-based estimate of within-RTO leakage under sub-national pricing,
+sharpening cross-sectional estimates of RGGI leakage \citep{Fell2018_leakage}. And it develops
+a paired entry/exit/re-entry research design on a single treated unit that may be of
+independent methodological interest for evaluating reversible policies.
+
+The remainder of the paper is organized as follows. Section~\ref{sec:background} describes
+RGGI and Virginia's participation history. Section~\ref{sec:lit} situates the paper in the
+literature. Section~\ref{sec:theory} presents a simple model of how an allowance price enters
+retail and wholesale prices and derives the predictions we test.
+Section~\ref{sec:data} describes the data and Section~\ref{sec:strategy} the empirical
+strategy. Section~\ref{sec:threats} addresses threats to identification.
+Sections~\ref{sec:results} and~\ref{sec:interpretation} report and interpret the results, and
+Section~\ref{sec:conclusion} concludes.
 
 % ==============================================================================
 \section{Institutional Background}\label{sec:background}
 
 \subsection{RGGI Overview}\label{sec:rggi-overview}
-\TODO{Phase 5 prose:} 2009 launch, program reviews, current membership; quarterly
-allowance auctions, compliance obligations, Cost Containment Reserve (CCR), Emissions
-Containment Reserve (ECR). Third Program Review changes effective 2027 (tighter cap
-trajectory, higher minimum reserve price, elimination of offsets).
+RGGI is a cooperative cap-and-trade program covering carbon-dioxide emissions from
+fossil-fired electric generators in a group of Northeast and Mid-Atlantic states. Launched in
+2009, it was the first mandatory market-based greenhouse-gas program in the United States. The
+program caps regional power-sector emissions and distributes nearly all allowances through
+quarterly auctions; covered generators must surrender one allowance per short ton of \co{}
+emitted over each multi-year compliance period. Proceeds accrue to the participating states,
+which direct the bulk of revenue to energy-efficiency and clean-energy programs
+\citep{AnalysisGroup2023_impacts}. Two price-stability mechanisms bound the allowance market:
+a Cost Containment Reserve (CCR) releases additional allowances when prices rise above a
+trigger, and an Emissions Containment Reserve (ECR) withholds allowances when prices fall
+below a floor; auctions also clear no lower than a minimum reserve price.
+
+The program is periodically recalibrated through formal program reviews. The Third Program
+Review, finalized in 2025 and effective in 2027, sharply tightens the trajectory: the regional
+cap steps down by roughly ten and a half percent of the 2025 budget per year through 2033 and
+by about three percent per year thereafter, the minimum reserve price rises to \$9.00 in 2027
+and escalates seven percent annually, the offset provisions are eliminated, and the ECR is
+replaced by an expanded two-tier CCR \citep{RGGI_thirdreview}. These changes matter for our
+setting because they raise the expected stringency---and therefore the expected allowance
+price---of the program Virginia is scheduled to re-enter in 2026, a point we return to when
+interpreting the re-entry design.
 
 \subsection{Virginia's RGGI Timeline}\label{sec:va-timeline}
 \begin{table}[H]
@@ -98,30 +168,88 @@ Jul.\ 2026 & Virginia re-enters RGGI & Second participation period \\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}\footnotesize
-\item \textit{Sources:} \TODO{Phase 5 -- cite Clean Economy Act; APCB repeal; RGGI auction records.}
+\item \textit{Sources:} \citet{VCEA2020,VAAPCB2023_repeal,RGGI_auctions}.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
 
 \subsection{The Dominion Energy Context}\label{sec:dominion}
-\TODO{Phase 5 prose, public sources only:} Dominion-dominated regulated market; RGGI costs
-passed through via a rider (\TODO{rider \$/month from public SCC dockets}); rider removed on
-exit, to be reinstated on re-entry. Concurrent factors: residential rate increases, data
-center load growth, IRA-driven clean-energy investment. \emph{No Dominion internal data are
-used; rider figures are drawn from public SCC filings.}
+Virginia's electricity market is dominated by Dominion Energy Virginia, a vertically
+integrated, rate-regulated utility. Unlike generators in restructured markets, Dominion
+recovers prudently incurred costs through retail rates set by the State Corporation Commission
+(SCC), and it recovered its RGGI allowance costs through a dedicated rate-adjustment clause,
+``Rider RGGI.'' The SCC established the rider in docket PUR-2020-00169, approving a revenue
+requirement on the order of \$168~million for the first rate year, and later addressed its
+reinstatement and revision in subsequent dockets as allowance costs grew
+\citep{DominionSCC_rider}. Because the rider was a separately stated, cost-pass-through line
+item, Virginia's exit removed an identifiable component of residential bills, and re-entry
+will restore one---an institutional feature we exploit to separate the mechanical
+(rider-driven) retail effect from any equilibrium effect operating through wholesale prices.
+
+Three concurrent developments complicate the Virginia setting and motivate the controls and
+robustness checks below. Residential rates were rising over the sample period for reasons
+unrelated to RGGI; explosive data-center load growth in Northern Virginia was placing upward
+pressure on demand and, potentially, on prices \citep{LBNL_datacenters}; and the 2022
+Inflation Reduction Act was changing the economics of clean generation nationwide. All three
+move electricity outcomes and overlap in time with Virginia's RGGI reversal, so a credible
+design must hold them constant. Throughout, we use only public data---SCC filings for the
+rider, and the public sources described in Section~\ref{sec:data} for all outcomes; no
+proprietary Dominion records are used.
 
 % ==============================================================================
 \section{Literature Review}\label{sec:lit}
-\TODO{Phase 5 prose, organized in four strands:}
-\begin{itemize}
-  \item \textbf{Empirical effects of carbon pricing:} \citet{Murray2015_rggi_attribution}; \TODO{Fell \& Maniloff 2018; Yan 2021; Song \& Hochman 2025.}
-  \item \textbf{Pass-through \& incidence:} \TODO{Fabra \& Reguant 2014; Hintermann 2016; Fowlie, Reguant \& Ryan 2016; Bushnell et al.\ 2013.}
-  \item \textbf{Policy reversal \& asymmetry:} \TODO{Greenstone 2002; Coglianese et al.\ 2020; Walker 2013.}
-  \item \textbf{Methodology:} \citet{Abadie2010_synth}; \TODO{Abadie et al.\ 2015; Abadie 2021; }\citet{Arkhangelsky2021_sdid}\TODO{; Cattaneo et al.\ 2021; Callaway \& Sant'Anna 2021; Cameron et al.\ 2008.}
-\end{itemize}
+This paper draws on, and contributes to, four literatures.
+
+\paragraph{The empirical effects of carbon pricing.} A first strand estimates how carbon
+markets affect emissions and prices. For RGGI specifically, \citet{Murray2015_rggi_attribution}
+decompose the post-2009 emissions decline and attribute the majority to falling natural-gas
+prices and the recession rather than to the cap, a finding that frames the identification
+challenge we confront. \citet{Fell2018_leakage} document substantial emissions leakage to
+neighboring non-RGGI regions, and \citet{Yan2021_rggi} reaches a related conclusion studying
+fossil-fuel consumption. On prices, recent work finds that RGGI adoption raised retail
+electricity prices in participating states by roughly ten percent in the short run
+\citep{SongHochman2025_retail}. Background on the earlier U.S.\ cap-and-trade experience for
+$\mathrm{SO}_2$ and $\mathrm{NO}_x$ \citep{Burtraw2009_so2nox} and on the theory of
+sub-national carbon pricing \citep{Shobe2012_federalism} rounds out this strand. What unites
+these studies is a focus on \emph{adoption}; none estimates the effect of removing a carbon market.
+
+\paragraph{Cost pass-through and incidence.} A second strand asks how emissions costs are
+transmitted into electricity prices. In competitive wholesale markets, pass-through can be
+substantial and even exceed one in equilibrium \citep{Fabra2014_passthrough}, and emission
+costs are reflected in hourly prices in restructured systems
+\citep{Hintermann2016_passthrough}. The incidence of regulation across firms can be large
+even when aggregate price effects are modest \citep{Bushnell2013_profiting}, and accounting
+for entry, exit, and investment dynamics changes the welfare assessment of market-based
+regulation \citep{Fowlie2016_dynamics}. This literature informs our model of how the
+allowance price enters Virginia's regulated retail rate and PJM wholesale prices, and it
+cautions that the wholesale-price response need not equal the rider-driven retail response.
+
+\paragraph{Policy reversal and asymmetry.} A third, smaller strand studies what happens when
+environmental regulation is tightened or relaxed. \citet{Greenstone2002_caa} estimates the
+industrial-activity effects of Clean Air Act nonattainment designations, and
+\citet{Walker2013_reallocation} traces the labor-market adjustment costs of the resulting
+sectoral reallocation; \citet{Coglianese2020_coal} disentangles the roles of fuel prices and
+regulation in the decline of U.S.\ coal. These papers establish that environmental regulation
+can have persistent, partly irreversible effects on the capital stock and workforce---the
+mechanism that would generate asymmetry between entry and exit---but the question has not been
+posed for a carbon market, where we can observe both directions of treatment on the same unit.
+
+\paragraph{Methodology.} Finally, the paper builds on the synthetic control method
+\citep{Abadie2010_synth,Abadie2015_comparative} and its practical guidance
+\citep{Abadie2021_using_synth}, on synthetic difference-in-differences
+\citep{Arkhangelsky2021_sdid}, and on modern difference-in-differences with multiple periods
+\citep{Callaway2021_did}. For inference we use prediction intervals tailored to synthetic
+control \citep{Cattaneo2021_prediction} and wild cluster bootstrap methods for settings with
+few clusters \citep{Cameron2008_bootstrap}. Our paired entry/exit design extends these tools
+to the evaluation of a reversible policy.
 
 % ==============================================================================
 \section{Theoretical Framework}\label{sec:theory}
+To organize the empirical analysis we set out a deliberately simple partial-equilibrium
+account of how an allowance price enters the prices a Virginia consumer faces. The model is
+not meant to be estimated structurally; its purpose is to make explicit why the retail and
+wholesale responses to RGGI participation may differ, and why the response to exit need not
+mirror the response to entry.
 
 \subsection{A Carbon Adder in a Regulated Market}\label{sec:model}
 We model the retail price of electricity as
@@ -136,6 +264,9 @@ rider; the wholesale-price effect depends on whether RGGI-state generators are m
 PJM dispatch.
 
 \subsection{Predictions}\label{sec:predictions}
+The model yields five testable predictions, which map directly onto the outcomes and tests of
+Sections~\ref{sec:strategy}--\ref{sec:interpretation}.
+
 \begin{prediction}[Retail prices]\label{pr:retail}
 Retail prices fall by approximately the rider amount on exit and rise by approximately the
 new rider on re-entry.
@@ -156,23 +287,53 @@ efficiency gains persist, or adjustments have ratchet properties.
 
 % ==============================================================================
 \section{Data}\label{sec:data}
-\TODO{Phase 5 prose.} \emph{Public sources only.}
+We assemble a monthly panel from public sources only; Table~\ref{tab:data-sources} lists each
+series and its origin. Retail electricity prices by customer class come from EIA Form~861M
+(monthly) and Form~861 (annual). Wholesale prices are locational marginal prices (LMPs) from
+PJM's Data Miner~2, aggregated from hourly to monthly. Carbon-dioxide emissions and gross load
+at the generating-unit level come from the EPA's continuous emissions monitoring system, via
+the Clean Air Markets Program Data portal, aggregated to the plant, state, and PJM-zone levels.
+Allowance prices and quantities come from RGGI's auction records \citep{RGGI_auctions}. We
+control for the principal drivers of electricity prices and emissions: natural-gas prices
+(EIA Henry Hub and the regionally relevant Transco Zone~5 hub), heating- and cooling-degree
+days (NOAA), and state economic conditions (income and population from BEA and the Census).
+The Rider~RGGI cost passed to Virginia customers is taken from public SCC filings
+\citep{DominionSCC_rider}.
+
 \input{../Tables/tab_data_sources.tex}   % generated by scripts/R/07_figures_tables.R
-% (placeholder file committed so the skeleton compiles; replaced in Phase 2-3)
 
 \subsection{Sample Construction}\label{sec:sample}
-\TODO{Phase 5 prose:} unit = state (PJM zone for wholesale); time = month (2018--2026);
-treated = Virginia. Control groups: non-RGGI PJM states (WV, OH, PA, KY, IN, NC, TN) and
-continuous-RGGI states (MD, DE, NJ, CT, MA, ME, NH, VT, RI, NY).
+The unit of analysis is the state-month for the price and emissions panels, and the PJM-zone
+month for the wholesale analysis; the sample window is January~2018 through mid-2026, spanning
+the pre-entry baseline, the participation period, and the post-exit period. Virginia is the
+treated unit. We use two donor pools. The first comprises non-RGGI states in the PJM
+Interconnection---West Virginia, Ohio, Pennsylvania, Kentucky, Indiana, North Carolina, and
+Tennessee---which share Virginia's wholesale market but never priced carbon. The second
+comprises states that participated in RGGI continuously throughout the sample---Maryland,
+Delaware, New Jersey, Connecticut, Massachusetts, Maine, New Hampshire, Vermont, Rhode Island,
+and New York. The two pools serve complementary purposes: the non-RGGI PJM states isolate the
+effect of carbon pricing within a common wholesale market, while the continuous-RGGI states
+absorb shocks common to carbon-pricing jurisdictions. Synthetic control selects, data-driven,
+the weighted combination of donors that best reproduces Virginia's pre-treatment path.
 
 % ==============================================================================
 \section{Empirical Strategy}\label{sec:strategy}
 
 \subsection{Synthetic Control (Primary)}\label{sec:scm}
-\TODO{Phase 5 prose:} construct synthetic Virginia matching pre-treatment outcomes and
-covariates, separately for the entry (pre: Jan.\ 2018--Dec.\ 2020) and exit (pre: Jan.\
-2021--Sep.\ 2023) windows. Inference via placebo/permutation tests and conformal prediction
-intervals.
+Our primary estimator is the synthetic control method. For each event and outcome we construct
+a synthetic Virginia as a convex combination of donor states whose weights are chosen to
+minimize the discrepancy between Virginia and the synthetic unit over the pre-treatment period,
+matching on pre-treatment outcome values and on the covariates listed in
+Section~\ref{sec:data}. The treatment effect in each post-treatment month is the gap between
+observed Virginia and its synthetic counterpart. We estimate the method separately for the two
+realized events: entry, with a pre-treatment window of January~2018 through December~2020 and a
+post-treatment window running to the exit; and exit, with a pre-treatment window of
+January~2021 through the months preceding the December~2023 withdrawal and a post-treatment
+window running through the end of the sample. Inference proceeds by permutation: we reassign
+the treatment to each donor in turn, compute the resulting placebo gaps, and assess whether
+Virginia's gap is extreme relative to the placebo distribution
+\citep{Abadie2010_synth,Abadie2021_using_synth}. We supplement the permutation test with the
+conformal prediction intervals of \citet{Cattaneo2021_prediction}.
 
 \subsection{Event-Study Difference-in-Differences}\label{sec:did}
 \begin{equation}\label{eq:eventstudy}
@@ -187,15 +348,53 @@ of clusters. Estimated separately for the exit ($t^\ast=$ Dec.\ 2023/Jan.\ 2024)
 ($t^\ast=$ Jan.\ 2021), and prospectively re-entry ($t^\ast=$ Jul.\ 2026) events.
 
 \subsection{Synthetic Difference-in-Differences}\label{sec:sdid}
-\TODO{Phase 5 prose:} \citet{Arkhangelsky2021_sdid} as a bridge between SCM and DiD.
+As a bridge between the two approaches we report synthetic difference-in-differences
+\citep{Arkhangelsky2021_sdid}, which combines the unit reweighting of synthetic control with
+the double-differencing of difference-in-differences and additionally reweights time periods.
+It is more robust than synthetic control when pre-treatment fit is imperfect and more robust
+than two-way fixed effects when the treated unit is not well represented by a simple average
+of controls, so agreement across the three estimators provides reassurance that the results are
+not an artifact of any single method.
 
 \subsection{Extensions}\label{sec:extensions}
-\TODO{Phase 5 prose:} wholesale PJM-zone analysis (DOM zone treated); emissions leakage
-(VA-plant vs.\ PJM-wide emissions); formal asymmetry test $|\effexit| = |\effentry|$;
-distributional analysis if public microdata permit.
+We pursue four extensions. First, we replace the state panel with a PJM-zone panel to study
+wholesale prices, treating the Dominion (DOM) zone as the treated unit and other PJM zones as
+controls. Second, we estimate emissions effects both for Virginia generators and for PJM as a
+whole; the difference identifies the leakage rate---the share of any Virginia emissions change
+offset by changes elsewhere in the interconnection. Third, we formally test for asymmetry by
+comparing the paired estimates, $|\effexit| = |\effentry|$; a rejection is evidence of
+hysteresis. Fourth, where public microdata permit, we examine heterogeneity in the retail-price
+effect across customer classes.
 
 % ==============================================================================
 \section{Threats to Identification and Robustness}\label{sec:threats}
+The design's credibility rests on the assumption that, absent the policy change, Virginia's
+outcomes would have evolved like those of its synthetic counterpart. Several threats could
+violate this assumption, and we address each with a corresponding check.
+Table~\ref{tab:threats} summarizes them.
+
+The most important threat is \emph{anticipation}. Governor Youngkin signaled his intent to
+withdraw from RGGI shortly after taking office in January 2022, well before the formal exit in
+December 2023, so forward-looking generators and investors may have adjusted in advance. We
+address this by re-estimating with alternative treatment dates---the January~2022 announcement,
+the June~2023 Board vote, and the December~2023 final auction---and by inspecting the
+pre-treatment gaps for evidence of anticipatory breaks. A second concern is \emph{concurrent
+policy shocks}: the Inflation Reduction Act and changes in state renewable-portfolio standards
+moved clean-energy investment over the same period. We control for renewable capacity additions
+and federal-subsidy proxies and show that the estimates are stable to their inclusion. Third,
+\emph{gas-price volatility} drives both prices and the dispatch order; we control for regional
+gas-hub prices and report gas-adjusted outcomes. Fourth, \emph{data-center load growth} in
+Northern Virginia could confound price effects; we control for large-customer load and use
+per-megawatt-hour prices rather than total revenue. Fifth, the within-PJM design raises a
+\emph{SUTVA} concern, since Virginia's exit may affect other PJM states; we estimate PJM-wide
+wholesale effects and bound the magnitude of spillovers. Finally, because the rider is a
+mechanical pass-through, we decompose the retail effect into its rider and non-rider
+(equilibrium) components, and we control for fleet composition to ensure that capacity
+additions and retirements rather than the policy are not driving the results. Inference
+throughout uses permutation tests for the synthetic control and the wild cluster bootstrap for
+the difference-in-differences estimates, both appropriate to the small number of treated units
+and clusters \citep{Cattaneo2021_prediction,Cameron2008_bootstrap}.
+
 \begin{table}[H]
 \centering
 \caption{Threats and robustness checks.}
@@ -241,7 +440,7 @@ hand-entered.}
 
 % ==============================================================================
 \section{Expected Results and Interpretation}\label{sec:interpretation}
-\TODO{Phase 5 prose around three pre-registered scenarios:}
+\TODO{Filled alongside results.} We pre-register three scenarios:
 \begin{description}
   \item[Scenario A --- Symmetric effects.] Carbon-pricing effects are reversible; policy
     uncertainty may undermine long-run investment incentives.
@@ -257,7 +456,7 @@ will report estimates once post-treatment data are available.}
 
 % ==============================================================================
 \section{Conclusion}\label{sec:conclusion}
-\TODO{Phase 5 prose.}
+\TODO{Written after results.}
 
 % ==============================================================================
 \clearpage
