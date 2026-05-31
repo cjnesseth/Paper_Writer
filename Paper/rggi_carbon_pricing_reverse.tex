@@ -1,0 +1,278 @@
+% ==============================================================================
+% Carbon Pricing in Reverse: Evidence from Virginia's Exit and Re-Entry into RGGI
+% ------------------------------------------------------------------------------
+% Engine: pdfLaTeX.  Compile from this directory (Paper/) with:
+%   TEXINPUTS=../Preambles:$TEXINPUTS pdflatex -interaction=nonstopmode rggi_carbon_pricing_reverse.tex
+%   BIBINPUTS=..:$BIBINPUTS bibtex rggi_carbon_pricing_reverse
+%   TEXINPUTS=../Preambles:$TEXINPUTS pdflatex -interaction=nonstopmode rggi_carbon_pricing_reverse.tex
+%   TEXINPUTS=../Preambles:$TEXINPUTS pdflatex -interaction=nonstopmode rggi_carbon_pricing_reverse.tex
+%
+% Structure rule: ALL numbers, tables, and figures are produced by scripts/R/*
+% and pulled in via \input{../Tables/...} and \includegraphics{...}.
+% Do NOT hand-type estimates. See quality_reports/plans/2026-05-30_rggi-paper.md.
+% ==============================================================================
+\documentclass[12pt]{article}
+\input{header}
+
+\title{Carbon Pricing in Reverse:\\
+       Evidence from Virginia's Exit and Re-Entry into RGGI}
+
+\author{%
+  \TODO{Author Name}\\
+  \TODO{Affiliation}\\
+  \texttt{\TODO{email}}%
+}
+
+\date{\today \\[0.5em] \footnotesize Preliminary draft --- please do not cite or circulate.}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+\PENDING{Abstract.} Virginia is the only U.S. state to enter, exit, and re-enter a
+carbon cap-and-trade program (the Regional Greenhouse Gas Initiative, RGGI) within a
+five-year span. Because the exit was driven by a change in gubernatorial administration
+rather than by economic conditions, the timing of treatment is plausibly exogenous. We
+use synthetic control and event-study difference-in-differences methods on public data to
+estimate the causal effect of Virginia's RGGI participation on retail electricity prices,
+wholesale prices, and \co{} emissions, and we test whether the effects of \emph{exiting}
+a carbon market are symmetric to the effects of \emph{entering} it. \PENDING{Headline
+estimates for the entry (Jan.\ 2021) and exit (Dec.\ 2023) events; the re-entry event
+(Jul.\ 2026) is analyzed prospectively.}
+
+\medskip
+\noindent\textbf{Keywords:} carbon pricing; cap-and-trade; RGGI; synthetic control;
+electricity markets; emissions leakage; policy reversal.\\
+\noindent\textbf{JEL Codes:} Q48, Q54, Q58, L94, H23.
+\end{abstract}
+
+\clearpage
+\tableofcontents
+\clearpage
+
+% ==============================================================================
+\section{Introduction}\label{sec:intro}
+% --- Sec 1.1 Motivation; 1.2 Research Questions; 1.3 Contribution ---
+\TODO{Phase 5 prose.} Carbon cap-and-trade is the dominant market-based climate policy
+instrument in the United States, yet credible causal evidence on its effects is scarce
+because clean counterfactuals are rare. Virginia provides a unique natural experiment.
+
+\paragraph{Research questions.} \TODO{prose around the four questions:}
+(i) the causal effect of Virginia's RGGI exit on retail prices, wholesale prices, and
+\co{} emissions; (ii) symmetry of exit vs.\ entry effects; (iii) the extent of within-PJM
+emissions leakage; (iv) whether re-entry replicates the entry effects.
+
+\paragraph{Contribution.} \TODO{prose:} first empirical study of a carbon-market
+\emph{exit}; a test for asymmetry/hysteresis exploiting a rare reversal; within-RTO (PJM)
+leakage estimates under sub-national pricing; a paired entry/exit/re-entry design on a
+single treated unit. Early illustrative evidence appears in \citet{Murray2015_rggi_attribution}.
+
+% ==============================================================================
+\section{Institutional Background}\label{sec:background}
+
+\subsection{RGGI Overview}\label{sec:rggi-overview}
+\TODO{Phase 5 prose:} 2009 launch, program reviews, current membership; quarterly
+allowance auctions, compliance obligations, Cost Containment Reserve (CCR), Emissions
+Containment Reserve (ECR). Third Program Review changes effective 2027 (tighter cap
+trajectory, higher minimum reserve price, elimination of offsets).
+
+\subsection{Virginia's RGGI Timeline}\label{sec:va-timeline}
+\begin{table}[H]
+\centering
+\caption{Virginia's RGGI participation timeline.}
+\label{tab:va-timeline}
+\begin{threeparttable}
+\begin{tabular}{@{}p{2.6cm}p{6.2cm}p{4.6cm}@{}}
+\toprule
+Date & Event & Political context \\
+\midrule
+Apr.\ 2020 & Clean Economy Act \& Community Flood Preparedness Act signed & Democratic trifecta \\
+Jan.\ 2021 & Virginia begins RGGI participation & First compliance period \\
+Jan.\ 2022 & Youngkin inaugurated; signals intent to withdraw & Republican governor, split legislature \\
+Jun.\ 2023 & Air Pollution Control Board votes to repeal RGGI regulation & Executive-driven withdrawal \\
+Dec.\ 2023 & Last Virginia participation in RGGI auction & Formal exit \\
+Jan.\ 2024--Jun.\ 2026 & Virginia outside RGGI & Non-participation period \\
+2025 & Spanberger (D) elected; legislation to rejoin signed & Democratic trifecta restored \\
+Jul.\ 2026 & Virginia re-enters RGGI & Second participation period \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}\footnotesize
+\item \textit{Sources:} \TODO{Phase 5 -- cite Clean Economy Act; APCB repeal; RGGI auction records.}
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\subsection{The Dominion Energy Context}\label{sec:dominion}
+\TODO{Phase 5 prose, public sources only:} Dominion-dominated regulated market; RGGI costs
+passed through via a rider (\TODO{rider \$/month from public SCC dockets}); rider removed on
+exit, to be reinstated on re-entry. Concurrent factors: residential rate increases, data
+center load growth, IRA-driven clean-energy investment. \emph{No Dominion internal data are
+used; rider figures are drawn from public SCC filings.}
+
+% ==============================================================================
+\section{Literature Review}\label{sec:lit}
+\TODO{Phase 5 prose, organized in four strands:}
+\begin{itemize}
+  \item \textbf{Empirical effects of carbon pricing:} \citet{Murray2015_rggi_attribution}; \TODO{Fell \& Maniloff 2018; Yan 2021; Song \& Hochman 2025.}
+  \item \textbf{Pass-through \& incidence:} \TODO{Fabra \& Reguant 2014; Hintermann 2016; Fowlie, Reguant \& Ryan 2016; Bushnell et al.\ 2013.}
+  \item \textbf{Policy reversal \& asymmetry:} \TODO{Greenstone 2002; Coglianese et al.\ 2020; Walker 2013.}
+  \item \textbf{Methodology:} \citet{Abadie2010_synth}; \TODO{Abadie et al.\ 2015; Abadie 2021; }\citet{Arkhangelsky2021_sdid}\TODO{; Cattaneo et al.\ 2021; Callaway \& Sant'Anna 2021; Cameron et al.\ 2008.}
+\end{itemize}
+
+% ==============================================================================
+\section{Theoretical Framework}\label{sec:theory}
+
+\subsection{A Carbon Adder in a Regulated Market}\label{sec:model}
+We model the retail price of electricity as
+\begin{equation}\label{eq:retail}
+  \pretail \;=\; \cgen \;+\; \ctd \;+\; \pallow \cdot \erate \;+\; \markup,
+\end{equation}
+where $\cgen$ is generation cost (fuel, O\&M), $\ctd$ is transmission and distribution
+cost, $\pallow$ is the allowance price ($\dollarMWh$ once scaled by the emissions rate
+$\erate$ in $\tonsMWh$ of the marginal generator), and $\markup$ is the regulated markup.
+Removing the carbon adder ($\pallow \to 0$) reduces $\pretail$ mechanically through the
+rider; the wholesale-price effect depends on whether RGGI-state generators are marginal in
+PJM dispatch.
+
+\subsection{Predictions}\label{sec:predictions}
+\begin{prediction}[Retail prices]\label{pr:retail}
+Retail prices fall by approximately the rider amount on exit and rise by approximately the
+new rider on re-entry.
+\end{prediction}
+\begin{prediction}[Wholesale LMPs]\label{pr:wholesale}
+Ambiguous: Virginia generators offer lower prices, but if inframarginal the LMP may not move.
+\end{prediction}
+\begin{prediction}[Virginia emissions]\label{pr:va-emissions}
+Rise if the adder was constraining dispatch of Virginia fossil generators.
+\end{prediction}
+\begin{prediction}[System-wide emissions]\label{pr:system-emissions}
+Ambiguous: depends on whether Virginia generation displaces cleaner or dirtier out-of-state generation (leakage).
+\end{prediction}
+\begin{prediction}[Asymmetry/hysteresis]\label{pr:asymmetry}
+Entry effects may exceed exit effects if 2021--2023 clean investments are irreversible,
+efficiency gains persist, or adjustments have ratchet properties.
+\end{prediction}
+
+% ==============================================================================
+\section{Data}\label{sec:data}
+\TODO{Phase 5 prose.} \emph{Public sources only.}
+\input{../Tables/tab_data_sources.tex}   % generated by scripts/R/07_figures_tables.R
+% (placeholder file committed so the skeleton compiles; replaced in Phase 2-3)
+
+\subsection{Sample Construction}\label{sec:sample}
+\TODO{Phase 5 prose:} unit = state (PJM zone for wholesale); time = month (2018--2026);
+treated = Virginia. Control groups: non-RGGI PJM states (WV, OH, PA, KY, IN, NC, TN) and
+continuous-RGGI states (MD, DE, NJ, CT, MA, ME, NH, VT, RI, NY).
+
+% ==============================================================================
+\section{Empirical Strategy}\label{sec:strategy}
+
+\subsection{Synthetic Control (Primary)}\label{sec:scm}
+\TODO{Phase 5 prose:} construct synthetic Virginia matching pre-treatment outcomes and
+covariates, separately for the entry (pre: Jan.\ 2018--Dec.\ 2020) and exit (pre: Jan.\
+2021--Sep.\ 2023) windows. Inference via placebo/permutation tests and conformal prediction
+intervals.
+
+\subsection{Event-Study Difference-in-Differences}\label{sec:did}
+\begin{equation}\label{eq:eventstudy}
+  Y_{st} \;=\; \alpha_s + \gamma_t
+  + \sum_{\tau \neq -1} \beta_\tau \,\mathbf{1}[s=\VA]\,\mathbf{1}[t-t^\ast=\tau]
+  + X_{st}'\delta + \varepsilon_{st},
+\end{equation}
+with state fixed effects $\alpha_s$, month fixed effects $\gamma_t$, time-varying controls
+$X_{st}$ (gas prices, HDD, CDD), and dynamic effects $\beta_\tau$ relative to $\tau=-1$.
+Standard errors clustered at the state level; wild cluster bootstrap given the small number
+of clusters. Estimated separately for the exit ($t^\ast=$ Dec.\ 2023/Jan.\ 2024), entry
+($t^\ast=$ Jan.\ 2021), and prospectively re-entry ($t^\ast=$ Jul.\ 2026) events.
+
+\subsection{Synthetic Difference-in-Differences}\label{sec:sdid}
+\TODO{Phase 5 prose:} \citet{Arkhangelsky2021_sdid} as a bridge between SCM and DiD.
+
+\subsection{Extensions}\label{sec:extensions}
+\TODO{Phase 5 prose:} wholesale PJM-zone analysis (DOM zone treated); emissions leakage
+(VA-plant vs.\ PJM-wide emissions); formal asymmetry test $|\effexit| = |\effentry|$;
+distributional analysis if public microdata permit.
+
+% ==============================================================================
+\section{Threats to Identification and Robustness}\label{sec:threats}
+\begin{table}[H]
+\centering
+\caption{Threats and robustness checks.}
+\label{tab:threats}
+\begin{threeparttable}
+\begin{tabular}{@{}p{5.4cm}p{8.0cm}@{}}
+\toprule
+Threat & Test / mitigation \\
+\midrule
+Anticipation (exit signaled early 2022) & Alternative treatment dates (Jan.\ 2022, Jun.\ 2023, Dec.\ 2023); pre-trend tests. \\
+Concurrent policy shocks (IRA, RPS) & Control for renewable capacity additions and federal subsidy proxies. \\
+Gas price volatility & Control for regional gas hub prices; gas-adjusted outcomes. \\
+Data center load growth & Control for large-customer load; use per-MWh prices. \\
+SUTVA violation (PJM spillovers) & Estimate PJM-wide wholesale effects; bound spillovers. \\
+Small-$N$ inference & Permutation inference (SCM); wild cluster bootstrap (DiD). \\
+Rider mechanicality & Decompose retail effect into rider (mechanical) and non-rider components. \\
+Fleet composition changes & Control for capacity additions/retirements; shares vs.\ levels. \\
+\bottomrule
+\end{tabular}
+\end{threeparttable}
+\end{table}
+
+% ==============================================================================
+\section{Results}\label{sec:results}
+\PENDING{All results below are generated by \texttt{scripts/R/} from public data and pulled
+in via \texttt{\textbackslash input}/\texttt{\textbackslash includegraphics}. No numbers are
+hand-entered.}
+
+\subsection{Exit Event (Dec.\ 2023)}\label{sec:res-exit}
+\PENDING{SCM gap plot, event-study coefficients, placebo distribution.}
+% \input{../Tables/tab_main_exit.tex}
+% \includegraphics[width=\linewidth]{scm_gap_exit_retail.pdf}
+
+\subsection{Entry Event (Jan.\ 2021)}\label{sec:res-entry}
+\PENDING{SCM and event-study estimates for entry.}
+% \input{../Tables/tab_main_entry.tex}
+
+\subsection{Asymmetry Test}\label{sec:res-asymmetry}
+\PENDING{Formal test of $|\effexit| = |\effentry|$.}
+
+\subsection{Emissions Leakage}\label{sec:res-leakage}
+\PENDING{VA-plant vs.\ PJM-wide emissions; implied leakage rate.}
+
+% ==============================================================================
+\section{Expected Results and Interpretation}\label{sec:interpretation}
+\TODO{Phase 5 prose around three pre-registered scenarios:}
+\begin{description}
+  \item[Scenario A --- Symmetric effects.] Carbon-pricing effects are reversible; policy
+    uncertainty may undermine long-run investment incentives.
+  \item[Scenario B --- Asymmetric (entry $>$ exit).] Irreversible clean investments create a
+    ratchet; even temporary participation yields lasting benefits.
+  \item[Scenario C --- Leakage dominates.] Sub-national design reshuffles generation across
+    state lines without net reductions.
+\end{description}
+
+\paragraph{Re-entry (prospective).} \PENDING{The Jul.\ 2026 re-entry is in the future as of
+this draft. We pre-register the design (treatment date, donor pool, estimands, inference) and
+will report estimates once post-treatment data are available.}
+
+% ==============================================================================
+\section{Conclusion}\label{sec:conclusion}
+\TODO{Phase 5 prose.}
+
+% ==============================================================================
+\clearpage
+% Interim: canonical Bibliography_base.bib is hook-protected; using the parallel
+% verified bib in master_supporting_docs/ until that is unprotected (then switch back).
+\bibliography{../master_supporting_docs/Bibliography_verified}
+
+% ==============================================================================
+\clearpage
+\appendix
+\section{Data Sources and Public Retrieval Methods}\label{app:data}
+\TODO{Phase 3 -- map each variable to its public source and access method.}
+
+\section{Pre-Analysis Plan: Re-Entry (Jul.\ 2026)}\label{app:pap}
+\TODO{Phase 4 -- pre-registered estimands, treatment date, donor pool, and inference for the
+re-entry event, fixed in advance of observing outcomes.}
+
+\end{document}

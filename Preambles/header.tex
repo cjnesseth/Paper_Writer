@@ -1,0 +1,87 @@
+% ==============================================================================
+% header.tex -- shared preamble for the RGGI paper (article class, pdfLaTeX)
+% ==============================================================================
+% Engine: pdfLaTeX (XeLaTeX not required; avoid fontspec-only features).
+% Included by Paper/*.tex via:  \documentclass[12pt]{article}\input{header}
+% Compile from Paper/ with: TEXINPUTS=../Preambles:$TEXINPUTS pdflatex ...
+% ==============================================================================
+
+% --- Encoding & fonts (pdfLaTeX) ---------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% --- Page geometry & spacing -------------------------------------------------
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{parskip}        % author may switch to \onehalfspacing for review
+
+% --- Math --------------------------------------------------------------------
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{bm}
+
+% --- Tables & figures --------------------------------------------------------
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{threeparttable}  % table notes under regression tables
+\usepackage{dcolumn}         % decimal-aligned columns
+\usepackage{siunitx}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{rotating}        % sidewaystable for wide results
+\usepackage{longtable}
+\graphicspath{{../Figures/}}
+
+% --- Bibliography (natbib, econ author-year) ---------------------------------
+\usepackage{natbib}
+\bibliographystyle{plainnat} % swap to aer.bst / a journal style at submission
+\setcitestyle{authoryear,round,aysep={},yysep={;}}
+
+% --- Cross-refs & links ------------------------------------------------------
+\usepackage[colorlinks=true,allcolors=blue!55!black,breaklinks=true]{hyperref}
+\usepackage{cleveref}
+
+% --- Theorem-like environments ------------------------------------------------
+\theoremstyle{plain}
+\newtheorem{prediction}{Prediction}
+\theoremstyle{definition}
+\newtheorem{assumption}{Assumption}
+
+% --- Drafting helpers (strip before submission) ------------------------------
+\usepackage{xcolor}
+\newcommand{\TODO}[1]{\textcolor{red}{\textbf{[TODO: #1]}}}
+\newcommand{\PENDING}[1]{\textcolor{orange}{\textbf{[PENDING DATA: #1]}}}
+
+% ==============================================================================
+% Project notation macros
+% ==============================================================================
+% Treatment / estimands
+\newcommand{\VA}{\text{VA}}
+\newcommand{\treat}{D}                 % treatment indicator
+\newcommand{\effect}{\tau}             % treatment effect / ATT
+\newcommand{\effexit}{\hat{\effect}^{\text{exit}}}
+\newcommand{\effentry}{\hat{\effect}^{\text{entry}}}
+
+% Carbon-adder partial-equilibrium model (Sec. 4)
+\newcommand{\pretail}{p_{r}}           % retail price
+\newcommand{\cgen}{c_{g}}              % generation cost
+\newcommand{\ctd}{c_{T}}               % transmission & distribution cost
+\newcommand{\pallow}{\pi_{\text{allow}}} % allowance price ($/ton)
+\newcommand{\erate}{e}                 % emissions rate of marginal generator
+\newcommand{\markup}{\mu}              % regulated markup
+\newcommand{\co}{\mathrm{CO}_2}
+
+% Units
+\newcommand{\dollarMWh}{\$/\mathrm{MWh}}
+\newcommand{\tonsMWh}{\mathrm{tons}/\mathrm{MWh}}
+
+% Abbreviations
+\newcommand{\rggi}{RGGI}
+\newcommand{\pjm}{PJM}
+\newcommand{\scm}{SCM}
+\newcommand{\did}{DiD}
+\newcommand{\sdid}{SDiD}

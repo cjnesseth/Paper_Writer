@@ -45,17 +45,19 @@
 ## Commands
 
 ```bash
-# LaTeX (3-pass, XeLaTeX only)
-cd Slides && TEXINPUTS=../Preambles:$TEXINPUTS xelatex -interaction=nonstopmode file.tex
-BIBINPUTS=..:$BIBINPUTS bibtex file
-TEXINPUTS=../Preambles:$TEXINPUTS xelatex -interaction=nonstopmode file.tex
-TEXINPUTS=../Preambles:$TEXINPUTS xelatex -interaction=nonstopmode file.tex
+# Paper (3-pass, pdfLaTeX — XeLaTeX not installed; pdflatex is standard for econ journals)
+cd Paper && TEXINPUTS=../Preambles:$TEXINPUTS pdflatex -interaction=nonstopmode rggi_carbon_pricing_reverse.tex
+BIBINPUTS=..:$BIBINPUTS bibtex rggi_carbon_pricing_reverse
+TEXINPUTS=../Preambles:$TEXINPUTS pdflatex -interaction=nonstopmode rggi_carbon_pricing_reverse.tex
+TEXINPUTS=../Preambles:$TEXINPUTS pdflatex -interaction=nonstopmode rggi_carbon_pricing_reverse.tex
 
-# Deploy Quarto to GitHub Pages
-./scripts/sync_to_docs.sh LectureN
+# R analysis pipeline (writes Tables/*.tex and Figures/*.pdf)
+Rscript scripts/R/00_setup.R   # then 01_* -> 02 -> 03 -> 04 -> 05 -> 06 -> 07
 
 # Quality score
-python scripts/quality_score.py Quarto/file.qmd
+python scripts/quality_score.py Paper/rggi_carbon_pricing_reverse.tex
+
+# (Dormant) Legacy slide commands: xelatex on Slides/, Quarto deploy via scripts/sync_to_docs.sh
 ```
 
 ---
@@ -130,7 +132,18 @@ python scripts/quality_score.py Quarto/file.qmd
 
 ## Current Project State
 
-| Lecture | Beamer | Quarto | Key Content |
-|---------|--------|--------|-------------|
-| 1: [Topic] | `Lecture01_Topic.tex` | `Lecture1_Topic.qmd` | [Brief description] |
-| 2: [Topic] | `Lecture02_Topic.tex` | -- | [Brief description] |
+**Active deliverable: an empirical economics paper (not lecture slides).**
+*"Carbon Pricing in Reverse: Evidence from Virginia's Exit and Re-Entry into RGGI"* —
+target JAERE/JEEM/Energy Economics; eventual dissertation chapter.
+
+- **Manuscript:** `Paper/rggi_carbon_pricing_reverse.tex` (plain LaTeX article, **pdfLaTeX** —
+  XeLaTeX is not installed in this environment and is not needed for a journal article).
+- **Analysis:** `scripts/R/` (00–07) — R scripts do all estimation and write `Tables/*.tex`
+  and `Figures/*.pdf`; the manuscript `\input`/`\includegraphics` them. No hand-entered numbers.
+- **Data:** public sources only (EIA, EPA CEMS, PJM, RGGI, NOAA, BEA/Census, public SCC
+  dockets). No Dominion internal data; no SAS.
+- **Spec/plan:** `quality_reports/specs/2026-05-30_rggi-paper.md`,
+  `quality_reports/plans/2026-05-30_rggi-paper.md`.
+- **Status:** Phase 0 (repo skeleton) complete; Phase 1 (`/lit-review` + bibliography) next.
+
+The slide infrastructure (Beamer/Quarto skills, lecture workflow) is retained but dormant.

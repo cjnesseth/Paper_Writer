@@ -38,6 +38,17 @@ Thumbs.db
 
 # Claude Code local files (not shared across machines)
 .claude/settings.local.json
+
+# Paper data layer (large public pulls + derived model objects)
+data/raw/
+data/results/
+*.parquet
+data/tidy/*.parquet
+
+# renv library (keep renv.lock; ignore the local cache/library)
+renv/library/
+renv/local/
+renv/staging/
 .claude/state/
 CLAUDE.local.md
 
