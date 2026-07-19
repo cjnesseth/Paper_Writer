@@ -13,8 +13,14 @@ PJM_ZONES <- c("DOM", "AEP", "APS", "ATSI", "BGE", "COMED", "DAY", "DEOK",
                "PEPCO", "PPL", "PSEG", "RECO")
 
 fetch_pjm_lmps <- function(start = SAMPLE_START, end = SAMPLE_END, dest = DIRS$data_raw) {
-  # TODO(Phase 2): page through Data Miner 2 API; write parquet by month.
-  stop("Not implemented (Phase 2). Requires PJM_API_KEY.")
+  # TODO(when key exists): page through Data Miner 2 API; write parquet by month.
+  stop("Requires PJM_API_KEY (free): register at https://dataminer2.pjm.com, ",
+       "create a subscription key at apiportal.pjm.com, then ",
+       "`export PJM_API_KEY=...` and implement this fetcher.")
 }
 
-if (sys.nframe() == 0) message("[01_fetch_pjm] stub -- implement in Phase 2.")
+if (sys.nframe() == 0) {
+  message("[01_fetch_pjm] SKIPPED -- no PJM_API_KEY set (free key: ",
+          "register at dataminer2.pjm.com / apiportal.pjm.com). ",
+          "Panel carries lmp = NA until then; wholesale results are pending.")
+}

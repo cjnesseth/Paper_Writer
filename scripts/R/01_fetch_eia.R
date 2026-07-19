@@ -13,13 +13,8 @@ source(if (file.exists("scripts/R/00_setup.R")) "scripts/R/00_setup.R" else if (
 
 EIA_861M_URL <- "https://www.eia.gov/electricity/data/eia861m/xls/sales_revenue.xlsx"
 
-download_eia_861m <- function(url = EIA_861M_URL, dest = DIRS$data_raw) {
-  out <- file.path(dest, "eia_861m_sales_revenue.xlsx")
-  if (file.exists(out)) { message("[01_fetch_eia] cached: ", out); return(out) }
-  ok <- tryCatch({ download.file(url, out, mode = "wb", quiet = TRUE); TRUE },
-                 error = function(e) { message("[01_fetch_eia] download failed: ",
-                                               conditionMessage(e)); FALSE })
-  if (ok) out else NULL
+download_eia_861m <- function(url = EIA_861M_URL) {
+  cached_download(url, "eia_861m_sales_revenue.xlsx")
 }
 
 # Parse the 861M workbook into a tidy residential retail-price series.
@@ -38,7 +33,9 @@ tidy_eia_861m <- function(xlsx) {
   yc <- grep("^year", names(dt), value = TRUE)[1]
   mc <- grep("^month", names(dt), value = TRUE)[1]
   sc <- grep("^state", names(dt), value = TRUE)[1]
-  pc <- grep("price", names(dt), value = TRUE)[1]      # residential price (cents/kWh)
+  # residential price: first price-like column ("Price" pre-2026 vintages;
+  # "Cents/kWh" from the Jun-2026 workbook redesign)
+  pc <- grep("price|cents_kwh", names(dt), value = TRUE)[1]
   if (any(is.na(c(yc, mc, sc, pc))))
     stop("[01_fetch_eia] could not locate Year/Month/State/Price columns; inspect ", sh)
   out <- dt[, .(state = toupper(trimws(get(sc))),
@@ -61,6 +58,8 @@ if (sys.nframe() == 0) {
       message(conditionMessage(e)); NULL })
     if (!is.null(tidy)) {
       saveRDS(tidy, file.path(DIRS$data_tidy, "eia_retail_state_month.rds"))
+      log_vintage("eia_861m_retail", EIA_861M_URL,
+                  sprintf("%s..%s", format(min(tidy$month)), format(max(tidy$month))))
       message(sprintf("[01_fetch_eia] tidy retail: %d rows, %d states, %s..%s",
                       nrow(tidy), uniqueN(tidy$state),
                       format(min(tidy$month)), format(max(tidy$month))))

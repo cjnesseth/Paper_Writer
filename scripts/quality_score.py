@@ -179,6 +179,24 @@ class IssueDetector:
         return overflows
 
     @staticmethod
+    def resolve_bib_file(content: str, tex_dir: Path, default: Path) -> Path:
+        """Resolve the bibliography the document actually uses.
+
+        Honors \\bibliography{...} (first path, .bib appended if missing),
+        resolved relative to the .tex file's directory. Falls back to the
+        project default when absent or unresolvable.
+        """
+        m = re.search(r'\\bibliography\{([^}]+)\}', content)
+        if m:
+            first = m.group(1).split(',')[0].strip()
+            if not first.endswith('.bib'):
+                first += '.bib'
+            candidate = (tex_dir / first).resolve()
+            if candidate.exists():
+                return candidate
+        return default
+
+    @staticmethod
     def check_broken_citations(content: str, bib_file: Path) -> List[str]:
         """Check for LaTeX citation keys not in bibliography.
 
@@ -412,7 +430,9 @@ class QualityScorer:
             self.score -= 20
 
         # Check broken citations (LaTeX-style \cite patterns)
-        bib_file = self.filepath.parent.parent / 'Bibliography_base.bib'
+        bib_file = IssueDetector.resolve_bib_file(
+            content, self.filepath.parent,
+            self.filepath.parent.parent / 'Bibliography_base.bib')
         broken_citations = IssueDetector.check_broken_citations(content, bib_file)
 
         # Also check Quarto-style @key citations
@@ -513,6 +533,7 @@ class QualityScorer:
         if not bib_file.exists():
             # Also check same directory
             bib_file = self.filepath.parent / 'Bibliography_base.bib'
+        bib_file = IssueDetector.resolve_bib_file(content, self.filepath.parent, bib_file)
         broken_citations = IssueDetector.check_broken_citations(content, bib_file)
         for key in broken_citations:
             self.issues['critical'].append({

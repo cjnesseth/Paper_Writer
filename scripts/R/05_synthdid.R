@@ -43,15 +43,15 @@ run_synthdid <- function(panel, outcome, event = c("entry", "exit")) {
 }
 
 if (sys.nframe() == 0) {
-  panel <- readRDS(file.path(DIRS$data_tidy, "panel_state_month.rds"))
-  tag <- if (isTRUE(panel$synthetic[1])) "SAMPLE" else "REAL"
+  panel <- load_analysis_panel()               # real by default; RGGI_USE_SAMPLE=1 opts in
+  tag <- result_tag(panel)                     # "" (real) or "_SAMPLE"
   for (ev in c("entry", "exit")) for (yv in c("retail", "lmp", "co2")) {
     res <- tryCatch(run_synthdid(panel, yv, ev), error = function(e) {
       message(sprintf("[05_synthdid] %s/%s skipped: %s", ev, yv, conditionMessage(e))); NULL })
     if (!is.null(res)) {
-      save_result(res, sprintf("sdid_%s_%s", ev, yv))
+      save_result(res, sprintf("sdid_%s_%s%s", ev, yv, tag))
       message(sprintf("[05_synthdid] (%s) %s/%s: est=%+.3f se=%.3f",
-                      tag, ev, yv, res$estimate, res$se))
+                      if (nzchar(tag)) "SAMPLE" else "REAL", ev, yv, res$estimate, res$se))
     }
   }
 }

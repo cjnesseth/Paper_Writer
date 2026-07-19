@@ -38,20 +38,21 @@ avg_post_effect <- function(model) {
 }
 
 if (sys.nframe() == 0) {
-  panel <- readRDS(file.path(DIRS$data_tidy, "panel_state_month.rds"))
-  is_synth <- isTRUE(panel$synthetic[1])
-  tag <- if (is_synth) "SAMPLE" else "REAL"
+  panel <- load_analysis_panel()               # real by default; RGGI_USE_SAMPLE=1 opts in
+  tag <- result_tag(panel)                     # "" (real) or "_SAMPLE"
+  is_synth <- nzchar(tag)
   truth <- list(entry = +6.0, exit = -6.0)  # injected retail effect (sample only)
 
-  lines <- c(sprintf("DiD event study (%s data)", tag), strrep("-", 40))
+  lines <- c(sprintf("DiD event study (%s data)", if (is_synth) "SAMPLE" else "REAL"),
+             strrep("-", 40))
   for (ev in c("entry", "exit")) {
     m <- run_event_study(panel, "retail", EVENTS[[ev]])
     eff <- avg_post_effect(m)
-    save_result(m, sprintf("did_%s_retail", ev))
+    save_result(m, sprintf("did_%s_retail%s", ev, tag))
     lines <- c(lines, sprintf("%-6s retail: avg post effect = %+.2f $/MWh%s",
                               ev, eff,
                               if (is_synth) sprintf("  (injected truth %+.1f)", truth[[ev]]) else ""))
   }
-  writeLines(lines, "/tmp/did_out.txt")
+  writeLines(lines, file.path(DIRS$results, sprintf("did_summary%s.txt", tag)))
   message(paste(lines, collapse = "\n"))
 }

@@ -70,3 +70,7 @@ When a mistake is corrected, append a `[LEARN:category]` entry below.
 [LEARN:meta] Dogfooding principles must be enforced: plan-first, spec-then-plan, quality gates, session logs → we follow our own guide.
 
 [LEARN:meta] Template development work (building infrastructure, docs) doesn't create session logs in quality_reports/ → those are for user work (slides, analysis), not meta-work. Keeps template clean for users who fork.
+
+[LEARN:data] Public-data fetchers need refreshable caches (env-flag force re-pull), partial-download cleanup, and vintage logging (source, url, access date, coverage) → upstream files update monthly and schemas change without notice (e.g., a workbook redesign renaming a price column broke a parser).
+
+[LEARN:data] Never let a synthetic/sample dataset share the real dataset's filename → downstream scripts silently consume it as real. Separate filenames + an explicit opt-in env var + a guard that refuses to render publication artifacts from flagged-synthetic data.

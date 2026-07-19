@@ -143,7 +143,15 @@ target JAERE/JEEM/Energy Economics; eventual dissertation chapter.
 - **Data:** public sources only (EIA, EPA CEMS, PJM, RGGI, NOAA, BEA/Census, public SCC
   dockets). No Dominion internal data; no SAS.
 - **Spec/plan:** `quality_reports/specs/2026-05-30_rggi-paper.md`,
-  `quality_reports/plans/2026-05-30_rggi-paper.md`.
-- **Status:** Phase 0 (repo skeleton) complete; Phase 1 (`/lit-review` + bibliography) next.
+  `quality_reports/plans/2026-05-30_rggi-paper.md`,
+  `quality_reports/plans/2026-07-19_july-refresh-refactor.md`.
+- **Status (2026-07-19):** Phases 0–1 complete. Phase 2 (public-data pipeline) **live with
+  real data** for all keyless sources: `Rscript scripts/R/run_all.R` rebuilds
+  `data/tidy/panel_state_month.*` (18 states, 2018-01..2026-04, real, balanced). Wholesale
+  LMPs pending a free `PJM_API_KEY`; CO₂ is EIA-923-derived pending `EPA_CAMPD_API_KEY`.
+  **Virginia's re-entry took legal effect 2026-07-01** (HB 29 signed 2026-02-20; DEQ regs
+  2026-04-09) — manuscript reframed; re-entry *results* remain prospective until post-period
+  data land (~Oct 2026). Next: Phase 3 estimation (install `tidysynth`/`synthdid`/`scpi`,
+  run 03–05 on the real panel).
 
 The slide infrastructure (Beamer/Quarto skills, lecture workflow) is retained but dormant.

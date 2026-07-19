@@ -67,12 +67,13 @@ scm_summary <- function(fit) {
 }
 
 if (sys.nframe() == 0) {
-  panel <- readRDS(file.path(DIRS$data_tidy, "panel_state_month.rds"))
-  tag <- if (isTRUE(panel$synthetic[1])) "SAMPLE" else "REAL"
+  panel <- load_analysis_panel()               # real by default; RGGI_USE_SAMPLE=1 opts in
+  tag <- result_tag(panel)                     # "" (real) or "_SAMPLE"
   for (ev in c("entry", "exit")) for (yv in c("retail", "lmp", "co2")) {
     res <- tryCatch(run_scm(panel, yv, ev), error = function(e) {
       message(sprintf("[03_scm] %s/%s skipped: %s", ev, yv, conditionMessage(e))); NULL })
-    if (!is.null(res)) save_result(res, sprintf("scm_%s_%s", ev, yv))
+    if (!is.null(res)) save_result(res, sprintf("scm_%s_%s%s", ev, yv, tag))
   }
-  message("[03_scm] (", tag, ") done where tidysynth available.")
+  message("[03_scm] (", if (nzchar(tag)) "SAMPLE" else "REAL",
+          ") done where tidysynth available.")
 }

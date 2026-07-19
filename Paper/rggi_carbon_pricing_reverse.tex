@@ -37,8 +37,8 @@ use synthetic control and event-study difference-in-differences methods on publi
 estimate the causal effect of Virginia's RGGI participation on retail electricity prices,
 wholesale prices, and \co{} emissions, and we test whether the effects of \emph{exiting}
 a carbon market are symmetric to the effects of \emph{entering} it. \PENDING{Headline
-estimates for the entry (Jan.\ 2021) and exit (Dec.\ 2023) events; the re-entry event
-(Jul.\ 2026) is analyzed prospectively.}
+estimates for the entry (Jan.\ 2021) and exit (Dec.\ 2023) events; the re-entry, effective
+July~1, 2026, is analyzed under a pre-registered design as post-treatment data accumulate.}
 
 \medskip
 \noindent\textbf{Keywords:} carbon pricing; cap-and-trade; RGGI; synthetic control;
@@ -67,12 +67,13 @@ Recession rather than to the cap itself \citep{Murray2015_rggi_attribution}---bu
 struggle to isolate the policy's own contribution from the many confounders that move with it.
 
 Virginia offers a rare opportunity to make progress. It is the only U.S.\ state to have
-\emph{entered}, \emph{exited}, and is scheduled to \emph{re-enter} a carbon cap-and-trade
+\emph{entered}, \emph{exited}, and \emph{re-entered} a carbon cap-and-trade
 program within a five-year span. Virginia joined RGGI in January 2021 under the Virginia
 Clean Economy Act \citep{VCEA2020}; following a change in gubernatorial administration, the
 Air Pollution Control Board repealed the enabling regulation and the state left the program
 after the December 2023 auction \citep{VAAPCB2023_repeal}; and, after a further change in
-administration, Virginia is scheduled to re-enter in July 2026. Crucially, the proximate
+administration, Virginia re-entered on July~1, 2026, under legislation enacted in February
+2026 \citep{VAHB29_2026,VADEQ2026_reinstate}. Crucially, the proximate
 cause of the 2023 exit was political---a new governor with the authority to direct the
 rulemaking---rather than a response to electricity-market or macroeconomic conditions. This
 political origin makes the \emph{timing} of the withdrawal plausibly exogenous to the
@@ -85,8 +86,8 @@ emissions? Second, are the effects of \emph{exiting} a carbon market symmetric t
 of \emph{entering} one, or does participation leave a durable imprint---through irreversible
 investment, for instance---that a withdrawal does not undo? Third, how much of any emissions
 change in Virginia leaks across state lines within the PJM Interconnection, the wholesale
-market in which Virginia sits? Fourth, does the scheduled 2026 re-entry reproduce the entry
-effects, providing an additional, prospective test?
+market in which Virginia sits? Fourth, does the July 2026 re-entry reproduce the entry
+effects, providing an additional, pre-registered test as post-treatment data accumulate?
 
 Answering these questions requires a counterfactual Virginia. We construct one with the
 synthetic control method \citep{Abadie2010_synth,Abadie2015_comparative,Abadie2021_using_synth},
@@ -96,9 +97,9 @@ trajectories. We complement the synthetic control with an event-study
 difference-in-differences specification and with synthetic difference-in-differences
 \citep{Arkhangelsky2021_sdid}, and we conduct inference appropriate to a single treated unit
 and a small number of clusters \citep{Cattaneo2021_prediction,Cameron2008_bootstrap}. The
-empirical content of the paper rests entirely on public data---retail prices from the U.S.\
-Energy Information Administration, hourly emissions from the EPA's continuous emissions
-monitoring system, wholesale prices from PJM, and allowance prices from RGGI---so that the
+empirical content of the paper rests entirely on public data---retail prices and fuel
+consumption from the U.S.\ Energy Information Administration, emissions from EPA data and
+EPA emission factors, wholesale prices from PJM, and allowance prices from RGGI---so that the
 analysis is fully reproducible and does not depend on proprietary utility records.
 
 The paper makes four contributions. It provides, to our knowledge, the first causal estimate
@@ -144,8 +145,24 @@ by about three percent per year thereafter, the minimum reserve price rises to \
 and escalates seven percent annually, the offset provisions are eliminated, and the ECR is
 replaced by an expanded two-tier CCR \citep{RGGI_thirdreview}. These changes matter for our
 setting because they raise the expected stringency---and therefore the expected allowance
-price---of the program Virginia is scheduled to re-enter in 2026, a point we return to when
-interpreting the re-entry design.
+price---of the program Virginia re-entered in 2026, a point we return to when
+interpreting the re-entry design. Allowance prices moved sharply over the months in which
+re-entry became law: Figure~\ref{fig:allowance-prices} plots the full auction history,
+in which the clearing price jumps between the March and June 2026 auctions---the two
+auctions bracketing the final re-entry regulation---consistent with the market capitalizing
+Virginia's returning compliance demand \citep{RGGI_auctions}.
+
+\begin{figure}[H]
+\centering
+\caption{RGGI allowance auction clearing prices, with Virginia's participation periods.}
+\label{fig:allowance-prices}
+\includegraphics[width=0.85\linewidth]{../Figures/fig_allowance_prices.pdf}
+\begin{minipage}{0.85\linewidth}\footnotesize\vspace{2pt}
+\emph{Notes:} Generated by \texttt{scripts/R/07\_figures\_tables.R} from RGGI, Inc.\
+auction results. Shaded bands mark Virginia's participation; the dashed line marks the
+February 2026 signing of the re-entry legislation (HB~29).
+\end{minipage}
+\end{figure}
 
 \subsection{Virginia's RGGI Timeline}\label{sec:va-timeline}
 \begin{table}[H]
@@ -163,12 +180,14 @@ Jan.\ 2022 & Youngkin inaugurated; signals intent to withdraw & Republican gover
 Jun.\ 2023 & Air Pollution Control Board votes to repeal RGGI regulation & Executive-driven withdrawal \\
 Dec.\ 2023 & Last Virginia participation in RGGI auction & Formal exit \\
 Jan.\ 2024--Jun.\ 2026 & Virginia outside RGGI & Non-participation period \\
-2025 & Spanberger (D) elected; legislation to rejoin signed & Democratic trifecta restored \\
-Jul.\ 2026 & Virginia re-enters RGGI & Second participation period \\
+Nov.\ 2025 & Spanberger (D) elected governor & Democratic trifecta restored \\
+Feb.\ 2026 & HB~29 signed (Ch.\ 7, 2026 Acts of Assembly), directing re-entry & Enacted Feb.\ 20, 2026 \\
+Apr.\ 2026 & DEQ adopts final regulation reinstating the \co{} Budget Trading Program & 9VAC5-140, Part VIII \\
+Jul.\ 2026 & Virginia re-enters RGGI & One-time six-month control period (Jul.--Dec.\ 2026) \\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}\footnotesize
-\item \textit{Sources:} \citet{VCEA2020,VAAPCB2023_repeal,RGGI_auctions}.
+\item \textit{Sources:} \citet{VCEA2020,VAAPCB2023_repeal,VAHB29_2026,VADEQ2026_reinstate,RGGI_auctions}.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -290,9 +309,12 @@ efficiency gains persist, or adjustments have ratchet properties.
 We assemble a monthly panel from public sources only; Table~\ref{tab:data-sources} lists each
 series and its origin. Retail electricity prices by customer class come from EIA Form~861M
 (monthly) and Form~861 (annual). Wholesale prices are locational marginal prices (LMPs) from
-PJM's Data Miner~2, aggregated from hourly to monthly. Carbon-dioxide emissions and gross load
-at the generating-unit level come from the EPA's continuous emissions monitoring system, via
-the Clean Air Markets Program Data portal, aggregated to the plant, state, and PJM-zone levels.
+PJM's Data Miner~2, aggregated from hourly to monthly. Carbon-dioxide emissions at the
+generating-unit level come from the EPA's continuous emissions monitoring system, via the
+Clean Air Markets Program Data portal, aggregated to the plant, state, and PJM-zone levels;
+the working emissions series in the current vintage is derived from EIA Form~923 monthly
+fuel consumption for electricity combined with EPA fuel-specific \co{} emission factors,
+and Table~\ref{tab:data-sources} records the vintage and coverage of every series used.
 Allowance prices and quantities come from RGGI's auction records \citep{RGGI_auctions}. We
 control for the principal drivers of electricity prices and emissions: natural-gas prices
 (EIA Henry Hub and the regionally relevant Transco Zone~5 hub), heating- and cooling-degree
@@ -304,8 +326,9 @@ The Rider~RGGI cost passed to Virginia customers is taken from public SCC filing
 
 \subsection{Sample Construction}\label{sec:sample}
 The unit of analysis is the state-month for the price and emissions panels, and the PJM-zone
-month for the wholesale analysis; the sample window is January~2018 through mid-2026, spanning
-the pre-entry baseline, the participation period, and the post-exit period. Virginia is the
+month for the wholesale analysis; the sample window is January~2018 through the most recent
+month with complete data (April~2026 in the current vintage), spanning the pre-entry
+baseline, the participation period, and the post-exit period. Virginia is the
 treated unit. We use two donor pools. The first comprises non-RGGI states in the PJM
 Interconnection---West Virginia, Ohio, Pennsylvania, Kentucky, Indiana, North Carolina, and
 Tennessee---which share Virginia's wholesale market but never priced carbon. The second
@@ -345,7 +368,8 @@ with state fixed effects $\alpha_s$, month fixed effects $\gamma_t$, time-varyin
 $X_{st}$ (gas prices, HDD, CDD), and dynamic effects $\beta_\tau$ relative to $\tau=-1$.
 Standard errors clustered at the state level; wild cluster bootstrap given the small number
 of clusters. Estimated separately for the exit ($t^\ast=$ Dec.\ 2023/Jan.\ 2024), entry
-($t^\ast=$ Jan.\ 2021), and prospectively re-entry ($t^\ast=$ Jul.\ 2026) events.
+($t^\ast=$ Jan.\ 2021), and---once post-treatment data accumulate---the re-entry
+($t^\ast=$ Jul.\ 2026) events.
 
 \subsection{Synthetic Difference-in-Differences}\label{sec:sdid}
 As a bridge between the two approaches we report synthetic difference-in-differences
@@ -444,15 +468,18 @@ hand-entered.}
 \begin{description}
   \item[Scenario A --- Symmetric effects.] Carbon-pricing effects are reversible; policy
     uncertainty may undermine long-run investment incentives.
-  \item[Scenario B --- Asymmetric (entry $>$ exit).] Irreversible clean investments create a
-    ratchet; even temporary participation yields lasting benefits.
+  \item[Scenario B --- Asymmetric (entry $>$ exit).] A ratchet from irreversible clean
+    investment; even temporary participation yields lasting benefits.
   \item[Scenario C --- Leakage dominates.] Sub-national design reshuffles generation across
     state lines without net reductions.
 \end{description}
 
-\paragraph{Re-entry (prospective).} \PENDING{The Jul.\ 2026 re-entry is in the future as of
-this draft. We pre-register the design (treatment date, donor pool, estimands, inference) and
-will report estimates once post-treatment data are available.}
+\paragraph{Re-entry (pre-registered; results pending).} \PENDING{Virginia's re-entry took
+effect July~1, 2026 \citep{VADEQ2026_reinstate}, so the pre-treatment period is now closed
+and the design in Appendix~\ref{app:pap} is locked; post-treatment outcome data have not
+yet been published (retail prices lag two to three months and emissions data are quarterly),
+so no re-entry estimates are reported. We will report them as the post-period accumulates,
+beginning with late-2026 data releases.}
 
 % ==============================================================================
 \section{Conclusion}\label{sec:conclusion}
@@ -472,6 +499,12 @@ will report estimates once post-treatment data are available.}
 
 \section{Pre-Analysis Plan: Re-Entry (Jul.\ 2026)}\label{app:pap}
 \TODO{Phase 4 -- pre-registered estimands, treatment date, donor pool, and inference for the
-re-entry event, fixed in advance of observing outcomes.}
+re-entry event, fixed in advance of observing outcomes. The re-entry took legal effect
+July~1, 2026, under a one-time six-month control period (July--December 2026)
+\citep{VAHB29_2026,VADEQ2026_reinstate}; Virginia sources bid in the September and December
+2026 auctions. Because outcome data for the post-period are not yet published, this plan
+remains fixed in advance of observing any post-treatment outcomes; the anticipation window
+(the February 2026 signing through the July 2026 effective date) is specified here as a
+pre-registered secondary analysis.}
 
 \end{document}
